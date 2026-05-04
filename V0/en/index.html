@@ -1700,6 +1700,166 @@
     </div>
     <!-- END BLOCK: contact-export-agents.html -->
 
+    <!-- Latest articles (layout aligned with FA home + ramo-web 3-latest-articles) -->
+    <div id="ramo-en-articles-block" class="relative w-full overflow-hidden text-white" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; direction: ltr;">
+        <style>
+            #ramo-en-articles-block .glass-panel {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                transition: all 0.3s ease;
+            }
+            #ramo-en-articles-block .bg-brand { background-color: #174f57; }
+            #ramo-en-articles-block .text-brand-light { color: #5aaeb8; }
+            #ramo-en-articles-block .slider-wrapper { position: relative; overflow: hidden; }
+            #ramo-en-articles-block .slider-track { display: flex; transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1); }
+            #ramo-en-articles-block .article-card { flex: 0 0 350px; margin: 0 12px; }
+            #ramo-en-articles-block .line-clamp-3 {
+                display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+            }
+        </style>
+        <section class="py-20 relative z-20 border-t border-white/5 bg-slate-900/20 backdrop-blur-sm">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="flex items-center justify-between mb-8 px-2">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="w-8 h-1 bg-brand rounded-full"></span>
+                            <span class="text-brand-light text-sm font-bold uppercase tracking-wider">Blog &amp; articles</span>
+                        </div>
+                        <h2 class="text-3xl md:text-4xl font-black text-white">Latest articles</h2>
+                    </div>
+                    <div class="flex gap-2">
+                        <button type="button" id="en-art-prev-btn" class="p-3 rounded-full glass-panel hover:bg-white/10 transition-colors text-white" aria-label="Previous"><i data-lucide="chevron-left" class="w-6 h-6"></i></button>
+                        <button type="button" id="en-art-next-btn" class="p-3 rounded-full glass-panel hover:bg-white/10 transition-colors text-white" aria-label="Next"><i data-lucide="chevron-right" class="w-6 h-6"></i></button>
+                    </div>
+                </div>
+                <div class="slider-wrapper">
+                    <div class="slider-track" id="en-art-slider">
+                        <article class="article-card glass-panel rounded-2xl overflow-hidden hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 group/card">
+                            <a href="../articles/azathioprine-comparison-en.html" class="block no-underline text-inherit focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5aaeb8] rounded-2xl">
+                                <div class="h-48 overflow-hidden relative">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10 opacity-60"></div>
+                                    <img src="https://www.themeadows.com/wp-content/uploads/2024/12/comparison.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-110" alt="">
+                                    <div class="absolute bottom-3 left-3 z-20"><span class="px-3 py-1 bg-brand/90 backdrop-blur text-xs rounded-full font-bold text-white">Scientific</span></div>
+                                </div>
+                                <div class="p-6 text-left">
+                                    <h3 class="text-xl font-bold text-white mb-3 leading-snug">Azathioprine compared to other immunosuppressants</h3>
+                                    <p class="text-sm text-slate-400 mb-4 line-clamp-3 leading-relaxed">Efficacy, safety, monitoring, and cost to support informed discussions with your care team.</p>
+                                    <span class="inline-flex items-center gap-2 text-brand-light font-bold text-sm group-hover/card:text-white">Read more<i data-lucide="arrow-right" class="w-4 h-4"></i></span>
+                                </div>
+                            </a>
+                        </article>
+                        <article class="article-card glass-panel rounded-2xl overflow-hidden hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 group/card">
+                            <a href="../articles/azathioprine-organ-transplant-en.html" class="block no-underline text-inherit focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5aaeb8] rounded-2xl">
+                                <div class="h-48 overflow-hidden relative">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10 opacity-60"></div>
+                                    <img src="https://healthyturkiye.com/storage/media/8315/organ-transplantation-turkey.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-110" alt="">
+                                    <div class="absolute bottom-3 left-3 z-20"><span class="px-3 py-1 bg-brand/90 backdrop-blur text-xs rounded-full font-bold text-white">Transplant</span></div>
+                                </div>
+                                <div class="p-6 text-left">
+                                    <h3 class="text-xl font-bold text-white mb-3 leading-snug">Azathioprine in organ transplantation</h3>
+                                    <p class="text-sm text-slate-400 mb-4 line-clamp-3 leading-relaxed">Combination regimens, dosing, monitoring, and long-term follow-up.</p>
+                                    <span class="inline-flex items-center gap-2 text-brand-light font-bold text-sm group-hover/card:text-white">Read more<i data-lucide="arrow-right" class="w-4 h-4"></i></span>
+                                </div>
+                            </a>
+                        </article>
+                        <article class="article-card glass-panel rounded-2xl overflow-hidden hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 group/card">
+                            <a href="../articles/carbamazepine-dd-interactions-en.html" class="block no-underline text-inherit focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5aaeb8] rounded-2xl">
+                                <div class="h-48 overflow-hidden relative">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10 opacity-60"></div>
+                                    <img src="https://cdn.sanity.io/images/0vv8moc6/drugtopics/1ada8d1ec0a3eae647595989386d73c2046720a5-5673x3782.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-110" alt="">
+                                    <div class="absolute bottom-3 left-3 z-20"><span class="px-3 py-1 bg-brand/90 backdrop-blur text-xs rounded-full font-bold text-white">Genetics</span></div>
+                                </div>
+                                <div class="p-6 text-left">
+                                    <h3 class="text-xl font-bold text-white mb-3 leading-snug">Carbamazepine: uses and genetic safety (HLA)</h3>
+                                    <p class="text-sm text-slate-400 mb-4 line-clamp-3 leading-relaxed">Indications, HLA screening, interactions, and monitoring essentials.</p>
+                                    <span class="inline-flex items-center gap-2 text-brand-light font-bold text-sm group-hover/card:text-white">Read more<i data-lucide="arrow-right" class="w-4 h-4"></i></span>
+                                </div>
+                            </a>
+                        </article>
+                        <article class="article-card glass-panel rounded-2xl overflow-hidden hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 group/card">
+                            <a href="../articles/carbaram-safe-usage-en.html" class="block no-underline text-inherit focus:outline-none focus-visible:ring-2 focus-visible:ring-[#5aaeb8] rounded-2xl">
+                                <div class="h-48 overflow-hidden relative">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10 opacity-60"></div>
+                                    <img src="https://normgroup.org/wp-content/uploads/2022/04/Ways_to_Make_Your_Patients_Happier_blog_graphic.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-110" alt="">
+                                    <div class="absolute bottom-3 left-3 z-20"><span class="px-3 py-1 bg-brand/90 backdrop-blur text-xs rounded-full font-bold text-white">Education</span></div>
+                                </div>
+                                <div class="p-6 text-left">
+                                    <h3 class="text-xl font-bold text-white mb-3 leading-snug">Carbamazepine: safety tips and usage guide</h3>
+                                    <p class="text-sm text-slate-400 mb-4 line-clamp-3 leading-relaxed">Correct use, labs, warning signs, and adherence.</p>
+                                    <span class="inline-flex items-center gap-2 text-brand-light font-bold text-sm group-hover/card:text-white">Read more<i data-lucide="arrow-right" class="w-4 h-4"></i></span>
+                                </div>
+                            </a>
+                        </article>
+                    </div>
+                </div>
+                <div class="flex justify-center gap-2 mt-8" id="en-art-dots"></div>
+            </div>
+        </section>
+        <script>
+        (function () {
+            const track = document.getElementById('en-art-slider');
+            const prevBtn = document.getElementById('en-art-prev-btn');
+            const nextBtn = document.getElementById('en-art-next-btn');
+            const dotsContainer = document.getElementById('en-art-dots');
+            if (!track || !dotsContainer) return;
+            const articles = Array.from(track.children);
+            const totalArticles = articles.length;
+            let currentIndex = totalArticles;
+            let isAnimating = false;
+            const cardWidth = 374;
+            const cloneBefore = articles.map((a) => a.cloneNode(true));
+            const cloneAfter = articles.map((a) => a.cloneNode(true));
+            cloneAfter.forEach((c) => track.appendChild(c));
+            cloneBefore.reverse().forEach((c) => track.insertBefore(c, track.firstChild));
+            track.style.transform = 'translateX(-' + currentIndex * cardWidth + 'px)';
+            for (let i = 0; i < totalArticles; i++) {
+                const dot = document.createElement('button');
+                dot.type = 'button';
+                dot.className = 'w-2 h-2 rounded-full transition-all duration-300 ' + (i === 0 ? 'bg-[#174f57] w-6' : 'bg-slate-600');
+                dot.addEventListener('click', () => goToSlide(i + totalArticles));
+                dotsContainer.appendChild(dot);
+            }
+            function updateDots() {
+                const realIndex = getRealIndex();
+                Array.from(dotsContainer.children).forEach((dot, i) => {
+                    dot.className = 'w-2 h-2 rounded-full transition-all duration-300 ' + (i === realIndex ? 'bg-[#174f57] w-6' : 'bg-slate-600');
+                });
+            }
+            function getRealIndex() {
+                let realIndex = (currentIndex - totalArticles) % totalArticles;
+                if (realIndex < 0) realIndex += totalArticles;
+                return realIndex;
+            }
+            function goToSlide(index) {
+                if (isAnimating) return;
+                isAnimating = true;
+                currentIndex = index;
+                track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+                track.style.transform = 'translateX(-' + currentIndex * cardWidth + 'px)';
+                updateDots();
+                setTimeout(() => {
+                    if (currentIndex < totalArticles / 2) {
+                        currentIndex += totalArticles;
+                        track.style.transition = 'none';
+                        track.style.transform = 'translateX(-' + currentIndex * cardWidth + 'px)';
+                    } else if (currentIndex >= totalArticles * 2 - totalArticles / 2) {
+                        currentIndex -= totalArticles;
+                        track.style.transition = 'none';
+                        track.style.transform = 'translateX(-' + currentIndex * cardWidth + 'px)';
+                    }
+                    isAnimating = false;
+                }, 500);
+            }
+            if (prevBtn) prevBtn.addEventListener('click', () => goToSlide(currentIndex - 1));
+            if (nextBtn) nextBtn.addEventListener('click', () => goToSlide(currentIndex + 1));
+            updateDots();
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        })();
+        </script>
+    </div>
+
     <!-- START BLOCK: 5-contract-manufacturing.html -->
     <div id="ramo-contract-block" class="relative w-full overflow-hidden text-white" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; direction: ltr;">
         <style>
