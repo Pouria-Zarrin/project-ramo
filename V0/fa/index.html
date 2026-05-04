@@ -45,26 +45,6 @@
             border-color: rgba(20,184,166,0.3);
         }
 
-        /* Header specific */
-        #ramo-header-block { background: rgba(15,23,42,0.85); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.06); box-shadow: 0 4px 20px -10px rgba(0,0,0,0.3); }
-        #ramo-header-block .nav-link { position:relative; color:rgba(255,255,255,0.75); transition:all 0.3s ease; padding:0.5rem 0; text-decoration:none; }
-        #ramo-header-block .nav-link:hover { color:#fff; }
-        #ramo-header-block .nav-link::after { content:''; position:absolute; bottom:0; right:0; width:0; height:2px; background:#5aaeb8; transition:width 0.3s ease; }
-        #ramo-header-block .nav-link:hover::after { width:100%; }
-        #ramo-header-block .btn-primary { background:linear-gradient(135deg,#174f57 0%,#0f363d 100%); border:1px solid rgba(255,255,255,0.1); color:#fff; padding:0.6rem 1.8rem; border-radius:12px; transition:all 0.3s cubic-bezier(0.4,0,0.2,1); text-decoration:none; position:relative; overflow:hidden; }
-        #ramo-header-block .btn-primary:hover { transform:translateY(-2px); box-shadow:0 10px 15px -3px rgba(0,0,0,0.2); border-color:rgba(90,174,184,0.3); }
-        #ramo-header-block .dropdown-menu { opacity:0; visibility:hidden; transform:translateY(10px); transition:all 0.2s ease; }
-        #ramo-header-block .group:hover .dropdown-menu { opacity:1; visibility:visible; transform:translateY(0); }
-        .news-link-wrapper { position:relative; display:inline-block; padding:8px 20px; }
-        .news-link { position:relative; color:#fbbf24 !important; font-weight:600; z-index:2; text-decoration:none !important; }
-        .news-link-wrapper::before { content:''; position:absolute; top:0; left:0; right:0; bottom:0; border:1px solid rgba(251,191,36,0.2); border-radius:8px; z-index:1; transition:all 0.3s ease; }
-        .news-link-wrapper:hover::before { border-color:rgba(251,191,36,0.6); background:rgba(251,191,36,0.1); }
-
-        /* Lang toggle */
-        .lang-btn { display:inline-block; padding:4px 12px; border-radius:8px; font-size:0.8rem; font-weight:600; text-decoration:none; transition:background 0.2s; }
-        .lang-active { background:rgba(23,79,87,0.8); color:#fff; border:1px solid rgba(90,174,184,0.4); }
-        .lang-inactive { background:rgba(255,255,255,0.06); color:rgba(255,255,255,0.7); border:1px solid rgba(255,255,255,0.1); }
-        .lang-inactive:hover { background:rgba(255,255,255,0.12); color:#fff; }
 
         /* Hero */
         #ramo-hero-block .hero-bg { position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; background:radial-gradient(circle at 10% 20%,#174f57 0%,rgb(11,38,59) 40%,rgb(2,6,23) 90%); }
@@ -130,145 +110,102 @@
 <!-- ═══════════════════════════════════════
      HEADER / NAV
 ════════════════════════════════════════ -->
-<div id="ramo-header-block" class="w-full sticky top-0 z-50" style="direction:rtl;">
-    <header class="w-full">
-        <div class="container mx-auto px-6 h-28 flex items-center justify-between">
-
-            <!-- Navigation (right in RTL) -->
-            <nav class="hidden md:flex items-center gap-10">
-                <a href="#" class="nav-link text-lg font-medium">خانه</a>
-                <div class="relative group cursor-pointer py-4">
-                    <a href="../about-us/history.html" class="nav-link text-lg font-medium flex items-center gap-1.5">
-                        درباره ما
-                        <i data-lucide="chevron-down" class="w-4 h-4 mt-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
-                    </a>
-                    <div class="dropdown-menu absolute top-full right-0 w-56 bg-[#0f172a]/95 backdrop-blur-md rounded-2xl shadow-2xl border border-white/10 overflow-hidden z-50">
-                        <div class="p-1">
-                            <a href="../about-us/board-members.html" class="block px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white rounded-xl transition-colors text-base no-underline flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#5aaeb8]"></span>اعضای هیات مدیره</a>
-                            <a href="../about-us/managers.html" class="block px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white rounded-xl transition-colors text-base no-underline flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#5aaeb8]"></span>مدیران اجرایی</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="relative group cursor-pointer py-4">
-                    <span class="nav-link text-lg font-medium flex items-center gap-1.5 cursor-pointer">
-                        محصولات
-                        <i data-lucide="chevron-down" class="w-4 h-4 mt-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
-                    </span>
-                    <div class="dropdown-menu absolute top-full right-0 w-64 bg-[#0f172a]/95 backdrop-blur-md rounded-2xl shadow-2xl border border-white/10 overflow-hidden z-50">
-                        <div class="p-1">
-                            <a href="../product-category-therapeutics/category-page.html" class="block px-4 py-3 text-white/80 hover:bg-white/5 hover:text-white rounded-xl transition-colors text-base no-underline flex items-center gap-2"><span class="w-1.5 h-1.5 rounded-full bg-[#5aaeb8]"></span>بر اساس گروه درمانی</a>
-                        </div>
-                    </div>
-                </div>
-                <a href="magazine/" class="nav-link text-lg font-medium">مجله سلامت</a>
-                <div class="news-link-wrapper">
-                    <a href="../news-page/news-highlights.html" class="news-link text-lg font-medium">اخبار</a>
-                </div>
-            </nav>
-
-            <!-- Mobile menu button -->
-            <button id="mobile-menu-btn" class="md:hidden text-white p-2 hover:bg-white/5 rounded-xl transition-colors border border-transparent hover:border-white/10 relative z-50">
-                <i data-lucide="menu" class="w-8 h-8"></i>
-            </button>
-
-            <!-- Logo + lang toggle (left in RTL) -->
-            <div class="flex items-center gap-6">
-                <!-- Language toggle -->
-                <div class="flex items-center gap-2">
-                    <a href="../en/" class="lang-btn lang-inactive">EN</a>
-                    <span class="lang-btn lang-active">FA</span>
-                </div>
-                <!-- CTA -->
-                <a href="../contact-us/contact-us.html" class="hidden lg:flex items-center gap-2 btn-primary text-base font-medium">
-                    <span>ارتباط با ما</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                </a>
-                <!-- Logo -->
-                <div class="relative group">
-                    <img src="../logos/english-full-logo-white.png"
-                         alt="Ramopharmin Logo"
-                         class="relative object-contain drop-shadow-2xl transform transition-transform duration-300 group-hover:scale-105"
-                         style="height:52px;width:auto;display:block;">
-                </div>
-            </div>
+<nav id="ramo-fa-header" style="position:fixed;top:0;left:0;right:0;z-index:100;font-family:'Vazirmatn','Tahoma',sans-serif;direction:rtl;">
+    <style>
+        #ramo-fa-header {
+            background: rgba(15,23,42,0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+        #ramo-fa-header .fa-nav-link {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        #ramo-fa-header .fa-nav-link:hover { color: #fff; }
+        #ramo-fa-header .fa-lang-btn {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        #ramo-fa-header .fa-lang-active {
+            background: rgba(23,79,87,0.8);
+            color: #fff;
+            border: 1px solid rgba(90,174,184,0.4);
+        }
+        #ramo-fa-header .fa-lang-inactive {
+            background: rgba(255,255,255,0.06);
+            color: rgba(255,255,255,0.7);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        #ramo-fa-header .fa-lang-inactive:hover {
+            background: rgba(255,255,255,0.12);
+            color: #fff;
+        }
+        #ramo-fa-header .fa-mobile-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            padding: 4px;
+        }
+        @media (max-width: 768px) {
+            #ramo-fa-header .fa-nav-links { display: none; }
+            #ramo-fa-header .fa-mobile-btn { display: block; }
+        }
+    </style>
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;">
+        <!-- Logo (appears on right in RTL) -->
+        <a href="./" style="text-decoration:none;display:flex;align-items:center;">
+            <img src="../logos/english-full-logo-white.png"
+                 alt="Ramopharmin"
+                 style="height:56px;width:auto;display:block;">
+        </a>
+        <!-- Nav links -->
+        <div class="fa-nav-links" style="display:flex;align-items:center;gap:28px;">
+            <a href="./" class="fa-nav-link">خانه</a>
+            <a href="../about-us/board-members.html" class="fa-nav-link">درباره ما</a>
+            <a href="../product-category-therapeutics/category-page.html" class="fa-nav-link">محصولات</a>
+            <a href="magazine/" class="fa-nav-link">مجله سلامت</a>
+            <a href="../news-page/news-highlights.html" class="fa-nav-link">اخبار</a>
         </div>
-    </header>
-
-    <!-- Mobile overlay -->
-    <div id="mobile-menu" class="fixed inset-0 bg-[#0f172a] z-40 transform translate-x-full transition-transform duration-300 md:hidden overflow-y-auto pt-32 px-6 pb-10" style="direction:rtl;">
-        <div class="flex flex-col gap-6">
-            <a href="#" class="text-xl font-medium text-white/90 no-underline">خانه</a>
-            <div class="flex flex-col gap-3">
-                <button onclick="toggleMobileSubmenu('mobile-about')" class="flex items-center justify-between text-xl font-medium text-white/90 w-full bg-transparent border-none p-0 cursor-pointer">
-                    <span>درباره ما</span>
-                    <i data-lucide="chevron-down" class="w-5 h-5 opacity-70 transition-transform duration-300" id="icon-mobile-about"></i>
-                </button>
-                <div id="mobile-about" class="hidden flex-col gap-3 pr-4 border-r border-white/10 mr-1">
-                    <a href="../about-us/board-members.html" class="text-lg text-white/70 hover:text-white py-1 no-underline">اعضای هیات مدیره</a>
-                    <a href="../about-us/managers.html" class="text-lg text-white/70 hover:text-white py-1 no-underline">مدیران اجرایی</a>
-                </div>
-            </div>
-            <div class="flex flex-col gap-3">
-                <button onclick="toggleMobileSubmenu('mobile-products')" class="flex items-center justify-between text-xl font-medium text-white/90 w-full bg-transparent border-none p-0 cursor-pointer">
-                    <span>محصولات</span>
-                    <i data-lucide="chevron-down" class="w-5 h-5 opacity-70 transition-transform duration-300" id="icon-mobile-products"></i>
-                </button>
-                <div id="mobile-products" class="hidden flex-col gap-3 pr-4 border-r border-white/10 mr-1">
-                    <a href="../product-category-therapeutics/category-page.html" class="text-lg text-white/70 hover:text-white py-1 no-underline">بر اساس گروه درمانی</a>
-                </div>
-            </div>
-            <a href="magazine/" class="text-xl font-medium text-white/90 no-underline">مجله سلامت</a>
-            <div class="news-link-wrapper">
-                <a href="../news-page/news-highlights.html" class="news-link text-xl font-medium">اخبار</a>
-            </div>
-            <div class="flex gap-3 mt-2">
-                <a href="../en/" class="lang-btn lang-inactive">EN</a>
-                <span class="lang-btn lang-active">FA</span>
-            </div>
-            <a href="../contact-us/contact-us.html" class="mt-4 btn-primary text-center py-3 text-lg font-medium rounded-xl no-underline flex items-center justify-center gap-2">
-                <span>ارتباط با ما</span>
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-            </a>
+        <!-- Lang toggle (appears on left in RTL) -->
+        <div style="display:flex;align-items:center;gap:8px;">
+            <a href="../en/" class="fa-lang-btn fa-lang-inactive">EN</a>
+            <span class="fa-lang-btn fa-lang-active">FA</span>
         </div>
     </div>
+</nav>
+<!-- Spacer for fixed header -->
+<div style="height:64px;"></div>
 
-    <script>
-        // News Ticker
-        (function() {
-            var items = [
-                "بیانیه خشت دژ ایلیا درباره مزایده شفا دارو — گروه سرمایه‌گذاری خشت دژ ایلیا شفاف‌سازی‌هایی ارائه کرده است",
-                "کارخانه جدید راموفارمین بزودی افتتاح خواهد شد",
-                "صنعت ما دچار «ریسک مقیاس» است! — گفت‌وگو با مدیرعامل راموفارمین",
-                "پویش آزادسازی بانوان زندانی — اقدام انسان‌دوستانه راموفارمین",
-                "گزارش تحول ساختاری و راهبردی راموفارمین"
-            ];
-            var ticker = document.getElementById('news-ticker-text');
-            var idx = 0;
-            function next() {
-                ticker.style.opacity = 0;
-                setTimeout(function() { ticker.textContent = items[idx]; ticker.style.opacity = 1; idx = (idx+1) % items.length; }, 400);
-            }
-            next(); setInterval(next, 3400);
-        })();
-
-        // Mobile Menu
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
-        let isMenuOpen = false;
-        if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener('click', () => {
-                isMenuOpen = !isMenuOpen;
-                mobileMenu.style.transform = isMenuOpen ? 'translateX(0)' : 'translateX(100%)';
-            });
+<script>
+    // News Ticker
+    (function() {
+        var items = [
+            "بیانیه خشت دژ ایلیا درباره مزایده شفا دارو — گروه سرمایه‌گذاری خشت دژ ایلیا شفاف‌سازی‌هایی ارائه کرده است",
+            "کارخانه جدید راموفارمین بزودی افتتاح خواهد شد",
+            "صنعت ما دچار «ریسک مقیاس» است! — گفت‌وگو با مدیرعامل راموفارمین",
+            "پویش آزادسازی بانوان زندانی — اقدام انسان‌دوستانه راموفارمین",
+            "گزارش تحول ساختاری و راهبردی راموفارمین"
+        ];
+        var ticker = document.getElementById('news-ticker-text');
+        var idx = 0;
+        function next() {
+            ticker.style.opacity = 0;
+            setTimeout(function() { ticker.textContent = items[idx]; ticker.style.opacity = 1; idx = (idx+1) % items.length; }, 400);
         }
-        function toggleMobileSubmenu(id) {
-            const el = document.getElementById(id);
-            const icon = document.getElementById('icon-' + id);
-            if (el) { el.classList.toggle('hidden'); el.classList.toggle('flex'); }
-            if (icon) { icon.style.transform = el && !el.classList.contains('hidden') ? 'rotate(180deg)' : ''; }
-        }
-    </script>
-</div>
+        next(); setInterval(next, 3400);
+    })();
+</script>
 
 <!-- ═══════════════════════════════════════
      HERO — 3D PILL
