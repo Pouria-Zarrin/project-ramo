@@ -97,6 +97,10 @@ const CHROME_CSS = `
             padding: 12px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
+        main.ramo-page-main {
+            background-color: #EFF2F3;
+            min-height: calc(100vh - 64px);
+        }
 `;
 
 function footerBlock(p) {
@@ -281,7 +285,15 @@ function wrapFragment(body, title, currentNav, pathObj) {
 <body>
 ${navBlock(pathObj, currentNav)}
 `;
-  return head + body.trim() + "\n" + footerBlock(pathObj) + "\n" + TAIL;
+  return (
+    head +
+    "<main class=\"ramo-page-main\">\n" +
+    body.trim() +
+    "\n</main>\n" +
+    footerBlock(pathObj) +
+    "\n" +
+    TAIL
+  );
 }
 
 function alreadyWrapped(s) {
