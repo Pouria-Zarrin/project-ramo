@@ -145,8 +145,24 @@
         .mesh-overlay-footer { position:absolute; inset:0; background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); z-index:0; pointer-events:none; }
         .footer-link { position:relative; color:#cbd5e1; transition:color 0.3s ease; display:inline-block; text-decoration:none; }
         .footer-link:hover { color:#2dd4bf; padding-right:4px; }
-        .social-btn { width:40px; height:40px; border-radius:12px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); display:flex; align-items:center; justify-content:center; transition:all 0.3s cubic-bezier(0.4,0,0.2,1); text-decoration:none; }
-        .social-btn:hover { background:rgba(20,184,166,0.2); border-color:rgba(20,184,166,0.4); transform:translateY(-3px); }
+        .social-btn {
+            width:40px; height:40px; border-radius:12px;
+            background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1);
+            display:flex; align-items:center; justify-content:center;
+            transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
+            text-decoration:none;
+            color:#fff;
+        }
+        .social-btn:hover { background:rgba(20,184,166,0.2); border-color:rgba(20,184,166,0.4); transform:translateY(-3px); color:#fff; }
+        .social-btn svg { display:block; flex-shrink:0; }
+        .footer-bottom-bar { color:rgba(226,232,240,0.82); }
+        .footer-bottom-bar .footer-bottom-copy { color:rgba(226,232,240,0.82); }
+        .footer-bottom-bar a.footer-legal {
+            color:rgba(255,255,255,0.95);
+            text-decoration:none;
+            transition:color 0.2s ease;
+        }
+        .footer-bottom-bar a.footer-legal:hover { color:#5eead4; }
     </style>
 </head>
 <body>
@@ -655,29 +671,29 @@
                 </ul>
                 <div class="mt-8 flex justify-start gap-3">
                     <a href="https://www.linkedin.com/company/ramopharmin" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
                     </a>
                     <a href="https://www.instagram.com/ramopharmin" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
                     </a>
                     <a href="https://twitter.com/ramopharmin" class="social-btn" aria-label="Twitter" target="_blank" rel="noopener">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
                     </a>
                     <a href="https://www.youtube.com/@ramopharmin" class="social-btn" aria-label="YouTube" target="_blank" rel="noopener">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0 2 2 0 0 1 1.4 1.4 24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.56 49.56 0 0 1-16.2 0 2 2 0 0 1-1.4-1.4"/><path d="m10 15 5-3-5-3z"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0 2 2 0 0 1 1.4 1.4 24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.56 49.56 0 0 1-16.2 0 2 2 0 0 1-1.4-1.4"/><path d="m10 15 5-3-5-3z"/></svg>
                     </a>
                 </div>
             </div>
         </div>
-        <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-6 text-xs text-slate-500">
+        <div class="footer-bottom-bar flex flex-col-reverse md:flex-row items-center justify-between gap-6 text-xs">
             <div class="flex items-center gap-1 dir-ltr text-left w-full md:w-auto justify-start">
-                <span>© 2025 Ramopharmin. All rights reserved.</span>
+                <span class="footer-bottom-copy">© 2025 Ramopharmin. All rights reserved.</span>
             </div>
             <div class="flex flex-wrap justify-center gap-6">
-                <a href="#" class="text-white hover:text-teal-400 transition-colors no-underline">حریم خصوصی</a>
-                <a href="#" class="text-white hover:text-teal-400 transition-colors no-underline">شرایط استفاده</a>
-                <a href="#" class="text-white hover:text-teal-400 transition-colors no-underline">نقشه سایت</a>
-                <a href="#" class="text-white hover:text-teal-400 transition-colors no-underline">تنظیمات کوکی</a>
+                <a href="#" class="footer-legal">حریم خصوصی</a>
+                <a href="#" class="footer-legal">شرایط استفاده</a>
+                <a href="#" class="footer-legal">نقشه سایت</a>
+                <a href="#" class="footer-legal">تنظیمات کوکی</a>
             </div>
         </div>
     </div>
