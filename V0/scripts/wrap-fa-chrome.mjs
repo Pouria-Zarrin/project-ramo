@@ -107,13 +107,17 @@ const CHROME_CSS = `
         }
         #ramo-fa-header .fa-nav-dd {
             position: relative;
+            /* Extend hover target below the label so the pointer can reach the menu
+               (absolutely positioned submenu does not expand this box in normal flow). */
+            padding-bottom: 12px;
+            margin-bottom: -12px;
         }
         #ramo-fa-header .fa-nav-submenu {
             display: none;
             position: absolute;
-            top: 100%;
+            top: calc(100% - 2px);
             right: 0;
-            margin-top: 10px;
+            margin-top: 0;
             min-width: 220px;
             background: #0f172a;
             border: 1px solid rgba(255, 255, 255, 0.12);
