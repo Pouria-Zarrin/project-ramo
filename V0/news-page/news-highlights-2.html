@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مجله سلامت راموفارمین — صفحه ۱</title>
-    <meta name="description" content="فهرست مقالات علمی و آموزشی داروسازی راموفارمین">
-    <link rel="next" href="index-2.html">
+    <title>اخبار و اطلاعیه‌ها | راموفارمین — صفحه ۲</title>
+    <meta name="description" content="فهرست اخبار، بیانیه‌ها و گزارش‌های رسمی داروسازی راموفارمین">
+    <link rel="prev" href="news-highlights.html">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -144,6 +144,7 @@
             padding: 1.25rem 0;
         }
         .mag-article-list > li:first-child { padding-top: 0; }
+        .mag-article-list > li.is-hidden { display: none; }
         .mag-article-title {
             font-size: 1.05rem;
             font-weight: 700;
@@ -155,6 +156,14 @@
         .mag-article-title:hover { color: #174f57; }
         .mag-article-meta { font-size: 0.8rem; color: #64748b; margin: 0.35rem 0 0; }
         .mag-article-excerpt { font-size: 0.9rem; color: #475569; margin: 0.5rem 0 0; line-height: 1.6; }
+        .news-index-empty {
+            display: none;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.95rem;
+            padding: 2rem 1rem;
+        }
+        .news-index-empty.is-visible { display: block; }
 
         .idx-pagination {
             display: flex;
@@ -195,24 +204,23 @@
 </head>
 <body>
 
-<!-- HEADER (aligned with FA home — dark bar; white wordmark) -->
 <nav id="ramo-fa-header">
     <div style="max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;">
-        <a href="../" style="text-decoration:none;display:flex;align-items:center;">
-            <img src="../../logos/english-full-logo-white.png" alt="Ramopharmin" style="height:64px;width:auto;display:block;">
+        <a href="../fa/" style="text-decoration:none;display:flex;align-items:center;">
+            <img src="../logos/english-full-logo-white.png" alt="Ramopharmin" style="height:64px;width:auto;display:block;">
         </a>
         <div class="fa-nav-links" style="display:flex;align-items:center;gap:28px;">
-            <a href="../" class="fa-nav-link">خانه</a>
-            <a href="../../about-us/board-members.html" class="fa-nav-link">درباره ما</a>
-            <a href="../../product-category-therapeutics/category-page.html" class="fa-nav-link">محصولات</a>
-            <a href="./" class="fa-nav-link fa-nav-current">مجله سلامت</a>
-            <a href="../../news-page/news-highlights.html" class="fa-nav-link">اخبار</a>
+            <a href="../fa/" class="fa-nav-link">خانه</a>
+            <a href="../about-us/board-members.html" class="fa-nav-link">درباره ما</a>
+            <a href="../product-category-therapeutics/category-page.html" class="fa-nav-link">محصولات</a>
+            <a href="../fa/magazine/" class="fa-nav-link">مجله سلامت</a>
+            <a href="./news-highlights.html" class="fa-nav-link fa-nav-current">اخبار</a>
         </div>
         <div style="display:flex;align-items:center;gap:10px;">
             <button type="button" class="fa-mobile-btn" id="mag-mobile-open" aria-label="باز کردن فهرست">
                 <i data-lucide="menu" class="w-7 h-7"></i>
             </button>
-            <a href="../../en/index.html" class="fa-lang-btn fa-lang-inactive">EN</a>
+            <a href="../en/index.html" class="fa-lang-btn fa-lang-inactive">EN</a>
             <span class="fa-lang-btn fa-lang-active">FA</span>
         </div>
     </div>
@@ -220,66 +228,48 @@
 <div style="height:64px;"></div>
 
 <div id="mag-mobile-panel" aria-hidden="true">
-    <a href="../">خانه</a>
-    <a href="../../about-us/board-members.html">درباره ما</a>
-    <a href="../../product-category-therapeutics/category-page.html">محصولات</a>
-    <a href="./">مجله سلامت</a>
-    <a href="../../news-page/news-highlights.html">اخبار</a>
-    <a href="../../en/index.html">English</a>
+    <a href="../fa/">خانه</a>
+    <a href="../about-us/board-members.html">درباره ما</a>
+    <a href="../product-category-therapeutics/category-page.html">محصولات</a>
+    <a href="../fa/magazine/">مجله سلامت</a>
+    <a href="./news-highlights.html">اخبار</a>
+    <a href="../en/index.html">English</a>
 </div>
 
 <main class="mag-index" dir="rtl">
     <header class="mag-index-head">
         <p class="mag-index-kicker">راموفارمین</p>
-        <h1 class="mag-index-title">مجله سلامت <span class="text-slate-500 font-semibold text-[0.55em]">— صفحه ۱</span></h1>
-        <p class="mag-index-lead">فهرست مقالات؛ برای مطالعه روی عنوان کلیک کنید. در هر صفحه حداکثر ۱۰ مقاله نمایش داده می‌شود.</p>
-        <form class="mag-index-search" action="./" method="get" role="search" aria-label="جستجو در مقالات">
-            <label for="mag-q" class="sr-only">جستجو</label>
-            <input id="mag-q" name="s" type="search" placeholder="جستجو…" autocomplete="off">
+        <h1 class="mag-index-title">اخبار و اطلاعیه‌ها <span class="text-slate-500 font-semibold text-[0.55em]">— صفحه ۲</span></h1>
+        <p class="mag-index-lead">فهرست گزارش‌ها، بیانیه‌ها و رویدادها؛ برای مطالعه روی عنوان کلیک کنید. در هر صفحه حداکثر ۱۰ خبر نمایش داده می‌شود. جستجو فقط میان همین صفحه انجام می‌شود.</p>
+        <form class="mag-index-search" id="news-index-search-form" role="search" aria-label="جستجو در اخبار">
+            <label for="news-q" class="sr-only">جستجو در اخبار</label>
+            <input id="news-q" name="s" type="search" placeholder="جستجو در عنوان و توضیح…" autocomplete="off">
             <button type="submit">جستجو</button>
         </form>
     </header>
 
-    <ol class="mag-article-list">
-        <li>
-            <a class="mag-article-title" href="articles/influenza.html">آنفلوآنزا؛ پیشگیری با واکسیناسیون، درمان و راهنمای جامع</a>
-            <p class="mag-article-meta">تحریریه راموفارمین</p>
-            <p class="mag-article-excerpt">انتقال، پیشگیری، درمان و نقش واکسن‌ها.</p>
+    <p id="news-index-empty" class="news-index-empty" role="status">موردی با این عبارت پیدا نشد.</p>
+
+    <ol class="mag-article-list" id="news-index-list">
+        <li class="news-index-item" data-search="فارمکس نمایشگاه بین‌المللی">
+            <a class="mag-article-title" href="../news/pharmex-ramopharmin.html">راموفارمین در نمایشگاه بین‌المللی فارمکس</a>
+            <p class="mag-article-meta">رویداد</p>
+            <p class="mag-article-excerpt">حضور و معرفی توانمندی‌ها در نمایشگاه تخصصی دارویی.</p>
         </li>
-        <li>
-            <a class="mag-article-title" href="articles/azathioprine-organ-transplant.html">آزاتیوپرین در پیوند اعضا — نقش درمانی، مانیتورینگ و مراقبت بلندمدت</a>
-            <p class="mag-article-meta">ویرایش: دکتر مختاری · تایید داروساز</p>
-            <p class="mag-article-excerpt">پیشگیری از رد پیوند، رژیم‌های ترکیبی و پایش آزمایشگاهی.</p>
-        </li>
-        <li>
-            <a class="mag-article-title" href="articles/azathioprine-side-effect.html">آزاتیوپرین — مدیریت عوارض و خطرات</a>
-            <p class="mag-article-meta">تحریریه راموفارمین</p>
-            <p class="mag-article-excerpt">چک‌لیست پایش، هشدارها و توصیه‌های عملی.</p>
-        </li>
-        <li>
-            <a class="mag-article-title" href="articles/azathioprine-ibd.html">آزارام (آزاتیوپرین) در IBD</a>
-            <p class="mag-article-meta">تحریریه راموفارمین</p>
-            <p class="mag-article-excerpt">کولیت اولسراتیو و بیماری کرون؛ مصرف و پایش.</p>
-        </li>
-        <li>
-            <a class="mag-article-title" href="articles/carbamazepine-1.html">کاربامازپین — راهنمای ساده برای بیماران</a>
-            <p class="mag-article-meta">تحریریه راموفارمین</p>
-            <p class="mag-article-excerpt">موارد مصرف، HLA و نکات مصرف و عوارض.</p>
-        </li>
-        <li>
-            <a class="mag-article-title" href="articles/carbaram-safe-usage.html">کاربارام (کاربامازپین): نکات مصرف ایمن</a>
-            <p class="mag-article-meta">تحریریه راموفارمین</p>
-            <p class="mag-article-excerpt">دوزدهی، پایش و علائم هشدار.</p>
+        <li class="news-index-item" data-search="تحول نوسازی صادرات راموفارمین">
+            <a class="mag-article-title" href="../news/doshanbe-daruyi.html">نگاهی به تحول راموفارمین؛ از نوسازی تا تمرکز بر صادرات</a>
+            <p class="mag-article-meta">گزارش</p>
+            <p class="mag-article-excerpt">مسیر تحول شرکت، سرمایه‌گذاری‌ها و اولویت صادرات.</p>
         </li>
     </ol>
 
-    <nav class="idx-pagination" aria-label="صفحه‌بندی فهرست مقالات">
-        <span class="idx-page-btn idx-page-btn--disabled" aria-disabled="true">صفحه قبلی</span>
-        <span class="idx-page-meta">صفحه ۱ از ۲</span>
-        <a class="idx-page-btn" href="index-2.html" rel="next">صفحه بعد</a>
+    <nav class="idx-pagination" aria-label="صفحه‌بندی اخبار">
+        <a class="idx-page-btn" href="news-highlights.html" rel="prev">صفحه قبلی</a>
+        <span class="idx-page-meta">صفحه ۲ از ۲</span>
+        <span class="idx-page-btn idx-page-btn--disabled" aria-disabled="true">صفحه بعد</span>
     </nav>
 
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ramopharmin Health Magazine","url":"https://pouria-zarrin.github.io/project-ramo/V0/fa/magazine/","potentialAction":{"@type":"SearchAction","target":"https://pouria-zarrin.github.io/project-ramo/V0/fa/magazine/?s={search_term_string}","query-input":"required name=search_term_string"}}</script>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"اخبار راموفارمین","description":"فهرست اخبار و اطلاعیه‌های رسمی داروسازی راموفارمین","inLanguage":"fa-IR"}</script>
 </main>
 
 <style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}</style>
@@ -318,10 +308,11 @@
                     لینک‌های سریع
                 </h3>
                 <ul class="space-y-3 text-sm text-slate-900 mb-8">
-                    <li><a href="../" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">خانه فارسی</a></li>
-                    <li><a href="../../contact-us/contact-us.html" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">ارتباط با ما</a></li>
-                    <li><a href="./" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">مجله سلامت</a></li>
-                    <li><a href="../../en/index.html" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">English site</a></li>
+                    <li><a href="../fa/" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">خانه فارسی</a></li>
+                    <li><a href="../contact-us/contact-us.html" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">ارتباط با ما</a></li>
+                    <li><a href="../fa/magazine/" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">مجله سلامت</a></li>
+                    <li><a href="./news-highlights.html" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">اخبار</a></li>
+                    <li><a href="../en/index.html" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">English site</a></li>
                     <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">پایداری و محیط زیست</a></li>
                     <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">سوالات متداول</a></li>
                 </ul>
@@ -374,6 +365,54 @@ document.addEventListener('DOMContentLoaded', function() {
             if (typeof lucide !== 'undefined') lucide.createIcons();
         });
     });
+})();
+
+(function() {
+    var form = document.getElementById('news-index-search-form');
+    var input = document.getElementById('news-q');
+    var list = document.getElementById('news-index-list');
+    var empty = document.getElementById('news-index-empty');
+    if (!form || !input || !list) return;
+
+    function norm(s) {
+        return (s || '').replace(/\s+/g, ' ').trim().toLowerCase();
+    }
+
+    function applyFilter() {
+        var q = norm(input.value);
+        var items = list.querySelectorAll('.news-index-item');
+        var n = 0;
+        items.forEach(function(li) {
+            var title = li.querySelector('.mag-article-title');
+            var excerpt = li.querySelector('.mag-article-excerpt');
+            var meta = li.querySelector('.mag-article-meta');
+            var blob = norm([
+                title ? title.textContent : '',
+                excerpt ? excerpt.textContent : '',
+                meta ? meta.textContent : '',
+                li.getAttribute('data-search') || ''
+            ].join(' '));
+            var show = !q || blob.indexOf(q) !== -1;
+            li.classList.toggle('is-hidden', !show);
+            if (show) n++;
+        });
+        if (empty) empty.classList.toggle('is-visible', n === 0);
+    }
+
+    input.addEventListener('input', applyFilter);
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        applyFilter();
+    });
+
+    if (window.location.search) {
+        var params = new URLSearchParams(window.location.search);
+        var s = params.get('s');
+        if (s) {
+            input.value = s;
+            applyFilter();
+        }
+    }
 })();
 </script>
 </body>

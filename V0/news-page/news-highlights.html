@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اخبار و اطلاعیه‌ها | راموفارمین</title>
+    <title>اخبار و اطلاعیه‌ها | راموفارمین — صفحه ۱</title>
     <meta name="description" content="فهرست اخبار، بیانیه‌ها و گزارش‌های رسمی داروسازی راموفارمین">
+    <link rel="next" href="news-highlights-2.html">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -163,6 +164,42 @@
             padding: 2rem 1rem;
         }
         .news-index-empty.is-visible { display: block; }
+
+        .idx-pagination {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+        .idx-page-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            color: #174f57;
+            background: #fff;
+            border: 1px solid #e2e8f0;
+            font-family: inherit;
+            cursor: pointer;
+        }
+        .idx-page-btn:hover:not(.idx-page-btn--disabled) {
+            background: #f0fdfa;
+            border-color: #5aaeb8;
+        }
+        .idx-page-btn--disabled {
+            color: #94a3b8;
+            cursor: not-allowed;
+            background: #f8fafc;
+            border-color: #e2e8f0;
+        }
+        .idx-page-meta { font-size: 0.9rem; color: #64748b; }
     </style>
 </head>
 <body>
@@ -203,7 +240,7 @@
     <header class="mag-index-head">
         <p class="mag-index-kicker">راموفارمین</p>
         <h1 class="mag-index-title">اخبار و اطلاعیه‌ها</h1>
-        <p class="mag-index-lead">فهرست گزارش‌ها، بیانیه‌ها و رویدادها؛ برای مطالعه روی عنوان کلیک کنید. می‌توانید با جستجو فهرست را محدود کنید.</p>
+        <p class="mag-index-lead">فهرست گزارش‌ها، بیانیه‌ها و رویدادها؛ برای مطالعه روی عنوان کلیک کنید. در هر صفحه حداکثر ۱۰ خبر نمایش داده می‌شود. جستجو فقط میان همین صفحه انجام می‌شود.</p>
         <form class="mag-index-search" id="news-index-search-form" role="search" aria-label="جستجو در اخبار">
             <label for="news-q" class="sr-only">جستجو در اخبار</label>
             <input id="news-q" name="s" type="search" placeholder="جستجو در عنوان و توضیح…" autocomplete="off">
@@ -244,17 +281,13 @@
             <p class="mag-article-meta">زیرساخت</p>
             <p class="mag-article-excerpt">نوسازی و توسعه فضای تولید در راستای استانداردهای بین‌المللی.</p>
         </li>
-        <li class="news-index-item" data-search="فارمکس نمایشگاه بین‌المللی">
-            <a class="mag-article-title" href="../news/pharmex-ramopharmin.html">راموفارمین در نمایشگاه بین‌المللی فارمکس</a>
-            <p class="mag-article-meta">رویداد</p>
-            <p class="mag-article-excerpt">حضور و معرفی توانمندی‌ها در نمایشگاه تخصصی دارویی.</p>
-        </li>
-        <li class="news-index-item" data-search="تحول نوسازی صادرات راموفارمین">
-            <a class="mag-article-title" href="../news/doshanbe-daruyi.html">نگاهی به تحول راموفارمین؛ از نوسازی تا تمرکز بر صادرات</a>
-            <p class="mag-article-meta">گزارش</p>
-            <p class="mag-article-excerpt">مسیر تحول شرکت، سرمایه‌گذاری‌ها و اولویت صادرات.</p>
-        </li>
     </ol>
+
+    <nav class="idx-pagination" aria-label="صفحه‌بندی اخبار">
+        <span class="idx-page-btn idx-page-btn--disabled" aria-disabled="true">صفحه قبلی</span>
+        <span class="idx-page-meta">صفحه ۱ از ۲</span>
+        <a class="idx-page-btn" href="news-highlights-2.html" rel="next">صفحه بعد</a>
+    </nav>
 
     <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"اخبار راموفارمین","description":"فهرست اخبار و اطلاعیه‌های رسمی داروسازی راموفارمین","inLanguage":"fa-IR"}</script>
 </main>
