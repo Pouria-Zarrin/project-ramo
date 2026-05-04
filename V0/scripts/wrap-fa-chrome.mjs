@@ -26,6 +26,14 @@ const CHROME_CSS = `
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            overflow: visible;
+        }
+        #ramo-fa-header > div {
+            overflow: visible;
+        }
+        #ramo-fa-header img[src*="english-full-logo-white"] {
+            transform: scale(1.1);
+            transform-origin: center center;
         }
         #ramo-fa-header .fa-nav-link {
             color: rgba(255, 255, 255, 0.72);
@@ -181,7 +189,7 @@ function navBlock(p, current) {
 <nav id="ramo-fa-header">
     <div style="max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;">
         <a href="${p.faHome}" style="text-decoration:none;display:flex;align-items:center;">
-            <img src="${p.logo}" alt="Ramopharmin" style="height:62px;width:auto;display:block;">
+            <img src="${p.logo}" alt="Ramopharmin" style="height:64px;width:auto;display:block;">
         </a>
         <div class="fa-nav-links" style="display:flex;align-items:center;gap:28px;">
             <a href="${p.faHome}" class="fa-nav-link${cHome}">خانه</a>
