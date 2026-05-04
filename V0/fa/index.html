@@ -76,6 +76,7 @@
         #ramo-hero-block .hero-inner {
             flex: 1 1 auto;
             width: 100%;
+            min-height: 100%;
             max-width: 1400px;
             margin-left: auto;
             margin-right: auto;
@@ -161,10 +162,14 @@
 (function () {
     function syncFaChrome() {
         var t = document.getElementById('ramo-news-ticker');
+        var n = document.getElementById('ramo-fa-header');
         var th = t ? Math.round(t.getBoundingClientRect().height) : 48;
-        var nav = 64;
+        /* Nav is fixed; ticker is already in document flow above the spacer, so the
+           spacer must only reserve the nav band — not ticker+nav (that double-counts). */
+        var nh = n ? Math.round(n.getBoundingClientRect().height) : 64;
         document.documentElement.style.setProperty('--fa-ticker-h', th + 'px');
-        document.documentElement.style.setProperty('--fa-chrome-h', (th + nav) + 'px');
+        document.documentElement.style.setProperty('--fa-nav-h', nh + 'px');
+        document.documentElement.style.setProperty('--fa-chrome-h', (th + nh) + 'px');
     }
     syncFaChrome();
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncFaChrome);
@@ -256,8 +261,8 @@
         </div>
     </div>
 </nav>
-<!-- Spacer: ticker + fixed nav (matches --fa-chrome-h) -->
-<div id="fa-chrome-spacer" style="height:var(--fa-chrome-h,112px);"></div>
+<!-- Spacer: fixed nav only (ticker is already in normal flow above this) -->
+<div id="fa-chrome-spacer" style="height:var(--fa-nav-h,64px);"></div>
 
 <script>
     // News Ticker
