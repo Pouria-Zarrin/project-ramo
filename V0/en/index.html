@@ -1561,49 +1561,81 @@
     <div id="ramo-contact-block" class="relative w-full overflow-hidden text-white" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; direction: ltr;">
         <style>
             #ramo-contact-block .glass-panel {
-                background: rgba(255, 255, 255, 0.05);
+                background: linear-gradient(160deg, rgba(15, 23, 42, 0.74) 0%, rgba(30, 41, 59, 0.56) 100%);
                 backdrop-filter: blur(12px);
                 -webkit-backdrop-filter: blur(12px);
-                border: 1px solid rgba(255, 255, 255, 0.08);
-                border-radius: 16px;
+                border: 1px solid rgba(148, 163, 184, 0.22);
+                border-radius: 20px;
+                box-shadow: 0 22px 44px -28px rgba(2, 6, 23, 0.8);
+            }
+
+            #ramo-contact-block .form-grid {
+                display: grid;
+                gap: 1rem;
+            }
+
+            #ramo-contact-block .form-row {
+                display: grid;
+                gap: 1rem;
+                grid-template-columns: 1fr;
+            }
+
+            @media (min-width: 768px) {
+                #ramo-contact-block .form-row { grid-template-columns: 1fr 1fr; }
+            }
+
+            #ramo-contact-block .field-label {
+                display: block;
+                font-size: 0.82rem;
+                font-weight: 600;
+                color: rgba(226, 232, 240, 0.92);
+                margin-bottom: 0.42rem;
+                letter-spacing: 0.01em;
             }
 
             #ramo-contact-block .form-input {
-                background: rgba(255, 255, 255, 0.05);
-                border: 1px solid rgba(255, 255, 255, 0.1);
-                border-radius: 8px;
-                color: white;
-                padding: 12px 16px;
+                background: rgba(15, 23, 42, 0.42);
+                border: 1px solid rgba(148, 163, 184, 0.28);
+                border-radius: 12px;
+                color: #fff;
+                padding: 0.78rem 0.92rem;
                 width: 100%;
-                transition: all 0.3s ease;
+                transition: border-color 0.22s ease, box-shadow 0.22s ease, background-color 0.22s ease;
+                line-height: 1.4;
+            }
+
+            #ramo-contact-block .form-input:hover {
+                border-color: rgba(148, 163, 184, 0.45);
             }
 
             #ramo-contact-block .form-input:focus {
-                border-color: rgba(90, 174, 184, 0.5);
-                box-shadow: 0 0 0 3px rgba(90, 174, 184, 0.1);
+                border-color: rgba(90, 174, 184, 0.85);
+                box-shadow: 0 0 0 3px rgba(90, 174, 184, 0.18);
+                background: rgba(15, 23, 42, 0.55);
                 outline: none;
             }
 
             #ramo-contact-block .form-input::placeholder {
-                color: rgba(255, 255, 255, 0.6);
+                color: rgba(203, 213, 225, 0.68);
             }
 
             #ramo-contact-block .btn-submit {
-                background: linear-gradient(135deg, #174f57 0%, #0f363d 100%);
-                border: 1px solid rgba(255,255,255,0.1);
-                color: white;
-                padding: 12px 24px;
-                border-radius: 8px;
-                font-weight: 600;
-                transition: all 0.3s ease;
+                background: linear-gradient(135deg, #1b6a74 0%, #174f57 45%, #0f363d 100%);
+                border: 1px solid rgba(90, 174, 184, 0.35);
+                color: #fff;
+                padding: 0.82rem 1.2rem;
+                border-radius: 12px;
+                font-weight: 700;
+                letter-spacing: 0.01em;
+                transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
                 cursor: pointer;
                 width: 100%;
             }
 
             #ramo-contact-block .btn-submit:hover {
-                transform: translateY(-2px);
-                box-shadow: 0 8px 25px -8px rgba(23, 79, 87, 0.5);
-                border-color: rgba(90, 174, 184, 0.3);
+                transform: translateY(-1px);
+                box-shadow: 0 12px 26px -12px rgba(23, 79, 87, 0.7);
+                border-color: rgba(132, 204, 214, 0.65);
             }
 
             #ramo-contact-block .badge {
@@ -1624,46 +1656,48 @@
         <div class="relative z-10 container mx-auto px-6 py-12 md:py-20">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <!-- Contact Form -->
-                <div class="glass-panel p-8">
+                <div class="glass-panel p-6 md:p-8">
                     <form action="https://formspree.io/f/xanrbkab" method="POST" accept-charset="UTF-8">
                         <input type="hidden" name="_subject" value="Ramopharmin — Export agents (EN home)">
                         <input type="hidden" name="form_source" value="en-index-export-agents">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="form-grid">
+                        <div class="form-row">
                             <div>
-                                <label for="first-name" class="block text-sm font-medium text-white/80 mb-2">First Name *</label>
+                                <label for="first-name" class="field-label">First Name *</label>
                                 <input type="text" id="first-name" name="first-name" required class="form-input" placeholder="Your first name">
                             </div>
                             <div>
-                                <label for="last-name" class="block text-sm font-medium text-white/80 mb-2">Last Name *</label>
+                                <label for="last-name" class="field-label">Last Name *</label>
                                 <input type="text" id="last-name" name="last-name" required class="form-input" placeholder="Your last name">
                             </div>
                         </div>
 
                         <div>
-                            <label for="company" class="block text-sm font-medium text-white/80 mb-2">Company/Organization *</label>
+                            <label for="company" class="field-label">Company/Organization *</label>
                             <input type="text" id="company" name="company" required class="form-input" placeholder="Your company name">
                         </div>
 
                         <div>
-                            <label for="email" class="block text-sm font-medium text-white/80 mb-2">Email Address *</label>
+                            <label for="email" class="field-label">Email Address *</label>
                             <input type="email" id="email" name="email" required class="form-input" placeholder="your.email@company.com">
                         </div>
 
                         <div>
-                            <label for="country" class="block text-sm font-medium text-white/80 mb-2">Country/Region</label>
+                            <label for="country" class="field-label">Country/Region</label>
                             <input type="text" id="country" name="country" class="form-input" placeholder="Your country">
                         </div>
 
                         <div>
-                            <label for="message" class="block text-sm font-medium text-white/80 mb-2">Message *</label>
+                            <label for="message" class="field-label">Message *</label>
                             <textarea id="message" name="message" rows="4" required class="form-input resize-none" placeholder="Tell us about your interest in our products and export opportunities..."></textarea>
+                        </div>
                         </div>
 
                         <button type="submit" class="btn-submit text-xs md:text-base text-center">
                             Send Message to Export Agents
                         </button>
 
-                        <p class="text-xs text-white/50 text-center">
+                        <p class="text-xs text-white/60 text-center mt-3">
                             By submitting this form, you agree to our privacy policy. We'll respond within 24 hours.
                         </p>
                     </form>
