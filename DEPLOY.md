@@ -20,9 +20,26 @@ GitHub shows the exact Pages URL under **Settings → Pages** after the first su
 
 ## Custom domain and HTTPS
 
-1. In your DNS (registrar or Cloudflare), add records per [GitHub’s custom-domain documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site). The docs list the current **A**, **AAAA**, and **CNAME** values (they can change; always use GitHub’s page as source of truth).
-2. In `V0/`, add a file named `CNAME` whose **only line** is your hostname, e.g. `www.example.com` (no `https://`, no path). You can start from [`V0/CNAME.example`](V0/CNAME.example).
-3. Push the `CNAME` file, wait for DNS propagation, then in **Settings → Pages** enable **Enforce HTTPS** once the certificate is issued.
+This repo deploys with **GitHub Actions** (`upload-pages-artifact` from `V0/`). The live hostname is set in the repo’s **Pages** settings (or API), not via a `CNAME` file in the artifact (GitHub does not require that file for workflow-based Pages).
+
+Always confirm current IP targets in [GitHub’s custom-domain documentation](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site).
+
+### ramopharmin.net (GoDaddy → GitHub Pages)
+
+**Primary hostname in GitHub:** `www.ramopharmin.net` (points at this project’s Pages site; paths are the same as on `github.io` but without `/project-ramo/`, e.g. `/fa/`, `/en/`).
+
+In **GoDaddy → My Products → ramopharmin.net → DNS**:
+
+1. **www** — add a **CNAME** record:
+   - **Name / Host:** `www`
+   - **Points to / Value:** `pouria-zarrin.github.io`
+   - Remove or replace any existing `www` parking / forwarding that conflicts.
+
+2. **Apex (optional)** — if you want `https://ramopharmin.net` (no `www`) to work as well, add GitHub’s **A** and **AAAA** records on **`@`** as listed in GitHub’s docs (four IPv4 and four IPv6 addresses). GitHub Pages will redirect apex ↔ `www` once both names resolve correctly.
+
+3. Wait for DNS (often minutes, sometimes up to 24–48 hours). In GitHub: **Settings → Pages**, confirm the domain check passes, then turn on **Enforce HTTPS** when it becomes available.
+
+If you change the hostname later, update the repo **Pages → Custom domain** to match DNS.
 
 ## Registering the domain
 
