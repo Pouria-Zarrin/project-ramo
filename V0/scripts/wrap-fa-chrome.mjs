@@ -107,15 +107,15 @@ const CHROME_CSS = `
         }
         #ramo-fa-header .fa-nav-dd {
             position: relative;
-            /* Extend hover target below the label so the pointer can reach the menu
-               (absolutely positioned submenu does not expand this box in normal flow). */
-            padding-bottom: 12px;
-            margin-bottom: -12px;
+            /* Large hit area under the label: submenu is out-of-flow, so this padding
+               keeps :hover on the parent while moving toward the panel. */
+            padding-bottom: 24px;
+            margin-bottom: -24px;
         }
         #ramo-fa-header .fa-nav-submenu {
             display: none;
             position: absolute;
-            top: calc(100% - 2px);
+            top: calc(100% - 14px);
             right: 0;
             margin-top: 0;
             min-width: 220px;
@@ -125,6 +125,16 @@ const CHROME_CSS = `
             padding: 8px 0;
             box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
             z-index: 200;
+        }
+        /* Invisible wedge above the panel — still inside .fa-nav-submenu, so it counts
+           as hovering the dropdown while crossing any remaining pixel gap. */
+        #ramo-fa-header .fa-nav-submenu::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 100%;
+            height: 28px;
         }
         #ramo-fa-header .fa-nav-dd:hover .fa-nav-submenu,
         #ramo-fa-header .fa-nav-dd:focus-within .fa-nav-submenu {

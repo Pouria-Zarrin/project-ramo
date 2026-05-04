@@ -89,13 +89,28 @@
         #ramo-header-block .dropdown-menu {
             opacity: 0;
             visibility: hidden;
-            transform: translateY(10px);
+            transform: translateY(6px);
             transition: all 0.2s ease;
         }
         #ramo-header-block .group:hover .dropdown-menu {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
+        }
+        #ramo-header-block .group.cursor-pointer {
+            padding-bottom: 20px;
+            margin-bottom: -20px;
+        }
+        #ramo-header-block .dropdown-menu.absolute {
+            top: calc(100% - 12px);
+        }
+        #ramo-header-block .dropdown-menu::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 100%;
+            height: 24px;
         }
 
         /* Language Buttons */
