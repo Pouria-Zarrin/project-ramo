@@ -247,7 +247,7 @@ function navBlock(p, current) {
         <div class="fa-nav-links" style="display:flex;align-items:center;gap:28px;">
             <a href="${p.faHome}" class="fa-nav-link${cHome}">خانه</a>
             <div class="fa-nav-dd">
-                <a href="${p.aboutBoard}" class="fa-nav-link${cAboutHistory}">درباره ما</a>
+                <a href="${p.aboutHistory}" class="fa-nav-link${cAboutHistory}">درباره ما</a>
                 <div class="fa-nav-submenu" role="menu">
                     <a href="${p.aboutBoard}" class="fa-nav-submenu-link${cBoard}" role="menuitem">هیئت مدیره</a>
                     <a href="${p.aboutManagers}" class="fa-nav-submenu-link${cManagers}" role="menuitem">مدیران ارشد</a>
@@ -270,6 +270,7 @@ function navBlock(p, current) {
 
 <div id="mag-mobile-panel" aria-hidden="true">
     <a href="${p.faHome}">خانه</a>
+    <a href="${p.aboutHistory}">درباره ما</a>
     <a href="${p.aboutBoard}">هیئت مدیره</a>
     <a href="${p.aboutManagers}">مدیران ارشد</a>
     <a href="${p.productsHub}">محصولات</a>
@@ -314,6 +315,7 @@ document.addEventListener('DOMContentLoaded', function() {
 const pathsTher = {
   logo: "../logos/english-full-logo-white.png",
   faHome: "../fa/",
+  aboutHistory: "../about-us/history.html",
   aboutBoard: "../about-us/board-members.html",
   aboutManagers: "../about-us/managers.html",
   productsHub: "category-page.html",
@@ -326,6 +328,7 @@ const pathsTher = {
 const pathsAbout = {
   logo: "../logos/english-full-logo-white.png",
   faHome: "../fa/",
+  aboutHistory: "../about-us/history.html",
   aboutBoard: "../about-us/board-members.html",
   aboutManagers: "../about-us/managers.html",
   productsHub: "../product-category-therapeutics/category-page.html",
