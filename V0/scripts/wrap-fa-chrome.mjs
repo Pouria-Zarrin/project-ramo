@@ -79,7 +79,7 @@ const CHROME_CSS = `
         #mag-mobile-panel {
             display: none;
             position: fixed;
-            top: 104px;
+            top: 64px;
             left: 0;
             right: 0;
             bottom: 0;
@@ -175,9 +175,9 @@ function navBlock(p, current) {
   const cNews = current === "news" ? " fa-nav-current" : "";
   return `<!-- HEADER (same chrome as health magazine) -->
 <nav id="ramo-fa-header">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;min-height:104px;display:flex;align-items:center;justify-content:space-between;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;">
         <a href="${p.faHome}" style="text-decoration:none;display:flex;align-items:center;">
-            <img src="${p.logo}" alt="Ramopharmin" style="height:88px;width:auto;display:block;">
+            <img src="${p.logo}" alt="Ramopharmin" style="height:56px;width:auto;display:block;">
         </a>
         <div class="fa-nav-links" style="display:flex;align-items:center;gap:28px;">
             <a href="${p.faHome}" class="fa-nav-link${cHome}">خانه</a>
@@ -195,7 +195,7 @@ function navBlock(p, current) {
         </div>
     </div>
 </nav>
-<div style="height:104px;"></div>
+<div style="height:64px;"></div>
 
 <div id="mag-mobile-panel" aria-hidden="true">
     <a href="${p.faHome}">خانه</a>
