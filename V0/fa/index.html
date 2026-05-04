@@ -166,7 +166,7 @@
         var th = t ? Math.round(t.getBoundingClientRect().height) : 48;
         /* Nav is fixed; ticker is already in document flow above the spacer, so the
            spacer must only reserve the nav band — not ticker+nav (that double-counts). */
-        var nh = n ? Math.round(n.getBoundingClientRect().height) : 64;
+        var nh = n ? Math.round(n.getBoundingClientRect().height) : 120;
         document.documentElement.style.setProperty('--fa-ticker-h', th + 'px');
         document.documentElement.style.setProperty('--fa-nav-h', nh + 'px');
         document.documentElement.style.setProperty('--fa-chrome-h', (th + nh) + 'px');
@@ -239,12 +239,12 @@
             #ramo-fa-header .fa-mobile-btn { display: block; }
         }
     </style>
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;min-height:120px;display:flex;align-items:center;justify-content:space-between;">
         <!-- Logo (appears on right in RTL) -->
         <a href="./" style="text-decoration:none;display:flex;align-items:center;">
             <img src="../logos/english-full-logo-white.png"
                  alt="Ramopharmin"
-                 style="height:56px;width:auto;display:block;">
+                 style="height:112px;width:auto;display:block;">
         </a>
         <!-- Nav links -->
         <div class="fa-nav-links" style="display:flex;align-items:center;gap:28px;">
@@ -262,7 +262,7 @@
     </div>
 </nav>
 <!-- Spacer: fixed nav only (ticker is already in normal flow above this) -->
-<div id="fa-chrome-spacer" style="height:var(--fa-nav-h,64px);"></div>
+<div id="fa-chrome-spacer" style="height:var(--fa-nav-h,120px);"></div>
 
 <script>
     // News Ticker
