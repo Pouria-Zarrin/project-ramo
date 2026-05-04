@@ -4,13 +4,13 @@
 <script src="https://unpkg.com/lucide@latest"></script>
 
 <style>
-    body {
+    html { background-color: #EFF2F3; }
+    .ramo-dark-surface {
         font-family: 'Vazirmatn', sans-serif;
         margin: 0;
         padding: 0;
-        /* Theme Background */
-        background: radial-gradient(circle at 10% 20%, #174f57 0%, rgb(11, 38, 59) 40%, rgb(2, 6, 23) 90%);
         min-height: 100vh;
+        background: radial-gradient(circle at 10% 20%, #174f57 0%, rgb(11, 38, 59) 40%, rgb(2, 6, 23) 90%);
     }
 
     /* Glassmorphism Utilities */
@@ -73,6 +73,7 @@
     }
 </style>
 
+<div class="ramo-dark-surface">
 <!-- NEWS SECTION -->
 <section class="w-full py-20 relative z-10">
     <div class="container mx-auto px-4 md:px-6">
@@ -333,6 +334,7 @@
 
     </div>
 </section>
+</div>
 
 <!-- Slider Script -->
 <script>

@@ -12,13 +12,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <style>
+        html { background-color: #EFF2F3; }
         body {
             font-family: 'Vazirmatn', sans-serif;
             margin: 0;
             padding: 0;
-            /* Background matches the theme for preview purposes */
-            background: radial-gradient(circle at 10% 20%, #174f57 0%, rgb(11, 38, 59) 40%, rgb(2, 6, 23) 90%);
+            background-color: #EFF2F3;
             min-height: 100vh;
+        }
+        .ramo-dark-surface {
+            min-height: 100vh;
+            background: radial-gradient(circle at 10% 20%, #174f57 0%, rgb(11, 38, 59) 40%, rgb(2, 6, 23) 90%);
         }
 
         /* Glassmorphism Utilities */
@@ -59,6 +63,7 @@
 </head>
 <body>
 
+    <div class="ramo-dark-surface">
     <!-- SPOTLIGHT SECTION -->
     <section class="py-20 relative z-10">
         <div class="container mx-auto px-4 md:px-6">
@@ -248,6 +253,7 @@
 
         </div>
     </section>
+    </div>
 
     <!-- 3D Visualization Script -->
     <script>

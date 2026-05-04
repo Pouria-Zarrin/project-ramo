@@ -11,12 +11,17 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
+        html { background-color: #EFF2F3; }
         body {
             font-family: 'Vazirmatn', sans-serif;
             margin: 0;
             padding: 0;
-            background: radial-gradient(circle at 10% 20%, #174f57 0%, rgb(11, 38, 59) 40%, rgb(2, 6, 23) 90%);
+            background-color: #EFF2F3;
             min-height: 100vh;
+        }
+        .ramo-dark-surface {
+            min-height: 100vh;
+            background: radial-gradient(circle at 10% 20%, #174f57 0%, rgb(11, 38, 59) 40%, rgb(2, 6, 23) 90%);
         }
 
         /* Glassmorphism Utilities */
@@ -128,6 +133,7 @@
 </head>
 <body>
 
+    <div class="ramo-dark-surface">
     <!-- MISSION SECTION -->
     <section class="w-full py-20 relative z-10">
         <div class="container mx-auto px-6">
@@ -227,6 +233,7 @@
             </div>
         </div>
     </section>
+    </div>
 
     <script>
         lucide.createIcons();
