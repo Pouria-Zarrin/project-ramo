@@ -1,17 +1,16 @@
-<!DOCTYPE html>
-<html lang="fa" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>هیئت مدیره | راموفارمین</title>
-    <meta name="description" content="داروسازی راموفارمین">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = { corePlugins: { preflight: false } }
-    </script>
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
+/**
+ * One-off / repeatable: wrap fragment HTML under V0 with FA magazine-style
+ * chrome (fixed dark nav + white footer). Run from repo root:
+ *   node V0/scripts/wrap-fa-chrome.mjs
+ */
+import { readFileSync, writeFileSync } from "fs";
+import { join, dirname } from "path";
+import { fileURLToPath } from "url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const V0 = join(__dirname, "..");
+
+const CHROME_CSS = `
         html { background-color: #EFF2F3; }
         body { font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif; background: #EFF2F3; margin: 0; color: #0f172a; }
 
@@ -98,190 +97,10 @@
             padding: 12px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
+`;
 
-    </style>
-</head>
-<body>
-<!-- HEADER (same chrome as health magazine) -->
-<nav id="ramo-fa-header">
-    <div style="max-width:1200px;margin:0 auto;padding:0 24px;min-height:104px;display:flex;align-items:center;justify-content:space-between;">
-        <a href="../fa/" style="text-decoration:none;display:flex;align-items:center;">
-            <img src="../logos/english-full-logo-white.png" alt="Ramopharmin" style="height:88px;width:auto;display:block;">
-        </a>
-        <div class="fa-nav-links" style="display:flex;align-items:center;gap:28px;">
-            <a href="../fa/" class="fa-nav-link">خانه</a>
-            <a href="../about-us/board-members.html" class="fa-nav-link fa-nav-current">درباره ما</a>
-            <a href="../product-category-therapeutics/category-page.html" class="fa-nav-link">محصولات</a>
-            <a href="../fa/magazine/" class="fa-nav-link">مجله سلامت</a>
-            <a href="../news-page/news-highlights.html" class="fa-nav-link">اخبار</a>
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;">
-            <button type="button" class="fa-mobile-btn" id="mag-mobile-open" aria-label="باز کردن فهرست">
-                <i data-lucide="menu" class="w-7 h-7"></i>
-            </button>
-            <a href="../en/index.html" class="fa-lang-btn fa-lang-inactive">EN</a>
-            <span class="fa-lang-btn fa-lang-active">FA</span>
-        </div>
-    </div>
-</nav>
-<div style="height:104px;"></div>
-
-<div id="mag-mobile-panel" aria-hidden="true">
-    <a href="../fa/">خانه</a>
-    <a href="../about-us/board-members.html">درباره ما</a>
-    <a href="../product-category-therapeutics/category-page.html">محصولات</a>
-    <a href="../fa/magazine/">مجله سلامت</a>
-    <a href="../news-page/news-highlights.html">اخبار</a>
-    <a href="../en/index.html">English</a>
-</div>
-
-<!-- Board of Directors — RTL, matches RAMOPHARMIN design language (trust/eyebrow/title/line), Elementor-friendly -->
-<section class="board-block" id="board-of-directors" dir="rtl" aria-labelledby="board-title">
-  <header class="board-head">
-    <h3 class="trust-eyebrow">مدیریت اقتصادی و علمی</h3>
-    <h2 id="board-title" class="trust-title">هیئت مدیره راموفارمین</h2>
-    <div class="trust-line" role="presentation"></div>
-    <p class="board-sub">معرفی اعضای هیئت مدیره شرکت داروسازی راموفارمین — تمرکز بر تجربه، رهبری و مسئولیت‌پذیری.</p>
-  </header>
-
-  <div class="board-rows" role="list" aria-label="لیست اعضای هیئت مدیره">
-    <!-- Row 1: FD (top) -->
-    <div class="board-row top">
-      <article class="member-card highlight" role="listitem" tabindex="0">
-        <div class="avatar" aria-hidden="true">
-          <span class="initials">FD</span>
-        </div>
-        <div class="member-body">
-          <h3 class="member-name">دکتر فرشاد دهقانی</h3>
-          <div class="member-org" dir="ltr">RAMOPHARMIN PHARMACEUTICAL CO</div>
-          <div class="member-role">رئیس هیئت مدیره</div>
-        </div>
-      </article>
-    </div>
-
-    <!-- Row 2: MS, SS -->
-    <div class="board-row mid">
-      <article class="member-card" role="listitem" tabindex="0">
-        <div class="avatar" aria-hidden="true">
-          <span class="initials">MS</span>
-        </div>
-        <div class="member-body">
-          <h3 class="member-name">دکتر مهدی سلطانی</h3>
-          <div class="member-org" dir="ltr">RAMOPHARMIN PHARMACEUTICAL CO</div>
-          <div class="member-role">نایب رئیس هیئت مدیره</div>
-        </div>
-      </article>
-      <article class="member-card" role="listitem" tabindex="0">
-        <div class="avatar" aria-hidden="true">
-          <span class="initials">SS</span>
-        </div>
-        <div class="member-body">
-          <h3 class="member-name">دکتر شهروز صارمی</h3>
-          <div class="member-org" dir="ltr">RAMOPHARMIN PHARMACEUTICAL CO</div>
-          <div class="member-role">عضو هیئت مدیره</div>
-        </div>
-      </article>
-    </div>
-
-    <!-- Row 3: AN, MZ -->
-    <div class="board-row bot">
-      <article class="member-card" role="listitem" tabindex="0">
-        <div class="avatar" aria-hidden="true">
-          <span class="initials">AN</span>
-        </div>
-        <div class="member-body">
-          <h3 class="member-name">سید علی نبوی</h3>
-          <div class="member-org" dir="ltr">RAMOPHARMIN PHARMACEUTICAL CO</div>
-          <div class="member-role">عضو هیئت مدیره</div>
-        </div>
-      </article>
-  <article class="member-card" role="listitem" tabindex="0" aria-label="عضو هیئت مدیره و مدیر عامل">
-        <div class="avatar" aria-hidden="true">
-          <span class="initials">MZ</span>
-        </div>
-        <div class="member-body">
-          <h3 class="member-name">دکتر مهدی زرین</h3>
-          <div class="member-org" dir="ltr">RAMOPHARMIN PHARMACEUTICAL CO</div>
-          <div class="member-role">عضو هیئت مدیره و مدیر عامل</div>
-        </div>
-      </article>
-    </div>
-  </div>
-
-  <footer class="board-foot">
-    <div class="policy-links">
-      <a href="/corporate-governance">حاکمیت شرکتی</a>
-      <a href="/code-of-ethics">منشور اخلاقی</a>
-      <a href="/contact">تماس با ما</a>
-    </div>
-  </footer>
-</section>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800&display=swap');
-
-.board-block{
-  --maxw:1200px; --accent:#28206b; --bg:#eff2f3; --card:#ffffff; --border:#e6e6ea; --muted:#555;
-  margin:0 auto; max-width:var(--maxw); padding:70px 16px; background:var(--bg);
-  font-family:'Vazirmatn','Vazirmatn RD',system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Helvetica Neue",sans-serif;
-}
-.board-head{ display:flex; flex-direction:column; align-items:center; text-align:center; margin-bottom:28px; }
-.trust-eyebrow{ font-size:18px; color:var(--accent); font-weight:700; margin-bottom:10px; }
-.trust-title{ font-size:clamp(26px,2.6vw,38px); margin:0; font-weight:800; color:#111; }
-.trust-line{ width:70px; height:3px; background:var(--accent); border-radius:4px; margin-top:16px; margin-bottom:16px; }
-.board-sub{ color:#5b5b5b; max-width:860px; margin:0 auto; line-height:1.8; }
-
-.board-rows{ display:flex; flex-direction:column; gap:14px; margin-top:16px; }
-.board-row{ display:flex; gap:14px; justify-content:center; }
-.board-row.top { justify-content:center; }
-.board-row.mid, .board-row.bot{ justify-content:center; }
-/* allow cards to line up nicely while staying compact */
-.board-row.top .member-card{ min-width:280px; max-width:480px; width:clamp(260px, 36vw, 400px); }
-.board-row.mid .member-card, .board-row.bot .member-card{ min-width:260px; max-width:380px; width:clamp(240px, 30vw, 340px); }
-@media (max-width:720px){
-  .board-row{ flex-direction:column; align-items:center; }
-}
-
-.member-card{
-  display:flex; flex-direction:row-reverse; align-items:center; gap:12px;
-  background:var(--card); border:1px solid var(--border); border-radius:12px;
-  padding:12px; box-shadow:0 6px 16px rgba(0,0,0,.06);
-  transition: box-shadow .25s ease, transform .25s ease, border-color .25s ease;
-  /* per-card manual text padding controls (override inline on .member-card) */
-  --pad-r: 0px; /* padding-right for text area */
-  --pad-l: 0px; /* padding-left  for text area */
-}
-.member-card:hover{ box-shadow:0 12px 26px rgba(0,0,0,.10); transform: translateY(-4px); }
-.member-card.highlight{ outline:2px solid var(--accent); outline-offset:2px; }
-.member-card:focus{ outline:2px solid var(--accent); outline-offset:2px; }
-
-.avatar{
-  width:52px; height:52px; border-radius:50%; background:#eef0ff; color:var(--accent);
-  display:grid; place-items:center; font-weight:800; font-size:18px; flex:0 0 auto;
-}
-.member-body{ display:flex; flex-direction:column; gap:4px; min-width:0; text-align:center; align-items:center; direction:rtl; flex:1 1 auto; width:100%; padding-right: var(--pad-r, 0px); padding-left: var(--pad-l, 0px); }
-.member-name{ margin:0; font-size:15.5px; font-weight:800; color:#111; }
-.member-org{ font-size:11.5px; color:#777; letter-spacing:.3px; }
-.member-role{ font-size:13px; color:#333; font-weight:700; }
-
-.board-foot{ margin-top:18px; display:flex; justify-content:center; }
-.policy-links{ display:flex; gap:14px; }
-.policy-links a{ color:#666; text-decoration:none; font-size:13px; }
-.policy-links a:hover{ color:#111; }
-</style>
-
-<script>
-(function(){
-  // Optional: auto-balance card heights if text wraps differently per line
-  const grid = document.querySelector('.board-grid');
-  if(!grid) return;
-  const ro = new ResizeObserver(()=>{
-    // noop placeholder for future equalization if needed
-  });
-  ro.observe(grid);
-})();
-</script>
-<style>#ramo-news-footer a{color:#0f172a!important}#ramo-news-footer a:hover{color:#0d9488!important}</style>
+function footerBlock(p) {
+  return `<style>#ramo-news-footer a{color:#0f172a!important}#ramo-news-footer a:hover{color:#0d9488!important}</style>
 <footer id="ramo-news-footer" class="border-t border-slate-300 bg-[#EFF2F3] pt-16 pb-8 mt-12" dir="rtl" style="border-top:1px solid #cbd5e1;">
     <div class="container mx-auto px-6">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-12 border-b border-slate-200 pb-12">
@@ -316,10 +135,10 @@
                     لینک‌های سریع
                 </h3>
                 <ul class="space-y-3 text-sm text-slate-900 mb-8">
-                    <li><a href="../fa/" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">خانه فارسی</a></li>
-                    <li><a href="../contact-us/contact-us.html" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">ارتباط با ما</a></li>
-                    <li><a href="../fa/magazine/" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">مجله سلامت</a></li>
-                    <li><a href="../en/index.html" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">English site</a></li>
+                    <li><a href="${p.faHome}" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">خانه فارسی</a></li>
+                    <li><a href="${p.contact}" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">ارتباط با ما</a></li>
+                    <li><a href="${p.magazine}" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">مجله سلامت</a></li>
+                    <li><a href="${p.en}" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">English site</a></li>
                     <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">پایداری و محیط زیست</a></li>
                     <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">سوالات متداول</a></li>
                 </ul>
@@ -345,8 +164,51 @@
         </div>
     </div>
 </footer>
+`;
+}
 
-<script>
+function navBlock(p, current) {
+  const cHome = current === "home" ? " fa-nav-current" : "";
+  const cAbout = current === "about" ? " fa-nav-current" : "";
+  const cProd = current === "products" ? " fa-nav-current" : "";
+  const cMag = current === "magazine" ? " fa-nav-current" : "";
+  const cNews = current === "news" ? " fa-nav-current" : "";
+  return `<!-- HEADER (same chrome as health magazine) -->
+<nav id="ramo-fa-header">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;min-height:104px;display:flex;align-items:center;justify-content:space-between;">
+        <a href="${p.faHome}" style="text-decoration:none;display:flex;align-items:center;">
+            <img src="${p.logo}" alt="Ramopharmin" style="height:88px;width:auto;display:block;">
+        </a>
+        <div class="fa-nav-links" style="display:flex;align-items:center;gap:28px;">
+            <a href="${p.faHome}" class="fa-nav-link${cHome}">خانه</a>
+            <a href="${p.about}" class="fa-nav-link${cAbout}">درباره ما</a>
+            <a href="${p.productsHub}" class="fa-nav-link${cProd}">محصولات</a>
+            <a href="${p.magazine}" class="fa-nav-link${cMag}">مجله سلامت</a>
+            <a href="${p.news}" class="fa-nav-link${cNews}">اخبار</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+            <button type="button" class="fa-mobile-btn" id="mag-mobile-open" aria-label="باز کردن فهرست">
+                <i data-lucide="menu" class="w-7 h-7"></i>
+            </button>
+            <a href="${p.en}" class="fa-lang-btn fa-lang-inactive">EN</a>
+            <span class="fa-lang-btn fa-lang-active">FA</span>
+        </div>
+    </div>
+</nav>
+<div style="height:104px;"></div>
+
+<div id="mag-mobile-panel" aria-hidden="true">
+    <a href="${p.faHome}">خانه</a>
+    <a href="${p.about}">درباره ما</a>
+    <a href="${p.productsHub}">محصولات</a>
+    <a href="${p.magazine}">مجله سلامت</a>
+    <a href="${p.news}">اخبار</a>
+    <a href="${p.en}">English</a>
+</div>
+`;
+}
+
+const TAIL = `<script>
 document.addEventListener('DOMContentLoaded', function() {
     if (typeof lucide !== 'undefined') lucide.createIcons();
 });
@@ -375,3 +237,95 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
+`;
+
+const pathsTher = {
+  logo: "../logos/english-full-logo-white.png",
+  faHome: "../fa/",
+  about: "../about-us/board-members.html",
+  productsHub: "category-page.html",
+  magazine: "../fa/magazine/",
+  news: "../news-page/news-highlights.html",
+  en: "../en/index.html",
+  contact: "../contact-us/contact-us.html",
+};
+
+const pathsAbout = {
+  logo: "../logos/english-full-logo-white.png",
+  faHome: "../fa/",
+  about: "../about-us/board-members.html",
+  productsHub: "../product-category-therapeutics/category-page.html",
+  magazine: "../fa/magazine/",
+  news: "../news-page/news-highlights.html",
+  en: "../en/index.html",
+  contact: "../contact-us/contact-us.html",
+};
+
+function wrapFragment(body, title, currentNav, pathObj) {
+  const head = `<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>${title}</title>
+    <meta name="description" content="داروسازی راموفارمین">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { corePlugins: { preflight: false } }
+    </script>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>${CHROME_CSS}
+    </style>
+</head>
+<body>
+${navBlock(pathObj, currentNav)}
+`;
+  return head + body.trim() + "\n" + footerBlock(pathObj) + "\n" + TAIL;
+}
+
+function alreadyWrapped(s) {
+  return /<!DOCTYPE html>/i.test(s) && /id="ramo-fa-header"/.test(s);
+}
+
+const jobs = [
+  ...[
+    "product-category-therapeutics/category-page.html",
+    "product-category-therapeutics/anti-diabetes.html",
+    "product-category-therapeutics/anti-migraine.html",
+    "product-category-therapeutics/anti-parkinson.html",
+    "product-category-therapeutics/antispasmodics-urinary.html",
+    "product-category-therapeutics/cns-drugs.html",
+    "product-category-therapeutics/cold-respiratory.html",
+    "product-category-therapeutics/gastrointestinal.html",
+  ].map((rel) => ({
+    rel,
+    title: rel.endsWith("category-page.html")
+      ? "گروه‌های درمانی | راموفارمین"
+      : "محصولات | راموفارمین",
+    current: "products",
+    paths: pathsTher,
+  })),
+  ...[
+    ["about-us/board-members.html", "هیئت مدیره | راموفارمین"],
+    ["about-us/managers.html", "مدیران ارشد | راموفارمین"],
+    ["about-us/history.html", "درباره ما | راموفارمین"],
+  ].map(([rel, title]) => ({
+    rel,
+    title,
+    current: "about",
+    paths: pathsAbout,
+  })),
+];
+
+for (const job of jobs) {
+  const fp = join(V0, job.rel);
+  let raw = readFileSync(fp, "utf8");
+  if (alreadyWrapped(raw)) {
+    console.log("skip (already wrapped):", job.rel);
+    continue;
+  }
+  raw = wrapFragment(raw, job.title, job.current, job.paths);
+  writeFileSync(fp, raw, "utf8");
+  console.log("wrapped:", job.rel);
+}
