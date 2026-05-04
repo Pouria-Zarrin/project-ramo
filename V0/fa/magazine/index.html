@@ -4,603 +4,295 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>مجله سلامت راموفارمین</title>
-    <meta name="description" content="مجموعه‌ای از مقالات تحریریه علمی درباره داروسازی، ایمونولوژی و سبک زندگی سالم">
+    <meta name="description" content="فهرست مقالات علمی و آموزشی داروسازی راموفارمین">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-      tailwind.config = {
-        corePlugins: { preflight: false }
-      }
+      tailwind.config = { corePlugins: { preflight: false } }
     </script>
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
-        body { font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif; background: #eff2f3; margin: 0; padding: 0; }
+        body { font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif; background: #f8fafc; margin: 0; color: #0f172a; }
 
-        /* ── Header ───────────────────────────────────────────── */
-        #ramo-header-block { background: #EFF2F3; border-bottom: 1px solid #e2e8f0; box-shadow: 0 4px 20px -10px rgba(0,0,0,.05); }
-        body.mobile-menu-open { overflow: hidden; position: fixed; width: 100%; }
+        #ramo-fa-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+            direction: rtl;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        #ramo-fa-header .fa-nav-link {
+            color: rgba(255, 255, 255, 0.72);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        #ramo-fa-header .fa-nav-link:hover { color: #fff; }
+        #ramo-fa-header .fa-nav-link.fa-nav-current {
+            color: #5aaeb8;
+            font-weight: 600;
+        }
+        #ramo-fa-header .fa-lang-btn {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        #ramo-fa-header .fa-lang-active {
+            background: rgba(23, 79, 87, 0.85);
+            color: #fff;
+            border: 1px solid rgba(90, 174, 184, 0.45);
+        }
+        #ramo-fa-header .fa-lang-inactive {
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        #ramo-fa-header .fa-lang-inactive:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+        }
+        #ramo-fa-header .fa-logo-chip {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.96);
+            border-radius: 10px;
+            padding: 6px 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
+        }
+        #ramo-fa-header .fa-logo-chip img { height: 44px; width: auto; display: block; }
+        #ramo-fa-header .fa-mobile-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            padding: 8px;
+            border-radius: 10px;
+        }
+        #ramo-fa-header .fa-mobile-btn:hover { background: rgba(255, 255, 255, 0.08); }
+        @media (max-width: 768px) {
+            #ramo-fa-header .fa-nav-links { display: none !important; }
+            #ramo-fa-header .fa-mobile-btn { display: block; }
+        }
+        #mag-mobile-panel {
+            display: none;
+            position: fixed;
+            top: 64px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0f172a;
+            z-index: 99;
+            padding: 24px;
+            flex-direction: column;
+            gap: 16px;
+        }
+        #mag-mobile-panel.is-open { display: flex; }
+        #mag-mobile-panel a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
-        #ramo-header-block .nav-link { position: relative; color: #475569; transition: all .3s ease; padding: .5rem 0; text-decoration: none; }
-        #ramo-header-block .nav-link:hover { color: #0f172a; }
-        #ramo-header-block .nav-link::after { content:''; position:absolute; bottom:0; right:0; width:0; height:2px; background:#0d9488; transition:width .3s ease; }
-        #ramo-header-block .nav-link:hover::after { width:100%; }
+        .mag-index { max-width: 42rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+        .mag-index-head { margin-bottom: 2rem; }
+        .mag-index-kicker { font-size: 0.8rem; font-weight: 700; color: #174f57; letter-spacing: 0.04em; margin: 0 0 0.5rem; }
+        .mag-index-title { font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 800; margin: 0 0 0.5rem; color: #0f172a; }
+        .mag-index-lead { margin: 0; color: #64748b; line-height: 1.7; font-size: 0.95rem; }
+        .mag-index-search { margin-top: 1.25rem; display: flex; gap: 8px; flex-wrap: wrap; }
+        .mag-index-search input {
+            flex: 1;
+            min-width: 0;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+        .mag-index-search input:focus { outline: 2px solid rgba(23, 79, 87, 0.25); border-color: transparent; }
+        .mag-index-search button {
+            padding: 10px 18px;
+            border-radius: 10px;
+            border: none;
+            background: #174f57;
+            color: #fff;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+        }
+        .mag-index-search button:hover { filter: brightness(1.05); }
 
-        #ramo-header-block .btn-primary { background: linear-gradient(135deg,#0d9488 0%,#115e59 100%); border:1px solid rgba(255,255,255,.1); color:#fff; padding:.5rem 1.8rem; min-height:46px; border-radius:12px; transition:all .3s cubic-bezier(.4,0,.2,1); box-shadow:0 4px 6px -1px rgba(0,0,0,.1); position:relative; overflow:hidden; text-decoration:none; display:inline-flex; align-items:center; justify-content:center; gap:8px; }
-        #ramo-header-block .btn-primary:hover { transform:translateY(-2px); box-shadow:0 10px 15px -3px rgba(0,0,0,.1); }
-        #ramo-header-block .btn-primary::before { content:''; position:absolute; top:0; left:-100%; width:100%; height:100%; background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent); transition:.5s; }
-        #ramo-header-block .btn-primary:hover::before { left:100%; }
+        .mag-article-list { list-style: none; margin: 0; padding: 0; }
+        .mag-article-list > li {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1.25rem 0;
+        }
+        .mag-article-list > li:first-child { padding-top: 0; }
+        .mag-article-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0f172a;
+            text-decoration: none;
+            line-height: 1.45;
+            display: inline-block;
+        }
+        .mag-article-title:hover { color: #174f57; }
+        .mag-article-meta { font-size: 0.8rem; color: #64748b; margin: 0.35rem 0 0; }
+        .mag-article-excerpt { font-size: 0.9rem; color: #475569; margin: 0.5rem 0 0; line-height: 1.6; }
 
-        #ramo-header-block .dropdown-menu { opacity:0; visibility:hidden; transform:translateY(10px); transition:all .2s ease; }
-        #ramo-header-block .group:hover .dropdown-menu { opacity:1; visibility:visible; transform:translateY(0); }
-
-        #ramo-header-block .lang-btn { color:#475569; background:rgba(0,0,0,.05); border:1px solid rgba(0,0,0,.1); padding:.25rem .75rem; border-radius:8px; transition:all .3s ease; min-width:44px; min-height:36px; display:flex; align-items:center; justify-content:center; cursor:pointer; text-decoration:none; font-size:.875rem; font-weight:500; }
-        #ramo-header-block .lang-btn:hover { background:rgba(0,0,0,.1); color:#0f172a; }
-        #ramo-header-block .lang-btn.lang-active { background:#0d9488; color:#fff; border-color:#0d9488; }
-
-        #ramo-header-block #mobile-menu-btn { background:#EFF2F3; color:#475569; border-color:transparent; }
-        #ramo-header-block #mobile-menu-btn:hover { background:#e2e8f0; }
-
-        /* ── Magazine sections shared background ────────────── */
-        .mag-section-wrap { background: #eff2f3; }
-
-        /* ── Magazine Header section ────────────────────────── */
-        .mag-header { --maxw:1200px; --accent:#28206b; --bg:#eff2f3; font-family:'Vazirmatn',sans-serif; margin:0 auto; max-width:var(--maxw); padding:48px 16px 24px; background:var(--bg); }
-        .mag-breadcrumbs ol { display:flex; gap:8px; align-items:center; list-style:none; padding:0; margin:0 0 12px; color:#5b5b5b; font-size:13px; justify-content:center; }
-        .mag-breadcrumbs a { color:var(--accent); text-decoration:none; }
-        .mag-breadcrumbs li+li:before { content:'›'; opacity:.5; margin:0 6px; }
-        .mag-head { text-align:center; display:flex; flex-direction:column; align-items:center; margin-bottom:18px; }
-        .mag-title { margin:0; font-size:clamp(26px,2.6vw,38px); font-weight:800; color:#111; }
-        .mag-line { width:70px; height:3px; background:var(--accent); border-radius:4px; margin:14px 0; }
-        .mag-sub { color:#5b5b5b; max-width:780px; margin:0 auto; }
-        .mag-tools { display:flex; flex-direction:column; gap:12px; margin-top:8px; }
-        .mag-search { display:flex; gap:10px; align-items:center; justify-content:center; }
-        .mag-search input { width:min(760px,100%); padding:12px 14px; border-radius:12px; border:1px solid #d7dbe0; background:#fff; font-size:15px; font-family:'Vazirmatn',sans-serif; }
-        .mag-search input:focus { outline:2px solid rgba(40,32,107,.25); border-color:transparent; }
-        .mag-search-btn { padding:12px 16px; background:var(--accent); color:#fff; border:0; border-radius:12px; font-weight:800; cursor:pointer; font-family:'Vazirmatn',sans-serif; }
-        .mag-search-btn:hover { filter:brightness(.95); }
-        .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
-        .mag-chips ul { display:flex; gap:10px; list-style:none; padding:0; margin:0; justify-content:center; flex-wrap:wrap; }
-        .mag-chips li { scroll-snap-align:start; }
-        .mag-chips a { display:inline-block; padding:8px 12px; border-radius:999px; border:1px solid #d7dbe0; background:#fff; color:#333; text-decoration:none; font-size:13px; white-space:nowrap; }
-        .mag-chips a:hover { border-color:var(--accent); color:var(--accent); }
-        @media(max-width:640px) { .mag-search{flex-direction:column;align-items:stretch} .mag-search-btn{width:100%} .mag-chips ul{gap:8px;justify-content:flex-start;flex-wrap:nowrap;overflow:auto;scroll-snap-type:x mandatory} }
-
-        /* ── Featured Article ───────────────────────────────── */
-        #mag-featured-article, #mag-featured-article * { font-family:'Vazirmatn',sans-serif !important; }
-
-        /* ── Azaram Spotlight ───────────────────────────────── */
-        .mag-spotlight { --maxw:1200px; --gap:20px; --radius:18px; --shadow:0 12px 28px rgba(0,0,0,.09); --accent:#28206b; font-family:'Vazirmatn',sans-serif; margin:0 auto; max-width:var(--maxw); padding:12px 16px 22px; background:#eff2f3; }
-        .ms-head { display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
-        .ms-title { margin:0; font-size:clamp(20px,2.2vw,26px); font-weight:800; color:#111; }
-        .ms-sub { margin:0; color:#5b5b5b; }
-        .ms-hero { border-radius:var(--radius); overflow:hidden; background:#195057; box-shadow:var(--shadow); }
-        .ms-content { display:flex; flex-direction:column; gap:10px; padding:20px; }
-        .ms-pill { display:inline-flex; align-items:center; border:2px solid var(--accent); color:#fff; border-radius:999px; padding:3px 8px; font-size:11px; line-height:1; white-space:nowrap; margin-bottom:10px; background:rgba(40,32,107,.08); width:fit-content; }
-        .ms-hero-title { margin:0 0 8px; color:#fff; font-weight:800; font-size:clamp(20px,2.3vw,28px); line-height:1.3; }
-        .ms-excerpt { margin:0 0 10px; color:#e8f2f4; line-height:1.7; }
-        .ms-meta { display:flex; gap:10px; flex-wrap:wrap; color:#d6e5e8; font-size:12px; margin-bottom:10px; }
-        .ms-dot { opacity:.6; }
-        .ms-actions { display:flex; gap:10px; flex-wrap:wrap; }
-        .ms-cta { display:inline-block; padding:12px 16px; border-radius:12px; font-weight:800; text-decoration:none; }
-        .ms-cta.primary { background:var(--accent); color:#fff; }
-        .ms-cta.secondary { background:transparent; color:#fff; border:2px solid rgba(255,255,255,.7); }
-        .ms-cta:hover { filter:brightness(.95); }
-        .ms-points { margin-top:12px; }
-        .ms-points ul { display:grid; gap:var(--gap); list-style:none; padding:0; margin:0; grid-template-columns:repeat(3,minmax(0,1fr)); }
-        @media(max-width:900px) { .ms-points ul{grid-template-columns:1fr} }
-        .ms-point { display:flex; gap:12px; align-items:flex-start; background:#fff; border:1px solid #e5e7eb; border-radius:16px; padding:16px; text-decoration:none; color:inherit; box-shadow:0 8px 22px rgba(0,0,0,.06); transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease; }
-        .ms-point:hover { transform:translateY(-3px); box-shadow:0 14px 28px rgba(0,0,0,.1); border-color:var(--accent); }
-        .ms-icon { flex:0 0 auto; width:36px; height:36px; border-radius:10px; border:2px solid var(--accent); color:var(--accent); display:flex; align-items:center; justify-content:center; font-weight:800; }
-        .ms-text h4 { margin:0 0 6px; font-size:16px; font-weight:800; color:#111; }
-        .ms-text p { margin:0; color:#4a4a4a; }
-        .ms-gallery { margin-top:8px; }
-        .ms-gallery ul { display:grid; gap:12px; list-style:none; margin:0; padding:0; grid-template-columns:repeat(4,minmax(0,1fr)); }
-        @media(max-width:1024px) { .ms-gallery ul{grid-template-columns:repeat(2,minmax(0,1fr))} }
-        @media(max-width:520px) { .ms-gallery ul{grid-template-columns:1fr} }
-        .ms-gbox { display:flex; align-items:center; justify-content:center; aspect-ratio:4/3; border-radius:14px; border:2px solid var(--accent); background:#fff; overflow:hidden; box-shadow:0 8px 22px rgba(0,0,0,.06); transition:transform .2s ease,box-shadow .2s ease; }
-        .ms-gbox:hover { transform:translateY(-3px); box-shadow:0 14px 28px rgba(0,0,0,.1); }
-        .ms-gbox img { width:100%; height:100%; display:block; object-fit:cover; object-position:center; }
-
-        /* ── Latest Articles ────────────────────────────────── */
-        .mag-latest { --maxw:1200px; --gap:24px; --radius:18px; --shadow:0 10px 28px rgba(0,0,0,.08); --accent:#28206b; font-family:'Vazirmatn',sans-serif; margin:0 auto; max-width:var(--maxw); padding:16px; }
-        .mag-latest-head { display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
-        .mag-latest-title { margin:0; font-size:clamp(20px,2.2vw,26px); font-weight:800; color:#111; }
-        .mag-latest-sub { color:#5b5b5b; margin:0; }
-        .mag-latest-grid { display:grid; gap:var(--gap); grid-template-columns:repeat(3,minmax(0,1fr)); }
-        @media(max-width:1024px) { .mag-latest-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
-        @media(max-width:640px) { .mag-latest-grid{grid-template-columns:1fr} }
-        .ml-card { display:flex; flex-direction:column; background:#fff; border-radius:var(--radius); box-shadow:var(--shadow); overflow:hidden; border:1px solid #eee; transition:transform .25s ease,box-shadow .25s ease; }
-        .ml-card:hover { transform:translateY(-6px); box-shadow:0 16px 36px rgba(0,0,0,.12); }
-        .ml-thumb { position:relative; display:block; aspect-ratio:16/9; overflow:hidden; }
-        .ml-thumb img { width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
-        .ml-card:hover .ml-thumb img { transform:scale(1.03); }
-        .ml-body { display:flex; flex-direction:column; flex:1; padding:20px; }
-        .ml-title { font-size:clamp(18px,2.2vw,22px); line-height:1.35; margin:0 0 10px; }
-        .ml-title a { text-decoration:none; color:inherit; }
-        .ml-excerpt { color:#4a4a4a; margin:0 0 16px; line-height:1.55; }
-        .ml-meta { display:flex; flex-wrap:wrap; gap:10px; align-items:center; color:#666; font-size:13px; margin-bottom:12px; }
-        .ml-dot { opacity:.5; }
-        .ml-badge { background:#eef0ff; color:var(--accent); padding:2px 8px; border-radius:999px; font-size:12px; }
-        .ml-cta { align-self:flex-start; margin-top:auto; padding:12px 18px; background:var(--accent); color:#fff; border-radius:10px; text-decoration:none; font-weight:700; transition:filter .2s; }
-        .ml-cta:hover { filter:brightness(.95); }
-
-        /* ── Featured Topics ────────────────────────────────── */
-        .mag-topics { --maxw:1200px; --gap:18px; --radius:14px; --accent:#28206b; font-family:'Vazirmatn',sans-serif; margin:0 auto; max-width:var(--maxw); padding:16px; }
-        .mag-topics-head { display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
-        .mag-topics-title { margin:0; font-size:clamp(20px,2.2vw,26px); font-weight:800; color:#111; }
-        .mag-topics-sub { color:#5b5b5b; margin:0; }
-        .mag-topics-grid { display:grid; gap:var(--gap); grid-template-columns:repeat(3,minmax(0,1fr)); }
-        @media(max-width:1024px) { .mag-topics-grid{grid-template-columns:repeat(2,minmax(0,1fr))} }
-        @media(max-width:640px) { .mag-topics-grid{grid-template-columns:1fr} }
-        .mt-card { display:block; background:#fff; border:1px solid #e5e7eb; border-radius:var(--radius); padding:18px; text-decoration:none; color:inherit; box-shadow:0 8px 22px rgba(0,0,0,.06); transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease; }
-        .mt-card:hover { transform:translateY(-4px); box-shadow:0 14px 28px rgba(0,0,0,.1); border-color:var(--accent); }
-        .mt-icon { width:38px; height:38px; border-radius:10px; border:2px solid var(--accent); display:flex; align-items:center; justify-content:center; color:var(--accent); font-weight:800; margin-bottom:10px; }
-        .mt-title { margin:0 0 6px; font-weight:800; font-size:16px; }
-        .mt-desc { margin:0; color:#4a4a4a; line-height:1.6; }
-
-        /* ── Editorial Standards ────────────────────────────── */
-        .mag-editorial { --maxw:1200px; --gap:18px; --radius:14px; --accent:#28206b; font-family:'Vazirmatn',sans-serif; margin:0 auto; max-width:var(--maxw); padding:16px 16px 40px; }
-        .mag-ed-head { display:flex; flex-direction:column; gap:6px; margin-bottom:10px; }
-        .mag-ed-title { margin:0; font-size:clamp(20px,2.2vw,26px); font-weight:800; color:#111; }
-        .mag-ed-sub { color:#5b5b5b; margin:0; }
-        .mag-ed-grid { display:grid; gap:var(--gap); grid-template-columns:repeat(2,minmax(0,1fr)); }
-        @media(max-width:820px) { .mag-ed-grid{grid-template-columns:1fr} }
-        .me-card { background:#fff; border:1px solid #e5e7eb; border-radius:var(--radius); padding:18px; box-shadow:0 8px 22px rgba(0,0,0,.06); }
-        .me-title { margin:0 0 8px; font-weight:800; font-size:16px; }
-        .me-desc { margin:0 0 10px; color:#4a4a4a; line-height:1.6; }
-        .me-links { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-        .me-link { color:var(--accent); text-decoration:none; font-weight:700; }
-        .me-link:hover { text-decoration:underline; }
-        .me-dot { opacity:.5; }
-
-        /* ── Footer ─────────────────────────────────────────── */
-        #ramo-news-footer a { color:#0f172a !important; }
-        #ramo-news-footer a:hover { color:#0d9488 !important; }
+        #ramo-news-footer a { color: #0f172a !important; }
+        #ramo-news-footer a:hover { color: #0d9488 !important; }
     </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════════
-     TOP INFO BAR
-════════════════════════════════════════════════════════════ -->
-<div id="ramo-header-bar" class="hidden md:flex w-full bg-gradient-to-l from-[#5aaeb8]/50 to-white text-slate-700 font-bold text-xs md:text-sm items-center justify-between px-4 py-3 border-b border-teal-200/30 shadow-sm z-50" style="font-family:'Vazirmatn',sans-serif;direction:rtl;">
-    <div class="flex items-center gap-2 flex-shrink-0">
-        <span class="text-slate-500 text-xs">زیرمجموعه</span>
-        <span id="holding-name" class="text-[#0d9488] font-semibold text-xs"></span>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════════
-     SITE HEADER
-════════════════════════════════════════════════════════════ -->
-<div id="ramo-header-block" class="w-full" style="font-family:'Vazirmatn',sans-serif;direction:rtl;">
-    <header class="w-full z-50">
-        <div class="container mx-auto px-6 h-28 flex items-center justify-between">
-
-            <!-- Navigation -->
-            <nav class="hidden md:flex items-center gap-10">
-                <a href="../" class="nav-link text-lg font-medium">خانه</a>
-
-                <div class="relative group cursor-pointer py-4">
-                    <a href="../../about-us/board-members.html" class="nav-link text-lg font-medium flex items-center gap-1.5">
-                        درباره ما
-                        <i data-lucide="chevron-down" class="w-4 h-4 mt-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
-                    </a>
-                    <div class="dropdown-menu absolute top-full right-0 w-56 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-50">
-                        <div class="p-1">
-                            <a href="../../about-us/board-members.html" class="block px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-xl transition-colors text-base no-underline flex items-center gap-2">
-                                <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>اعضای هیات مدیره
-                            </a>
-                            <a href="../../about-us/managers.html" class="block px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-xl transition-colors text-base no-underline flex items-center gap-2">
-                                <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>مدیران اجرایی
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="relative group cursor-pointer py-4">
-                    <span class="nav-link text-lg font-medium flex items-center gap-1.5">
-                        محصولات
-                        <i data-lucide="chevron-down" class="w-4 h-4 mt-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
-                    </span>
-                    <div class="dropdown-menu absolute top-full right-0 w-64 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-50">
-                        <div class="p-1">
-                            <a href="../../product-category-therapeutics/category-page.html" class="block px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-xl transition-colors text-base no-underline flex items-center gap-2">
-                                <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>بر اساس گروه درمانی
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <a href="./" class="nav-link text-lg font-medium" style="color:#0d9488;">مجله سلامت</a>
-            </nav>
-
-            <!-- Mobile Menu Button -->
-            <button id="mobile-menu-btn" class="md:hidden text-slate-700 p-2 hover:bg-slate-100 rounded-xl transition-colors border border-transparent hover:border-slate-200 relative z-50">
-                <i data-lucide="menu" class="w-8 h-8"></i>
+<!-- HEADER (aligned with FA home — dark bar; colored logo on light chip for contrast) -->
+<nav id="ramo-fa-header">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;">
+        <a href="../" class="fa-logo-chip" style="text-decoration:none;">
+            <img src="../../logos/english-full-logo.png" alt="Ramopharmin" style="height:44px;width:auto;display:block;">
+        </a>
+        <div class="fa-nav-links" style="display:flex;align-items:center;gap:28px;">
+            <a href="../" class="fa-nav-link">خانه</a>
+            <a href="../../about-us/board-members.html" class="fa-nav-link">درباره ما</a>
+            <a href="../../product-category-therapeutics/category-page.html" class="fa-nav-link">محصولات</a>
+            <a href="./" class="fa-nav-link fa-nav-current">مجله سلامت</a>
+            <a href="../../news-page/news-highlights.html" class="fa-nav-link">اخبار</a>
+        </div>
+        <div style="display:flex;align-items:center;gap:10px;">
+            <button type="button" class="fa-mobile-btn" id="mag-mobile-open" aria-label="باز کردن فهرست">
+                <i data-lucide="menu" class="w-7 h-7"></i>
             </button>
-
-            <!-- Logo & CTA -->
-            <div class="flex items-center gap-4 md:gap-8">
-                <div class="flex items-center gap-1.5">
-                    <a href="../../en/" class="lang-btn">EN</a>
-                    <span class="lang-btn lang-active">FA</span>
-                </div>
-                <a href="../" class="hidden lg:flex items-center justify-center gap-2 btn-primary text-base font-medium">
-                    <span>ارتباط با ما</span>
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-                </a>
-                <a href="../" class="relative group block">
-                    <img src="../../logos/english-full-logo-white.png"
-                         alt="Ramopharmin Logo"
-                         style="height:85px;width:auto;display:block;"
-                         class="relative object-contain transform transition-transform duration-300 group-hover:scale-105">
-                </a>
-            </div>
-        </div>
-    </header>
-
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="fixed inset-0 bg-[#EFF2F3] z-40 transform translate-x-full transition-transform duration-300 md:hidden overflow-y-auto pt-32 px-6 pb-10" style="direction:rtl;">
-        <div class="flex flex-col gap-6">
-            <a href="../" class="text-xl font-medium text-slate-800 hover:text-teal-600 transition-colors no-underline">خانه</a>
-            <div class="flex flex-col gap-3">
-                <button onclick="toggleMobileSubmenu('mobile-about-submenu')" class="flex items-center justify-between text-xl font-medium text-slate-800 w-full bg-transparent border-none p-0 cursor-pointer">
-                    <span>درباره ما</span>
-                    <i data-lucide="chevron-down" class="w-5 h-5 opacity-70 transition-transform duration-300" id="icon-mobile-about-submenu"></i>
-                </button>
-                <div id="mobile-about-submenu" class="hidden flex-col gap-3 pr-4 border-r border-slate-200 mr-1">
-                    <a href="../../about-us/board-members.html" class="text-lg text-slate-600 hover:text-slate-900 py-1 no-underline">اعضای هیات مدیره</a>
-                    <a href="../../about-us/managers.html" class="text-lg text-slate-600 hover:text-slate-900 py-1 no-underline">مدیران اجرایی</a>
-                </div>
-            </div>
-            <div class="flex flex-col gap-3">
-                <button onclick="toggleMobileSubmenu('mobile-products-submenu')" class="flex items-center justify-between text-xl font-medium text-slate-800 w-full bg-transparent border-none p-0 cursor-pointer">
-                    <span>محصولات</span>
-                    <i data-lucide="chevron-down" class="w-5 h-5 opacity-70 transition-transform duration-300" id="icon-mobile-products-submenu"></i>
-                </button>
-                <div id="mobile-products-submenu" class="hidden flex-col gap-3 pr-4 border-r border-slate-200 mr-1">
-                    <a href="../../product-category-therapeutics/category-page.html" class="text-lg text-slate-600 hover:text-slate-900 py-1 no-underline">بر اساس گروه درمانی</a>
-                </div>
-            </div>
-            <a href="./" class="text-xl font-medium text-teal-600 transition-colors no-underline">مجله سلامت</a>
-            <div class="flex gap-3 pt-2">
-                <a href="../../en/" class="lang-btn">EN</a>
-                <span class="lang-btn lang-active">FA</span>
-            </div>
+            <a href="../../en/index.html" class="fa-lang-btn fa-lang-inactive">EN</a>
+            <span class="fa-lang-btn fa-lang-active">FA</span>
         </div>
     </div>
+</nav>
+<div style="height:64px;"></div>
+
+<div id="mag-mobile-panel" aria-hidden="true">
+    <a href="../">خانه</a>
+    <a href="../../about-us/board-members.html">درباره ما</a>
+    <a href="../../product-category-therapeutics/category-page.html">محصولات</a>
+    <a href="./">مجله سلامت</a>
+    <a href="../../news-page/news-highlights.html">اخبار</a>
+    <a href="../../en/index.html">English</a>
 </div>
 
-<!-- ═══════════════════════════════════════════════════════════
-     MAGAZINE HEADER
-════════════════════════════════════════════════════════════ -->
-<div class="mag-section-wrap">
-<section class="mag-header" aria-labelledby="mag-title" dir="rtl">
-    <header class="mag-head">
-        <nav class="mag-breadcrumbs" aria-label="breadcrumbs">
-            <ol>
-                <li><a href="../">خانه</a></li>
-                <li aria-current="page">مجله سلامت</li>
-            </ol>
-        </nav>
-        <h1 id="mag-title" class="mag-title">مجله سلامت راموفارمین</h1>
-        <div class="mag-line" aria-hidden="true"></div>
-        <p class="mag-sub">مجموعه‌ای از مقالات تحریریه علمی درباره داروسازی، ایمونولوژی و سبک زندگی سالم؛ با تمرکز بر خوانایی، منابع معتبر و تولید محتوای اثربخش برای عموم.</p>
-    </header>
-    <div class="mag-tools">
-        <form class="mag-search" action="./" method="get" role="search" aria-label="جستجو در مجله">
-            <label for="mag-q" class="sr-only">جستجو در مجله سلامت</label>
-            <input id="mag-q" name="s" type="search" inputmode="search" placeholder="جستجو در مقالات (مثلاً: آزارام، پیوند، لوپوس)">
-            <button type="submit" class="mag-search-btn" aria-label="جستجو">جستجو</button>
+<main class="mag-index" dir="rtl">
+    <header class="mag-index-head">
+        <p class="mag-index-kicker">راموفارمین</p>
+        <h1 class="mag-index-title">مجله سلامت</h1>
+        <p class="mag-index-lead">فهرست مقالات؛ برای مطالعه روی عنوان کلیک کنید.</p>
+        <form class="mag-index-search" action="./" method="get" role="search" aria-label="جستجو در مقالات">
+            <label for="mag-q" class="sr-only">جستجو</label>
+            <input id="mag-q" name="s" type="search" placeholder="جستجو…" autocomplete="off">
+            <button type="submit">جستجو</button>
         </form>
-        <nav class="mag-chips" aria-label="موضوعات پرطرفدار">
-            <ul>
-                <li><a href="#">#آزارام</a></li>
-                <li><a href="#">#ایمونولوژی</a></li>
-                <li><a href="#">#پیوند_اعضا</a></li>
-                <li><a href="#">#داروشناسی</a></li>
-                <li><a href="#">#راهنما_بیمار</a></li>
-                <li><a href="#">#درمان_خودایمنی</a></li>
-            </ul>
-        </nav>
-    </div>
-
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ramopharmin","url":"https://pouria-zarrin.github.io/project-ramo/fa/magazine/","potentialAction":{"@type":"SearchAction","target":"https://pouria-zarrin.github.io/project-ramo/fa/magazine/?s={search_term_string}","query-input":"required name=search_term_string"}}</script>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     FEATURED ARTICLE
-════════════════════════════════════════════════════════════ -->
-<section id="mag-featured-article" dir="rtl" class="block">
-    <div class="bg-[#195057]">
-        <div class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-20">
-            <div class="flex flex-col lg:flex-row gap-6 lg:gap-8 items-center">
-                <div class="w-full lg:w-1/2">
-                    <div class="relative overflow-hidden rounded-2xl shadow-2xl">
-                        <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?q=80&w=1600&auto=format&fit=crop"
-                             alt="مقاله ویژه: آنفلوآنزا؛ پیشگیری با واکسیناسیون، درمان و راهنمای جامع"
-                             class="w-full h-64 sm:h-80 lg:h-96 object-cover"
-                             onerror="this.onerror=null;this.src='https://placehold.co/1200x800?text=Influenza'">
-                        <div class="absolute top-4 right-4 bg-[#261F6B] text-white px-4 py-2 rounded-lg font-bold text-sm shadow-lg">مقاله ویژه</div>
-                    </div>
-                </div>
-                <div class="w-full lg:w-1/2 text-white">
-                    <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold leading-tight mb-4">آنفلوآنزا؛ پیشگیری با واکسیناسیون، درمان و راهنمای جامع</h2>
-                    <p class="text-base sm:text-lg leading-relaxed mb-6 text-white">با نزدیک شدن به فصل آنفلوآنزا، آشنایی با راه‌های انتقال، پیشگیری، درمان و به‌ویژه نقش واکسن‌ها اهمیت زیادی دارد. این مقاله به زبان ساده و با تکیه بر منابع معتبر علمی تدوین شده است.</p>
-                    <a href="https://ramopharmin.org/influenza/" class="inline-flex items-center gap-2 bg-[#261F6B] hover:bg-[#195057] text-white font-bold px-6 py-3 rounded-xl shadow-lg transition-all duration-200 hover:scale-105">
-                        مطالعه مقاله کامل <span aria-hidden="true">&#x2190;</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ═══════════════════════════════════════════════════════════
-     AZARAM SPOTLIGHT
-════════════════════════════════════════════════════════════ -->
-<section class="mag-spotlight" aria-labelledby="ms-title" dir="rtl">
-    <header class="ms-head">
-        <h2 id="ms-title" class="ms-title">آزارام (آزاتیوپرین) — داروی کلیدی در کنترل بیماری‌های خودایمنی</h2>
-        <p class="ms-sub">مروری علمی و بالینی بر داروی آزارام؛ محصول شرکت راموفارمین برای مدیریت طولانی‌مدت بیماری‌های خودایمنی و پیشگیری از رد پیوند</p>
     </header>
-    <article class="ms-hero" aria-label="معرفی محصول آزارام">
-        <div class="ms-content">
-            <div class="ms-pill">موضوع ویژه</div>
-            <h3 class="ms-hero-title">آزارام (آزاتیوپرین): معرفی، کاربردها و نکات ایمنی</h3>
-            <p class="ms-excerpt">آزارام نام تجاری داروی آزاتیوپرین است که توسط شرکت داروسازی راموفارمین تولید می‌شود. این دارو یکی از درمان‌های اصلی در کنترل بیماری‌های خودایمنی مانند آرتریت روماتوئید و لوپوس است و همچنین برای پیشگیری از رد پیوند اعضا پس از عمل جراحی به کار می‌رود. آزارام با تعدیل عملکرد دستگاه ایمنی، به کاهش التهاب و جلوگیری از حمله سیستم ایمنی به بافت‌های بدن کمک می‌کند. استفاده از این دارو باید زیر نظر پزشک و همراه با پایش منظم آزمایشگاهی انجام شود.</p>
-            <div class="ms-meta">
-                <span class="ms-item">ویرایش: دکتر مختاری</span>
-                <span class="ms-dot">•</span>
-                <span class="ms-item">تأیید داروساز: تیم علمی راموفارمین</span>
-            </div>
-            <div class="ms-actions">
-                <a class="ms-cta primary" href="https://ramopharmin.org/azathioprine/">مطالعه معرفی کامل</a>
-                <a class="ms-cta secondary" href="https://ramopharmin.org/azaram-catalog/">دانلود بروشور آزارام</a>
-            </div>
-            <div class="ms-gallery" aria-label="تصاویر مرتبط آزارام">
-                <ul>
-                    <li><a class="ms-gbox" href="#" aria-label="تصویر ۱ آزارام"><img src="https://www.themeadows.com/wp-content/uploads/2024/12/comparison.jpg" alt="بسته‌بندی داروی آزارام" loading="lazy"></a></li>
-                    <li><a class="ms-gbox" href="#" aria-label="تصویر ۲ آزارام"><img src="https://healthyturkiye.com/storage/media/8315/organ-transplantation-turkey.jpg" alt="نمای نزدیک از قرص‌های آزارام" loading="lazy"></a></li>
-                    <li><a class="ms-gbox" href="#" aria-label="تصویر ۳ آزارام"><img src="https://medshadow.org/wp-content/uploads/2019/06/drug-side-effects-scaled.jpeg" alt="محیط تولید داروی آزارام" loading="lazy"></a></li>
-                    <li><a class="ms-gbox" href="#" aria-label="تصویر ۴ آزارام"><img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Irritable_bowel_syndrome.jpg" alt="تیم پزشکی در درمان بیماران خودایمنی" loading="lazy"></a></li>
-                </ul>
-            </div>
-        </div>
-    </article>
-    <nav class="ms-points" aria-label="گزیده نکات آزارام">
-        <ul>
-            <li><a href="#" class="ms-point"><span class="ms-icon" aria-hidden="true">1</span><div class="ms-text"><h4>موارد مصرف</h4><p>RA، لوپوس، و پیشگیری از رد پیوند</p></div></a></li>
-            <li><a href="#" class="ms-point"><span class="ms-icon" aria-hidden="true">2</span><div class="ms-text"><h4>ایمنی و پایش</h4><p>مصرف طبق نظر پزشک، آزمایش‌های دوره‌ای</p></div></a></li>
-            <li><a href="#" class="ms-point"><span class="ms-icon" aria-hidden="true">3</span><div class="ms-text"><h4>استانداردهای تولید</h4><p>تولید ایزوله، منطبق با الزامات GMP</p></div></a></li>
-        </ul>
-    </nav>
-    <script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","headline":"آزارام (آزاتیوپرین): معرفی، کاربردها و نکات ایمنی","author":{"@type":"Person","name":"تیم علمی راموفارمین"},"publisher":{"@type":"Organization","name":"Ramopharmin"},"inLanguage":"fa"}</script>
-</section>
 
-<!-- ═══════════════════════════════════════════════════════════
-     LATEST ARTICLES
-════════════════════════════════════════════════════════════ -->
-<section class="mag-latest" aria-labelledby="mag-latest-title" dir="rtl">
-    <header class="mag-latest-head">
-        <h2 id="mag-latest-title" class="mag-latest-title">آخرین مقالات</h2>
-        <p class="mag-latest-sub">مرور سریع تازه‌ترین مطالب علمی تحریریه؛ برای خواندن کامل هر مطلب روی کارت کلیک کنید.</p>
-    </header>
-    <div class="mag-latest-grid">
-        <article class="ml-card" itemscope itemtype="https://schema.org/Article">
-            <a class="ml-thumb" href="https://ramopharmin.org/influenza/" itemprop="url">
-                <img src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?q=80&w=1600&auto=format&fit=crop" alt="آنفلوآنزا" loading="lazy" itemprop="image">
-            </a>
-            <div class="ml-body">
-                <h3 class="ml-title" itemprop="headline"><a href="https://ramopharmin.org/influenza/">آنفلوآنزا؛ پیشگیری با واکسیناسیون، درمان و راهنمای جامع</a></h3>
-                <p class="ml-excerpt" itemprop="description">با نزدیک شدن به فصل آنفلوآنزا، آشنایی با راه‌های انتقال، پیشگیری، درمان و نقش واکسن‌ها اهمیت زیادی دارد.</p>
-                <div class="ml-meta"><span class="ml-author" itemprop="author">تحریریه راموفارمین</span><span class="ml-dot">•</span><span class="ml-badge">منابع ✓</span></div>
-                <a class="ml-cta" href="https://ramopharmin.org/influenza/">مطالعه مقاله</a>
-            </div>
-        </article>
-        <article class="ml-card" itemscope itemtype="https://schema.org/Article">
-            <a class="ml-thumb" href="https://ramopharmin.org/azathioprine-organ-transplant/" itemprop="url">
-                <img src="https://healthyturkiye.com/storage/media/8315/organ-transplantation-turkey.jpg" alt="آزاتیوپرین در پیوند اعضا" loading="lazy" itemprop="image">
-            </a>
-            <div class="ml-body">
-                <h3 class="ml-title" itemprop="headline"><a href="https://ramopharmin.org/azathioprine-organ-transplant/">آزاتیوپرین در پیوند اعضا — نقش درمانی، مانیتورینگ و مراقبت بلندمدت</a></h3>
-                <p class="ml-excerpt" itemprop="description">نقش آزاتیوپرین در پیشگیری از رد پیوند، رژیم‌های ترکیبی، دوزدهی، مانیتورینگ آزمایشگاهی/بالینی.</p>
-                <div class="ml-meta"><span class="ml-author" itemprop="author">ویرایش: دکتر مختاری</span><span class="ml-dot">•</span><span class="ml-badge">تایید داروساز</span></div>
-                <a class="ml-cta" href="https://ramopharmin.org/azathioprine-organ-transplant/">مطالعه مقاله</a>
-            </div>
-        </article>
-        <article class="ml-card" itemscope itemtype="https://schema.org/Article">
-            <a class="ml-thumb" href="https://ramopharmin.org/azathioprine-side-effect/" itemprop="url">
-                <img src="https://medshadow.org/wp-content/uploads/2019/06/drug-side-effects-scaled.jpeg" alt="آزاتیوپرین — مدیریت عوارض" loading="lazy" itemprop="image">
-            </a>
-            <div class="ml-body">
-                <h3 class="ml-title" itemprop="headline"><a href="https://ramopharmin.org/azathioprine-side-effect/">آزاتیوپرین — مدیریت عوارض و خطرات: چک‌لیست پایش، هشدارها و توصیه‌های عملی</a></h3>
-                <p class="ml-excerpt" itemprop="description">راهنمای عملی برای شناسایی و مدیریت عوارض آزاتیوپرین، برنامه پایش آزمایشگاهی و علائم هشدار.</p>
-                <div class="ml-meta"><span class="ml-author" itemprop="author">تحریریه راموفارمین</span><span class="ml-dot">•</span><span class="ml-badge">منابع ✓</span></div>
-                <a class="ml-cta" href="https://ramopharmin.org/azathioprine-side-effect/">مطالعه مقاله</a>
-            </div>
-        </article>
-        <article class="ml-card" itemscope itemtype="https://schema.org/Article">
-            <a class="ml-thumb" href="https://ramopharmin.org/azathioprine-ibd/" itemprop="url">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Irritable_bowel_syndrome.jpg" alt="آزارام در IBD" loading="lazy" itemprop="image">
-            </a>
-            <div class="ml-body">
-                <h3 class="ml-title" itemprop="headline"><a href="https://ramopharmin.org/azathioprine-ibd/">آزارام (آزاتیوپرین) در IBD: راهنمای جامع برای کولیت اولسراتیو و بیماری کرون</a></h3>
-                <p class="ml-excerpt" itemprop="description">نقش آزاتیوپرین در حفظ بهبودی IBD، نحوه مصرف و پایش، عوارض و هشدارهای مهم.</p>
-                <div class="ml-meta"><span class="ml-author" itemprop="author">تحریریه راموفارمین</span><span class="ml-dot">•</span><span class="ml-badge">منابع ✓</span></div>
-                <a class="ml-cta" href="https://ramopharmin.org/azathioprine-ibd/">مطالعه مقاله</a>
-            </div>
-        </article>
-        <article class="ml-card" itemscope itemtype="https://schema.org/Article">
-            <a class="ml-thumb" href="https://ramopharmin.org/carbamazepine-1/" itemprop="url">
-                <img src="https://cdn.sanity.io/images/0vv8moc6/drugtopics/1ada8d1ec0a3eae647595989386d73c2046720a5-5673x3782.jpg" alt="کاربامازپین" loading="lazy" itemprop="image">
-            </a>
-            <div class="ml-body">
-                <h3 class="ml-title" itemprop="headline"><a href="https://ramopharmin.org/carbamazepine-1/">کاربامازپین — راهنمای ساده برای بیماران</a></h3>
-                <p class="ml-excerpt" itemprop="description">معرفی کاربامازپین، موارد مصرف، ایمنی ژنتیکی (HLA) و نکات مصرف و عوارض مهم.</p>
-                <div class="ml-meta"><span class="ml-author" itemprop="author">تحریریه راموفارمین</span><span class="ml-dot">•</span><span class="ml-badge">منابع ✓</span></div>
-                <a class="ml-cta" href="https://ramopharmin.org/carbamazepine-1/">مطالعه مقاله</a>
-            </div>
-        </article>
-        <article class="ml-card" itemscope itemtype="https://schema.org/Article">
-            <a class="ml-thumb" href="https://ramopharmin.org/carbaram-safe-usage/" itemprop="url">
-                <img src="https://normgroup.org/wp-content/uploads/2022/04/Ways_to_Make_Your_Patients_Happier_blog_graphic.jpg" alt="کاربارام نکات مصرف ایمن" loading="lazy" itemprop="image">
-            </a>
-            <div class="ml-body">
-                <h3 class="ml-title" itemprop="headline"><a href="https://ramopharmin.org/carbaram-safe-usage/">کاربارام (کاربامازپین): نکات مصرف ایمن</a></h3>
-                <p class="ml-excerpt" itemprop="description">چگونه کاربارام را ایمن‌تر مصرف کنیم: دوزدهی، پایش، علائم هشدار و توصیه‌های کاربردی.</p>
-                <div class="ml-meta"><span class="ml-author" itemprop="author">تحریریه راموفارمین</span><span class="ml-dot">•</span><span class="ml-badge">منابع ✓</span></div>
-                <a class="ml-cta" href="https://ramopharmin.org/carbaram-safe-usage/">مطالعه مقاله</a>
-            </div>
-        </article>
-    </div>
-</section>
+    <ol class="mag-article-list">
+        <li>
+            <a class="mag-article-title" href="articles/influenza.html">آنفلوآنزا؛ پیشگیری با واکسیناسیون، درمان و راهنمای جامع</a>
+            <p class="mag-article-meta">تحریریه راموفارمین</p>
+            <p class="mag-article-excerpt">انتقال، پیشگیری، درمان و نقش واکسن‌ها.</p>
+        </li>
+        <li>
+            <a class="mag-article-title" href="articles/azathioprine-organ-transplant.html">آزاتیوپرین در پیوند اعضا — نقش درمانی، مانیتورینگ و مراقبت بلندمدت</a>
+            <p class="mag-article-meta">ویرایش: دکتر مختاری · تایید داروساز</p>
+            <p class="mag-article-excerpt">پیشگیری از رد پیوند، رژیم‌های ترکیبی و پایش آزمایشگاهی.</p>
+        </li>
+        <li>
+            <a class="mag-article-title" href="articles/azathioprine-side-effect.html">آزاتیوپرین — مدیریت عوارض و خطرات</a>
+            <p class="mag-article-meta">تحریریه راموفارمین</p>
+            <p class="mag-article-excerpt">چک‌لیست پایش، هشدارها و توصیه‌های عملی.</p>
+        </li>
+        <li>
+            <a class="mag-article-title" href="articles/azathioprine-ibd.html">آزارام (آزاتیوپرین) در IBD</a>
+            <p class="mag-article-meta">تحریریه راموفارمین</p>
+            <p class="mag-article-excerpt">کولیت اولسراتیو و بیماری کرون؛ مصرف و پایش.</p>
+        </li>
+        <li>
+            <a class="mag-article-title" href="articles/carbamazepine-1.html">کاربامازپین — راهنمای ساده برای بیماران</a>
+            <p class="mag-article-meta">تحریریه راموفارمین</p>
+            <p class="mag-article-excerpt">موارد مصرف، HLA و نکات مصرف و عوارض.</p>
+        </li>
+        <li>
+            <a class="mag-article-title" href="articles/carbaram-safe-usage.html">کاربارام (کاربامازپین): نکات مصرف ایمن</a>
+            <p class="mag-article-meta">تحریریه راموفارمین</p>
+            <p class="mag-article-excerpt">دوزدهی، پایش و علائم هشدار.</p>
+        </li>
+    </ol>
 
-<!-- ═══════════════════════════════════════════════════════════
-     FEATURED TOPICS
-════════════════════════════════════════════════════════════ -->
-<section class="mag-topics" aria-labelledby="mag-topics-title" dir="rtl">
-    <header class="mag-topics-head">
-        <h2 id="mag-topics-title" class="mag-topics-title">موضوعات منتخب</h2>
-        <p class="mag-topics-sub">مسیرهای پیشنهادی برای شروع مطالعه در مجله سلامت راموفارمین</p>
-    </header>
-    <div class="mag-topics-grid">
-        <a class="mt-card" href="#"><div class="mt-icon">AZ</div><h3 class="mt-title">آزارام (آزاتیوپرین)</h3><p class="mt-desc">راهنما، نحوه مصرف، ایمنی و نکات کاربردی برای بیماران و پزشکان.</p></a>
-        <a class="mt-card" href="#"><div class="mt-icon">IM</div><h3 class="mt-title">ایمونولوژی</h3><p class="mt-desc">مبانی سیستم ایمنی، بیماری‌های خودایمنی و درمان‌های سرکوب‌کننده ایمنی.</p></a>
-        <a class="mt-card" href="#"><div class="mt-icon">TX</div><h3 class="mt-title">پیوند اعضا</h3><p class="mt-desc">اصول مراقبت پس از پیوند، داروهای ضدرد و پایش درمان.</p></a>
-        <a class="mt-card" href="#"><div class="mt-icon">PH</div><h3 class="mt-title">داروشناسی</h3><p class="mt-desc">فارماکولوژی عملی، مکانیسم اثر و تداخلات دارویی مهم.</p></a>
-        <a class="mt-card" href="#"><div class="mt-icon">PT</div><h3 class="mt-title">راهنما بیمار</h3><p class="mt-desc">مطالب کاربردی برای بیماران: پرسش‌های رایج و توصیه‌های روزمره.</p></a>
-        <a class="mt-card" href="#"><div class="mt-icon">LV</div><h3 class="mt-title">سبک زندگی سالم</h3><p class="mt-desc">تغذیه، فعالیت بدنی، خواب و مدیریت استرس برای بهبود کیفیت زندگی.</p></a>
-    </div>
-</section>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"Ramopharmin Health Magazine","url":"https://pouria-zarrin.github.io/project-ramo/V0/fa/magazine/","potentialAction":{"@type":"SearchAction","target":"https://pouria-zarrin.github.io/project-ramo/V0/fa/magazine/?s={search_term_string}","query-input":"required name=search_term_string"}}</script>
+</main>
 
-<!-- ═══════════════════════════════════════════════════════════
-     EDITORIAL STANDARDS
-════════════════════════════════════════════════════════════ -->
-<section class="mag-editorial" aria-labelledby="mag-ed-title" dir="rtl">
-    <header class="mag-ed-head">
-        <h2 id="mag-ed-title" class="mag-ed-title">استانداردهای تحریریه و منابع</h2>
-        <p class="mag-ed-sub">تعهد ما: دقت علمی، شفافیت و قابل‌اتکا بودن محتوا</p>
-    </header>
-    <div class="mag-ed-grid">
-        <article class="me-card"><h3 class="me-title">اصول انتشار</h3><p class="me-desc">انتشار محتوا بر پایه منابع معتبر، مرور همتا و راهنماهای بالینی روزآمد انجام می‌شود.</p><a class="me-link" href="#">مشاهده اصول انتشار</a></article>
-        <article class="me-card"><h3 class="me-title">منابع و ارجاعات</h3><p class="me-desc">هر مقاله دارای ارجاع به منابع علمی معتبر (راهنماهای تخصصی، مقالات مروری، کتب مرجع) است.</p><a class="me-link" href="#">سیاست ارجاع‌دهی</a></article>
-        <article class="me-card"><h3 class="me-title">بازبینی علمی</h3><p class="me-desc">مطالب حساس بالینی توسط متخصص یا داروساز بازبینی می‌شوند و تاریخ به‌روزرسانی درج می‌گردد.</p><a class="me-link" href="#">فرایند بازبینی</a></article>
-        <article class="me-card"><h3 class="me-title">اصلاحات و شفافیت</h3><p class="me-desc">خط‌مشی اصلاح، تضاد منافع و افشاگری‌ها به‌صورت شفاف منتشر می‌شود.</p><div class="me-links"><a class="me-link" href="#">افشاگری‌ها</a><span class="me-dot">•</span><a class="me-link" href="#">سیاست اصلاحات</a></div></article>
-    </div>
-</section>
-</div>
+<style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}</style>
 
-<!-- ═══════════════════════════════════════════════════════════
-     FOOTER
-════════════════════════════════════════════════════════════ -->
-<style>#ramo-news-footer a{color:#0f172a!important}#ramo-news-footer a:hover{color:#0d9488!important}</style>
-<footer id="ramo-news-footer" class="border-t border-slate-300 bg-[#EFF2F3] pt-16 pb-8 mt-12" dir="rtl" style="border-top:1px solid #cbd5e1;">
+<footer id="ramo-news-footer" class="border-t border-slate-200 bg-white pt-12 pb-8 mt-8" dir="rtl">
     <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-12 border-b border-slate-200 pb-12">
-            <div class="lg:col-span-5 text-right space-y-6">
-                <div class="text-slate-900 font-bold text-xl">داروسازی راموفارمین</div>
-                <p class="text-slate-600 leading-loose text-sm lg:text-base max-w-md text-right">شرکت داروسازی راموفارمین به عنوان یکی از پیشگامان صنعت دارو در ایران، با بهره‌گیری از دانش روز، فناوری‌های نوین و استانداردهای بین‌المللی، در تولید و توزیع داروهای با کیفیت و موثر فعالیت می‌کند. ماموریت ما ارتقای سلامت و کیفیت زندگی جامعه است.</p>
-                <div class="text-xs text-slate-400 flex flex-col gap-1"><span>کد مستند: RM-12-2025</span><span>بازبینی: دسامبر 2025</span></div>
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-10 border-b border-slate-200 pb-10">
+            <div class="lg:col-span-5 text-right space-y-4">
+                <div class="text-slate-900 font-bold text-lg">داروسازی راموفارمین</div>
+                <p class="text-slate-600 text-sm leading-relaxed max-w-md mr-0 ml-auto">شرکت داروسازی راموفارمین با بهره‌گیری از دانش روز و استانداردهای بین‌المللی در تولید داروهای مؤثر فعالیت می‌کند.</p>
             </div>
             <div class="lg:col-span-4 text-right">
-                <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center justify-start gap-2"><span class="w-1.5 h-6 bg-teal-500 rounded-full"></span>منابع</h3>
-                <ul class="space-y-3 text-sm text-slate-900">
-                    <li><a href="#" class="hover:text-teal-600 transition-colors block">نوآوری علمی</a></li>
-                    <li><a href="#" class="hover:text-teal-600 transition-colors block">پژوهش‌های اسپانسرشده</a></li>
-                    <li><a href="#" class="hover:text-teal-600 transition-colors block">اطلاعات پزشکی برای پزشکان</a></li>
-                    <li><a href="#" class="hover:text-teal-600 transition-colors block">برنامه‌های حمایت دارویی</a></li>
-                    <li><a href="#" class="hover:text-teal-600 transition-colors block">آزمایش‌های بالینی جهانی</a></li>
-                    <li><a href="#" class="hover:text-teal-600 transition-colors block">محصولات دارویی</a></li>
-                    <li><a href="#" class="hover:text-teal-600 transition-colors block">گزارش عارضه جانبی</a></li>
+                <h3 class="text-sm font-bold text-slate-900 mb-4">دسترسی سریع</h3>
+                <ul class="space-y-2 text-sm text-slate-700">
+                    <li><a href="../" class="hover:text-teal-600 transition-colors">خانه فارسی</a></li>
+                    <li><a href="../../contact-us/contact-us.html" class="hover:text-teal-600 transition-colors">ارتباط با ما</a></li>
+                    <li><a href="../../en/index.html" class="hover:text-teal-600 transition-colors">English site</a></li>
                 </ul>
             </div>
-            <div class="lg:col-span-3 text-right">
-                <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center justify-start gap-2"><span class="w-1.5 h-6 bg-teal-500 rounded-full"></span>لینک‌های سریع</h3>
-                <ul class="space-y-3 text-sm text-slate-900 mb-8">
-                    <li><a href="../../fa/" class="hover:text-teal-600 transition-colors block">خانه فارسی</a></li>
-                    <li><a href="../../contact-us/contact-us.html" class="hover:text-teal-600 transition-colors block">ارتباط با ما</a></li>
-                    <li><a href="../../en/index.html" class="hover:text-teal-600 transition-colors block">English site</a></li>
-                    <li><a href="#" class="hover:text-teal-600 transition-colors block">پایداری و محیط زیست</a></li>
-                    <li><a href="#" class="hover:text-teal-600 transition-colors block">سوالات متداول</a></li>
-                </ul>
-                <div class="flex justify-start gap-3">
-                    <a href="#" class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-900 hover:bg-teal-50 hover:text-teal-600 hover:border-teal-200 transition-all shadow-sm hover:-translate-y-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-                    </a>
-                    <a href="#" class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-900 hover:bg-teal-50 hover:text-teal-600 hover:border-teal-200 transition-all shadow-sm hover:-translate-y-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-                    </a>
-                    <a href="#" class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-900 hover:bg-teal-50 hover:text-teal-600 hover:border-teal-200 transition-all shadow-sm hover:-translate-y-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-6 text-xs text-slate-500">
-            <div>© 2025 Ramopharmin. All rights reserved.</div>
-            <div class="flex gap-6">
-                <a href="#" class="hover:text-teal-600 transition-colors">حریم خصوصی</a>
-                <a href="#" class="hover:text-teal-600 transition-colors">شرایط استفاده</a>
+            <div class="lg:col-span-3 text-right text-sm text-slate-500">
+                <p class="m-0">© 2025 Ramopharmin</p>
             </div>
         </div>
     </div>
 </footer>
 
 <script>
-    // Holding name typing effect
-    document.addEventListener('DOMContentLoaded', function() {
-        const holdingText = "هلدینگ خشت دژ ایلیا";
-        const el = document.getElementById('holding-name');
-        if (!el) return;
-        let i = 0, deleting = false;
-        function type() {
-            if (!deleting) {
-                el.textContent = holdingText.substring(0, i + 1);
-                i++;
-                if (i === holdingText.length) setTimeout(() => { deleting = true; }, 2000);
-            } else {
-                el.textContent = holdingText.substring(0, i);
-                i--;
-                if (i < 0) { deleting = false; i = 0; setTimeout(type, 500); return; }
-            }
-            setTimeout(type, deleting ? 100 : 150);
-        }
-        type();
-    });
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+});
 
-    // Lucide icons
-    document.addEventListener('DOMContentLoaded', function() {
+(function() {
+    var btn = document.getElementById('mag-mobile-open');
+    var panel = document.getElementById('mag-mobile-panel');
+    if (!btn || !panel) return;
+    var open = false;
+    btn.addEventListener('click', function() {
+        open = !open;
+        panel.classList.toggle('is-open', open);
+        panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+        btn.innerHTML = open ? '<i data-lucide="x" class="w-7 h-7"></i>' : '<i data-lucide="menu" class="w-7 h-7"></i>';
         if (typeof lucide !== 'undefined') lucide.createIcons();
     });
-
-    // Mobile menu
-    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    let menuOpen = false;
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', () => {
-            menuOpen = !menuOpen;
-            mobileMenu.classList.toggle('translate-x-full', !menuOpen);
-            mobileMenuBtn.innerHTML = menuOpen
-                ? '<i data-lucide="x" class="w-8 h-8"></i>'
-                : '<i data-lucide="menu" class="w-8 h-8"></i>';
+    panel.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+            open = false;
+            panel.classList.remove('is-open');
+            panel.setAttribute('aria-hidden', 'true');
+            btn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
             if (typeof lucide !== 'undefined') lucide.createIcons();
         });
-    }
-
-    window.toggleMobileSubmenu = function(id) {
-        const submenu = document.getElementById(id);
-        const icon = document.getElementById('icon-' + id);
-        const hidden = submenu.classList.contains('hidden');
-        submenu.classList.toggle('hidden', !hidden);
-        submenu.classList.toggle('flex', hidden);
-        if (icon) icon.style.transform = hidden ? 'rotate(180deg)' : 'rotate(0deg)';
-    };
+    });
+})();
 </script>
 </body>
 </html>

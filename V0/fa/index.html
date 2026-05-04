@@ -47,13 +47,64 @@
 
 
         /* Hero */
-        #ramo-hero-block .hero-bg { position:absolute; top:0; left:0; width:100%; height:100%; z-index:0; background:radial-gradient(circle at 10% 20%,#174f57 0%,rgb(11,38,59) 40%,rgb(2,6,23) 90%); }
+        #ramo-hero-block .hero-bg { z-index: 0; background: radial-gradient(circle at 10% 20%, #174f57 0%, rgb(11, 38, 59) 40%, rgb(2, 6, 23) 90%); }
         #ramo-hero-block .orb { position:absolute; border-radius:50%; filter:blur(80px); opacity:0.6; animation:floatOrb 20s infinite ease-in-out; }
         #ramo-hero-block .orb-1 { top:-10%; left:-10%; width:50vw; height:50vw; background:#174f57; animation-delay:0s; }
         #ramo-hero-block .orb-2 { bottom:-20%; right:-10%; width:40vw; height:40vw; background:#3b82f6; animation-delay:-5s; }
         @keyframes floatOrb { 0%{transform:translate(0,0) scale(1);} 33%{transform:translate(30px,50px) scale(1.1);} 66%{transform:translate(-20px,20px) scale(0.95);} 100%{transform:translate(0,0) scale(1);} }
-        #ramo-hero-block .mesh-overlay { position:absolute; inset:0; background-image:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2v-4h4v-2H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); z-index:1; pointer-events:none; }
-        #ramo-hero-block #fa-canvas-container { width:100%; height:500px; position:relative; z-index:10; outline:none; cursor:move; }
+        #ramo-hero-block .mesh-overlay { z-index: 1; pointer-events: none; background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2v-4h4v-2H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+        /* Hero fills viewport below ticker + fixed nav; --fa-chrome-h set by inline script */
+        #ramo-hero-block {
+            width: 100%;
+            max-width: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-height: calc(100svh - var(--fa-chrome-h, 112px));
+            isolation: isolate;
+        }
+        @supports (height: 100dvh) {
+            #ramo-hero-block { min-height: calc(100dvh - var(--fa-chrome-h, 112px)); }
+        }
+        #ramo-hero-block .hero-bg,
+        #ramo-hero-block .mesh-overlay {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            min-height: 100%;
+        }
+        #ramo-hero-block .hero-inner {
+            flex: 1 1 auto;
+            width: 100%;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+            position: relative;
+            z-index: 10;
+            display: grid;
+            align-content: center;
+        }
+        #ramo-hero-block #fa-canvas-container {
+            /* Explicit sizing so clientWidth/Height are non-zero before WebGL init
+               (aspect-ratio + flex/grid can resolve to 0×0 on first frames otherwise). */
+            box-sizing: border-box;
+            width: min(100%, 520px);
+            min-width: 240px;
+            max-width: 520px;
+            margin-left: auto;
+            margin-right: auto;
+            aspect-ratio: 1;
+            min-height: 280px;
+            max-height: min(72vw, 560px);
+            height: auto;
+            position: relative;
+            z-index: 10;
+            outline: none;
+            cursor: grab;
+            flex-shrink: 0;
+        }
         #ramo-hero-block .text-shadow-sm { text-shadow:0 2px 10px rgba(0,0,0,0.5); }
 
         /* Categories */
@@ -102,15 +153,36 @@
 <!-- ═══════════════════════════════════════
      NEWS TICKER
 ════════════════════════════════════════ -->
-<div id="ramo-news-ticker" class="w-full bg-gradient-to-l from-[#174f57] to-[#0f172a] text-white font-bold text-xs md:text-sm flex items-center justify-end px-4 py-3 border-b border-yellow-300/10 shadow z-50" style="direction:rtl;">
+<div id="ramo-news-ticker" class="w-full bg-gradient-to-l from-[#174f57] to-[#0f172a] text-white font-bold text-xs md:text-sm flex items-center justify-end px-4 py-3 border-b border-yellow-300/10 shadow z-[60]" style="direction:rtl;">
     <span id="news-ticker-text" class="transition-opacity duration-500 ml-2">به وبسایت رسمی راموفارمین خوش آمدید</span>
     <i data-lucide="megaphone" class="w-4 h-4 text-yellow-300 mr-2"></i>
 </div>
+<script>
+(function () {
+    function syncFaChrome() {
+        var t = document.getElementById('ramo-news-ticker');
+        var th = t ? Math.round(t.getBoundingClientRect().height) : 48;
+        var nav = 64;
+        document.documentElement.style.setProperty('--fa-ticker-h', th + 'px');
+        document.documentElement.style.setProperty('--fa-chrome-h', (th + nav) + 'px');
+    }
+    syncFaChrome();
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', syncFaChrome);
+    window.addEventListener('load', function () {
+        syncFaChrome();
+        requestAnimationFrame(syncFaChrome);
+    });
+    window.addEventListener('resize', function () {
+        clearTimeout(window.__faChromeR);
+        window.__faChromeR = setTimeout(syncFaChrome, 120);
+    });
+})();
+</script>
 
 <!-- ═══════════════════════════════════════
      HEADER / NAV
 ════════════════════════════════════════ -->
-<nav id="ramo-fa-header" style="position:fixed;top:0;left:0;right:0;z-index:100;font-family:'Vazirmatn','Tahoma',sans-serif;direction:rtl;">
+<nav id="ramo-fa-header" style="position:fixed;top:var(--fa-ticker-h,48px);left:0;right:0;z-index:100;font-family:'Vazirmatn','Tahoma',sans-serif;direction:rtl;">
     <style>
         #ramo-fa-header {
             background: rgba(15,23,42,0.85);
@@ -184,8 +256,8 @@
         </div>
     </div>
 </nav>
-<!-- Spacer for fixed header -->
-<div style="height:64px;"></div>
+<!-- Spacer: ticker + fixed nav (matches --fa-chrome-h) -->
+<div id="fa-chrome-spacer" style="height:var(--fa-chrome-h,112px);"></div>
 
 <script>
     // News Ticker
@@ -210,10 +282,10 @@
 <!-- ═══════════════════════════════════════
      HERO — 3D PILL
 ════════════════════════════════════════ -->
-<div id="ramo-hero-block" class="relative w-full overflow-hidden bg-[#0f172a] text-white" style="min-height:600px;">
+<div id="ramo-hero-block" class="w-full overflow-hidden bg-[#0f172a] text-white">
     <div class="hero-bg"><div class="orb orb-1"></div><div class="orb orb-2"></div></div>
     <div class="mesh-overlay"></div>
-    <div class="relative z-10 container mx-auto px-6 pt-16 pb-32 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[600px]">
+    <div class="relative z-10 hero-inner pt-12 pb-20 md:pt-16 md:pb-28 grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-center">
         <!-- Right col (text, RTL) -->
         <div class="order-2 lg:order-1 text-right space-y-8">
             <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-white/10 text-brand-light text-sm font-bold tracking-wide">
@@ -243,9 +315,9 @@
                 <div><div class="text-3xl font-bold text-white">GMP</div><div class="text-sm text-slate-400 mt-1">استاندارد جهانی</div></div>
             </div>
         </div>
-        <!-- Left col (3D) -->
-        <div class="order-1 lg:order-2 hidden md:flex justify-center items-center relative h-[500px]">
-            <div id="fa-canvas-container"></div>
+        <!-- Left col (3D) — visible on all breakpoints -->
+        <div class="order-1 lg:order-2 flex justify-center items-stretch relative w-full min-h-[280px] min-w-0 py-4 lg:py-0 self-stretch">
+            <div id="fa-canvas-container" aria-label="نمای سه‌بعدی کپسول"></div>
             <div class="absolute bottom-0 right-0 glass-panel p-6 rounded-2xl max-w-xs transform rotate-3 shadow-2xl hidden md:block z-20">
                 <div class="flex items-center gap-4 mb-3">
                     <div class="bg-[#174f57]/50 p-3 rounded-full text-white"><i data-lucide="activity" class="w-6 h-6"></i></div>
@@ -272,47 +344,47 @@
             <p class="text-slate-400 text-lg leading-relaxed">تولیدکننده طیف وسیعی از محصولات دارویی با بالاترین استانداردهای جهانی برای ارتقای سلامت جامعه.</p>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <a href="https://ramopharmin.org/immunosuppressants-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
+            <a href="../product-category-therapeutics/category-page.html" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
                 <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
                 <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300"><i data-lucide="shield-alert" class="w-7 h-7 text-white"></i></div>
                 <div><h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">سرکوب‌کننده‌های ایمنی</h3><p class="text-sm text-slate-400 leading-relaxed">مهارکننده‌های کالسینورین و سایر ایمونوساپرسورها برای پیوند اعضا.</p></div>
             </a>
-            <a href="https://ramopharmin.org/anti-parkinson-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
+            <a href="../product-category-therapeutics/anti-parkinson.html" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
                 <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
                 <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300"><i data-lucide="brain-circuit" class="w-7 h-7 text-white"></i></div>
                 <div><h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">داروهای ضد پارکینسون</h3><p class="text-sm text-slate-400 leading-relaxed">مهارکننده‌های MAO‑B و آگونیست‌های دوپامین.</p></div>
             </a>
-            <a href="https://ramopharmin.org/pain-anti-inflammatory-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
+            <a href="../product-category-therapeutics/category-page.html" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
                 <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
                 <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300"><i data-lucide="flame" class="w-7 h-7 text-white"></i></div>
                 <div><h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">ضددرد و ضدالتهاب</h3><p class="text-sm text-slate-400 leading-relaxed">NSAIDs و مهارکننده‌های انتخابی COX‑2.</p></div>
             </a>
-            <a href="https://ramopharmin.org/cold-respiratory-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
+            <a href="../product-category-therapeutics/cold-respiratory.html" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
                 <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
                 <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300"><i data-lucide="wind" class="w-7 h-7 text-white"></i></div>
                 <div><h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">سرماخوردگی و تنفسی</h3><p class="text-sm text-slate-400 leading-relaxed">آنتی‌هیستامین‌ها و ضداحتقان‌ها.</p></div>
             </a>
-            <a href="https://ramopharmin.org/supplements-vitamins-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
+            <a href="../product-category-therapeutics/category-page.html" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
                 <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
                 <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300"><i data-lucide="sun" class="w-7 h-7 text-white"></i></div>
                 <div><h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">مکمل‌ها و ویتامین‌ها</h3><p class="text-sm text-slate-400 leading-relaxed">انواع ویتامین‌ها و مینرال‌ها.</p></div>
             </a>
-            <a href="https://ramopharmin.org/antispasmodics-urinary-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
+            <a href="../product-category-therapeutics/antispasmodics-urinary.html" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
                 <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
                 <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300"><i data-lucide="activity" class="w-7 h-7 text-white"></i></div>
                 <div><h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">ضداسپاسم و ادراری</h3><p class="text-sm text-slate-400 leading-relaxed">آنتی‌موسکارینی‌های انتخابی.</p></div>
             </a>
-            <a href="https://ramopharmin.org/anti-migraine-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
+            <a href="../product-category-therapeutics/anti-migraine.html" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
                 <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
                 <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300"><i data-lucide="zap" class="w-7 h-7 text-white"></i></div>
                 <div><h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">داروهای ضدمیگرن</h3><p class="text-sm text-slate-400 leading-relaxed">تریپتان‌ها و آنتاگونیست‌های CGRP.</p></div>
             </a>
-            <a href="https://ramopharmin.org/anti-diabetes-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
+            <a href="../product-category-therapeutics/anti-diabetes.html" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
                 <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
                 <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300"><i data-lucide="heart-pulse" class="w-7 h-7 text-white"></i></div>
                 <div><h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">داروهای ضد دیابت</h3><p class="text-sm text-slate-400 leading-relaxed">مهارکننده‌های DPP‑4 و SGLT2.</p></div>
             </a>
-            <a href="https://ramopharmin.org/gastrointestinal-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
+            <a href="../product-category-therapeutics/gastrointestinal.html" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden no-underline">
                 <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
                 <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300"><i data-lucide="utensils" class="w-7 h-7 text-white"></i></div>
                 <div><h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">داروهای گوارشی</h3><p class="text-sm text-slate-400 leading-relaxed">مهارکننده‌های پمپ پروتون.</p></div>
@@ -343,19 +415,19 @@
             <div class="slider-track" id="art-slider">
                 <article class="article-card glass-panel rounded-2xl overflow-hidden hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 group/card">
                     <div class="h-48 overflow-hidden relative"><div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10 opacity-60"></div><img src="https://www.themeadows.com/wp-content/uploads/2024/12/comparison.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-110" alt=""><div class="absolute bottom-3 right-3 z-20"><span class="px-3 py-1 bg-brand/90 backdrop-blur text-xs rounded-full font-bold text-white">علمی</span></div></div>
-                    <div class="p-6 text-right"><h3 class="text-xl font-bold text-white mb-3 leading-snug">آزاتیوپرین در مقایسه با سایر مهارکننده‌های ایمنی</h3><p class="text-sm text-slate-400 mb-4 line-clamp-3 leading-relaxed">مقایسه اثربخشی، ایمنی، پایش و هزینه برای تصمیم‌گیری درمانی آگاهانه.</p><a href="https://ramopharmin.org/azathioprine-comparison/" class="inline-flex items-center gap-2 text-brand-light font-bold text-sm hover:text-white transition-colors no-underline">بیشتر بخوانید<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div>
+                    <div class="p-6 text-right"><h3 class="text-xl font-bold text-white mb-3 leading-snug">آزاتیوپرین در مقایسه با سایر مهارکننده‌های ایمنی</h3><p class="text-sm text-slate-400 mb-4 line-clamp-3 leading-relaxed">مقایسه اثربخشی، ایمنی، پایش و هزینه برای تصمیم‌گیری درمانی آگاهانه.</p><a href="magazine/articles/azathioprine-comparison.html" class="inline-flex items-center gap-2 text-brand-light font-bold text-sm hover:text-white transition-colors no-underline">بیشتر بخوانید<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div>
                 </article>
                 <article class="article-card glass-panel rounded-2xl overflow-hidden hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 group/card">
                     <div class="h-48 overflow-hidden relative"><div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10 opacity-60"></div><img src="https://healthyturkiye.com/storage/media/8315/organ-transplantation-turkey.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-110" alt=""><div class="absolute bottom-3 right-3 z-20"><span class="px-3 py-1 bg-brand/90 backdrop-blur text-xs rounded-full font-bold text-white">پزشکی</span></div></div>
-                    <div class="p-6 text-right"><h3 class="text-xl font-bold text-white mb-3 leading-snug">آزاتیوپرین در پیوند اعضا</h3><p class="text-sm text-slate-400 mb-4 line-clamp-3 leading-relaxed">مروری بر رژیم‌های ترکیبی، دوزدهی و پایش بلندمدت.</p><a href="https://ramopharmin.org/azathioprine-organ-transplant/" class="inline-flex items-center gap-2 text-brand-light font-bold text-sm hover:text-white transition-colors no-underline">بیشتر بخوانید<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div>
+                    <div class="p-6 text-right"><h3 class="text-xl font-bold text-white mb-3 leading-snug">آزاتیوپرین در پیوند اعضا</h3><p class="text-sm text-slate-400 mb-4 line-clamp-3 leading-relaxed">مروری بر رژیم‌های ترکیبی، دوزدهی و پایش بلندمدت.</p><a href="magazine/articles/azathioprine-organ-transplant.html" class="inline-flex items-center gap-2 text-brand-light font-bold text-sm hover:text-white transition-colors no-underline">بیشتر بخوانید<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div>
                 </article>
                 <article class="article-card glass-panel rounded-2xl overflow-hidden hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 group/card">
                     <div class="h-48 overflow-hidden relative"><div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10 opacity-60"></div><img src="https://cdn.sanity.io/images/0vv8moc6/drugtopics/1ada8d1ec0a3eae647595989386d73c2046720a5-5673x3782.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-110" alt=""><div class="absolute bottom-3 right-3 z-20"><span class="px-3 py-1 bg-brand/90 backdrop-blur text-xs rounded-full font-bold text-white">ژنتیک</span></div></div>
-                    <div class="p-6 text-right"><h3 class="text-xl font-bold text-white mb-3 leading-snug">کاربامازپین: کاربردها و ایمنی ژنتیکی</h3><p class="text-sm text-slate-400 mb-4 line-clamp-3 leading-relaxed">راهنمای بیمار درباره موارد مصرف، اهمیت آزمایش HLA و پایش ایمنی.</p><a href="https://ramopharmin.org/carbamazepine-dd-interactions/" class="inline-flex items-center gap-2 text-brand-light font-bold text-sm hover:text-white transition-colors no-underline">بیشتر بخوانید<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div>
+                    <div class="p-6 text-right"><h3 class="text-xl font-bold text-white mb-3 leading-snug">کاربامازپین: کاربردها و ایمنی ژنتیکی</h3><p class="text-sm text-slate-400 mb-4 line-clamp-3 leading-relaxed">راهنمای بیمار درباره موارد مصرف، اهمیت آزمایش HLA و پایش ایمنی.</p><a href="magazine/articles/carbamazepine-dd-interactions.html" class="inline-flex items-center gap-2 text-brand-light font-bold text-sm hover:text-white transition-colors no-underline">بیشتر بخوانید<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div>
                 </article>
                 <article class="article-card glass-panel rounded-2xl overflow-hidden hover:bg-white/5 transition-all duration-300 hover:-translate-y-2 group/card">
                     <div class="h-48 overflow-hidden relative"><div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10 opacity-60"></div><img src="https://normgroup.org/wp-content/uploads/2022/04/Ways_to_Make_Your_Patients_Happier_blog_graphic.jpg" class="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-110" alt=""><div class="absolute bottom-3 right-3 z-20"><span class="px-3 py-1 bg-brand/90 backdrop-blur text-xs rounded-full font-bold text-white">آموزشی</span></div></div>
-                    <div class="p-6 text-right"><h3 class="text-xl font-bold text-white mb-3 leading-snug">کاربامازپین: نکات ایمنی و راهنمای مصرف</h3><p class="text-sm text-slate-400 mb-4 line-clamp-3 leading-relaxed">مصرف صحیح، آزمایش‌ها و علائم هشدار.</p><a href="https://ramopharmin.org/carbaram-safe-usage/" class="inline-flex items-center gap-2 text-brand-light font-bold text-sm hover:text-white transition-colors no-underline">بیشتر بخوانید<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div>
+                    <div class="p-6 text-right"><h3 class="text-xl font-bold text-white mb-3 leading-snug">کاربامازپین: نکات ایمنی و راهنمای مصرف</h3><p class="text-sm text-slate-400 mb-4 line-clamp-3 leading-relaxed">مصرف صحیح، آزمایش‌ها و علائم هشدار.</p><a href="magazine/articles/carbaram-safe-usage.html" class="inline-flex items-center gap-2 text-brand-light font-bold text-sm hover:text-white transition-colors no-underline">بیشتر بخوانید<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div>
                 </article>
             </div>
         </div>
@@ -389,9 +461,9 @@
             </div>
             <div class="order-1 lg:order-2">
                 <div class="mission-grid">
-                    <div class="grid-item item-main group"><img src="https://ramopharmin.org/wp-content/uploads/2025/10/Quality-Control-in-the-Pharmaceutical-Industry-2048x1367-1.webp" alt="Quality Control"><div class="item-overlay"></div><div class="item-caption"><div class="caption-badge group-hover:bg-teal-500 transition-colors"><i data-lucide="microscope" class="w-3 h-3"></i><span>آزمایشگاه کنترل کیفیت</span></div><h4 class="text-white font-bold text-lg drop-shadow-md">دقت در جزئیات</h4></div></div>
-                    <div class="grid-item item-secondary group"><img src="https://ramopharmin.org/wp-content/uploads/2025/10/pharmaceutical-manufacturing.webp" alt="Manufacturing"><div class="item-overlay"></div><div class="item-caption"><div class="caption-badge group-hover:bg-teal-500 transition-colors"><i data-lucide="settings" class="w-3 h-3"></i><span>خطوط تولید</span></div></div></div>
-                    <div class="grid-item item-tertiary group"><img src="https://ramopharmin.org/wp-content/uploads/2025/10/Pharmaceutical-GMPs-Scanlin-scaled-1.jpeg" alt="GMP"><div class="item-overlay"></div><div class="item-caption"><div class="caption-badge group-hover:bg-teal-500 transition-colors"><i data-lucide="clipboard-check" class="w-3 h-3"></i><span>استاندارد GMP</span></div></div></div>
+                    <div class="grid-item item-main group"><img src="https://pub-638fc8ca34b7400fa409ed5968293d2e.r2.dev/assets/mission/quality-control-lab.jpg" alt="Quality Control"><div class="item-overlay"></div><div class="item-caption"><div class="caption-badge group-hover:bg-teal-500 transition-colors"><i data-lucide="microscope" class="w-3 h-3"></i><span>آزمایشگاه کنترل کیفیت</span></div><h4 class="text-white font-bold text-lg drop-shadow-md">دقت در جزئیات</h4></div></div>
+                    <div class="grid-item item-secondary group"><img src="https://pub-638fc8ca34b7400fa409ed5968293d2e.r2.dev/assets/mission/pharmaceutical-manufacturing.jpg" alt="Manufacturing"><div class="item-overlay"></div><div class="item-caption"><div class="caption-badge group-hover:bg-teal-500 transition-colors"><i data-lucide="settings" class="w-3 h-3"></i><span>خطوط تولید</span></div></div></div>
+                    <div class="grid-item item-tertiary group"><img src="https://pub-638fc8ca34b7400fa409ed5968293d2e.r2.dev/assets/mission/gmp-standards.jpg" alt="GMP"><div class="item-overlay"></div><div class="item-caption"><div class="caption-badge group-hover:bg-teal-500 transition-colors"><i data-lucide="clipboard-check" class="w-3 h-3"></i><span>استاندارد GMP</span></div></div></div>
                 </div>
             </div>
         </div>
@@ -415,12 +487,12 @@
         </div>
         <div class="slider-wrapper">
             <div class="slider-track" id="news-slider">
-                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px]"><div class="card-accent-line bg-teal-500"></div><div class="flex justify-between items-start mb-4" dir="rtl"><div class="flex items-center gap-2 text-xs text-slate-400"><i data-lucide="calendar" class="w-3 h-3"></i><time>۲۳ آذر ۱۴۰۴</time></div><span class="px-3 py-1 rounded-full text-xs font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30">بیانیه رسمی</span></div><div class="text-right flex-grow flex flex-col" dir="rtl"><h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-teal-300 transition-colors">بیانیه خشت دژ ایلیا درباره مزایده شفا دارو</h3><p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">گروه سرمایه‌گذاری خشت دژ ایلیا شفاف‌سازی‌هایی درباره مزایده شفا دارو ارائه کرده است.</p><div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center"><i data-lucide="file-text" class="w-5 h-5 text-slate-600 group-hover:text-teal-400 transition-colors"></i><a href="https://ramopharmin.org/shafa-statement/" class="text-sm font-bold text-teal-400 hover:text-white transition-colors flex items-center gap-1 no-underline">مشاهده خبر<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div></div></article>
-                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px]"><div class="card-accent-line bg-blue-500"></div><div class="flex justify-between items-start mb-4" dir="rtl"><div class="flex items-center gap-2 text-xs text-slate-400"><i data-lucide="calendar" class="w-3 h-3"></i><time>۱۵ آذر ۱۴۰۴</time></div><span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">گزارش ویژه</span></div><div class="text-right flex-grow flex flex-col" dir="rtl"><h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-blue-300 transition-colors">گزارش تحول ساختاری و راهبردی راموفارمین</h3><p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">اصلاحات ساختاری، مدیریتی و زیرساختی پس از خصوصی‌سازی.</p><div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center"><i data-lucide="bar-chart-3" class="w-5 h-5 text-slate-600 group-hover:text-blue-400 transition-colors"></i><a href="https://ramopharmin.org/ramo-publications-1/" class="text-sm font-bold text-blue-400 hover:text-white transition-colors flex items-center gap-1 no-underline">مشاهده خبر<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div></div></article>
-                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px]"><div class="card-accent-line bg-pink-500"></div><div class="flex justify-between items-start mb-4" dir="rtl"><div class="flex items-center gap-2 text-xs text-slate-400"><i data-lucide="calendar" class="w-3 h-3"></i><time>۱۵ آذر ۱۴۰۴</time></div><span class="px-3 py-1 rounded-full text-xs font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30">مسئولیت اجتماعی</span></div><div class="text-right flex-grow flex flex-col" dir="rtl"><h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-pink-300 transition-colors">پویش آزادسازی بانوان زندانی</h3><p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">اقدام انسان‌دوستانه راموفارمین در آزادسازی مادران زندانی.</p><div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center"><i data-lucide="heart-handshake" class="w-5 h-5 text-slate-600 group-hover:text-pink-400 transition-colors"></i><a href="https://ramopharmin.org/pouyesh/" class="text-sm font-bold text-pink-400 hover:text-white transition-colors flex items-center gap-1 no-underline">مشاهده خبر<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div></div></article>
-                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px]"><div class="card-accent-line bg-amber-500"></div><div class="flex justify-between items-start mb-4" dir="rtl"><div class="flex items-center gap-2 text-xs text-slate-400"><i data-lucide="calendar" class="w-3 h-3"></i><time>۲۵ اردیبهشت ۱۴۰۴</time></div><span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">رویداد</span></div><div class="text-right flex-grow flex flex-col" dir="rtl"><h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-amber-300 transition-colors">راموفارمین در نمایشگاه بین‌المللی فارمکس</h3><p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">حضور فعال در هفتمین نمایشگاه فارمکس خاورمیانه.</p><div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center"><i data-lucide="building-2" class="w-5 h-5 text-slate-600 group-hover:text-amber-400 transition-colors"></i><a href="https://ramopharmin.org/pharmex-ramopharmin/" class="text-sm font-bold text-amber-400 hover:text-white transition-colors flex items-center gap-1 no-underline">مشاهده خبر<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div></div></article>
-                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px]"><div class="card-accent-line bg-emerald-500"></div><div class="flex justify-between items-start mb-4" dir="rtl"><div class="flex items-center gap-2 text-xs text-slate-400"><i data-lucide="calendar" class="w-3 h-3"></i><time>۹ فروردین ۱۴۰۴</time></div><span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">GMP</span></div><div class="text-right flex-grow flex flex-col" dir="rtl"><h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-emerald-300 transition-colors">آغاز طرح جامع اصلاحات GMP</h3><p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">ارتقای کیفیت با همگام‌سازی خطوط تولید با استانداردهای جهانی.</p><div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center"><i data-lucide="check-circle-2" class="w-5 h-5 text-slate-600 group-hover:text-emerald-400 transition-colors"></i><a href="https://ramopharmin.org/gmp/" class="text-sm font-bold text-emerald-400 hover:text-white transition-colors flex items-center gap-1 no-underline">مشاهده خبر<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div></div></article>
-                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px] border-dashed border-2 !border-slate-700 hover:!border-teal-500"><div class="flex justify-center items-center h-full flex-col text-center gap-4"><div class="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-teal-900/50 transition-colors"><i data-lucide="archive" class="w-8 h-8 text-slate-400 group-hover:text-teal-400"></i></div><div><h3 class="text-xl font-bold text-white mb-2">آرشیو اخبار</h3><p class="text-sm text-slate-400">مشاهده تمام اطلاعیه‌ها و گزارش‌های پیشین</p></div><a href="https://ramopharmin.org/news/" class="px-6 py-2 rounded-full bg-white/5 hover:bg-teal-600 text-white text-sm font-bold transition-all border border-white/10 mt-2 no-underline">ورود به آرشیو</a></div></article>
+                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px]"><div class="card-accent-line bg-teal-500"></div><div class="flex justify-between items-start mb-4" dir="rtl"><div class="flex items-center gap-2 text-xs text-slate-400"><i data-lucide="calendar" class="w-3 h-3"></i><time>۲۳ آذر ۱۴۰۴</time></div><span class="px-3 py-1 rounded-full text-xs font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30">بیانیه رسمی</span></div><div class="text-right flex-grow flex flex-col" dir="rtl"><h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-teal-300 transition-colors">بیانیه خشت دژ ایلیا درباره مزایده شفا دارو</h3><p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">گروه سرمایه‌گذاری خشت دژ ایلیا شفاف‌سازی‌هایی درباره مزایده شفا دارو ارائه کرده است.</p><div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center"><i data-lucide="file-text" class="w-5 h-5 text-slate-600 group-hover:text-teal-400 transition-colors"></i><a href="../news/khisht-dezh-statement.html" class="text-sm font-bold text-teal-400 hover:text-white transition-colors flex items-center gap-1 no-underline">مشاهده خبر<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div></div></article>
+                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px]"><div class="card-accent-line bg-blue-500"></div><div class="flex justify-between items-start mb-4" dir="rtl"><div class="flex items-center gap-2 text-xs text-slate-400"><i data-lucide="calendar" class="w-3 h-3"></i><time>۱۵ آذر ۱۴۰۴</time></div><span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">گزارش ویژه</span></div><div class="text-right flex-grow flex flex-col" dir="rtl"><h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-blue-300 transition-colors">گزارش تحول ساختاری و راهبردی راموفارمین</h3><p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">اصلاحات ساختاری، مدیریتی و زیرساختی پس از خصوصی‌سازی.</p><div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center"><i data-lucide="bar-chart-3" class="w-5 h-5 text-slate-600 group-hover:text-blue-400 transition-colors"></i><a href="../news/news-article-ramopharmin-structure-report.html" class="text-sm font-bold text-blue-400 hover:text-white transition-colors flex items-center gap-1 no-underline">مشاهده خبر<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div></div></article>
+                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px]"><div class="card-accent-line bg-pink-500"></div><div class="flex justify-between items-start mb-4" dir="rtl"><div class="flex items-center gap-2 text-xs text-slate-400"><i data-lucide="calendar" class="w-3 h-3"></i><time>۱۵ آذر ۱۴۰۴</time></div><span class="px-3 py-1 rounded-full text-xs font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30">مسئولیت اجتماعی</span></div><div class="text-right flex-grow flex flex-col" dir="rtl"><h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-pink-300 transition-colors">پویش آزادسازی بانوان زندانی</h3><p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">اقدام انسان‌دوستانه راموفارمین در آزادسازی مادران زندانی.</p><div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center"><i data-lucide="heart-handshake" class="w-5 h-5 text-slate-600 group-hover:text-pink-400 transition-colors"></i><a href="../news/news-article-rafarmin-women-release.html" class="text-sm font-bold text-pink-400 hover:text-white transition-colors flex items-center gap-1 no-underline">مشاهده خبر<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div></div></article>
+                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px]"><div class="card-accent-line bg-amber-500"></div><div class="flex justify-between items-start mb-4" dir="rtl"><div class="flex items-center gap-2 text-xs text-slate-400"><i data-lucide="calendar" class="w-3 h-3"></i><time>۲۵ اردیبهشت ۱۴۰۴</time></div><span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">رویداد</span></div><div class="text-right flex-grow flex flex-col" dir="rtl"><h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-amber-300 transition-colors">راموفارمین در نمایشگاه بین‌المللی فارمکس</h3><p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">حضور فعال در هفتمین نمایشگاه فارمکس خاورمیانه.</p><div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center"><i data-lucide="building-2" class="w-5 h-5 text-slate-600 group-hover:text-amber-400 transition-colors"></i><a href="../news/pharmex-ramopharmin.html" class="text-sm font-bold text-amber-400 hover:text-white transition-colors flex items-center gap-1 no-underline">مشاهده خبر<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div></div></article>
+                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px]"><div class="card-accent-line bg-emerald-500"></div><div class="flex justify-between items-start mb-4" dir="rtl"><div class="flex items-center gap-2 text-xs text-slate-400"><i data-lucide="calendar" class="w-3 h-3"></i><time>۹ فروردین ۱۴۰۴</time></div><span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">GMP</span></div><div class="text-right flex-grow flex flex-col" dir="rtl"><h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-emerald-300 transition-colors">آغاز طرح جامع اصلاحات GMP</h3><p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">ارتقای کیفیت با همگام‌سازی خطوط تولید با استانداردهای جهانی.</p><div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center"><i data-lucide="check-circle-2" class="w-5 h-5 text-slate-600 group-hover:text-emerald-400 transition-colors"></i><a href="../news/gmp.html" class="text-sm font-bold text-emerald-400 hover:text-white transition-colors flex items-center gap-1 no-underline">مشاهده خبر<i data-lucide="arrow-left" class="w-4 h-4"></i></a></div></div></article>
+                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px] border-dashed border-2 !border-slate-700 hover:!border-teal-500"><div class="flex justify-center items-center h-full flex-col text-center gap-4"><div class="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-teal-900/50 transition-colors"><i data-lucide="archive" class="w-8 h-8 text-slate-400 group-hover:text-teal-400"></i></div><div><h3 class="text-xl font-bold text-white mb-2">آرشیو اخبار</h3><p class="text-sm text-slate-400">مشاهده تمام اطلاعیه‌ها و گزارش‌های پیشین</p></div><a href="../news-page/news-highlights.html" class="px-6 py-2 rounded-full bg-white/5 hover:bg-teal-600 text-white text-sm font-bold transition-all border border-white/10 mt-2 no-underline">ورود به آرشیو</a></div></article>
             </div>
         </div>
         <div class="flex justify-center gap-2 mt-8" id="news-dots-container"></div>
@@ -512,41 +584,173 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // 3D Pill
 (function() {
+    let pillInited = false;
+    /** Prefer Phong/Lambert so low-end GPUs and strict WebGL1 contexts still shade reliably. */
+    function pillMaterial(hex) {
+        try {
+            var isLight = (hex === 0xffffff);
+            return new THREE.MeshPhongMaterial({
+                color: hex,
+                shininess: isLight ? 55 : 90,
+                specular: isLight ? 0xbbbbbb : 0x668888
+            });
+        } catch (e) {
+            return new THREE.MeshLambertMaterial({ color: hex });
+        }
+    }
     function initThreeJS() {
+        if (pillInited) return;
         const container = document.getElementById('fa-canvas-container');
         if (!container || typeof THREE === 'undefined') return;
-        while(container.firstChild) container.removeChild(container.firstChild);
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+        var cw = container.clientWidth;
+        var ch = container.clientHeight;
+        if (cw < 2 || ch < 2) {
+            /* Last-resort intrinsic box so aspect-ratio / flex can establish size */
+            if (!container.dataset.sizeHint) {
+                container.dataset.sizeHint = '1';
+                container.style.minHeight = 'min(90vw, 520px)';
+                container.style.minWidth = '240px';
+            }
+            cw = container.clientWidth;
+            ch = container.clientHeight;
+        }
+        if (cw < 2 || ch < 2) return;
+        while (container.firstChild) container.removeChild(container.firstChild);
+        let renderer;
+        try {
+            renderer = new THREE.WebGLRenderer({
+                alpha: true,
+                antialias: true,
+                powerPreference: 'high-performance',
+                failIfMajorPerformanceCaveat: false
+            });
+        } catch (e) {
+            return;
+        }
+        if (!renderer || !renderer.getContext()) return;
+        var scene, camera, pillGroup, pGroup, fit, animate;
+        try {
+        scene = new THREE.Scene();
+        const aspect = Math.max(0.5, cw / ch);
+        camera = new THREE.PerspectiveCamera(45, aspect, 0.1, 1000);
         camera.position.z = 35;
-        const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-        renderer.setSize(container.clientWidth, container.clientHeight);
-        renderer.setPixelRatio(window.devicePixelRatio);
-        container.appendChild(renderer.domElement);
-        const pillGroup = new THREE.Group();
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+        renderer.setClearColor(0x000000, 0);
+        pillGroup = new THREE.Group();
         scene.add(pillGroup);
-        const matBrand = new THREE.MeshPhysicalMaterial({ color: 0x174f57, metalness: 0.1, roughness: 0.2, clearcoat: 1.0, clearcoatRoughness: 0.1 });
-        const matWhite = new THREE.MeshPhysicalMaterial({ color: 0xffffff, metalness: 0.1, roughness: 0.2, clearcoat: 1.0, clearcoatRoughness: 0.1 });
+        const matBrand = pillMaterial(0x174f57);
+        const matWhite = pillMaterial(0xffffff);
+        matBrand.side = THREE.DoubleSide;
+        matWhite.side = THREE.DoubleSide;
         const radius = 6, tubeHeight = 12, segs = 32;
-        pillGroup.add(Object.assign(new THREE.Mesh(new THREE.SphereGeometry(radius,32,16,0,Math.PI*2,0,Math.PI/2), matBrand), {position: {y: tubeHeight/2, x:0, z:0}}));
-        const topBody = new THREE.Mesh(new THREE.CylinderGeometry(radius,radius,tubeHeight/2,segs,1,true), matBrand); topBody.position.y = tubeHeight/4; pillGroup.add(topBody);
-        const botBody = new THREE.Mesh(new THREE.CylinderGeometry(radius,radius,tubeHeight/2,segs,1,true), matWhite); botBody.position.y = -tubeHeight/4; pillGroup.add(botBody);
-        const botCap = new THREE.Mesh(new THREE.SphereGeometry(radius,32,16,0,Math.PI*2,0,Math.PI/2), matWhite); botCap.rotation.x = Math.PI; botCap.position.y = -tubeHeight/2; pillGroup.add(botCap);
-        const pMat = new THREE.MeshBasicMaterial({color:0x5aaeb8,transparent:true,opacity:0.6});
-        const pGeo = new THREE.SphereGeometry(0.3,8,8);
-        const pGroup = new THREE.Group(); scene.add(pGroup);
-        for(let i=0;i<30;i++){const m=new THREE.Mesh(pGeo,pMat);const r=15+Math.random()*10;const t=Math.random()*Math.PI*2;const p=Math.random()*Math.PI;m.position.set(r*Math.sin(p)*Math.cos(t),r*Math.sin(p)*Math.sin(t),r*Math.cos(p));pGroup.add(m);}
-        scene.add(new THREE.AmbientLight(0xffffff,0.5));
-        const s=new THREE.SpotLight(0xffffff,1);s.position.set(20,20,20);scene.add(s);
-        const rl=new THREE.PointLight(0x174f57,3,50);rl.position.set(-20,0,-10);scene.add(rl);
-        pillGroup.rotation.z = Math.PI/4; pillGroup.rotation.x = Math.PI/6;
-        let mx=0,my=0;
-        document.addEventListener('mousemove',e=>{mx=(e.clientX-window.innerWidth/2)/1000;my=(e.clientY-window.innerHeight/2)/1000;});
-        (function animate(){requestAnimationFrame(animate);pillGroup.rotation.y+=0.01;pillGroup.position.y=Math.sin(Date.now()*0.001)*1;pGroup.rotation.y-=0.002;scene.rotation.y+=(mx-scene.rotation.y)*0.05;scene.rotation.x+=(my-scene.rotation.x)*0.05;renderer.render(scene,camera);})();
-        window.addEventListener('resize',()=>{renderer.setSize(container.clientWidth,container.clientHeight);camera.aspect=container.clientWidth/container.clientHeight;camera.updateProjectionMatrix();});
+        const topCap = new THREE.Mesh(new THREE.SphereGeometry(radius, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2), matBrand);
+        topCap.position.set(0, tubeHeight / 2, 0);
+        pillGroup.add(topCap);
+        const topBody = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, tubeHeight / 2, segs, 1, true), matBrand); topBody.position.y = tubeHeight / 4; pillGroup.add(topBody);
+        const botBody = new THREE.Mesh(new THREE.CylinderGeometry(radius, radius, tubeHeight / 2, segs, 1, true), matWhite); botBody.position.y = -tubeHeight / 4; pillGroup.add(botBody);
+        const botCap = new THREE.Mesh(new THREE.SphereGeometry(radius, 32, 16, 0, Math.PI * 2, 0, Math.PI / 2), matWhite); botCap.rotation.x = Math.PI; botCap.position.y = -tubeHeight / 2; pillGroup.add(botCap);
+        const pMat = new THREE.MeshBasicMaterial({ color: 0x5aaeb8, transparent: true, opacity: 0.6 });
+        const pGeo = new THREE.SphereGeometry(0.3, 8, 8);
+        pGroup = new THREE.Group(); scene.add(pGroup);
+        for (let i = 0; i < 30; i++) {
+            const m = new THREE.Mesh(pGeo, pMat);
+            const r = 15 + Math.random() * 10;
+            const t = Math.random() * Math.PI * 2;
+            const p = Math.random() * Math.PI;
+            m.position.set(r * Math.sin(p) * Math.cos(t), r * Math.sin(p) * Math.sin(t), r * Math.cos(p));
+            pGroup.add(m);
+        }
+        scene.add(new THREE.AmbientLight(0xffffff, 0.72));
+        const dir = new THREE.DirectionalLight(0xffffff, 0.95);
+        dir.position.set(8, 12, 18);
+        scene.add(dir);
+        const s = new THREE.SpotLight(0xffffff, 0.85);
+        s.position.set(20, 20, 20);
+        s.target.position.set(0, 0, 0);
+        scene.add(s);
+        scene.add(s.target);
+        const rl = new THREE.PointLight(0x5aaeb8, 1.8, 80); rl.position.set(-14, 4, -8); scene.add(rl);
+        pillGroup.rotation.z = Math.PI / 4; pillGroup.rotation.x = Math.PI / 6;
+        let mx = 0, my = 0;
+        document.addEventListener('mousemove', function (e) {
+            mx = (e.clientX - window.innerWidth / 2) / 1000;
+            my = (e.clientY - window.innerHeight / 2) / 1000;
+        });
+        function fit() {
+            const w = Math.max(1, container.clientWidth);
+            const h = Math.max(1, container.clientHeight);
+            renderer.setSize(w, h, false);
+            camera.aspect = w / h;
+            camera.updateProjectionMatrix();
+        }
+        var canvas = renderer.domElement;
+        canvas.style.width = '100%';
+        canvas.style.height = '100%';
+        canvas.style.display = 'block';
+        container.appendChild(canvas);
+        fit();
+        pillInited = true;
+        window.addEventListener('resize', fit);
+        if (typeof ResizeObserver !== 'undefined') {
+            try { new ResizeObserver(fit).observe(container); } catch (e) { /* ignore */ }
+        }
+        (function animate() {
+            requestAnimationFrame(animate);
+            pillGroup.rotation.y += 0.01;
+            pillGroup.position.y = Math.sin(Date.now() * 0.001);
+            pGroup.rotation.y -= 0.002;
+            scene.rotation.y += (mx - scene.rotation.y) * 0.05;
+            scene.rotation.x += (my - scene.rotation.x) * 0.05;
+            renderer.render(scene, camera);
+        })();
+        } catch (err) {
+            if (typeof console !== 'undefined' && console.error) console.error('[fa-pill]', err);
+            try {
+                if (renderer && renderer.domElement && renderer.domElement.parentNode === container) {
+                    container.removeChild(renderer.domElement);
+                }
+                if (renderer) renderer.dispose();
+            } catch (disposeErr) { /* ignore */ }
+            pillInited = false;
+        }
     }
-    const check = setInterval(()=>{if(typeof THREE!=='undefined'){clearInterval(check);initThreeJS();}},100);
-    setTimeout(()=>clearInterval(check),5000);
+    var tryLeft = 400;
+    function tryInit() {
+        if (typeof THREE === 'undefined') return;
+        if (pillInited) return;
+        requestAnimationFrame(function tick() {
+            if (pillInited) return;
+            initThreeJS();
+            if (!pillInited && tryLeft-- > 0) requestAnimationFrame(tick);
+        });
+    }
+    const check = setInterval(function () {
+        if (typeof THREE === 'undefined') return;
+        clearInterval(check);
+        if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', tryInit);
+        else tryInit();
+    }, 50);
+    setTimeout(function () { clearInterval(check); }, 12000);
+    window.addEventListener('load', function () {
+        tryLeft = 400;
+        tryInit();
+    });
+    /* When layout assigns a non-zero box (grid/flex + aspect-ratio), mount the canvas */
+    function attachPillResizeObserver() {
+        if (typeof ResizeObserver === 'undefined') return;
+        var el = document.getElementById('fa-canvas-container');
+        if (!el) return;
+        try {
+            new ResizeObserver(function () {
+                initThreeJS();
+            }).observe(el);
+        } catch (e) { /* ignore */ }
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', attachPillResizeObserver);
+    } else {
+        attachPillResizeObserver();
+    }
 })();
 
 // Generic infinite slider factory
