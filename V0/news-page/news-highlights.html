@@ -3,285 +3,404 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramopharmin - News Highlights</title>
+    <title>اخبار و اطلاعیه‌ها | راموفارمین</title>
+    <meta name="description" content="فهرست اخبار، بیانیه‌ها و گزارش‌های رسمی داروسازی راموفارمین">
 
-    <!-- Dependencies -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <script>
+      tailwind.config = { corePlugins: { preflight: false } }
+    </script>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
         html { background-color: #EFF2F3; }
-        body {
-            font-family: 'Vazirmatn', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #EFF2F3;
-            min-height: 100vh;
-        }
-        .ramo-dark-surface {
-            min-height: 100vh;
-            background: radial-gradient(circle at 10% 20%, #174f57 0%, rgb(11, 38, 59) 40%, rgb(2, 6, 23) 90%);
-        }
+        body { font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif; background: #EFF2F3; margin: 0; color: #0f172a; }
 
-        /* Glassmorphism Utilities */
-        .glass-panel {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .glass-panel:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(20, 184, 166, 0.4);
-            transform: translateY(-5px);
-            box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.4);
-        }
-
-        .text-brand-light { color: #5aaeb8; }
-        .bg-brand { background-color: #174f57; }
-
-        /* Featured News Card */
-        .featured-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .featured-card:hover {
-            background: rgba(255, 255, 255, 0.12);
-            border-color: rgba(20, 184, 166, 0.6);
-            transform: translateY(-8px) scale(1.02);
-            box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Card Decoration Line */
-        .card-accent-line {
-            position: absolute;
+        #ramo-fa-header {
+            position: fixed;
+            top: 0;
+            left: 0;
             right: 0;
-            top: 20px;
-            bottom: 20px;
-            width: 4px;
-            background: #14b8a6;
-            border-radius: 4px 0 0 4px;
-            opacity: 0.6;
-            transition: opacity 0.3s;
+            z-index: 100;
+            font-family: 'Vazirmatn', 'Tahoma', sans-serif;
+            direction: rtl;
+            background: rgba(15, 23, 42, 0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            overflow: visible;
         }
-        .featured-card:hover .card-accent-line {
-            opacity: 1;
-            box-shadow: 0 0 15px #14b8a6;
+        #ramo-fa-header > div {
+            overflow: visible;
+        }
+        #ramo-fa-header img[src*="english-full-logo-white"] {
+            transform: scale(1.1);
+            transform-origin: center center;
+        }
+        #ramo-fa-header .fa-nav-link {
+            color: rgba(255, 255, 255, 0.72);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        #ramo-fa-header .fa-nav-link:hover { color: #fff; }
+        #ramo-fa-header .fa-nav-link.fa-nav-current {
+            color: #5aaeb8;
+            font-weight: 600;
+        }
+        #ramo-fa-header .fa-lang-btn {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+        #ramo-fa-header .fa-lang-active {
+            background: rgba(23, 79, 87, 0.85);
+            color: #fff;
+            border: 1px solid rgba(90, 174, 184, 0.45);
+        }
+        #ramo-fa-header .fa-lang-inactive {
+            background: rgba(255, 255, 255, 0.06);
+            color: rgba(255, 255, 255, 0.72);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        #ramo-fa-header .fa-lang-inactive:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+        }
+        #ramo-fa-header .fa-mobile-btn {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+            padding: 8px;
+            border-radius: 10px;
+        }
+        #ramo-fa-header .fa-mobile-btn:hover { background: rgba(255, 255, 255, 0.08); }
+        @media (max-width: 768px) {
+            #ramo-fa-header .fa-nav-links { display: none !important; }
+            #ramo-fa-header .fa-mobile-btn { display: block; }
+        }
+        #mag-mobile-panel {
+            display: none;
+            position: fixed;
+            top: 64px;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0f172a;
+            z-index: 99;
+            padding: 24px;
+            flex-direction: column;
+            gap: 16px;
+        }
+        #mag-mobile-panel.is-open { display: flex; }
+        #mag-mobile-panel a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+        .mag-index { max-width: 42rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+        .mag-index-head { margin-bottom: 2rem; }
+        .mag-index-kicker { font-size: 0.8rem; font-weight: 700; color: #174f57; letter-spacing: 0.04em; margin: 0 0 0.5rem; }
+        .mag-index-title { font-size: clamp(1.75rem, 4vw, 2.25rem); font-weight: 800; margin: 0 0 0.5rem; color: #0f172a; }
+        .mag-index-lead { margin: 0; color: #64748b; line-height: 1.7; font-size: 0.95rem; }
+        .mag-index-search { margin-top: 1.25rem; display: flex; gap: 8px; flex-wrap: wrap; }
+        .mag-index-search input {
+            flex: 1;
+            min-width: 0;
+            padding: 10px 12px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            font-family: inherit;
+            font-size: 0.95rem;
         }
+        .mag-index-search input:focus { outline: 2px solid rgba(23, 79, 87, 0.25); border-color: transparent; }
+        .mag-index-search button {
+            padding: 10px 18px;
+            border-radius: 10px;
+            border: none;
+            background: #174f57;
+            color: #fff;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+        }
+        .mag-index-search button:hover { filter: brightness(1.05); }
 
-        .line-clamp-4 {
-            display: -webkit-box;
-            -webkit-line-clamp: 4;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
+        .mag-article-list { list-style: none; margin: 0; padding: 0; }
+        .mag-article-list > li {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 1.25rem 0;
         }
-
-        /* Pulse animation for priority indicator */
-        @keyframes pulse-glow {
-            0%, 100% { box-shadow: 0 0 5px rgba(239, 68, 68, 0.5); }
-            50% { box-shadow: 0 0 20px rgba(239, 68, 68, 0.8); }
+        .mag-article-list > li:first-child { padding-top: 0; }
+        .mag-article-list > li.is-hidden { display: none; }
+        .mag-article-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0f172a;
+            text-decoration: none;
+            line-height: 1.45;
+            display: inline-block;
         }
-
-        .priority-indicator {
-            animation: pulse-glow 2s infinite;
+        .mag-article-title:hover { color: #174f57; }
+        .mag-article-meta { font-size: 0.8rem; color: #64748b; margin: 0.35rem 0 0; }
+        .mag-article-excerpt { font-size: 0.9rem; color: #475569; margin: 0.5rem 0 0; line-height: 1.6; }
+        .news-index-empty {
+            display: none;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.95rem;
+            padding: 2rem 1rem;
         }
+        .news-index-empty.is-visible { display: block; }
     </style>
 </head>
 <body>
 
-    <div class="ramo-dark-surface">
-    <!-- NEWS HIGHLIGHTS SECTION -->
-    <section class="w-full pt-24 pb-8 relative z-10">
-        <div class="container mx-auto px-4 md:px-6">
-
-            <!-- Section Header -->
-            <div class="text-center mb-12">
-                <div class="flex items-center justify-center gap-2 mb-4">
-                    <span class="w-12 h-1 bg-[#174f57] rounded-full shadow-[0_0_15px_rgba(20,184,166,0.6)]"></span>
-                    <span class="text-brand-light text-sm font-bold uppercase tracking-wider px-4">خبرهای ویژه</span>
-                    <span class="w-12 h-1 bg-[#174f57] rounded-full shadow-[0_0_15px_rgba(20,184,166,0.6)]"></span>
-                </div>
-                <h2 class="text-4xl md:text-5xl font-black text-white leading-tight mb-4">
-                    آخرین اخبار <span class="text-transparent bg-clip-text bg-gradient-to-l from-teal-200 to-white">راموفارمین</span>
-                </h2>
-            </div>
-
-            <!-- Featured News Grid -->
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
-
-                <!-- Main Featured News (Large Card) -->
-                <div class="lg:col-span-2">
-                    <article class="featured-card rounded-3xl p-8 relative group h-full flex flex-col">
-                        <div class="card-accent-line bg-red-500"></div>
-
-                        <!-- Priority Indicator -->
-                        <div class="flex items-center gap-2 mb-4">
-                            <span class="priority-indicator w-3 h-3 bg-red-500 rounded-full"></span>
-                            <span class="px-4 py-1 rounded-full text-xs font-bold bg-red-500/20 text-red-300 border border-red-500/30">اولویت بالا</span>
-                        </div>
-
-                        <!-- Header: Date & Category -->
-                        <div class="flex justify-between items-start mb-6" dir="rtl">
-                            <div class="flex items-center gap-2 text-sm text-slate-400">
-                                <i data-lucide="calendar" class="w-4 h-4"></i>
-                                <time>۱۵ آذر ۱۴۰۴</time>
-                            </div>
-                            <span class="px-4 py-2 rounded-full text-sm font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">گزارش ویژه</span>
-                        </div>
-
-                        <!-- Content -->
-                        <div class="text-right flex-grow flex flex-col" dir="rtl">
-                            <h3 class="text-2xl md:text-3xl font-black text-white mb-4 leading-tight group-hover:text-blue-300 transition-colors">
-                                گزارش تحول ساختاری و راهبردی راموفارمین
-                            </h3>
-                            <p class="text-base text-slate-300 leading-relaxed line-clamp-4 mb-6">
-                                گزارشی جامع از اصلاحات ساختاری، مدیریتی و زیرساختی راموفارمین پس از خصوصی‌سازی. این گزارش تحولات کلیدی شرکت در مسیر توسعه پایدار، سرمایه‌گذاری‌های انجام‌شده و برنامه‌های راهبردی برای آینده را بررسی می‌کند. از نوسازی خطوط تولید گرفته تا توسعه محصول و ورود به بازارهای صادراتی، همه جوانب این تحول بزرگ در این گزارش ویژه تحلیل شده است.
-                            </p>
-
-                            <!-- Footer: Link -->
-                            <div class="mt-auto pt-6 border-t border-white/10 flex justify-end items-center">
-                                <a href="../news/news-article-ramopharmin-structure-report.html" class="text-lg font-bold text-blue-400 hover:text-white transition-colors flex items-center gap-2 group">
-                                    مشاهده گزارش کامل
-                                    <i data-lucide="arrow-left" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-                </div>
-
-                <!-- Secondary Featured News (Smaller Cards) -->
-                <div class="space-y-6">
-
-                    <!-- Card 1 -->
-                    <article class="featured-card rounded-2xl p-6 relative group">
-                        <div class="card-accent-line bg-pink-500"></div>
-
-                        <div class="flex justify-between items-start mb-4" dir="rtl">
-                            <div class="flex items-center gap-2 text-xs text-slate-400">
-                                <i data-lucide="calendar" class="w-3 h-3"></i>
-                                <time>۱۵ آذر ۱۴۰۴</time>
-                            </div>
-                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30">مسئولیت اجتماعی</span>
-                        </div>
-
-                        <div class="text-right" dir="rtl">
-                            <h4 class="text-lg font-bold text-white mb-2 leading-snug group-hover:text-pink-300 transition-colors">
-                                پویش آزادسازی بانوان زندانی
-                            </h4>
-                            <p class="text-sm text-slate-400 leading-relaxed line-clamp-2 mb-4">
-                                اقدام انسان‌دوستانه رافارمین در آزادسازی چهار بانوی زندانی مادر و سرپرست خانواده.
-                            </p>
-
-                            <div class="flex justify-between items-center">
-                                <i data-lucide="heart-handshake" class="w-4 h-4 text-slate-600 group-hover:text-pink-400 transition-colors"></i>
-                                <a href="../news/news-article-rafarmin-women-release.html" class="text-sm font-bold text-pink-400 hover:text-white transition-colors">
-                                    مشاهده خبر
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- Card 2 -->
-                    <article class="featured-card rounded-2xl p-6 relative group">
-                        <div class="card-accent-line bg-teal-500"></div>
-
-                        <div class="flex justify-between items-start mb-4" dir="rtl">
-                            <div class="flex items-center gap-2 text-xs text-slate-400">
-                                <i data-lucide="calendar" class="w-3 h-3"></i>
-                                <time>۲۳ آذر ۱۴۰۴</time>
-                            </div>
-                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30">بیانیه رسمی</span>
-                        </div>
-
-                        <div class="text-right" dir="rtl">
-                            <h4 class="text-lg font-bold text-white mb-2 leading-snug group-hover:text-teal-300 transition-colors">
-                                بیانیه خشت دژ ایلیا درباره مزایده شفا دارو
-                            </h4>
-                            <p class="text-sm text-slate-400 leading-relaxed line-clamp-2 mb-4">
-                                گروه سرمایه‌گذاری خشت دژ ایلیا شفاف‌سازی‌هایی درباره مزایده شرکت سرمایه‌گذاری شفا دارو ارائه کرده است.
-                            </p>
-
-                            <div class="flex justify-between items-center">
-                                <i data-lucide="file-text" class="w-4 h-4 text-slate-600 group-hover:text-teal-400 transition-colors"></i>
-                                <a href="../news/khisht-dezh-statement.html" class="text-sm font-bold text-teal-400 hover:text-white transition-colors">
-                                    مشاهده بیانیه
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                </div>
-            </div>
-
+<nav id="ramo-fa-header">
+    <div style="max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;">
+        <a href="../fa/" style="text-decoration:none;display:flex;align-items:center;">
+            <img src="../logos/english-full-logo-white.png" alt="Ramopharmin" style="height:64px;width:auto;display:block;">
+        </a>
+        <div class="fa-nav-links" style="display:flex;align-items:center;gap:28px;">
+            <a href="../fa/" class="fa-nav-link">خانه</a>
+            <a href="../about-us/board-members.html" class="fa-nav-link">درباره ما</a>
+            <a href="../product-category-therapeutics/category-page.html" class="fa-nav-link">محصولات</a>
+            <a href="../fa/magazine/" class="fa-nav-link">مجله سلامت</a>
+            <a href="./news-highlights.html" class="fa-nav-link fa-nav-current">اخبار</a>
         </div>
-    </section>
+        <div style="display:flex;align-items:center;gap:10px;">
+            <button type="button" class="fa-mobile-btn" id="mag-mobile-open" aria-label="باز کردن فهرست">
+                <i data-lucide="menu" class="w-7 h-7"></i>
+            </button>
+            <a href="../en/index.html" class="fa-lang-btn fa-lang-inactive">EN</a>
+            <span class="fa-lang-btn fa-lang-active">FA</span>
+        </div>
     </div>
+</nav>
+<div style="height:64px;"></div>
 
-    <!-- Initialize Icons -->
-    <script>
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        }
-    </script>
+<div id="mag-mobile-panel" aria-hidden="true">
+    <a href="../fa/">خانه</a>
+    <a href="../about-us/board-members.html">درباره ما</a>
+    <a href="../product-category-therapeutics/category-page.html">محصولات</a>
+    <a href="../fa/magazine/">مجله سلامت</a>
+    <a href="./news-highlights.html">اخبار</a>
+    <a href="../en/index.html">English</a>
+</div>
 
-    <style>#ramo-news-footer a{color:#0f172a!important}#ramo-news-footer a:hover{color:#0d9488!important}</style>
-    <footer id="ramo-news-footer" class="border-t border-slate-300 bg-[#EFF2F3] pt-16 pb-8 mt-12" dir="rtl" style="border-top:1px solid #cbd5e1;">
-        <div class="container mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-12 border-b border-slate-200 pb-12">
-                <div class="lg:col-span-5 text-right space-y-6">
-                    <div class="text-slate-900 font-bold text-xl">داروسازی راموفارمین</div>
-                    <p class="text-slate-600 leading-loose text-sm lg:text-base max-w-md text-right">شرکت داروسازی راموفارمین به عنوان یکی از پیشگامان صنعت دارو در ایران، با بهره‌گیری از دانش روز، فناوری‌های نوین و استانداردهای بین‌المللی، در تولید و توزیع داروهای با کیفیت و موثر فعالیت می‌کند. ماموریت ما ارتقای سلامت و کیفیت زندگی جامعه است.</p>
-                    <div class="text-xs text-slate-400 flex flex-col gap-1"><span>کد مستند: RM-12-2025</span><span>بازبینی: دسامبر 2025</span></div>
-                </div>
-                <div class="lg:col-span-4 text-right">
-                    <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center justify-start gap-2"><span class="w-1.5 h-6 bg-teal-500 rounded-full"></span>منابع</h3>
-                    <ul class="space-y-3 text-sm text-slate-900">
-                        <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">نوآوری علمی</a></li>
-                        <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">پژوهش‌های اسپانسرشده</a></li>
-                        <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">اطلاعات پزشکی برای پزشکان</a></li>
-                        <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">برنامه‌های حمایت دارویی</a></li>
-                        <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">آزمایش‌های بالینی جهانی</a></li>
-                        <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">محصولات دارویی</a></li>
-                        <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">گزارش عارضه جانبی</a></li>
-                    </ul>
-                </div>
-                <div class="lg:col-span-3 text-right">
-                    <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center justify-start gap-2"><span class="w-1.5 h-6 bg-teal-500 rounded-full"></span>لینک‌های سریع</h3>
-                    <ul class="space-y-3 text-sm text-slate-900 mb-8">
-                        <li><a href="../fa/" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">خانه فارسی</a></li>
-                        <li><a href="../contact-us/contact-us.html" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">ارتباط با ما</a></li>
-                        <li><a href="../fa/magazine/" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">مجله سلامت</a></li>
-                        <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">پایداری و محیط زیست</a></li>
-                        <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">سوالات متداول</a></li>
-                    </ul>
-                    <div class="flex justify-start gap-3">
-                        <a href="#" class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-900 hover:bg-teal-50 hover:text-teal-600 hover:border-teal-200 transition-all shadow-sm hover:-translate-y-1" aria-label="LinkedIn"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg></a>
-                        <a href="#" class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-900 hover:bg-teal-50 hover:text-teal-600 hover:border-teal-200 transition-all shadow-sm hover:-translate-y-1" aria-label="Instagram"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg></a>
-                        <a href="#" class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-900 hover:bg-teal-50 hover:text-teal-600 hover:border-teal-200 transition-all shadow-sm hover:-translate-y-1" aria-label="Twitter"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg></a>
-                    </div>
+<main class="mag-index" dir="rtl">
+    <header class="mag-index-head">
+        <p class="mag-index-kicker">راموفارمین</p>
+        <h1 class="mag-index-title">اخبار و اطلاعیه‌ها</h1>
+        <p class="mag-index-lead">فهرست گزارش‌ها، بیانیه‌ها و رویدادها؛ برای مطالعه روی عنوان کلیک کنید. می‌توانید با جستجو فهرست را محدود کنید.</p>
+        <form class="mag-index-search" id="news-index-search-form" role="search" aria-label="جستجو در اخبار">
+            <label for="news-q" class="sr-only">جستجو در اخبار</label>
+            <input id="news-q" name="s" type="search" placeholder="جستجو در عنوان و توضیح…" autocomplete="off">
+            <button type="submit">جستجو</button>
+        </form>
+    </header>
+
+    <p id="news-index-empty" class="news-index-empty" role="status">موردی با این عبارت پیدا نشد.</p>
+
+    <ol class="mag-article-list" id="news-index-list">
+        <li class="news-index-item" data-search="گزارش تحول ساختاری راهبردی اصلاحات خصوصی‌سازی">
+            <a class="mag-article-title" href="../news/news-article-ramopharmin-structure-report.html">گزارش جامع تحول ساختاری و راهبردی راموفارمین</a>
+            <p class="mag-article-meta">گزارش ویژه</p>
+            <p class="mag-article-excerpt">تحلیل اصلاحات ساختاری، مدیریتی و زیرساختی و برنامه‌های آتی شرکت.</p>
+        </li>
+        <li class="news-index-item" data-search="ریسک مقیاس صنعت دارو سیاست‌گذاری گفت‌وگو مدیرعامل">
+            <a class="mag-article-title" href="../news/risk-scale.html">ریسک مقیاس؛ خطای تکرارشونده در سیاست‌گذاری و صنعت</a>
+            <p class="mag-article-meta">مصاحبه و تحلیل</p>
+            <p class="mag-article-excerpt">نگاهی به چالش‌های مقیاس در صنعت دارویی و سیاست‌گذاری.</p>
+        </li>
+        <li class="news-index-item" data-search="خشت دژ ایلیا شفا دارو مزایده بیانیه">
+            <a class="mag-article-title" href="../news/khisht-dezh-statement.html">بیانیه گروه سرمایه‌گذاری خشت دژ ایلیا درباره مزایده شفا دارو</a>
+            <p class="mag-article-meta">بیانیه رسمی</p>
+            <p class="mag-article-excerpt">شفاف‌سازی درباره روند مزایده و ابعاد حقوقی و مالی.</p>
+        </li>
+        <li class="news-index-item" data-search="پویش آزادسازی بانوان زندانی مسئولیت اجتماعی">
+            <a class="mag-article-title" href="../news/news-article-rafarmin-women-release.html">پویش آزادسازی بانوان زندانی</a>
+            <p class="mag-article-meta">مسئولیت اجتماعی</p>
+            <p class="mag-article-excerpt">اقدام انسان‌دوستانه در حمایت از مادران و سرپرستان خانواده.</p>
+        </li>
+        <li class="news-index-item" data-search="GMP اصلاحات کیفیت ایمنی دارو">
+            <a class="mag-article-title" href="../news/gmp.html">آغاز طرح جامع اصلاحات GMP در راموفارمین</a>
+            <p class="mag-article-meta">کیفیت و استاندارد</p>
+            <p class="mag-article-excerpt">گامی به سوی ارتقای کیفیت، ایمنی و انطباق با استانداردهای تولید دارو.</p>
+        </li>
+        <li class="news-index-item" data-search="GMP عمران توسعه کارخانه استاندارد">
+            <a class="mag-article-title" href="../news/gmp-renovation.html">آغاز عملیات عمرانی و توسعه‌ای برای ارتقای استانداردهای GMP</a>
+            <p class="mag-article-meta">زیرساخت</p>
+            <p class="mag-article-excerpt">نوسازی و توسعه فضای تولید در راستای استانداردهای بین‌المللی.</p>
+        </li>
+        <li class="news-index-item" data-search="فارمکس نمایشگاه بین‌المللی">
+            <a class="mag-article-title" href="../news/pharmex-ramopharmin.html">راموفارمین در نمایشگاه بین‌المللی فارمکس</a>
+            <p class="mag-article-meta">رویداد</p>
+            <p class="mag-article-excerpt">حضور و معرفی توانمندی‌ها در نمایشگاه تخصصی دارویی.</p>
+        </li>
+        <li class="news-index-item" data-search="تحول نوسازی صادرات راموفارمین">
+            <a class="mag-article-title" href="../news/doshanbe-daruyi.html">نگاهی به تحول راموفارمین؛ از نوسازی تا تمرکز بر صادرات</a>
+            <p class="mag-article-meta">گزارش</p>
+            <p class="mag-article-excerpt">مسیر تحول شرکت، سرمایه‌گذاری‌ها و اولویت صادرات.</p>
+        </li>
+    </ol>
+
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"اخبار راموفارمین","description":"فهرست اخبار و اطلاعیه‌های رسمی داروسازی راموفارمین","inLanguage":"fa-IR"}</script>
+</main>
+
+<style>.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}</style>
+<style>#ramo-news-footer a{color:#0f172a!important}#ramo-news-footer a:hover{color:#0d9488!important}</style>
+<footer id="ramo-news-footer" class="border-t border-slate-300 bg-[#EFF2F3] pt-16 pb-8 mt-12" dir="rtl" style="border-top:1px solid #cbd5e1;">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 mb-12 border-b border-slate-200 pb-12">
+            <div class="lg:col-span-5 text-right space-y-6">
+                <div class="text-slate-900 font-bold text-xl">داروسازی راموفارمین</div>
+                <p class="text-slate-600 leading-loose text-sm lg:text-base max-w-md text-right">
+                    شرکت داروسازی راموفارمین به عنوان یکی از پیشگامان صنعت دارو در ایران، با بهره‌گیری از دانش روز، فناوری‌های نوین و استانداردهای بین‌المللی، در تولید و توزیع داروهای با کیفیت و موثر فعالیت می‌کند. ماموریت ما ارتقای سلامت و کیفیت زندگی جامعه است.
+                </p>
+                <div class="text-xs text-slate-400 flex flex-col gap-1">
+                    <span>کد مستند: RM-12-2025</span>
+                    <span>بازبینی: دسامبر 2025</span>
                 </div>
             </div>
-            <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-6 text-xs text-slate-500">
-                <div class="dir-ltr">© 2025 Ramopharmin. All rights reserved.</div>
-                <div class="flex gap-6">
-                    <a href="#" class="hover:text-teal-600 transition-colors">حریم خصوصی</a>
-                    <a href="#" class="hover:text-teal-600 transition-colors">شرایط استفاده</a>
+            <div class="lg:col-span-4 text-right">
+                <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center justify-start gap-2">
+                    <span class="w-1.5 h-6 bg-teal-500 rounded-full"></span>
+                    منابع
+                </h3>
+                <ul class="space-y-3 text-sm text-slate-900">
+                    <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">نوآوری علمی</a></li>
+                    <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">پژوهش‌های اسپانسرشده</a></li>
+                    <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">اطلاعات پزشکی برای پزشکان</a></li>
+                    <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">برنامه‌های حمایت دارویی</a></li>
+                    <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">آزمایش‌های بالینی جهانی</a></li>
+                    <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">محصولات دارویی</a></li>
+                    <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">گزارش عارضه جانبی</a></li>
+                </ul>
+            </div>
+            <div class="lg:col-span-3 text-right">
+                <h3 class="text-lg font-bold text-slate-900 mb-6 flex items-center justify-start gap-2">
+                    <span class="w-1.5 h-6 bg-teal-500 rounded-full"></span>
+                    لینک‌های سریع
+                </h3>
+                <ul class="space-y-3 text-sm text-slate-900 mb-8">
+                    <li><a href="../fa/" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">خانه فارسی</a></li>
+                    <li><a href="../contact-us/contact-us.html" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">ارتباط با ما</a></li>
+                    <li><a href="../fa/magazine/" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">مجله سلامت</a></li>
+                    <li><a href="./news-highlights.html" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">اخبار</a></li>
+                    <li><a href="../en/index.html" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">English site</a></li>
+                    <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">پایداری و محیط زیست</a></li>
+                    <li><a href="#" class="hover:text-teal-600 transition-colors block hover:translate-x-1 transition-transform duration-300">سوالات متداول</a></li>
+                </ul>
+                <div class="flex justify-start gap-3">
+                    <a href="#" class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-900 hover:bg-teal-50 hover:text-teal-600 hover:border-teal-200 transition-all shadow-sm hover:-translate-y-1" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-900 hover:bg-teal-50 hover:text-teal-600 hover:border-teal-200 transition-all shadow-sm hover:-translate-y-1" aria-label="Instagram">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="#" class="w-10 h-10 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-900 hover:bg-teal-50 hover:text-teal-600 hover:border-teal-200 transition-all shadow-sm hover:-translate-y-1" aria-label="Twitter">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                    </a>
                 </div>
             </div>
         </div>
-    </footer>
+        <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-6 text-xs text-slate-500">
+            <div class="dir-ltr">© 2025 Ramopharmin. All rights reserved.</div>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-teal-600 transition-colors">حریم خصوصی</a>
+                <a href="#" class="hover:text-teal-600 transition-colors">شرایط استفاده</a>
+            </div>
+        </div>
+    </div>
+</footer>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    if (typeof lucide !== 'undefined') lucide.createIcons();
+});
+
+(function() {
+    var btn = document.getElementById('mag-mobile-open');
+    var panel = document.getElementById('mag-mobile-panel');
+    if (!btn || !panel) return;
+    var open = false;
+    btn.addEventListener('click', function() {
+        open = !open;
+        panel.classList.toggle('is-open', open);
+        panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+        btn.innerHTML = open ? '<i data-lucide="x" class="w-7 h-7"></i>' : '<i data-lucide="menu" class="w-7 h-7"></i>';
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    });
+    panel.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+            open = false;
+            panel.classList.remove('is-open');
+            panel.setAttribute('aria-hidden', 'true');
+            btn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        });
+    });
+})();
+
+(function() {
+    var form = document.getElementById('news-index-search-form');
+    var input = document.getElementById('news-q');
+    var list = document.getElementById('news-index-list');
+    var empty = document.getElementById('news-index-empty');
+    if (!form || !input || !list) return;
+
+    function norm(s) {
+        return (s || '').replace(/\s+/g, ' ').trim().toLowerCase();
+    }
+
+    function applyFilter() {
+        var q = norm(input.value);
+        var items = list.querySelectorAll('.news-index-item');
+        var n = 0;
+        items.forEach(function(li) {
+            var title = li.querySelector('.mag-article-title');
+            var excerpt = li.querySelector('.mag-article-excerpt');
+            var meta = li.querySelector('.mag-article-meta');
+            var blob = norm([
+                title ? title.textContent : '',
+                excerpt ? excerpt.textContent : '',
+                meta ? meta.textContent : '',
+                li.getAttribute('data-search') || ''
+            ].join(' '));
+            var show = !q || blob.indexOf(q) !== -1;
+            li.classList.toggle('is-hidden', !show);
+            if (show) n++;
+        });
+        if (empty) empty.classList.toggle('is-visible', n === 0);
+    }
+
+    input.addEventListener('input', applyFilter);
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        applyFilter();
+    });
+
+    if (window.location.search) {
+        var params = new URLSearchParams(window.location.search);
+        var s = params.get('s');
+        if (s) {
+            input.value = s;
+            applyFilter();
+        }
+    }
+})();
+</script>
 </body>
 </html>
