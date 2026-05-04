@@ -107,6 +107,44 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
+        #ramo-fa-header .fa-nav-dd {
+            position: relative;
+        }
+        #ramo-fa-header .fa-nav-submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            min-width: 220px;
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 8px 0;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+            z-index: 200;
+        }
+        #ramo-fa-header .fa-nav-dd:hover .fa-nav-submenu,
+        #ramo-fa-header .fa-nav-dd:focus-within .fa-nav-submenu {
+            display: block;
+        }
+        #ramo-fa-header .fa-nav-submenu a {
+            display: block;
+            padding: 10px 18px;
+            color: rgba(255, 255, 255, 0.88);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        #ramo-fa-header .fa-nav-submenu a:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+        #ramo-fa-header .fa-nav-submenu a.fa-nav-current {
+            color: #5aaeb8;
+            background: rgba(90, 174, 184, 0.12);
+        }
+
     </style>
 </head>
 <body>
@@ -118,7 +156,13 @@
         </a>
         <div class="fa-nav-links" style="display:flex;align-items:center;gap:28px;">
             <a href="../fa/" class="fa-nav-link">خانه</a>
-            <a href="../about-us/board-members.html" class="fa-nav-link fa-nav-current">درباره ما</a>
+            <div class="fa-nav-dd">
+                <a href="../about-us/board-members.html" class="fa-nav-link">درباره ما</a>
+                <div class="fa-nav-submenu" role="menu">
+                    <a href="../about-us/board-members.html" class="fa-nav-submenu-link fa-nav-current" role="menuitem">هیئت مدیره</a>
+                    <a href="../about-us/managers.html" class="fa-nav-submenu-link" role="menuitem">مدیران ارشد</a>
+                </div>
+            </div>
             <a href="../product-category-therapeutics/category-page.html" class="fa-nav-link">محصولات</a>
             <a href="../fa/magazine/" class="fa-nav-link">مجله سلامت</a>
             <a href="../news-page/news-highlights.html" class="fa-nav-link">اخبار</a>
@@ -136,7 +180,8 @@
 
 <div id="mag-mobile-panel" aria-hidden="true">
     <a href="../fa/">خانه</a>
-    <a href="../about-us/board-members.html">درباره ما</a>
+    <a href="../about-us/board-members.html">هیئت مدیره</a>
+    <a href="../about-us/managers.html">مدیران ارشد</a>
     <a href="../product-category-therapeutics/category-page.html">محصولات</a>
     <a href="../fa/magazine/">مجله سلامت</a>
     <a href="../news-page/news-highlights.html">اخبار</a>
@@ -218,9 +263,9 @@
 
   <footer class="board-foot">
     <div class="policy-links">
-      <a href="/corporate-governance">حاکمیت شرکتی</a>
-      <a href="/code-of-ethics">منشور اخلاقی</a>
-      <a href="/contact">تماس با ما</a>
+      <a href="../fa/">صفحه اصلی</a>
+      <a href="managers.html">مدیران ارشد</a>
+      <a href="../contact-us/contact-us.html">تماس با ما</a>
     </div>
   </footer>
 </section>

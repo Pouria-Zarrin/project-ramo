@@ -105,6 +105,43 @@ const CHROME_CSS = `
             padding: 12px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
+        #ramo-fa-header .fa-nav-dd {
+            position: relative;
+        }
+        #ramo-fa-header .fa-nav-submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            min-width: 220px;
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 8px 0;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+            z-index: 200;
+        }
+        #ramo-fa-header .fa-nav-dd:hover .fa-nav-submenu,
+        #ramo-fa-header .fa-nav-dd:focus-within .fa-nav-submenu {
+            display: block;
+        }
+        #ramo-fa-header .fa-nav-submenu a {
+            display: block;
+            padding: 10px 18px;
+            color: rgba(255, 255, 255, 0.88);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        #ramo-fa-header .fa-nav-submenu a:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+        #ramo-fa-header .fa-nav-submenu a.fa-nav-current {
+            color: #5aaeb8;
+            background: rgba(90, 174, 184, 0.12);
+        }
         main.ramo-page-main {
             background-color: #EFF2F3;
             min-height: calc(100vh - 64px);
@@ -181,7 +218,9 @@ function footerBlock(p) {
 
 function navBlock(p, current) {
   const cHome = current === "home" ? " fa-nav-current" : "";
-  const cAbout = current === "about" ? " fa-nav-current" : "";
+  const cAboutHistory = current === "about" ? " fa-nav-current" : "";
+  const cBoard = current === "about-board" ? " fa-nav-current" : "";
+  const cManagers = current === "about-managers" ? " fa-nav-current" : "";
   const cProd = current === "products" ? " fa-nav-current" : "";
   const cMag = current === "magazine" ? " fa-nav-current" : "";
   const cNews = current === "news" ? " fa-nav-current" : "";
@@ -193,7 +232,13 @@ function navBlock(p, current) {
         </a>
         <div class="fa-nav-links" style="display:flex;align-items:center;gap:28px;">
             <a href="${p.faHome}" class="fa-nav-link${cHome}">خانه</a>
-            <a href="${p.about}" class="fa-nav-link${cAbout}">درباره ما</a>
+            <div class="fa-nav-dd">
+                <a href="${p.aboutBoard}" class="fa-nav-link${cAboutHistory}">درباره ما</a>
+                <div class="fa-nav-submenu" role="menu">
+                    <a href="${p.aboutBoard}" class="fa-nav-submenu-link${cBoard}" role="menuitem">هیئت مدیره</a>
+                    <a href="${p.aboutManagers}" class="fa-nav-submenu-link${cManagers}" role="menuitem">مدیران ارشد</a>
+                </div>
+            </div>
             <a href="${p.productsHub}" class="fa-nav-link${cProd}">محصولات</a>
             <a href="${p.magazine}" class="fa-nav-link${cMag}">مجله سلامت</a>
             <a href="${p.news}" class="fa-nav-link${cNews}">اخبار</a>
@@ -211,7 +256,8 @@ function navBlock(p, current) {
 
 <div id="mag-mobile-panel" aria-hidden="true">
     <a href="${p.faHome}">خانه</a>
-    <a href="${p.about}">درباره ما</a>
+    <a href="${p.aboutBoard}">هیئت مدیره</a>
+    <a href="${p.aboutManagers}">مدیران ارشد</a>
     <a href="${p.productsHub}">محصولات</a>
     <a href="${p.magazine}">مجله سلامت</a>
     <a href="${p.news}">اخبار</a>
@@ -254,7 +300,8 @@ document.addEventListener('DOMContentLoaded', function() {
 const pathsTher = {
   logo: "../logos/english-full-logo-white.png",
   faHome: "../fa/",
-  about: "../about-us/board-members.html",
+  aboutBoard: "../about-us/board-members.html",
+  aboutManagers: "../about-us/managers.html",
   productsHub: "category-page.html",
   magazine: "../fa/magazine/",
   news: "../news-page/news-highlights.html",
@@ -265,7 +312,8 @@ const pathsTher = {
 const pathsAbout = {
   logo: "../logos/english-full-logo-white.png",
   faHome: "../fa/",
-  about: "../about-us/board-members.html",
+  aboutBoard: "../about-us/board-members.html",
+  aboutManagers: "../about-us/managers.html",
   productsHub: "../product-category-therapeutics/category-page.html",
   magazine: "../fa/magazine/",
   news: "../news-page/news-highlights.html",
@@ -327,13 +375,13 @@ const jobs = [
     paths: pathsTher,
   })),
   ...[
-    ["about-us/board-members.html", "هیئت مدیره | راموفارمین"],
-    ["about-us/managers.html", "مدیران ارشد | راموفارمین"],
-    ["about-us/history.html", "درباره ما | راموفارمین"],
-  ].map(([rel, title]) => ({
+    ["about-us/board-members.html", "هیئت مدیره | راموفارمین", "about-board"],
+    ["about-us/managers.html", "مدیران ارشد | راموفارمین", "about-managers"],
+    ["about-us/history.html", "درباره ما | راموفارمین", "about"],
+  ].map(([rel, title, navCurrent]) => ({
     rel,
     title,
-    current: "about",
+    current: navCurrent,
     paths: pathsAbout,
   })),
 ];

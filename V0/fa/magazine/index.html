@@ -110,6 +110,44 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
+        #ramo-fa-header .fa-nav-dd {
+            position: relative;
+        }
+        #ramo-fa-header .fa-nav-submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            min-width: 220px;
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 8px 0;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+            z-index: 200;
+        }
+        #ramo-fa-header .fa-nav-dd:hover .fa-nav-submenu,
+        #ramo-fa-header .fa-nav-dd:focus-within .fa-nav-submenu {
+            display: block;
+        }
+        #ramo-fa-header .fa-nav-submenu a {
+            display: block;
+            padding: 10px 18px;
+            color: rgba(255, 255, 255, 0.88);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        #ramo-fa-header .fa-nav-submenu a:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+        #ramo-fa-header .fa-nav-submenu a.fa-nav-current {
+            color: #5aaeb8;
+            background: rgba(90, 174, 184, 0.12);
+        }
+
         .mag-index { max-width: 42rem; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
         .mag-index-head { margin-bottom: 2rem; }
         .mag-index-kicker { font-size: 0.8rem; font-weight: 700; color: #174f57; letter-spacing: 0.04em; margin: 0 0 0.5rem; }
@@ -203,7 +241,13 @@
         </a>
         <div class="fa-nav-links" style="display:flex;align-items:center;gap:28px;">
             <a href="../" class="fa-nav-link">خانه</a>
-            <a href="../../about-us/board-members.html" class="fa-nav-link">درباره ما</a>
+            <div class="fa-nav-dd">
+                <a href="../../about-us/board-members.html" class="fa-nav-link">درباره ما</a>
+                <div class="fa-nav-submenu" role="menu">
+                    <a href="../../about-us/board-members.html" class="fa-nav-submenu-link" role="menuitem">هیئت مدیره</a>
+                    <a href="../../about-us/managers.html" class="fa-nav-submenu-link" role="menuitem">مدیران ارشد</a>
+                </div>
+            </div>
             <a href="../../product-category-therapeutics/category-page.html" class="fa-nav-link">محصولات</a>
             <a href="./" class="fa-nav-link fa-nav-current">مجله سلامت</a>
             <a href="../../news-page/news-highlights.html" class="fa-nav-link">اخبار</a>
@@ -221,7 +265,8 @@
 
 <div id="mag-mobile-panel" aria-hidden="true">
     <a href="../">خانه</a>
-    <a href="../../about-us/board-members.html">درباره ما</a>
+    <a href="../../about-us/board-members.html">هیئت مدیره</a>
+    <a href="../../about-us/managers.html">مدیران ارشد</a>
     <a href="../../product-category-therapeutics/category-page.html">محصولات</a>
     <a href="./">مجله سلامت</a>
     <a href="../../news-page/news-highlights.html">اخبار</a>

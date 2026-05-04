@@ -211,6 +211,68 @@
             transition: color 0.2s;
         }
         #ramo-fa-header .fa-nav-link:hover { color: #fff; }
+        #ramo-fa-header .fa-nav-link.fa-nav-current {
+            color: #5aaeb8;
+            font-weight: 600;
+        }
+        #ramo-fa-header .fa-nav-dd {
+            position: relative;
+        }
+        #ramo-fa-header .fa-nav-submenu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin-top: 10px;
+            min-width: 220px;
+            background: #0f172a;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 12px;
+            padding: 8px 0;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
+            z-index: 200;
+        }
+        #ramo-fa-header .fa-nav-dd:hover .fa-nav-submenu,
+        #ramo-fa-header .fa-nav-dd:focus-within .fa-nav-submenu {
+            display: block;
+        }
+        #ramo-fa-header .fa-nav-submenu a {
+            display: block;
+            padding: 10px 18px;
+            color: rgba(255, 255, 255, 0.88);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        #ramo-fa-header .fa-nav-submenu a:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+        #ramo-fa-header .fa-nav-submenu a.fa-nav-current {
+            color: #5aaeb8;
+            background: rgba(90, 174, 184, 0.12);
+        }
+        #mag-mobile-panel {
+            display: none;
+            position: fixed;
+            top: var(--fa-chrome-h, 112px);
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #0f172a;
+            z-index: 99;
+            padding: 24px;
+            flex-direction: column;
+            gap: 16px;
+        }
+        #mag-mobile-panel.is-open { display: flex; }
+        #mag-mobile-panel a {
+            color: rgba(255, 255, 255, 0.9);
+            text-decoration: none;
+            font-size: 1.1rem;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
         #ramo-fa-header .fa-lang-btn {
             display: inline-block;
             padding: 4px 12px;
@@ -257,13 +319,22 @@
         <!-- Nav links -->
         <div class="fa-nav-links" style="display:flex;align-items:center;gap:28px;">
             <a href="./" class="fa-nav-link">خانه</a>
-            <a href="../about-us/board-members.html" class="fa-nav-link">درباره ما</a>
+            <div class="fa-nav-dd">
+                <a href="../about-us/board-members.html" class="fa-nav-link">درباره ما</a>
+                <div class="fa-nav-submenu" role="menu">
+                    <a href="../about-us/board-members.html" class="fa-nav-submenu-link" role="menuitem">هیئت مدیره</a>
+                    <a href="../about-us/managers.html" class="fa-nav-submenu-link" role="menuitem">مدیران ارشد</a>
+                </div>
+            </div>
             <a href="../product-category-therapeutics/category-page.html" class="fa-nav-link">محصولات</a>
             <a href="magazine/" class="fa-nav-link">مجله سلامت</a>
             <a href="../news-page/news-highlights.html" class="fa-nav-link">اخبار</a>
         </div>
         <!-- Lang toggle (appears on left in RTL) -->
-        <div style="display:flex;align-items:center;gap:8px;">
+        <div style="display:flex;align-items:center;gap:10px;">
+            <button type="button" class="fa-mobile-btn" id="mag-mobile-open" aria-label="باز کردن فهرست">
+                <i data-lucide="menu" class="w-7 h-7"></i>
+            </button>
             <a href="../en/" class="fa-lang-btn fa-lang-inactive">EN</a>
             <span class="fa-lang-btn fa-lang-active">FA</span>
         </div>
@@ -271,6 +342,16 @@
 </nav>
 <!-- Spacer: fixed nav only (ticker is already in normal flow above this) -->
 <div id="fa-chrome-spacer" style="height:var(--fa-chrome-h,112px);"></div>
+
+<div id="mag-mobile-panel" aria-hidden="true">
+    <a href="./">خانه</a>
+    <a href="../about-us/board-members.html">هیئت مدیره</a>
+    <a href="../about-us/managers.html">مدیران ارشد</a>
+    <a href="../product-category-therapeutics/category-page.html">محصولات</a>
+    <a href="magazine/">مجله سلامت</a>
+    <a href="../news-page/news-highlights.html">اخبار</a>
+    <a href="../en/">English</a>
+</div>
 
 <script>
     // News Ticker
@@ -573,22 +654,30 @@
                     <li><a href="#" class="footer-link">سوالات متداول</a></li>
                 </ul>
                 <div class="mt-8 flex justify-start gap-3">
-                    <a href="#" class="social-btn" aria-label="LinkedIn"><i data-lucide="linkedin" class="w-5 h-5 text-white"></i></a>
-                    <a href="#" class="social-btn" aria-label="Instagram"><i data-lucide="instagram" class="w-5 h-5 text-white"></i></a>
-                    <a href="#" class="social-btn" aria-label="Twitter"><i data-lucide="twitter" class="w-5 h-5 text-white"></i></a>
-                    <a href="#" class="social-btn" aria-label="YouTube"><i data-lucide="youtube" class="w-5 h-5 text-white"></i></a>
+                    <a href="https://www.linkedin.com/company/ramopharmin" class="social-btn" aria-label="LinkedIn" target="_blank" rel="noopener">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+                    </a>
+                    <a href="https://www.instagram.com/ramopharmin" class="social-btn" aria-label="Instagram" target="_blank" rel="noopener">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+                    </a>
+                    <a href="https://twitter.com/ramopharmin" class="social-btn" aria-label="Twitter" target="_blank" rel="noopener">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+                    </a>
+                    <a href="https://www.youtube.com/@ramopharmin" class="social-btn" aria-label="YouTube" target="_blank" rel="noopener">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0 2 2 0 0 1 1.4 1.4 24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.56 49.56 0 0 1-16.2 0 2 2 0 0 1-1.4-1.4"/><path d="m10 15 5-3-5-3z"/></svg>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-6 text-xs text-slate-500">
-            <div class="flex items-center gap-1 dir-ltr">
+            <div class="flex items-center gap-1 dir-ltr text-left w-full md:w-auto justify-start">
                 <span>© 2025 Ramopharmin. All rights reserved.</span>
             </div>
             <div class="flex flex-wrap justify-center gap-6">
-                <a href="#" class="hover:text-teal-400 transition-colors no-underline">حریم خصوصی</a>
-                <a href="#" class="hover:text-teal-400 transition-colors no-underline">شرایط استفاده</a>
-                <a href="#" class="hover:text-teal-400 transition-colors no-underline">نقشه سایت</a>
-                <a href="#" class="hover:text-teal-400 transition-colors no-underline">تنظیمات کوکی</a>
+                <a href="#" class="text-white hover:text-teal-400 transition-colors no-underline">حریم خصوصی</a>
+                <a href="#" class="text-white hover:text-teal-400 transition-colors no-underline">شرایط استفاده</a>
+                <a href="#" class="text-white hover:text-teal-400 transition-colors no-underline">نقشه سایت</a>
+                <a href="#" class="text-white hover:text-teal-400 transition-colors no-underline">تنظیمات کوکی</a>
             </div>
         </div>
     </div>
@@ -602,6 +691,29 @@
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof lucide !== 'undefined') lucide.createIcons();
 });
+
+(function() {
+    var btn = document.getElementById('mag-mobile-open');
+    var panel = document.getElementById('mag-mobile-panel');
+    if (!btn || !panel) return;
+    var open = false;
+    btn.addEventListener('click', function() {
+        open = !open;
+        panel.classList.toggle('is-open', open);
+        panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+        btn.innerHTML = open ? '<i data-lucide="x" class="w-7 h-7"></i>' : '<i data-lucide="menu" class="w-7 h-7"></i>';
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    });
+    panel.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+            open = false;
+            panel.classList.remove('is-open');
+            panel.setAttribute('aria-hidden', 'true');
+            btn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        });
+    });
+})();
 
 // 3D Pill
 (function() {
