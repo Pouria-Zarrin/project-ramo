@@ -1,0 +1,17 @@
+---
+description: After substantive file edits, commit and push to origin
+alwaysApply: true
+---
+
+# Git: commit and push after changes
+
+When you modify, add, or remove project files (code, HTML, assets under `V0/`, config, etc.), finish the task by:
+
+1. `git status` to confirm what changed.
+2. `git add` only intentional paths (exclude editor scratch, secrets, and anything listed in `.gitignore`).
+3. `git commit` with a clear, conventional message (present tense, what changed and why in one short paragraph or subject + optional body).
+4. `git push` to `origin` on the current branch (usually `main`).
+
+If there is nothing to commit, say so. If push fails, diagnose (auth, network, non-fast-forward), fix or tell the user what blocked it.
+
+Do not bundle unrelated large refactors into one commit when the user made a small request; prefer one logical commit per completed task when practical.
