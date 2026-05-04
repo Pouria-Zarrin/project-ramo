@@ -1,0 +1,146 @@
+<!-- Board of Directors — RTL, matches RAMOPHARMIN design language (trust/eyebrow/title/line), Elementor-friendly -->
+<section class="board-block" id="board-of-directors" dir="rtl" aria-labelledby="board-title">
+  <header class="board-head">
+    <h3 class="trust-eyebrow">مدیریت اقتصادی و علمی</h3>
+    <h2 id="board-title" class="trust-title">هیئت مدیره راموفارمین</h2>
+    <div class="trust-line" role="presentation"></div>
+    <p class="board-sub">معرفی اعضای هیئت مدیره شرکت داروسازی راموفارمین — تمرکز بر تجربه، رهبری و مسئولیت‌پذیری.</p>
+  </header>
+
+  <div class="board-rows" role="list" aria-label="لیست اعضای هیئت مدیره">
+    <!-- Row 1: FD (top) -->
+    <div class="board-row top">
+      <article class="member-card highlight" role="listitem" tabindex="0">
+        <div class="avatar" aria-hidden="true">
+          <span class="initials">FD</span>
+        </div>
+        <div class="member-body">
+          <h3 class="member-name">دکتر فرشاد دهقانی</h3>
+          <div class="member-org" dir="ltr">RAMOPHARMIN PHARMACEUTICAL CO</div>
+          <div class="member-role">رئیس هیئت مدیره</div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Row 2: MS, SS -->
+    <div class="board-row mid">
+      <article class="member-card" role="listitem" tabindex="0">
+        <div class="avatar" aria-hidden="true">
+          <span class="initials">MS</span>
+        </div>
+        <div class="member-body">
+          <h3 class="member-name">دکتر مهدی سلطانی</h3>
+          <div class="member-org" dir="ltr">RAMOPHARMIN PHARMACEUTICAL CO</div>
+          <div class="member-role">نایب رئیس هیئت مدیره</div>
+        </div>
+      </article>
+      <article class="member-card" role="listitem" tabindex="0">
+        <div class="avatar" aria-hidden="true">
+          <span class="initials">SS</span>
+        </div>
+        <div class="member-body">
+          <h3 class="member-name">دکتر شهروز صارمی</h3>
+          <div class="member-org" dir="ltr">RAMOPHARMIN PHARMACEUTICAL CO</div>
+          <div class="member-role">عضو هیئت مدیره</div>
+        </div>
+      </article>
+    </div>
+
+    <!-- Row 3: AN, MZ -->
+    <div class="board-row bot">
+      <article class="member-card" role="listitem" tabindex="0">
+        <div class="avatar" aria-hidden="true">
+          <span class="initials">AN</span>
+        </div>
+        <div class="member-body">
+          <h3 class="member-name">سید علی نبوی</h3>
+          <div class="member-org" dir="ltr">RAMOPHARMIN PHARMACEUTICAL CO</div>
+          <div class="member-role">عضو هیئت مدیره</div>
+        </div>
+      </article>
+  <article class="member-card" role="listitem" tabindex="0" aria-label="عضو هیئت مدیره و مدیر عامل">
+        <div class="avatar" aria-hidden="true">
+          <span class="initials">MZ</span>
+        </div>
+        <div class="member-body">
+          <h3 class="member-name">دکتر مهدی زرین</h3>
+          <div class="member-org" dir="ltr">RAMOPHARMIN PHARMACEUTICAL CO</div>
+          <div class="member-role">عضو هیئت مدیره و مدیر عامل</div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <footer class="board-foot">
+    <div class="policy-links">
+      <a href="/corporate-governance">حاکمیت شرکتی</a>
+      <a href="/code-of-ethics">منشور اخلاقی</a>
+      <a href="/contact">تماس با ما</a>
+    </div>
+  </footer>
+</section>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800&display=swap');
+
+.board-block{
+  --maxw:1200px; --accent:#28206b; --bg:#eff2f3; --card:#ffffff; --border:#e6e6ea; --muted:#555;
+  margin:0 auto; max-width:var(--maxw); padding:70px 16px; background:var(--bg);
+  font-family:'Vazirmatn','Vazirmatn RD',system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Helvetica Neue",sans-serif;
+}
+.board-head{ display:flex; flex-direction:column; align-items:center; text-align:center; margin-bottom:28px; }
+.trust-eyebrow{ font-size:18px; color:var(--accent); font-weight:700; margin-bottom:10px; }
+.trust-title{ font-size:clamp(26px,2.6vw,38px); margin:0; font-weight:800; color:#111; }
+.trust-line{ width:70px; height:3px; background:var(--accent); border-radius:4px; margin-top:16px; margin-bottom:16px; }
+.board-sub{ color:#5b5b5b; max-width:860px; margin:0 auto; line-height:1.8; }
+
+.board-rows{ display:flex; flex-direction:column; gap:14px; margin-top:16px; }
+.board-row{ display:flex; gap:14px; justify-content:center; }
+.board-row.top { justify-content:center; }
+.board-row.mid, .board-row.bot{ justify-content:center; }
+/* allow cards to line up nicely while staying compact */
+.board-row.top .member-card{ min-width:280px; max-width:480px; width:clamp(260px, 36vw, 400px); }
+.board-row.mid .member-card, .board-row.bot .member-card{ min-width:260px; max-width:380px; width:clamp(240px, 30vw, 340px); }
+@media (max-width:720px){
+  .board-row{ flex-direction:column; align-items:center; }
+}
+
+.member-card{
+  display:flex; flex-direction:row-reverse; align-items:center; gap:12px;
+  background:var(--card); border:1px solid var(--border); border-radius:12px;
+  padding:12px; box-shadow:0 6px 16px rgba(0,0,0,.06);
+  transition: box-shadow .25s ease, transform .25s ease, border-color .25s ease;
+  /* per-card manual text padding controls (override inline on .member-card) */
+  --pad-r: 0px; /* padding-right for text area */
+  --pad-l: 0px; /* padding-left  for text area */
+}
+.member-card:hover{ box-shadow:0 12px 26px rgba(0,0,0,.10); transform: translateY(-4px); }
+.member-card.highlight{ outline:2px solid var(--accent); outline-offset:2px; }
+.member-card:focus{ outline:2px solid var(--accent); outline-offset:2px; }
+
+.avatar{
+  width:52px; height:52px; border-radius:50%; background:#eef0ff; color:var(--accent);
+  display:grid; place-items:center; font-weight:800; font-size:18px; flex:0 0 auto;
+}
+.member-body{ display:flex; flex-direction:column; gap:4px; min-width:0; text-align:center; align-items:center; direction:rtl; flex:1 1 auto; width:100%; padding-right: var(--pad-r, 0px); padding-left: var(--pad-l, 0px); }
+.member-name{ margin:0; font-size:15.5px; font-weight:800; color:#111; }
+.member-org{ font-size:11.5px; color:#777; letter-spacing:.3px; }
+.member-role{ font-size:13px; color:#333; font-weight:700; }
+
+.board-foot{ margin-top:18px; display:flex; justify-content:center; }
+.policy-links{ display:flex; gap:14px; }
+.policy-links a{ color:#666; text-decoration:none; font-size:13px; }
+.policy-links a:hover{ color:#111; }
+</style>
+
+<script>
+(function(){
+  // Optional: auto-balance card heights if text wraps differently per line
+  const grid = document.querySelector('.board-grid');
+  if(!grid) return;
+  const ro = new ResizeObserver(()=>{
+    // noop placeholder for future equalization if needed
+  });
+  ro.observe(grid);
+})();
+</script>

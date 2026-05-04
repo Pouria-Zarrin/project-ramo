@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramopharmin - Product Spotlight</title>
+    
+    <!-- Dependencies -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Switched from Three.js to 3Dmol.js for Protein Visualization -->
+    <script src="https://unpkg.com/3dmol/build/3Dmol-min.js"></script>
+
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at 10% 20%, #174f57 0%, rgb(11, 38, 59) 40%, rgb(2, 6, 23) 90%);
+            min-height: 100vh;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-panel:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(20, 184, 166, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .text-brand-light { color: #5aaeb8; }
+        .bg-brand { background-color: #174f57; }
+        .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
+
+        /* Container for 3Dmol viewer */
+        #spotlight-viewer {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            position: relative;
+            outline: none;
+        }
+        
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SPOTLIGHT SECTION -->
+    <section class="py-20 relative z-10">
+        <div class="container mx-auto px-4 md:px-6">
+
+            <!-- Section Header -->
+            <div class="text-center mb-12">
+                <h3 class="text-brand-light font-bold text-sm tracking-wider uppercase mb-3 flex items-center justify-center gap-2">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    پایبندی به آگاهی
+                </h3>
+                <h2 class="text-3xl md:text-4xl font-black text-white mb-4">مجله سلامت راموفارمین</h2>
+                <div class="w-16 h-1 bg-[#174f57] mx-auto rounded-full mb-4"></div>
+                <p class="text-slate-400 max-w-2xl mx-auto">
+                    مطالب علمی و آموزشی برای ارتقای آگاهی عمومی در حوزه سلامت و داروسازی.
+                </p>
+            </div>
+
+            <!-- MAIN SPOTLIGHT CARD (Featured Product) -->
+            <div class="glass-panel rounded-3xl overflow-hidden border border-white/10 mb-12">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+                    
+                    <!-- LEFT: 3D Visualization Area -->
+                    <div class="relative bg-gradient-to-br from-[#174f57]/30 to-slate-900/50 min-h-[400px] flex items-center justify-center order-2 lg:order-1 overflow-hidden group">
+                        
+                        <!-- 3Dmol Viewer -->
+                        <div id="spotlight-viewer" class="w-full h-full relative z-0"></div>
+                        
+                        <!-- Info Box about the Protein -->
+                        <div class="absolute bottom-6 left-6 z-10 pointer-events-none max-w-[200px]">
+                            <div class="bg-black/40 backdrop-blur-md p-4 rounded-xl border border-white/10 text-right">
+                                <div class="flex items-center gap-2 mb-2">
+                                    <div class="w-2 h-2 bg-teal-400 rounded-full animate-pulse"></div>
+                                    <span class="text-xs font-bold text-teal-300">هدف دارویی</span>
+                                </div>
+                                <h4 class="text-white font-bold text-sm mb-1">ساختار IMPDH</h4>
+                                <p class="text-[10px] text-slate-300 leading-relaxed">
+                                    آنزیم هدف متابولیت‌های آزاتیوپرین که با مهار آن، تکثیر لنفوسیت‌ها کنترل می‌شود.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RIGHT: Content Area -->
+                    <div class="p-8 lg:p-12 flex flex-col justify-center order-1 lg:order-2 text-right">
+                        
+                        <!-- Badge -->
+                        <div class="mb-6">
+                            <span class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-teal-500/10 text-teal-300 border border-teal-500/20 text-xs font-bold uppercase tracking-wide">
+                                <i data-lucide="star" class="w-3 h-3"></i>
+                                موضوع ویژه
+                            </span>
+                        </div>
+
+                        <h2 class="text-3xl lg:text-4xl font-black text-white mb-6 leading-tight">
+                            آزارام (آزاتیوپرین): <br/>
+                            <span class="text-brand-light">معرفی محصول و کاربردهای بالینی</span>
+                        </h2>
+
+                        <p class="text-slate-300 text-lg leading-relaxed mb-8">
+                            راموفارمین یکی از تولیدکنندگان کلیدی آزارام در کشور است؛ دارویی ضروری در درمان بیماری‌های خودایمنی و پیشگیری از رد پیوند. این معرفی، به کاربردها، ایمنی و منابع معتبر می‌پردازد.
+                        </p>
+
+                        <!-- Meta Data -->
+                        <div class="flex items-center gap-6 text-sm text-slate-400 mb-8 border-t border-white/5 pt-6">
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="user-check" class="w-4 h-4 text-teal-400"></i>
+                                <span>ویرایش: دکتر مختاری</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i data-lucide="check-circle" class="w-4 h-4 text-teal-400"></i>
+                                <span>تایید داروساز</span>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="flex flex-wrap gap-4">
+                            <a href="https://ramopharmin.org/azathioprine/" class="inline-flex items-center gap-2 px-6 py-3 bg-[#174f57] hover:bg-[#113a40] text-white rounded-xl font-bold transition-all shadow-lg hover:shadow-teal-900/40">
+                                مطالعه معرفی کامل
+                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                            </a>
+                            <a href="https://ramopharmin.org/azaram-catalog/" class="inline-flex items-center gap-2 px-6 py-3 glass-panel hover:bg-white/10 text-white rounded-xl font-bold transition-all">
+                                <i data-lucide="download" class="w-4 h-4"></i>
+                                دانلود بروشور
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RELATED ARTICLES GRID -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                
+                <!-- Article 1 -->
+                <article class="glass-panel rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full">
+                    <div class="h-40 overflow-hidden relative">
+                        <img src="https://www.themeadows.com/wp-content/uploads/2024/12/comparison.jpg" 
+                             alt="Comparison" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-80"></div>
+                        <div class="absolute bottom-3 right-3 text-xs font-bold text-white bg-black/30 backdrop-blur px-2 py-1 rounded">علمی</div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow text-right">
+                        <h4 class="text-white font-bold text-lg mb-3 leading-snug group-hover:text-teal-300 transition-colors">
+                            <a href="https://ramopharmin.org/azathioprine-comparison/">آزاتیوپرین در مقایسه با سایر مهارکننده‌ها</a>
+                        </h4>
+                        <p class="text-sm text-slate-400 line-clamp-2 mb-4">مقایسه اثربخشی، ایمنی، پایش و هزینه برای تصمیم‌گیری درمانی آگاهانه.</p>
+                        
+                        <div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center text-xs text-slate-500">
+                            <span>منابع ✓</span>
+                            <a href="https://ramopharmin.org/azathioprine-comparison/" class="text-teal-400 hover:text-white transition-colors flex items-center gap-1">
+                                مطالعه
+                                <i data-lucide="chevron-left" class="w-3 h-3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="glass-panel rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full">
+                    <div class="h-40 overflow-hidden relative">
+                        <img src="https://healthyturkiye.com/storage/media/8315/organ-transplantation-turkey.jpg" 
+                             alt="Transplant" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-80"></div>
+                        <div class="absolute bottom-3 right-3 text-xs font-bold text-white bg-black/30 backdrop-blur px-2 py-1 rounded">بالینی</div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow text-right">
+                        <h4 class="text-white font-bold text-lg mb-3 leading-snug group-hover:text-teal-300 transition-colors">
+                            <a href="https://ramopharmin.org/azathioprine-organ-transplant/">آزاتیوپرین در پیوند اعضا</a>
+                        </h4>
+                        <p class="text-sm text-slate-400 line-clamp-2 mb-4">نقش درمانی، مانیتورینگ و مراقبت بلندمدت در بیماران پیوندی.</p>
+                        
+                        <div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center text-xs text-slate-500">
+                            <span>تایید داروساز</span>
+                            <a href="https://ramopharmin.org/azathioprine-organ-transplant/" class="text-teal-400 hover:text-white transition-colors flex items-center gap-1">
+                                مطالعه
+                                <i data-lucide="chevron-left" class="w-3 h-3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="glass-panel rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full">
+                    <div class="h-40 overflow-hidden relative">
+                        <img src="https://medshadow.org/wp-content/uploads/2019/06/drug-side-effects-scaled.jpeg" 
+                             alt="Side Effects" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-80"></div>
+                        <div class="absolute bottom-3 right-3 text-xs font-bold text-white bg-black/30 backdrop-blur px-2 py-1 rounded">ایمنی</div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow text-right">
+                        <h4 class="text-white font-bold text-lg mb-3 leading-snug group-hover:text-teal-300 transition-colors">
+                            <a href="https://ramopharmin.org/azathioprine-side-effect/">مدیریت عوارض و خطرات</a>
+                        </h4>
+                        <p class="text-sm text-slate-400 line-clamp-2 mb-4">چک‌لیست پایش، هشدارها و توصیه‌های عملی برای بیماران.</p>
+                        
+                        <div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center text-xs text-slate-500">
+                            <span>منابع ✓</span>
+                            <a href="https://ramopharmin.org/azathioprine-side-effect/" class="text-teal-400 hover:text-white transition-colors flex items-center gap-1">
+                                مطالعه
+                                <i data-lucide="chevron-left" class="w-3 h-3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="glass-panel rounded-2xl overflow-hidden group hover:-translate-y-2 transition-transform duration-300 flex flex-col h-full">
+                    <div class="h-40 overflow-hidden relative">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1a/Irritable_bowel_syndrome.jpg" 
+                             alt="IBD" 
+                             class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-[#0f172a] to-transparent opacity-80"></div>
+                        <div class="absolute bottom-3 right-3 text-xs font-bold text-white bg-black/30 backdrop-blur px-2 py-1 rounded">IBD</div>
+                    </div>
+                    <div class="p-5 flex flex-col flex-grow text-right">
+                        <h4 class="text-white font-bold text-lg mb-3 leading-snug group-hover:text-teal-300 transition-colors">
+                            <a href="https://ramopharmin.org/azathioprine-ibd/">آزارام در درمان IBD</a>
+                        </h4>
+                        <p class="text-sm text-slate-400 line-clamp-2 mb-4">راهنمای جامع برای کولیت اولسراتیو و بیماری کرون.</p>
+                        
+                        <div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center text-xs text-slate-500">
+                            <span>منابع ✓</span>
+                            <a href="https://ramopharmin.org/azathioprine-ibd/" class="text-teal-400 hover:text-white transition-colors flex items-center gap-1">
+                                مطالعه
+                                <i data-lucide="chevron-left" class="w-3 h-3"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 3D Visualization Script (3Dmol.js) -->
+    <script>
+        lucide.createIcons();
+
+        // Initialize 3Dmol viewer when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            const element = document.getElementById('spotlight-viewer');
+            if (!element) return;
+
+            // Configure viewer with transparent background
+            const config = { backgroundColor: '0x00000000' };
+            const viewer = $3Dmol.createViewer(element, config);
+
+            // Fetch PDB 1PVN (IMPDH structure)
+            $3Dmol.download("pdb:1PVN", viewer, {
+                doAssembly: true, 
+                noSecondaryStructure: false
+            }, function() {
+                // Style: Teal Cartoon representation
+                viewer.setStyle({}, {cartoon: {color: '#14b8a6', opacity: 0.95}});
+                
+                // Add some variety (optional: highlight ligand or specific chains if needed)
+                // For now, keep it simple and clean brand color
+                
+                viewer.zoomTo();
+                viewer.render();
+
+                // Auto-spin logic
+                let angle = 0;
+                function animate() {
+                    viewer.rotate(0.5); // Spin speed
+                    requestAnimationFrame(animate);
+                }
+                animate();
+            });
+
+            // Handle Resize
+            window.addEventListener('resize', () => {
+                viewer.resize();
+            });
+        });
+    </script>
+</body>
+</html>

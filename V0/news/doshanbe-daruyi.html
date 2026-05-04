@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نگاهی به تحول راموفارمین؛ از نوسازی تا تمرکز بر صادرات | راموفارمین</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Vazirmatn -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                    },
+                    colors: {
+                        'ramo-blue': '#195057',
+                        'ramo-dark': '#172554',
+                        'ramo-accent': '#3b82f6',
+                        'clinical-teal': '#195057',
+                        'journal-gray': '#f1f5f9',
+                        'text-body': '#334155',
+                        'text-header': '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .toc-scrollbar::-webkit-scrollbar { width: 4px; }
+        .toc-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .toc-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .toc-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        .a-article p { text-align: justify; text-justify: inter-word; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-text-body">
+
+    <!-- Top Navigation Bar (Sticky) -->
+    <nav class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-ramo-blue rounded flex items-center justify-center text-white font-bold">R</div>
+                <div class="hidden md:block">
+                    <span class="block text-sm font-bold text-ramo-blue">اخبار راموفارمین</span>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="https://ramopharmin.org/" class="text-lg font-medium no-underline text-gray-700 hover:text-ramo-blue">خانه</a>
+
+                <div class="relative group cursor-pointer">
+                    <a href="https://ramopharmin.org/aboutus/" class="text-lg font-medium flex items-center gap-1.5 text-gray-700 hover:text-ramo-blue no-underline">
+                        درباره ما
+                        <i class="fa-solid fa-chevron-down text-xs opacity-70"></i>
+                    </a>
+                    <div class="dropdown-menu absolute top-full right-0 w-56 bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                        <div class="p-1">
+                            <a href="https://ramopharmin.org/board/" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl text-base no-underline">اعضای هیات مدیره</a>
+                            <a href="https://ramopharmin.org/managers/" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl text-base no-underline">مدیران اجرایی</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative group cursor-pointer">
+                    <a href="#" class="text-lg font-medium flex items-center gap-1.5 text-gray-700 hover:text-ramo-blue no-underline">
+                        محصولات
+                        <i class="fa-solid fa-chevron-down text-xs opacity-70"></i>
+                    </a>
+                    <div class="dropdown-menu absolute top-full right-0 w-64 bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                        <div class="p-1">
+                            <a href="https://ramopharmin.org/products/" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl text-base no-underline">بر اساس شکل دارویی</a>
+                            <a href="https://ramopharmin.org/category-by-therapeutics/" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl text-base no-underline">بر اساس گروه درمانی</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://ramopharmin.org/salamat/" class="text-lg font-medium no-underline text-gray-700 hover:text-ramo-blue">مجله سلامت</a>
+            </nav>
+
+            <div class="flex items-center gap-3">
+                <button class="text-gray-500 hover:text-ramo-blue px-3 py-2 text-sm hidden sm:block">
+                    <i class="fa-solid fa-search ml-1"></i> جستجو
+                </button>
+                <a href="#" onclick="window.print(); return false;" class="bg-ramo-blue hover:bg-ramo-dark text-white px-4 py-2 rounded-sm text-sm font-medium transition-colors flex items-center gap-2 shadow-sm" aria-label="چاپ یا ذخیره به‌عنوان PDF">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span>دانلود PDF</span>
+                </a>
+                <button id="mobileMenuBtn" class="md:hidden p-2 rounded bg-gray-100 text-gray-700 ml-2">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile sliding menu -->
+    <div id="mobileMenu" class="fixed inset-y-0 right-0 w-80 max-w-xs bg-white shadow-lg transform translate-x-full transition-transform z-50">
+        <div class="p-4 border-b border-gray-100 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-ramo-blue rounded flex items-center justify-center text-white font-bold">R</div>
+                <div class="text-sm font-bold text-ramo-blue">راموفارمین</div>
+            </div>
+            <button id="mobileMenuClose" class="p-2 text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+        <nav class="p-4 space-y-2">
+            <a href="https://ramopharmin.org/" class="block py-3 px-2 rounded hover:bg-gray-50 text-gray-800">خانه</a>
+
+            <div>
+                <button onclick="toggleMobileSubmenu('submenu-about')" class="w-full text-right py-3 px-2 rounded hover:bg-gray-50 flex items-center justify-between text-gray-800">
+                    <span>درباره ما</span>
+                    <i class="fa-solid fa-chevron-down text-sm text-gray-500"></i>
+                </button>
+                <div id="submenu-about" class="hidden pr-4">
+                    <a href="https://ramopharmin.org/board/" class="block py-2 text-sm text-gray-700">اعضای هیات مدیره</a>
+                    <a href="https://ramopharmin.org/managers/" class="block py-2 text-sm text-gray-700">مدیران اجرایی</a>
+                </div>
+            </div>
+
+            <div>
+                <button onclick="toggleMobileSubmenu('submenu-products')" class="w-full text-right py-3 px-2 rounded hover:bg-gray-50 flex items-center justify-between text-gray-800">
+                    <span>محصولات</span>
+                    <i class="fa-solid fa-chevron-down text-sm text-gray-500"></i>
+                </button>
+                <div id="submenu-products" class="hidden pr-4">
+                    <a href="https://ramopharmin.org/products/" class="block py-2 text-sm text-gray-700">بر اساس شکل دارویی</a>
+                    <a href="https://ramopharmin.org/category-by-therapeutics/" class="block py-2 text-sm text-gray-700">بر اساس گروه درمانی</a>
+                </div>
+            </div>
+
+            <a href="https://ramopharmin.org/salamat/" class="block py-3 px-2 rounded hover:bg-gray-50 text-gray-800">مجله سلامت</a>
+        </nav>
+    </div>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+        <!-- RIGHT SIDEBAR: Table of Contents & Info (Sticky on Desktop) -->
+        <aside class="hidden lg:block lg:col-span-3">
+            <div class="sticky top-24 space-y-6">
+
+                <div class="bg-white rounded-lg border border-gray-200 shadow-sm p-4">
+                    <h3 class="font-bold text-gray-900 mb-3 text-sm border-b pb-2">فهرست مطالب</h3>
+                    <ul class="space-y-2 text-sm toc-scrollbar max-h-[60vh] overflow-y-auto pl-2">
+                        <li><a href="#sec-intro" class="text-ramo-accent hover:underline block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">مروری کوتاه</a></li>
+                        <li><a href="#sec-modernization" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">سرمایه‌گذاری و نوسازی</a></li>
+                        <li><a href="#sec-export" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">راهبرد صادرات‌محور</a></li>
+                        <li><a href="#sec-finance" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">نتایج مالی اولیه</a></li>
+                        <li><a href="#sec-readmore" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">مطالعه بیشتر</a></li>
+                        <li><a href="#sec-summary" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">جمع‌بندی</a></li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
+                    <h4 class="text-xs font-bold text-ramo-blue uppercase mb-2">عنوان مقاله</h4>
+                    <h5 class="text-sm font-extrabold text-text-header leading-tight mb-3">
+                        نگاهی به تحول راموفارمین؛ از نوسازی تا تمرکز بر صادرات
+                    </h5>
+                    <div class="text-xs text-gray-600 leading-relaxed mb-3">
+                        <p class="text-justify">
+                            در گفت‌وگوی رسانه «دوشنبه‌های دارویی» با مدیرعامل راموفارمین، جزئیات سرمایه‌گذاری ۶۵۰ میلیارد تومانی، بازسازی خطوط و راهبرد صادرات‌محور شرکت تشریح شده است.
+                        </p>
+                    </div>
+                    <a href="#sec-summary" class="text-xs bg-ramo-blue text-white px-3 py-2 rounded inline-block hover:bg-ramo-dark transition-colors">مشاهده جمع‌بندی</a>
+                </div>
+
+            </div>
+        </aside>
+
+        <!-- CENTER: Article Content -->
+        <article class="lg:col-span-6 bg-white shadow-sm border border-gray-200 rounded-lg p-6 md:p-10 a-article">
+
+            <header class="mb-6">
+                <div class="text-xs font-bold text-clinical-teal mb-2">اخبار شرکت</div>
+                <h1 class="text-2xl md:text-3xl font-extrabold text-text-header leading-tight mb-3">نگاهی به تحول راموفارمین؛ از نوسازی تا تمرکز بر صادرات</h1>
+                <p class="text-sm text-gray-600 mb-3">در گفت‌وگوی رسانه «دوشنبه‌های دارویی» با دکتر مهدی زرین، مسیر تحول راموفارمین پس از خصوصی‌سازی، از نوسازی زیرساخت تا استراتژی صادرات تشریح شد.</p>
+                <div class="flex flex-wrap gap-4 text-xs text-gray-400">
+                    <span>نویسنده: واحد روابط عمومی راموفارمین</span>
+                    <span class="dot">•</span>
+                    <span>آخرین بروزرسانی: ۳۱ فروردین ۱۴۰۴</span>
+                    <span class="dot">•</span>
+                    <span>زمان مطالعه: ۴ دقیقه</span>
+                </div>
+            </header>
+
+            <div class="mb-6 hidden sm:flex items-center gap-3">
+                <div class="flex gap-2">
+                    <a href="#" class="text-xs bg-white border border-gray-200 px-3 py-2 rounded inline-flex items-center gap-2"> <i class="fa-brands fa-linkedin"></i> اشتراک در LinkedIn</a>
+                    <a href="#" class="text-xs bg-white border border-gray-200 px-3 py-2 rounded inline-flex items-center gap-2"> <i class="fa-solid fa-link"></i> کپی لینک</a>
+                </div>
+                <div class="flex-1 text-right text-xs text-gray-500">دانلود نسخه PDF: <a href="#" onclick="window.print(); return false;" class="text-ramo-blue hover:underline" aria-label="چاپ یا ذخیره به‌عنوان PDF">دانلود</a></div>
+            </div>
+
+            <figure class="a-secmedia mb-6">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1503389152951-9f343605f61e?q=80&w=1600&auto=format&fit=crop" alt="نوسازی خطوط و تجهیزات در یک کارخانه داروسازی" class="w-full h-auto object-cover rounded-lg border border-gray-200">
+                <figcaption class="text-xs text-gray-500 mt-2">بازسازی خطوط تولید و سرمایه‌گذاری تازه بستر جهش راموفارمین را فراهم کرده است.</figcaption>
+            </figure>
+
+            <h2 id="sec-intro" class="text-xl font-bold text-text-header mb-3">مروری کوتاه</h2>
+            <p class="mb-4 text-gray-700">راموفارمین پس از واگذاری به بخش خصوصی و مدیریت جدید، با پاک‌سازی بدهی‌ها و سرمایه‌گذاری سنگین در نوسازی خطوط، در حال بازگشت به ظرفیت مطلوب است. در این مسیر، تمرکز بر صادرات به عنوان راهبرد اصلی رشد معرفی شده و مذاکرات بازارهای منطقه‌ای در جریان است.</p>
+
+            <h2 id="sec-modernization" class="text-xl font-bold text-text-header mb-3">سرمایه‌گذاری و نوسازی</h2>
+            <p class="mb-4 text-gray-700">در چند ماه اخیر بیش از ۶۵۰ میلیارد تومان برای تجهیز ماشین‌آلات، بازسازی ساختمان‌ها و اصلاح کامل استانداردهای GMP هزینه شده است. بخش بزرگی از بدهی‌های بانکی تسویه و برنامه‌های آموزش منابع انسانی و توسعه خطوط مکمل‌ها نیز در حال اجرا است.</p>
+
+            <h2 id="sec-export" class="text-xl font-bold text-text-header mb-3">راهبرد صادرات‌محور</h2>
+            <p class="mb-4 text-gray-700">مدیریت شرکت صادرات را تنها مسیر رشد پایدار می‌داند؛ به جای رقابت داخلی، ورود هدفمند به بازارهای ترکیه، عراق، عمان، ارمنستان و تاجیکستان پیگیری می‌شود تا سبد محصولات با نیاز این بازارها همسو شود.</p>
+
+            <h2 id="sec-finance" class="text-xl font-bold text-text-header mb-3">نتایج مالی اولیه</h2>
+            <p class="mb-4 text-gray-700">با وجود افت ۳۵٪ فروش عددی در ماه‌های گذشته، مدیریت سبد محصولات و کنترل هزینه‌ها باعث خروج شرکت از زیان و ثبت سودآوری شده است؛ نشانه‌ای از اینکه برنامه نوسازی و صادرات اثرگذاری خود را آغاز کرده است.</p>
+
+            <h2 id="sec-readmore" class="text-xl font-bold text-text-header mb-3">مطالعه بیشتر</h2>
+            <p class="mb-4 text-gray-700">برای مطالعه کامل مصاحبه و آشنایی با جزئیات برنامه‌های توسعه‌ای راموفارمین، از لینک زیر استفاده کنید.</p>
+            <p class="mb-6 text-gray-700"><a href="https://doshanbehayedarouei.ir/pharma/19275/" class="text-ramo-blue hover:underline">متن کامل مصاحبه در «دوشنبه‌های دارویی»</a></p>
+
+            <h2 id="sec-summary" class="text-xl font-bold text-text-header mb-3">جمع‌بندی</h2>
+            <p class="mb-6 text-gray-700">سرمایه‌گذاری تازه و تمرکز بر صادرات، راموفارمین را از فاز نوسازی به مسیر رشد پایدار می‌برد. تسویه بدهی‌ها، ارتقای خطوط و مذاکرات بازارهای منطقه‌ای نشان می‌دهد مسیر تحول آغاز شده و نشانه‌های سودآوری دوباره دیده می‌شود.</p>
+
+            <script type="application/ld+json">
+            {
+              "@context":"https://schema.org",
+              "@type":"Article",
+              "headline":"نگاهی به تحول راموفارمین؛ از نوسازی تا تمرکز بر صادرات | راموفارمین",
+              "description":"مروری بر سرمایه‌گذاری ۶۵۰ میلیاردی، بازسازی خطوط و راهبرد صادرات‌محور راموفارمین پس از خصوصی‌سازی.",
+              "author":{"@type":"Organization","name":"Ramopharmin Editorial"},
+              "publisher":{"@type":"Organization","name":"Ramopharmin"},
+              "dateModified":"2025-04-20",
+              "inLanguage":"fa"
+            }
+            </script>
+
+        </article>
+
+        <!-- LEFT SIDEBAR: Related & Authors (Desktop) / Bottom (Mobile) -->
+        <aside class="lg:col-span-3 space-y-6">
+            <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
+                <h3 class="font-bold text-gray-900 text-sm mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-user-doctor text-clinical-teal"></i>
+                    درباره نویسندگان
+                </h3>
+                <div class="flex items-start gap-3 mb-4">
+                    <img src="https://ui-avatars.com/api/?name=Ramopharmin&background=195057&color=fff" class="w-10 h-10 rounded-full" alt="Author">
+                    <div>
+                        <div class="text-sm font-bold text-gray-800">واحد روابط عمومی راموفارمین</div>
+                        <div class="text-xs text-gray-500 mt-1">اخبار و روابط عمومی راموفارمین</div>
+                        <a href="#" class="text-xs text-ramo-blue hover:underline mt-1 block">ارتباط با روابط عمومی</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-ramo-blue to-ramo-dark text-white p-6 rounded-lg text-center shadow-md">
+                <i class="fa-solid fa-hospital text-3xl mb-3 text-white/80"></i>
+                <h3 class="font-bold text-sm mb-2">داروسازی راموفارمین</h3>
+                <p class="text-xs text-white/90 mb-4 leading-relaxed">
+                    شرکت داروسازی راموفارمین به عنوان یکی از پیشگامان صنعت دارو در ایران، با بهره‌گیری از دانش روز، فناوری‌های نوین و استانداردهای بین‌المللی، در تولید و توزیع داروهای با کیفیت و موثر فعالیت می‌کند. ماموریت ما ارتقای سلامت و کیفیت زندگی جامعه است.
+                </p>
+                <a href="https://ramopharmin.org/" class="inline-block bg-white text-ramo-blue text-xs font-bold py-2 px-4 rounded hover:bg-ramo-blue/10 transition">بیشتر بدانید</a>
+            </div>
+
+        </aside>
+
+    </main>
+    
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-400">
+            &copy; ۱۴۰۳ گروه داروسازی راموفارمین. تمامی حقوق محفوظ است.
+        </div>
+    </footer>
+
+    <script>
+        (function(){
+            const btn = document.getElementById('mobileMenuBtn');
+            const closeBtn = document.getElementById('mobileMenuClose');
+            const menu = document.getElementById('mobileMenu');
+            function openMenu(){ menu.classList.remove('translate-x-full'); menu.classList.add('translate-x-0'); document.body.style.overflow = 'hidden'; }
+            function closeMenu(){ menu.classList.remove('translate-x-0'); menu.classList.add('translate-x-full'); document.body.style.overflow = ''; }
+            if(btn) btn.addEventListener('click', openMenu);
+            if(closeBtn) closeBtn.addEventListener('click', closeMenu);
+            document.addEventListener('click', function(e){
+                if(!menu) return;
+                if(menu.classList.contains('translate-x-0')){
+                    const inside = menu.contains(e.target) || (btn && btn.contains(e.target));
+                    if(!inside) closeMenu();
+                }
+            });
+            window.toggleMobileSubmenu = function(id){
+                const el = document.getElementById(id);
+                if(!el) return;
+                el.classList.toggle('hidden');
+            }
+        })();
+    </script>
+
+</body>
+</html>

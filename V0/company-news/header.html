@@ -1,0 +1,177 @@
+<!-- Dependencies -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    corePlugins: {
+      preflight: false, // Disable base reset to prevent conflicts with WP theme
+    }
+  }
+</script>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+<script src="https://unpkg.com/lucide@latest"></script>
+
+
+<!-- News Ticker Section -->
+<div id="ramo-news-ticker" class="w-full bg-gradient-to-l from-[#174f57] to-[#0f172a] text-white font-bold text-xs md:text-sm flex items-center justify-end px-4 py-3 border-b border-yellow-300/10 shadow z-50" style="font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif; direction: rtl;">
+    <span id="news-ticker-text" class="transition-opacity duration-500 ml-2" style="font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif; color: #fff;">به وبسایت رسمی راموفارمین خوش آمدید</span>
+    <i class="fa-solid fa-bullhorn text-yellow-300 text-base"></i>
+</div>
+
+<!-- Header Wrapper -->
+<div id="ramo-header-block" class="w-full bg-[#0f172a]" style="font-family: 'Vazirmatn', sans-serif; direction: rtl;">
+
+    <style>
+        /* Scoped Styles for Header */
+        #ramo-header-block {
+            background: #0f172a; /* Matches hero section base color */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 4px 20px -10px rgba(0,0,0,0.3);
+        }
+        
+        /* Navigation Links */
+        #ramo-header-block .nav-link {
+            position: relative;
+            color: rgba(255,255,255,0.75);
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+        #ramo-header-block .nav-link:hover {
+            color: #ffffff;
+        }
+        #ramo-header-block .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: #5aaeb8; /* Brand Light Teal */
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px rgba(90, 174, 184, 0.5);
+        }
+        #ramo-header-block .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        /* Logo Animation */
+        #ramo-header-block .logo-container {
+            transition: transform 0.3s ease;
+        }
+        #ramo-header-block .logo-container:hover {
+            transform: scale(1.05);
+        }
+        
+        /* Mobile Menu Toggle */
+        #ramo-header-block .mobile-menu-btn {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: all 0.3s ease;
+        }
+        #ramo-header-block .mobile-menu-btn:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(90, 174, 184, 0.3);
+        }
+        
+        /* Mobile Menu */
+        #ramo-header-block .mobile-menu {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+        #ramo-header-block .mobile-menu.open {
+            transform: translateY(0);
+        }
+        
+        /* CTA Button */
+        #ramo-header-block .cta-btn {
+            background: linear-gradient(135deg, #5aaeb8 0%, #14b8a6 100%);
+            box-shadow: 0 4px 15px rgba(90, 174, 184, 0.3);
+            transition: all 0.3s ease;
+        }
+        #ramo-header-block .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(90, 174, 184, 0.4);
+        }
+    </style>
+
+    <!-- Header Content -->
+    <div class="container mx-auto px-4 md:px-6">
+        <div class="flex items-center justify-between py-4">
+            
+            <!-- Logo Section -->
+            <div class="flex items-center gap-4">
+                <div class="logo-container">
+                    <a href="/" class="flex items-center gap-3">
+                        <div class="w-10 h-10 bg-gradient-to-br from-[#5aaeb8] to-[#14b8a6] rounded-lg flex items-center justify-center shadow-lg">
+                            <span class="text-white font-black text-lg">ر</span>
+                        </div>
+                        <div class="text-right">
+                            <h1 class="text-white font-black text-lg leading-tight">راموفارمین</h1>
+                            <p class="text-slate-400 text-xs">Ramopharmin</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="/" class="nav-link">صفحه اصلی</a>
+                <a href="/about-us/" class="nav-link">درباره ما</a>
+                <a href="/products/" class="nav-link">محصولات</a>
+                <a href="/news/" class="nav-link">اخبار</a>
+                <a href="/contact/" class="nav-link">تماس با ما</a>
+            </nav>
+
+            <!-- CTA Button -->
+            <div class="hidden md:block">
+                <a href="/contact/" class="cta-btn px-6 py-2 rounded-lg text-white font-bold text-sm">
+                    تماس با ما
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn lg:hidden w-10 h-10 rounded-lg flex items-center justify-center" onclick="toggleMobileMenu()">
+                <i data-lucide="menu" class="w-5 h-5 text-white"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu lg:hidden fixed top-[88px] left-0 right-0 z-40">
+            <div class="container mx-auto px-4 py-6">
+                <nav class="flex flex-col gap-4">
+                    <a href="/" class="nav-link block py-2">صفحه اصلی</a>
+                    <a href="/about-us/" class="nav-link block py-2">درباره ما</a>
+                    <a href="/products/" class="nav-link block py-2">محصولات</a>
+                    <a href="/news/" class="nav-link block py-2">اخبار</a>
+                    <a href="/contact/" class="nav-link block py-2">تماس با ما</a>
+                    <div class="border-t border-white/10 pt-4 mt-4">
+                        <a href="/contact/" class="cta-btn inline-block px-6 py-2 rounded-lg text-white font-bold text-sm">
+                            تماس با ما
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    lucide.createIcons();
+    
+    function toggleMobileMenu() {
+        const menu = document.getElementById('mobile-menu');
+        menu.classList.toggle('open');
+    }
+    
+    // Close mobile menu on outside click
+    document.addEventListener('click', function(event) {
+        const menu = document.getElementById('mobile-menu');
+        const btn = event.target.closest('.mobile-menu-btn');
+        if (!menu.contains(event.target) && !btn) {
+            menu.classList.remove('open');
+        }
+    });
+</script>

@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramopharmin - Footer</title>
+    
+    <!-- Dependencies -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            margin: 0;
+            padding: 0;
+            /* Body background removed to test standalone block */
+        }
+
+        /* Mesh Pattern Overlay */
+        .mesh-overlay {
+            position: absolute;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Footer Container with Self-Contained Background */
+        .footer-container {
+            /* Applied gradient directly here so it works on any page */
+            background: radial-gradient(circle at 10% 20%, #174f57 0%, rgb(11, 38, 59) 40%, rgb(2, 6, 23) 90%);
+            position: relative;
+            overflow: hidden; /* Contains the mesh */
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Link Hover Effects */
+        .footer-link {
+            position: relative;
+            color: #cbd5e1; /* Slate-300 */
+            transition: color 0.3s ease;
+            display: inline-block;
+        }
+        .footer-link:hover {
+            color: #2dd4bf; /* Teal-400 */
+            padding-right: 4px; /* Subtle slide effect */
+        }
+        
+        /* Social Buttons */
+        .social-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .social-btn:hover {
+            background: rgba(20, 184, 166, 0.2); /* Teal bg */
+            border-color: rgba(20, 184, 166, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(20, 184, 166, 0.2);
+        }
+        .social-btn svg {
+            transition: transform 0.3s ease;
+        }
+        .social-btn:hover svg {
+            transform: scale(1.1);
+        }
+
+        .text-brand-light { color: #5aaeb8; }
+    </style>
+</head>
+<body>
+
+    <!-- FOOTER SECTION -->
+    <footer class="footer-container text-white pt-16 pb-8">
+        
+        <!-- Mesh Background inside Footer -->
+        <div class="mesh-overlay"></div>
+        
+        <div class="container mx-auto px-6 relative z-10">
+            
+            <!-- Main Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 mb-16 border-b border-white/10 pb-12">
+                
+                <!-- COLUMN 1: Brand & About (Span 5) -->
+                <div class="lg:col-span-5 text-right space-y-6">
+                    <!-- Logo -->
+                    <div class="text-white font-bold text-xl font-vazirmatn">
+                        داروسازی راموفارمین
+                    </div>
+
+                    <p class="text-slate-300 leading-loose text-sm lg:text-base max-w-md ml-auto text-justify">
+                        شرکت داروسازی راموفارمین به عنوان یکی از پیشگامان صنعت دارو در ایران، با بهره‌گیری از دانش روز، فناوری‌های نوین و استانداردهای بین‌المللی، در تولید و توزیع داروهای با کیفیت و موثر فعالیت می‌کند. ماموریت ما ارتقای سلامت و کیفیت زندگی جامعه است.
+                    </p>
+
+                    <!-- Meta Info -->
+                    <div class="text-xs text-slate-400 flex flex-col sm:flex-row gap-4">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="file-text" class="w-4 h-4 text-teal-500"></i>
+                            <span>کد مستند: RM-12-2025</span>
+                        </div>
+                        <div class="hidden sm:block w-px h-4 bg-white/10"></div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="clock" class="w-4 h-4 text-teal-500"></i>
+                            <span>بازبینی: <span id="reviewDate" class="text-slate-200"></span></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Spacer Column (Hidden on mobile) -->
+                <div class="hidden lg:block lg:col-span-1"></div>
+
+                <!-- COLUMN 2: Resources (Span 3) -->
+                <div class="lg:col-span-3 text-right">
+                    <h3 class="text-lg font-bold text-white mb-6 flex items-center justify-start gap-2">
+                        <span class="w-1.5 h-6 bg-teal-500 rounded-full"></span>
+                        منابع
+                    </h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="footer-link">نوآوری علمی</a></li>
+                        <li><a href="#" class="footer-link">پژوهش‌های اسپانسرشده</a></li>
+                        <li><a href="#" class="footer-link">اطلاعات پزشکی برای پزشکان</a></li>
+                        <li><a href="#" class="footer-link">برنامه‌های حمایت دارویی</a></li>
+                        <li><a href="#" class="footer-link">آزمایش‌های بالینی جهانی</a></li>
+                        <li><a href="#" class="footer-link">محصولات دارویی</a></li>
+                        <li><a href="#" class="footer-link text-amber-400 hover:text-amber-300">گزارش عارضه جانبی</a></li>
+                    </ul>
+                </div>
+
+                <!-- COLUMN 3: Quick Links (Span 3) -->
+                <div class="lg:col-span-3 text-right">
+                    <h3 class="text-lg font-bold text-white mb-6 flex items-center justify-start gap-2">
+                        <span class="w-1.5 h-6 bg-teal-500 rounded-full"></span>
+                        لینک‌های سریع
+                    </h3>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="footer-link">فرصت‌های شغلی</a></li>
+                        <li><a href="#" class="footer-link">ارتباط با روابط عمومی</a></li>
+                        <li><a href="#" class="footer-link">پایداری و محیط زیست</a></li>
+                        <li><a href="#" class="footer-link">اطلاعیه حقوقی</a></li>
+                        <li><a href="#" class="footer-link">سوالات متداول</a></li>
+                    </ul>
+
+                    <!-- Social Icons -->
+                    <div class="mt-8 flex justify-start gap-3">
+                        <a href="#" class="social-btn" aria-label="LinkedIn">
+                            <i data-lucide="linkedin" class="w-5 h-5 text-white"></i>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="Instagram">
+                            <i data-lucide="instagram" class="w-5 h-5 text-white"></i>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="Twitter">
+                            <i data-lucide="twitter" class="w-5 h-5 text-white"></i>
+                        </a>
+                        <a href="#" class="social-btn" aria-label="YouTube">
+                            <i data-lucide="youtube" class="w-5 h-5 text-white"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-6 text-xs text-slate-500">
+                <div class="flex items-center gap-1 dir-ltr">
+                    <span>© 2025 Ramopharmin. All rights reserved.</span>
+                </div>
+                
+                <div class="flex flex-wrap justify-center gap-6">
+                    <a href="#" class="hover:text-teal-400 transition-colors">حریم خصوصی</a>
+                    <a href="#" class="hover:text-teal-400 transition-colors">شرایط استفاده</a>
+                    <a href="#" class="hover:text-teal-400 transition-colors">نقشه سایت</a>
+                    <a href="#" class="hover:text-teal-400 transition-colors">تنظیمات کوکی</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        lucide.createIcons();
+
+        // Date Script
+        var now = new Date();
+        var months = ['ژانویه', 'فوریه', 'مارس', 'آوریل', 'مه', 'ژوئن', 'جولای', 'آگوست', 'سپتامبر', 'اکتبر', 'نوامبر', 'دسامبر'];
+        
+        // Using standard English month for professional pharma look
+        document.getElementById('reviewDate').innerHTML = months[now.getMonth()] + ' ' + now.getFullYear();
+    </script>
+</body>
+</html>

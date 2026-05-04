@@ -1,0 +1,1985 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramopharmin - English Home Page</title>
+
+    <!-- Dependencies -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/renderers/CSS2DRenderer.js"></script>
+
+    <style>
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+            background: radial-gradient(circle at 10% 20%, #174f57 0%, rgb(11, 38, 59) 40%, rgb(2, 6, 23) 90%);
+            margin: 0;
+            padding: 0;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- START BLOCK: 1-head-2-tablet-3D.html -->
+    <!-- Main Wrapper -->
+    <div id="ramo-hero-block" class="relative w-full overflow-hidden bg-[#0f172a] text-white" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; min-height: 600px; direction: ltr;">
+
+        <style>
+            /* Scoped Styles */
+            #ramo-hero-block .hero-bg {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                z-index: 0;
+                background: radial-gradient(circle at 10% 20%, #174f57 0%, rgb(11, 38, 59) 40%, rgb(2, 6, 23) 90%);
+            }
+
+            #ramo-hero-block .orb {
+                position: absolute;
+                border-radius: 50%;
+                filter: blur(80px);
+                opacity: 0.6;
+                animation: floatOrb 20s infinite ease-in-out;
+            }
+
+            #ramo-hero-block .orb-1 {
+                top: -10%;
+                left: -10%;
+                width: 50vw;
+                height: 50vw;
+                background: #174f57;
+                animation-delay: 0s;
+            }
+
+            #ramo-hero-block .orb-2 {
+                bottom: -20%;
+                right: -10%;
+                width: 40vw;
+                height: 40vw;
+                background: #3b82f6;
+                animation-delay: -5s;
+            }
+
+            @keyframes floatOrb {
+                0% { transform: translate(0, 0) scale(1); }
+                33% { transform: translate(30px, 50px) scale(1.1); }
+                66% { transform: translate(-20px, 20px) scale(0.95); }
+                100% { transform: translate(0, 0) scale(1); }
+            }
+
+            #ramo-hero-block .mesh-overlay {
+                position: absolute;
+                inset: 0;
+                background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+                z-index: 1;
+                pointer-events: none;
+            }
+
+            #ramo-hero-block #canvas-container {
+                width: 100%;
+                height: 500px;
+                position: relative;
+                z-index: 10;
+                outline: none;
+                cursor: move;
+            }
+            
+            #ramo-hero-block .glass-panel {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+            }
+
+            #ramo-hero-block .glass-nav {
+                background: rgba(15, 23, 42, 0.6);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            }
+            
+            #ramo-hero-block .text-shadow-sm {
+                text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            }
+
+            /* Utilities */
+            .bg-brand { background-color: #174f57; }
+            .text-brand { color: #174f57; }
+            .text-brand-light { color: #5aaeb8; }
+            .hover-bg-brand-dark:hover { background-color: #0f3338; }
+            .shadow-brand { box-shadow: 0 10px 15px -3px rgba(23, 79, 87, 0.5); }
+        </style>
+
+        <!-- Background -->
+        <div class="hero-bg">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+        </div>
+        <div class="mesh-overlay"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 container mx-auto px-6 pt-32 pb-32 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[600px]">
+            
+            <!-- Left Col (Text for LTR) -->
+            <div class="order-2 lg:order-1 text-left space-y-8">
+                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-white/10 text-brand-light text-sm font-bold tracking-wide">
+                    <span class="w-2 h-2 rounded-full bg-brand animate-pulse"></span>
+                    Innovation in Health
+                </div>
+
+                <h1 class="text-5xl lg:text-7xl font-black leading-tight text-shadow-sm bg-clip-text text-transparent bg-gradient-to-l from-white via-white to-slate-400 m-0">
+                    Ramopharmin<br/>
+                    Pharmaceuticals
+                </h1>
+
+                <p class="text-xl text-slate-300 leading-relaxed max-w-lg ml-0 lg:mr-auto">
+                    A fusion of modern science and advanced technology. <span class="text-white font-semibold">Science serving quality</span>, building a healthier future.
+                </p>
+
+                <div class="flex flex-wrap gap-4 pt-4">
+                    <button class="bg-brand hover-bg-brand-dark text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg shadow-brand transition-all transform hover:-translate-y-1 flex items-center gap-2 border-none cursor-pointer">
+                        <span>Contact Us</span>
+                        <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                    </button>
+                    
+                    <button class="glass-panel hover:bg-white/10 text-white px-8 py-4 rounded-xl font-bold text-lg transition-all flex items-center gap-2 border border-white/10 cursor-pointer">
+                        <i data-lucide="pill" class="w-5 h-5"></i>
+                        <span>View Products</span>
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-3 gap-6 pt-12 border-t border-white/10 mt-12">
+                    <div>
+                        <div class="text-3xl font-bold text-white">50+</div>
+                        <div class="text-sm text-slate-400 mt-1">Years of Experience</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white">200+</div>
+                        <div class="text-sm text-slate-400 mt-1">Pharmaceutical Products</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-white">GMP</div>
+                        <div class="text-sm text-slate-400 mt-1">Global Standard</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Col (3D) -->
+            <div class="order-1 lg:order-2 hidden md:flex justify-center items-center relative h-[500px]">
+                <div id="canvas-container"></div>
+                
+                <!-- Floating Card -->
+                <div class="absolute bottom-0 right-0 glass-panel p-6 rounded-2xl max-w-xs transform rotate-3 shadow-2xl hidden md:block z-20">
+                    <div class="flex items-center gap-4 mb-3">
+                        <div class="bg-[#174f57]/50 p-3 rounded-full text-white">
+                            <i data-lucide="activity" class="w-6 h-6"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-white m-0 text-lg">Superior Quality</h3>
+                            <p class="text-xs text-slate-300 m-0">Advanced formulation</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2 text-xs text-slate-400">
+                        <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                        <span>GMP Standard</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        // Initialize Icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+
+        // Initialize Three.js
+        function initThreeJS() {
+            const container = document.getElementById('canvas-container');
+            if (!container) return;
+            
+            // Clear existing canvas if any (re-init safety)
+            while(container.firstChild) {
+                container.removeChild(container.firstChild);
+            }
+
+            if (typeof THREE === 'undefined') {
+                console.error('Three.js not loaded');
+                return;
+            }
+
+            // Scene Setup
+            const scene = new THREE.Scene();
+            
+            // Camera
+            const camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            camera.position.z = 35; 
+
+            // Renderer
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(container.clientWidth, container.clientHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            container.appendChild(renderer.domElement);
+
+            // Group to hold the pill
+            const pillGroup = new THREE.Group();
+            scene.add(pillGroup);
+
+            // Materials
+            const matBrand = new THREE.MeshPhysicalMaterial({
+                color: 0x174f57, 
+                metalness: 0.1,
+                roughness: 0.2,
+                clearcoat: 1.0,
+                clearcoatRoughness: 0.1
+            });
+
+            const matWhite = new THREE.MeshPhysicalMaterial({
+                color: 0xffffff,
+                metalness: 0.1,
+                roughness: 0.2,
+                clearcoat: 1.0,
+                clearcoatRoughness: 0.1
+            });
+
+            // Geometry
+            const radius = 6;
+            const tubeHeight = 12; 
+            const tubeSegs = 32;
+
+            const topGeo = new THREE.SphereGeometry(radius, 32, 16, 0, Math.PI * 2, 0, Math.PI/2);
+            const topCap = new THREE.Mesh(topGeo, matBrand);
+            topCap.position.y = tubeHeight / 2;
+            pillGroup.add(topCap);
+
+            const topBodyGeo = new THREE.CylinderGeometry(radius, radius, tubeHeight / 2, tubeSegs, 1, true);
+            const topBody = new THREE.Mesh(topBodyGeo, matBrand);
+            topBody.position.y = tubeHeight / 4;
+            pillGroup.add(topBody);
+
+            const botBodyGeo = new THREE.CylinderGeometry(radius, radius, tubeHeight / 2, tubeSegs, 1, true);
+            const botBody = new THREE.Mesh(botBodyGeo, matWhite);
+            botBody.position.y = -tubeHeight / 4;
+            pillGroup.add(botBody);
+
+            const botGeo = new THREE.SphereGeometry(radius, 32, 16, 0, Math.PI * 2, 0, Math.PI/2);
+            const botCap = new THREE.Mesh(botGeo, matWhite);
+            botCap.rotation.x = Math.PI;
+            botCap.position.y = -tubeHeight / 2;
+            pillGroup.add(botCap);
+
+            // Particles
+            const particleGroup = new THREE.Group();
+            scene.add(particleGroup);
+            
+            const particleMat = new THREE.MeshBasicMaterial({ color: 0x5aaeb8, transparent: true, opacity: 0.6 });
+            const particleGeo = new THREE.SphereGeometry(0.3, 8, 8);
+
+            for(let i=0; i<30; i++) {
+                const mesh = new THREE.Mesh(particleGeo, particleMat);
+                const r = 15 + Math.random() * 10;
+                const theta = Math.random() * Math.PI * 2;
+                const phi = Math.random() * Math.PI;
+                mesh.position.x = r * Math.sin(phi) * Math.cos(theta);
+                mesh.position.y = r * Math.sin(phi) * Math.sin(theta);
+                mesh.position.z = r * Math.cos(phi);
+                mesh.userData = {
+                    speedX: (Math.random() - 0.5) * 0.05,
+                    speedY: (Math.random() - 0.5) * 0.05,
+                    speedZ: (Math.random() - 0.5) * 0.05,
+                    initialPos: mesh.position.clone()
+                };
+                particleGroup.add(mesh);
+            }
+
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+            scene.add(ambientLight);
+
+            const spotLight = new THREE.SpotLight(0xffffff, 1);
+            spotLight.position.set(20, 20, 20);
+            scene.add(spotLight);
+
+            const rimLight = new THREE.PointLight(0x174f57, 3, 50);
+            rimLight.position.set(-20, 0, -10);
+            scene.add(rimLight);
+            
+            const fillLight = new THREE.PointLight(0x3b82f6, 0.5);
+            fillLight.position.set(0, -20, 10);
+            scene.add(fillLight);
+
+            // Animation
+            let mouseX = 0;
+            let mouseY = 0;
+            
+            pillGroup.rotation.z = Math.PI / 4; 
+            pillGroup.rotation.x = Math.PI / 6;
+
+            const animate = () => {
+                requestAnimationFrame(animate);
+
+                pillGroup.rotation.y += 0.01;
+                pillGroup.position.y = Math.sin(Date.now() * 0.001) * 1;
+
+                particleGroup.rotation.y -= 0.002;
+                particleGroup.children.forEach(p => {
+                    p.position.y += Math.sin(Date.now() * 0.002 + p.position.x) * 0.02;
+                });
+
+                const targetRotX = mouseY * 0.5;
+                const targetRotY = mouseX * 0.5;
+                
+                scene.rotation.y += (targetRotY - scene.rotation.y) * 0.05;
+                scene.rotation.x += (targetRotX - scene.rotation.x) * 0.05;
+
+                renderer.render(scene, camera);
+            };
+
+            animate();
+
+            // Resize Handler
+            const handleResize = () => {
+                if (!container) return;
+                const width = container.clientWidth;
+                const height = container.clientHeight;
+                renderer.setSize(width, height);
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+            };
+
+            window.addEventListener('resize', handleResize);
+            
+            // Cleanup if element removed (optional but good for SPAs)
+            const observer = new MutationObserver((mutations) => {
+                if(!document.body.contains(container)) {
+                    window.removeEventListener('resize', handleResize);
+                    observer.disconnect();
+                }
+            });
+            observer.observe(document.body, {childList: true, subtree: true});
+
+            // Mouse Move
+            document.addEventListener('mousemove', (e) => {
+                const windowHalfX = window.innerWidth / 2;
+                const windowHalfY = window.innerHeight / 2;
+                mouseX = (e.clientX - windowHalfX) / 1000;
+                mouseY = (e.clientY - windowHalfY) / 1000;
+            });
+        }
+
+        // Run Initialization
+        // Check if Three is loaded, if not wait a bit
+        const checkThree = setInterval(() => {
+            if (typeof THREE !== 'undefined') {
+                clearInterval(checkThree);
+                initThreeJS();
+            }
+        }, 100);
+        
+        // Fallback timeout
+        setTimeout(() => clearInterval(checkThree), 5000);
+
+    })();
+    </script>
+    </div>
+    <!-- END BLOCK: 1-head-2-tablet-3D.html -->
+
+    <!-- START BLOCK: company-profile.html -->
+    <div id="ramo-profile-block" class="relative w-full overflow-hidden text-white" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; direction: ltr;">
+        <style>
+            /* Profile Slider Styles */
+            #ramo-profile-block .slider-container {
+                position: relative;
+                width: 100%;
+                height: 600px;
+                overflow: hidden;
+                border-radius: 24px;
+            }
+            
+            #ramo-profile-block .slides {
+                display: flex;
+                width: 500%; /* 5 slides */
+                height: 100%;
+                transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            }
+            
+            #ramo-profile-block .slide {
+                width: 20%; /* 1/5 of container */
+                height: 100%;
+                position: relative;
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(15px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 3rem;
+            }
+            
+            #ramo-profile-block .slide-content {
+                max-width: 500px;
+                text-align: center;
+            }
+            
+            #ramo-profile-block .slide-icon {
+                width: 80px;
+                height: 80px;
+                border-radius: 50%;
+                background: linear-gradient(135deg, #5aaeb8 0%, #2d7b84 100%);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 0 auto 2rem;
+                box-shadow: 0 8px 32px rgba(90, 174, 184, 0.3);
+            }
+            
+            #ramo-profile-block .slide h3 {
+                font-size: 2.5rem;
+                font-weight: 800;
+                margin-bottom: 1rem;
+                text-shadow: 0 0 20px rgba(90, 174, 184, 0.5);
+            }
+            
+            #ramo-profile-block .slide p {
+                font-size: 1.1rem;
+                line-height: 1.6;
+                opacity: 0.9;
+                margin-bottom: 2rem;
+            }
+            
+            /* Navigation Dots */
+            #ramo-profile-block .slider-nav {
+                position: absolute;
+                bottom: 2rem;
+                left: 50%;
+                transform: translateX(-50%);
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+                z-index: 10;
+            }
+            
+            #ramo-profile-block .nav-arrow {
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.2);
+                border-radius: 50%;
+                width: 40px;
+                height: 40px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                color: white;
+            }
+            
+            #ramo-profile-block .nav-arrow:hover {
+                background: rgba(90, 174, 184, 0.2);
+                border-color: rgba(90, 174, 184, 0.4);
+                transform: scale(1.1);
+            }
+            
+            #ramo-profile-block .nav-dots {
+                display: flex;
+                gap: 0.5rem;
+            }
+            
+            #ramo-profile-block .nav-dot {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3);
+                border: 2px solid rgba(255, 255, 255, 0.5);
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+            
+            #ramo-profile-block .nav-dot.active {
+                background: #5aaeb8;
+                transform: scale(1.2);
+                box-shadow: 0 0 20px rgba(90, 174, 184, 0.6);
+            }
+            
+            /* Floating Particles */
+            @keyframes floatParticle1 {
+                0%, 100% {
+                    transform: translateY(0px) translateX(0px) rotate(0deg);
+                    opacity: 0.3;
+                }
+                25% {
+                    transform: translateY(-20px) translateX(10px) rotate(90deg);
+                    opacity: 0.6;
+                }
+                50% {
+                    transform: translateY(-10px) translateX(20px) rotate(180deg);
+                    opacity: 0.4;
+                }
+                75% {
+                    transform: translateY(-30px) translateX(5px) rotate(270deg);
+                    opacity: 0.7;
+                }
+            }
+            @keyframes floatParticle1 {
+                0%, 100% {
+                    transform: translateY(0px) translateX(0px) rotate(0deg);
+                    opacity: 0.3;
+                }
+                25% {
+                    transform: translateY(-20px) translateX(10px) rotate(90deg);
+                    opacity: 0.6;
+                }
+                50% {
+                    transform: translateY(-10px) translateX(20px) rotate(180deg);
+                    opacity: 0.4;
+                }
+                75% {
+                    transform: translateY(-30px) translateX(5px) rotate(270deg);
+                    opacity: 0.7;
+                }
+            }
+            
+            @keyframes floatParticle2 {
+                0%, 100% {
+                    transform: translateY(0px) translateX(0px) rotate(0deg);
+                    opacity: 0.2;
+                }
+                33% {
+                    transform: translateY(-25px) translateX(-15px) rotate(120deg);
+                    opacity: 0.5;
+                }
+                66% {
+                    transform: translateY(-15px) translateX(-25px) rotate(240deg);
+                    opacity: 0.3;
+                }
+            }
+            
+            @keyframes floatParticle3 {
+                0%, 100% {
+                    transform: translateY(0px) translateX(0px) scale(1);
+                    opacity: 0.4;
+                }
+                50% {
+                    transform: translateY(-35px) translateX(25px) scale(1.2);
+                    opacity: 0.8;
+                }
+            }
+            
+            #ramo-profile-block .floating-particles {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                pointer-events: none;
+                overflow: hidden;
+            }
+            
+            #ramo-profile-block .particle {
+                position: absolute;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(90, 174, 184, 0.3) 0%, rgba(90, 174, 184, 0.1) 70%);
+                backdrop-filter: blur(1px);
+            }
+            
+            #ramo-profile-block .particle-1 {
+                width: 8px;
+                height: 8px;
+                top: 20%;
+                left: 15%;
+                animation: floatParticle1 8s ease-in-out infinite;
+            }
+            
+            #ramo-profile-block .particle-2 {
+                width: 12px;
+                height: 12px;
+                top: 60%;
+                right: 20%;
+                animation: floatParticle2 10s ease-in-out infinite;
+            }
+            
+            #ramo-profile-block .particle-3 {
+                width: 6px;
+                height: 6px;
+                top: 40%;
+                left: 70%;
+                animation: floatParticle3 12s ease-in-out infinite;
+            }
+            
+            /* Progress Bar */
+            #ramo-profile-block .progress-bar {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                height: 4px;
+                background: rgba(255, 255, 255, 0.2);
+                width: 100%;
+            }
+            
+            #ramo-profile-block .progress-fill {
+                height: 100%;
+                background: linear-gradient(90deg, #5aaeb8, #2d7b84);
+                width: 0%;
+                transition: width 4s linear;
+            }
+            
+            /* Mobile Adjustments */
+            @media (max-width: 768px) {
+                #ramo-profile-block .slider-container {
+                    height: 500px;
+                }
+                
+                #ramo-profile-block .slide {
+                    padding: 2rem 1.5rem;
+                }
+                
+                #ramo-profile-block .slide h3 {
+                    font-size: 2rem;
+                }
+            }
+        </style>
+
+        <div class="relative z-10 container mx-auto px-6 pt-32 pb-20">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl lg:text-6xl font-black mb-4">
+                    Discover <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-white">Ramopharmin</span>
+                </h2>
+                <p class="text-lg opacity-80 max-w-2xl mx-auto">
+                    Explore our journey, expertise, and global presence through our interactive company profile
+                </p>
+            </div>
+
+            <!-- Slider Container -->
+            <div class="slider-container mx-auto max-w-6xl relative">
+                <!-- Floating Particles -->
+                <div class="floating-particles">
+                    <div class="particle particle-1"></div>
+                    <div class="particle particle-2"></div>
+                    <div class="particle particle-3"></div>
+                </div>
+                <div class="slides" id="profile-slides">
+                    <!-- Slide 1: Company Overview -->
+                    <div class="slide">
+                        <div class="slide-content">
+                            <div class="slide-icon">
+                                <i data-lucide="building" class="w-10 h-10 text-white"></i>
+                            </div>
+                            <h3>Company Overview</h3>
+                            <p>
+                                Founded in 2000, Ramopharmin has grown from a local pharmaceutical manufacturer to a globally recognized company. 
+                                Our mission is to provide high-quality, affordable medications while maintaining the highest standards of pharmaceutical excellence.
+                            </p>
+                            <div class="grid grid-cols-3 gap-4 mt-6">
+                                <div>
+                                    <div class="text-2xl font-bold text-teal-300">25+</div>
+                                    <div class="text-sm opacity-70">Years Experience</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-teal-300">500+</div>
+                                    <div class="text-sm opacity-70">Products</div>
+                                </div>
+                                <div>
+                                    <div class="text-2xl font-bold text-teal-300">50+</div>
+                                    <div class="text-sm opacity-70">Countries</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: GMP Excellence -->
+                    <div class="slide">
+                        <div class="slide-content">
+                            <div class="slide-icon">
+                                <i data-lucide="shield-check" class="w-10 h-10 text-white"></i>
+                            </div>
+                            <h3>GMP Excellence</h3>
+                            <p>
+                                Our state-of-the-art facilities are WHO-GMP certified, ensuring every product meets international quality standards. 
+                                Our quality control systems include advanced analytical equipment and rigorous testing protocols.
+                            </p>
+                            <div class="space-y-3 mt-6">
+                                <div class="flex justify-between items-center">
+                                    <span>Quality Assurance</span>
+                                    <span class="text-teal-300 font-bold">100%</span>
+                                </div>
+                                <div class="w-full bg-white/20 rounded-full h-3">
+                                    <div class="bg-gradient-to-r from-teal-400 to-teal-600 h-3 rounded-full w-full"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: Production Lines -->
+                    <div class="slide">
+                        <div class="slide-content">
+                            <div class="slide-icon">
+                                <i data-lucide="cog" class="w-10 h-10 text-white"></i>
+                            </div>
+                            <h3>Production Lines</h3>
+                            <p>
+                                Our automated production facilities can manufacture over 700 million units annually across multiple dosage forms. 
+                                From tablets and capsules to syrups and injectables, we maintain consistent quality and efficiency.
+                            </p>
+                            <div class="grid grid-cols-2 gap-6 mt-6">
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold text-teal-300 mb-2">500M</div>
+                                    <div class="text-sm opacity-70">Tablets & Capsules</div>
+                                </div>
+                                <div class="text-center">
+                                    <div class="text-3xl font-bold text-teal-300 mb-2">200M</div>
+                                    <div class="text-sm opacity-70">Liquid Formulations</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 4: Global Corridors -->
+                    <div class="slide">
+                        <div class="slide-content">
+                            <div class="slide-icon">
+                                <i data-lucide="globe" class="w-10 h-10 text-white"></i>
+                            </div>
+                            <h3>Global Corridors</h3>
+                            <p>
+                                Our strategic distribution network spans 50+ countries across Europe, Middle East, Asia, and Africa. 
+                                With dedicated export teams and local partnerships, we ensure reliable delivery worldwide.
+                            </p>
+                            <div class="flex flex-wrap justify-center gap-3 mt-6">
+                                <span class="px-3 py-1 bg-teal-500/20 rounded-full text-sm">Europe</span>
+                                <span class="px-3 py-1 bg-teal-500/20 rounded-full text-sm">Middle East</span>
+                                <span class="px-3 py-1 bg-teal-500/20 rounded-full text-sm">Asia</span>
+                                <span class="px-3 py-1 bg-teal-500/20 rounded-full text-sm">Africa</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 5: Milestones -->
+                    <div class="slide">
+                        <div class="slide-content">
+                            <div class="slide-icon">
+                                <i data-lucide="calendar" class="w-10 h-10 text-white"></i>
+                            </div>
+                            <h3>Key Milestones</h3>
+                            <p>
+                                From our founding in Tehran to becoming a global pharmaceutical leader, our journey reflects 
+                                commitment to innovation, quality, and patient care worldwide.
+                            </p>
+                            <div class="space-y-3 mt-6 text-left">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-3 h-3 bg-teal-400 rounded-full"></div>
+                                    <span class="text-sm">2000: Company Founded</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-3 h-3 bg-teal-400 rounded-full"></div>
+                                    <span class="text-sm">2005: GMP Certification</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-3 h-3 bg-teal-400 rounded-full"></div>
+                                    <span class="text-sm">2010: International Expansion</span>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <div class="w-3 h-3 bg-teal-400 rounded-full"></div>
+                                    <span class="text-sm">2025: 50+ Countries Served</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Dots -->
+                <div class="slider-nav">
+                    <button class="nav-arrow nav-prev" id="prev-slide">
+                        <i data-lucide="chevron-left" class="w-6 h-6"></i>
+                    </button>
+                    <div class="nav-dots">
+                        <div class="nav-dot active" data-slide="0"></div>
+                        <div class="nav-dot" data-slide="1"></div>
+                        <div class="nav-dot" data-slide="2"></div>
+                        <div class="nav-dot" data-slide="3"></div>
+                        <div class="nav-dot" data-slide="4"></div>
+                    </div>
+                    <button class="nav-arrow nav-next" id="next-slide">
+                        <i data-lucide="chevron-right" class="w-6 h-6"></i>
+                    </button>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+
+            // Slider Functionality
+            document.addEventListener('DOMContentLoaded', function() {
+                const slides = document.getElementById('profile-slides');
+                const dots = document.querySelectorAll('#ramo-profile-block .nav-dot');
+                const progressFill = document.getElementById('progress-fill');
+                let currentSlide = 0;
+                let autoPlayInterval;
+                const totalSlides = 5;
+
+                function updateSlider() {
+                    // Update slide position
+                    slides.style.transform = `translateX(-${currentSlide * 20}%)`;
+                    
+                    // Update dots
+                    dots.forEach((dot, index) => {
+                        dot.classList.toggle('active', index === currentSlide);
+                    });
+                    
+                    // Reset progress
+                    progressFill.style.width = '0%';
+                    setTimeout(() => {
+                        progressFill.style.width = '100%';
+                    }, 50);
+                }
+
+                function nextSlide() {
+                    currentSlide = (currentSlide + 1) % totalSlides;
+                    updateSlider();
+                }
+
+                function goToSlide(slideIndex) {
+                    currentSlide = slideIndex;
+                    updateSlider();
+                    resetAutoPlay();
+                }
+
+                function resetAutoPlay() {
+                    clearInterval(autoPlayInterval);
+                    startAutoPlay();
+                }
+
+                function startAutoPlay() {
+                    autoPlayInterval = setInterval(nextSlide, 4000);
+                }
+
+                // Event listeners
+                dots.forEach((dot, index) => {
+                    dot.addEventListener('click', () => goToSlide(index));
+                });
+
+                // Arrow navigation
+                document.getElementById('prev-slide').addEventListener('click', () => {
+                    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+                    updateSlider();
+                    resetAutoPlay();
+                });
+
+                document.getElementById('next-slide').addEventListener('click', () => {
+                    nextSlide();
+                    resetAutoPlay();
+                });
+
+                // Pause on hover
+                document.getElementById('ramo-profile-block').addEventListener('mouseenter', () => {
+                    clearInterval(autoPlayInterval);
+                });
+
+                document.getElementById('ramo-profile-block').addEventListener('mouseleave', () => {
+                    startAutoPlay();
+                });
+
+                // Start autoplay
+                startAutoPlay();
+                updateSlider();
+            });
+        </script>
+    </div>
+    <!-- END BLOCK: company-profile.html -->
+
+    <!-- START BLOCK: 2-therapeutics-categories.html -->
+    <section class="py-12 md:py-24 relative z-20">
+        <div class="container mx-auto px-4 md:px-6">
+            
+            <style>
+                /* Glassmorphism Utilities */
+                .glass-panel {
+                    background: rgba(255, 255, 255, 0.03);
+                    backdrop-filter: blur(10px);
+                    border: 1px solid rgba(255, 255, 255, 0.08);
+                    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+                }
+                
+                .glass-panel:hover {
+                    background: rgba(255, 255, 255, 0.08);
+                    border-color: rgba(20, 184, 166, 0.3); /* Teal border on hover */
+                    transform: translateY(-4px);
+                    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+                }
+
+                .text-brand-light { color: #5aaeb8; }
+                .bg-brand { background-color: #174f57; }
+                
+                /* Icon container gradient */
+                .icon-gradient {
+                    background: linear-gradient(135deg, #174f57 0%, #2d7b84 100%);
+                }
+            </style>
+            <!-- Header Section -->
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <h3 class="text-brand-light font-bold text-sm tracking-wider uppercase mb-3 animate-pulse">Committed to Effective Therapies</h3>
+                <h2 class="text-3xl md:text-5xl font-black text-white mb-6 leading-tight">Ramopharmin Therapeutic Groups</h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-transparent via-[#174f57] to-transparent mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-400 text-lg leading-relaxed">
+                    Manufacturer of a wide range of pharmaceutical products meeting the highest international standards to improve public health.
+                </p>
+            </div>
+
+            <!-- Categories Grid -->
+            <!-- 1 col mobile, 2 col tablet, 3 col desktop -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- 1. Immunosuppressants -->
+                <a href="https://ramopharmin.org/immunosuppressants-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <!-- Hover Glow Effect -->
+                    <div class="absolute -left-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="shield-alert" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">Immunosuppressants</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">Calcineurin inhibitors and other immunosuppressants for organ transplantation.</p>
+                    </div>
+                </a>
+
+                <!-- 2. Anti-Parkinson -->
+                <a href="https://ramopharmin.org/anti-parkinson-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -left-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="brain-circuit" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">Anti-Parkinson Drugs</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">MAO‑B inhibitors and dopamine agonists for symptom control.</p>
+                    </div>
+                </a>
+
+                <!-- 3. Pain & Anti-inflammatory -->
+                <a href="https://ramopharmin.org/pain-anti-inflammatory-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -left-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="flame" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">Pain & Anti-inflammatory</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">NSAIDs and selective COX‑2 inhibitors for pain management.</p>
+                    </div>
+                </a>
+
+                <!-- 4. Cold & Respiratory -->
+                <a href="https://ramopharmin.org/cold-respiratory-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -left-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="wind" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">Cold & Respiratory</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">Antihistamines and decongestants to support respiratory health.</p>
+                    </div>
+                </a>
+
+                <!-- 5. Supplements -->
+                <a href="../product-category-therapeutics/category-page.html" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -left-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="sun" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">Supplements & Vitamins</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">A range of vitamins and minerals to support immune health.</p>
+                    </div>
+                </a>
+
+                <!-- 6. Laxatives -->
+                <a href="../product-category-therapeutics/gastrointestinal.html" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -left-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="droplets" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">Laxatives</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">Osmotic agents and GC‑C agonists for bowel regulation.</p>
+                    </div>
+                </a>
+
+                <!-- 7. Antispasmodics -->
+                <a href="https://ramopharmin.org/antispasmodics-urinary-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -left-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="activity" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">Antispasmodics & Urinary</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">Selective antimuscarinics for urinary disorders.</p>
+                    </div>
+                </a>
+
+                <!-- 8. Anti-Migraine -->
+                <a href="https://ramopharmin.org/anti-migraine-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -left-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="zap" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">Anti-Migraine</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">Triptans and CGRP antagonists for headache relief.</p>
+                    </div>
+                </a>
+
+                <!-- 9. Anti-Diabetes -->
+                <a href="https://ramopharmin.org/anti-diabetes-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -left-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="heart-pulse" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">Anti-Diabetes</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">DPP‑4 and SGLT2 inhibitors for blood sugar control.</p>
+                    </div>
+                </a>
+
+                 <!-- 10. CNS -->
+                 <a href="https://ramopharmin.org/cns-drugs-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -left-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="brain" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">Central Nervous System</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">GABA modulators and dopamine agents.</p>
+                    </div>
+                </a>
+
+                 <!-- 11. Gastrointestinal -->
+                 <a href="https://ramopharmin.org/gastrointestinal-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -left-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="utensils" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">Gastrointestinal Drugs</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">Proton pump inhibitors and therapies for gut health.</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Init Icons -->
+    <script>
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    </script>
+    <!-- END BLOCK: 2-therapeutics-categories.html -->
+
+    <!-- START BLOCK: 4-export-network.html -->
+    <div id="ramo-export-block" class="relative w-full overflow-hidden text-white" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; direction: ltr;">
+        <style>
+            #ramo-export-block .mesh-overlay { display: none; }
+            #ramo-export-block .orb { display: none; }
+
+            #ramo-export-block .glass-panel {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            #ramo-export-block .glow-border {
+                border: 1px solid rgba(90, 174, 184, 0.4);
+                box-shadow: 0 15px 40px -10px rgba(20, 184, 166, 0.5);
+            }
+
+            #ramo-export-block .badge {
+                background: rgba(15, 23, 42, 0.7);
+                border: 1px solid rgba(90, 174, 184, 0.4);
+            }
+
+            #ramo-export-block #export-map-container {
+                position: relative;
+                width: 100%;
+                min-height: 520px;
+                border-radius: 24px;
+                overflow: hidden;
+                outline: none;
+            }
+
+            #ramo-export-block #export-globe {
+                width: 100%;
+                height: 100%;
+                min-height: 520px;
+                border-radius: 20px;
+                overflow: hidden;
+                position: relative;
+            }
+
+            #ramo-export-block .globe-label {
+                font-family: "Segoe UI", Arial, sans-serif;
+                font-size: 12px;
+                font-weight: 700;
+                color: #e5f4f7;
+                padding: 4px 8px;
+                border-radius: 999px;
+                background: rgba(15,23,42,0.85);
+                border: 1px solid rgba(90,174,184,0.5);
+                white-space: nowrap;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.35);
+                transform: translate(-50%, -50%);
+                pointer-events: none;
+            }
+
+            @media (max-width: 768px) {
+                #ramo-export-block #export-map-container {
+                    min-height: 300px;
+                }
+                #ramo-export-block #export-globe {
+                    min-height: 300px;
+                }
+            }
+        </style>
+
+        <!-- Background -->
+        <div class="mesh-overlay"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+
+        <!-- Content -->
+        <div class="relative z-10 container mx-auto px-6 py-12 md:py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <!-- Text -->
+            <div class="space-y-8 max-w-xl">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full badge text-brand-light text-sm font-bold tracking-wide">
+                    <span class="w-2 h-2 rounded-full bg-[#14b8a6] animate-pulse"></span>
+                    Export Network
+                </div>
+
+                <div class="space-y-4">
+                    <h2 class="text-4xl lg:text-5xl font-black leading-tight m-0 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-slate-300">
+                        Expanding from Tehran to Strategic Hubs
+                    </h2>
+                    <p class="text-lg text-slate-300 leading-relaxed">
+                        Ramopharmin’s export program connects Tehran to key regional markets with assured quality, cold-chain integrity, and regulatory alignment. A single hub, multiple corridors.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="glass-panel rounded-2xl p-4 flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-[#174f57]/40 flex items-center justify-center text-brand-light">
+                            <i data-lucide="globe-2" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-white">Regulatory Ready</div>
+                            <p class="text-sm text-slate-400 mt-1">GMP compliant dossiers, multilingual packaging, and market-specific labeling.</p>
+                        </div>
+                    </div>
+                    <div class="glass-panel rounded-2xl p-4 flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-[#3b82f6]/30 flex items-center justify-center text-blue-200">
+                            <i data-lucide="truck" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-white">Secured Logistics</div>
+                            <p class="text-sm text-slate-400 mt-1">Validated cold-chain partners with live telemetry across all routes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 pt-4">
+                    <div class="glass-panel rounded-2xl p-4 glow-border">
+                        <div class="text-2xl font-bold text-white">6</div>
+                        <div class="text-sm text-slate-400 mt-1">Active corridors</div>
+                    </div>
+                    <div class="glass-panel rounded-2xl p-4">
+                        <div class="text-2xl font-bold text-white">72h</div>
+                        <div class="text-sm text-slate-400 mt-1">Avg. delivery to GCC</div>
+                    </div>
+                    <div class="glass-panel rounded-2xl p-4">
+                        <div class="text-2xl font-bold text-white">24/7</div>
+                        <div class="text-sm text-slate-400 mt-1">Quality oversight</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Globe -->
+            <div class="glass-panel rounded-[30px] p-4 glow-border">
+                <div id="export-map-container" class="bg-black/40">
+                    <div id="export-globe" class="relative z-10"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+    (() => {
+        const container = document.getElementById('export-globe');
+        if (!container || typeof THREE === 'undefined') return;
+
+        const scene = new THREE.Scene();
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.outputEncoding = THREE.sRGBEncoding;
+        container.appendChild(renderer.domElement);
+
+        // Label renderer for crisp text
+        const labelRenderer = new THREE.CSS2DRenderer();
+        labelRenderer.setSize(container.clientWidth, container.clientHeight);
+        labelRenderer.domElement.style.position = 'absolute';
+        labelRenderer.domElement.style.top = '0';
+        labelRenderer.domElement.style.left = '0';
+        labelRenderer.domElement.style.pointerEvents = 'none';
+        container.appendChild(labelRenderer.domElement);
+
+        const camera = new THREE.PerspectiveCamera(30, 1, 0.1, 1000);
+        camera.position.set(0, 0, 7.8);
+
+        // Lighting
+        scene.add(new THREE.AmbientLight(0x4b5563, 1.2));
+        const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
+        keyLight.position.set(5, 2, 5);
+        scene.add(keyLight);
+        const rimLight = new THREE.PointLight(0x14b8a6, 1.2, 25);
+        rimLight.position.set(-6, -3, -4);
+        scene.add(rimLight);
+
+        // Globe
+        const radius = 2.6;
+        const globeGeometry = new THREE.SphereGeometry(radius, 64, 64);
+        const textureLoader = new THREE.TextureLoader();
+        const surfaceTexture = textureLoader.load('https://threejs.org/examples/textures/planets/earth_lights_2048.png');
+        const bumpTexture = textureLoader.load('https://threejs.org/examples/textures/planets/earth_normal_2048.jpg');
+
+        const globeMaterial = new THREE.MeshPhongMaterial({
+            map: surfaceTexture,
+            bumpMap: bumpTexture,
+            bumpScale: 0.02,
+            emissive: 0x174f57,
+            emissiveIntensity: 0.25,
+            shininess: 18,
+            transparent: true,
+            opacity: 0.98
+        });
+        const globe = new THREE.Mesh(globeGeometry, globeMaterial);
+        scene.add(globe);
+
+        // Grid overlay on globe
+        const gridGeometry = new THREE.SphereGeometry(radius * 1.01, 32, 32);
+        const gridMaterial = new THREE.MeshBasicMaterial({ color: 0x5aaeb8, wireframe: true, transparent: true, opacity: 0.08 });
+        const grid = new THREE.Mesh(gridGeometry, gridMaterial);
+        scene.add(grid);
+
+        // Locations
+        const hubs = {
+            tehran: { name: 'Tehran', lat: 35.6892, lng: 51.3890 },
+            ankara: { name: 'Ankara', lat: 39.9334, lng: 32.8597 },
+            istanbul: { name: 'Istanbul', lat: 41.0082, lng: 28.9784 },
+            muscat: { name: 'Muscat', lat: 23.5859, lng: 58.4059 },
+            dubai: { name: 'Dubai', lat: 25.2048, lng: 55.2708 },
+            baghdad: { name: 'Baghdad', lat: 33.3128, lng: 44.3615 },
+            kabul: { name: 'Kabul', lat: 34.5553, lng: 69.2075 },
+            ashgabat: { name: 'Ashgabat', lat: 37.9601, lng: 58.3261 },
+            islamabad: { name: 'Islamabad', lat: 33.6844, lng: 73.0479 },
+            baku: { name: 'Baku', lat: 40.4093, lng: 49.8671 },
+            yerevan: { name: 'Yerevan', lat: 40.1792, lng: 44.4991 }
+        };
+
+        const markerGroup = new THREE.Group();
+        scene.add(markerGroup);
+
+        const labelGroup = new THREE.Group();
+        scene.add(labelGroup);
+
+        const lineGroup = new THREE.Group();
+        scene.add(lineGroup);
+
+        function latLngToVector3(lat, lng, r) {
+            const phi = THREE.MathUtils.degToRad(90 - lat);
+            const theta = THREE.MathUtils.degToRad(lng + 180);
+            const x = -r * Math.sin(phi) * Math.cos(theta);
+            const z = r * Math.sin(phi) * Math.sin(theta);
+            const y = r * Math.cos(phi);
+            return new THREE.Vector3(x, y, z);
+        }
+
+        // Markers
+        const markerMaterial = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0.9 });
+
+        Object.values(hubs).forEach((hub) => {
+            const isCenter = hub.name === 'Tehran';
+
+            const marker = new THREE.Mesh(
+                new THREE.SphereGeometry(isCenter ? 0.07 : 0.045, 18, 18),
+                new THREE.MeshBasicMaterial({
+                    color: isCenter ? 0x14b8a6 : 0xffffff,
+                    transparent: true,
+                    opacity: isCenter ? 1 : 0.9
+                })
+            );
+            marker.position.copy(latLngToVector3(hub.lat, hub.lng, radius + 0.02));
+            markerGroup.add(marker);
+
+            if (isCenter) {
+                const halo = new THREE.Mesh(
+                    new THREE.RingGeometry(0.11, 0.16, 32),
+                    new THREE.MeshBasicMaterial({ color: 0x14b8a6, transparent: true, opacity: 0.35, side: THREE.DoubleSide })
+                );
+                halo.position.copy(marker.position);
+                halo.lookAt(new THREE.Vector3(0, 0, 0));
+                markerGroup.add(halo);
+            }
+
+            const labelDiv = document.createElement('div');
+            labelDiv.className = 'globe-label';
+            labelDiv.textContent = hub.name;
+            if (isCenter) {
+                labelDiv.style.background = 'rgba(20,184,166,0.9)';
+                labelDiv.style.border = '1px solid rgba(255,255,255,0.6)';
+                labelDiv.style.boxShadow = '0 0 18px rgba(20,184,166,0.6)';
+            }
+            const labelObj = new THREE.CSS2DObject(labelDiv);
+            const basePos = latLngToVector3(hub.lat, hub.lng, radius + (isCenter ? 0.16 : 0.12));
+            labelObj.position.copy(basePos);
+            labelGroup.add(labelObj);
+        });
+
+        // Connections
+        const routes = [
+            ['tehran', 'ankara'],
+            ['tehran', 'istanbul'],
+            ['tehran', 'muscat'],
+            ['tehran', 'dubai'],
+            ['tehran', 'baghdad'],
+            ['tehran', 'kabul'],
+            ['tehran', 'ashgabat'],
+            ['tehran', 'islamabad'],
+            ['tehran', 'baku'],
+            ['tehran', 'yerevan']
+        ];
+
+        const animatedRoutes = [];
+
+        routes.forEach(([fromKey, toKey]) => {
+            const start = latLngToVector3(hubs[fromKey].lat, hubs[fromKey].lng, radius + 0.02);
+            const end = latLngToVector3(hubs[toKey].lat, hubs[toKey].lng, radius + 0.02);
+            const mid = start.clone().add(end).multiplyScalar(0.5).normalize().multiplyScalar(radius * 1.4);
+
+            const curve = new THREE.QuadraticBezierCurve3(start, mid, end);
+            const points = curve.getPoints(80);
+
+            const lineGeometry = new THREE.BufferGeometry().setFromPoints(points);
+            const lineMaterial = new THREE.LineBasicMaterial({ color: 0x5aaeb8, transparent: true, opacity: 0.7 });
+            const line = new THREE.Line(lineGeometry, lineMaterial);
+            lineGroup.add(line);
+
+            // Moving spark along the route
+            const sparkMaterial = new THREE.PointsMaterial({ color: 0xffffff, size: 0.08, transparent: true, opacity: 0.95 });
+            const spark = new THREE.Points(new THREE.BufferGeometry().setFromPoints([points[0]]), sparkMaterial);
+            lineGroup.add(spark);
+
+            animatedRoutes.push({ curve, spark, progress: Math.random() });
+        });
+
+        // Resize handling
+        function resize() {
+            const { clientWidth, clientHeight } = container;
+            renderer.setSize(clientWidth, clientHeight);
+            labelRenderer.setSize(clientWidth, clientHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.8));
+            camera.aspect = clientWidth / clientHeight;
+            camera.updateProjectionMatrix();
+        }
+        resize();
+        window.addEventListener('resize', resize);
+
+        const rotationGroup = new THREE.Group();
+        rotationGroup.add(globe);
+        rotationGroup.add(grid);
+        rotationGroup.add(markerGroup);
+        rotationGroup.add(lineGroup);
+        rotationGroup.add(labelGroup);
+        scene.add(rotationGroup);
+
+        // Face the Middle East region (center near Tehran/Baghdad)
+        const focusVec = latLngToVector3(32, 47, radius);
+        const focusQuat = new THREE.Quaternion().setFromUnitVectors(
+            focusVec.clone().normalize(),
+            new THREE.Vector3(0, 0, 1)
+        );
+        rotationGroup.quaternion.copy(focusQuat);
+
+        // Static view (no autorotate)
+        let autoRotate = 0;
+
+        function animate() {
+            requestAnimationFrame(animate);
+
+            rotationGroup.rotation.y += autoRotate;
+
+            animatedRoutes.forEach((route) => {
+                route.progress = (route.progress + 0.0035) % 1;
+                const point = route.curve.getPointAt(route.progress);
+                route.spark.geometry.setFromPoints([point]);
+            });
+
+            renderer.render(scene, camera);
+            labelRenderer.render(scene, camera);
+        }
+        animate();
+    })();
+    </script>
+
+    <script>
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    </script>
+    </div>
+    <!-- END BLOCK: 4-export-network.html -->
+
+    <!-- START BLOCK: contact-export-agents.html -->
+    <div id="ramo-contact-block" class="relative w-full overflow-hidden text-white" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; direction: ltr;">
+        <style>
+            #ramo-contact-block .glass-panel {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+                border-radius: 16px;
+            }
+
+            #ramo-contact-block .form-input {
+                background: rgba(255, 255, 255, 0.05);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 8px;
+                color: white;
+                padding: 12px 16px;
+                width: 100%;
+                transition: all 0.3s ease;
+            }
+
+            #ramo-contact-block .form-input:focus {
+                border-color: rgba(90, 174, 184, 0.5);
+                box-shadow: 0 0 0 3px rgba(90, 174, 184, 0.1);
+                outline: none;
+            }
+
+            #ramo-contact-block .form-input::placeholder {
+                color: rgba(255, 255, 255, 0.6);
+            }
+
+            #ramo-contact-block .btn-submit {
+                background: linear-gradient(135deg, #174f57 0%, #0f363d 100%);
+                border: 1px solid rgba(255,255,255,0.1);
+                color: white;
+                padding: 12px 24px;
+                border-radius: 8px;
+                font-weight: 600;
+                transition: all 0.3s ease;
+                cursor: pointer;
+                width: 100%;
+            }
+
+            #ramo-contact-block .btn-submit:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 8px 25px -8px rgba(23, 79, 87, 0.5);
+                border-color: rgba(90, 174, 184, 0.3);
+            }
+
+            #ramo-contact-block .badge {
+                background: rgba(15, 23, 42, 0.7);
+                border: 1px solid rgba(90, 174, 184, 0.4);
+                border-radius: 999px;
+                padding: 8px 16px;
+                display: inline-flex;
+                align-items: center;
+                gap: 8px;
+            }
+
+            #ramo-contact-block h2 {
+                text-shadow: 0 0 15px rgba(90, 174, 184, 0.6), 0 0 30px rgba(90, 174, 184, 0.4), 0 0 45px rgba(90, 174, 184, 0.2);
+            }
+        </style>
+
+        <div class="relative z-10 container mx-auto px-6 py-12 md:py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Contact Form -->
+                <div class="glass-panel p-8">
+                    <form action="https://formspree.io/f/xanrbkab" method="POST">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label for="first-name" class="block text-sm font-medium text-white/80 mb-2">First Name *</label>
+                                <input type="text" id="first-name" name="first-name" required class="form-input" placeholder="Your first name">
+                            </div>
+                            <div>
+                                <label for="last-name" class="block text-sm font-medium text-white/80 mb-2">Last Name *</label>
+                                <input type="text" id="last-name" name="last-name" required class="form-input" placeholder="Your last name">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label for="company" class="block text-sm font-medium text-white/80 mb-2">Company/Organization *</label>
+                            <input type="text" id="company" name="company" required class="form-input" placeholder="Your company name">
+                        </div>
+
+                        <div>
+                            <label for="email" class="block text-sm font-medium text-white/80 mb-2">Email Address *</label>
+                            <input type="email" id="email" name="email" required class="form-input" placeholder="your.email@company.com">
+                        </div>
+
+                        <div>
+                            <label for="country" class="block text-sm font-medium text-white/80 mb-2">Country/Region</label>
+                            <input type="text" id="country" name="country" class="form-input" placeholder="Your country">
+                        </div>
+
+                        <div>
+                            <label for="message" class="block text-sm font-medium text-white/80 mb-2">Message *</label>
+                            <textarea id="message" name="message" rows="4" required class="form-input resize-none" placeholder="Tell us about your interest in our products and export opportunities..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn-submit text-xs md:text-base text-center">
+                            Send Message to Export Agents
+                        </button>
+
+                        <p class="text-xs text-white/50 text-center">
+                            By submitting this form, you agree to our privacy policy. We'll respond within 24 hours.
+                        </p>
+                    </form>
+                </div>
+
+                <!-- Text Content -->
+                <div class="space-y-8 max-w-sm md:max-w-xl text-center pl-0 md:pl-28">
+                    <div class="badge text-brand-light text-sm font-bold tracking-wide">
+                        <span class="w-2 h-2 rounded-full bg-[#14b8a6] animate-pulse"></span>
+                        Export Partnership
+                    </div>
+
+                    <div class="space-y-4">
+                        <h2 class="text-4xl lg:text-5xl font-black leading-tight m-0">
+                            Contact Our Export Agents
+                        </h2>
+                        <p class="text-lg text-white/80 leading-relaxed">
+                            Ready to expand your pharmaceutical business globally? Our experienced export agents are here to help you navigate international markets, establish distribution networks, and create customized solutions for your global expansion needs.
+                        </p>
+                        <p class="text-base text-white/70">
+                            Whether you're a distributor, pharmacy chain, or healthcare provider, we offer comprehensive support for importing our high-quality pharmaceutical products. Let's discuss partnership opportunities that drive mutual success.
+                        </p>
+                    </div>
+
+                    <div class="flex items-center justify-center gap-4 text-sm text-white/60">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="clock" class="w-4 h-4"></i>
+                            <span>Response within 24 hours</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="globe" class="w-4 h-4"></i>
+                            <span>Global expertise</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            }
+        </script>
+    </div>
+    <!-- END BLOCK: contact-export-agents.html -->
+
+    <!-- START BLOCK: 5-contract-manufacturing.html -->
+    <div id="ramo-contract-block" class="relative w-full overflow-hidden text-white" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; direction: ltr;">
+        <style>
+            #ramo-contract-block .mesh-overlay { display: none; }
+            #ramo-contract-block .orb { display: none; }
+
+            #ramo-contract-block .glass-panel {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.08);
+            }
+            #ramo-contract-block .badge {
+                background: rgba(15, 23, 42, 0.7);
+                border: 1px solid rgba(90, 174, 184, 0.4);
+            }
+            #ramo-contract-block .glow-border {
+                border: 1px solid rgba(90, 174, 184, 0.4);
+                box-shadow: 0 15px 40px -10px rgba(20, 184, 166, 0.5);
+            }
+        </style>
+
+        <div class="mesh-overlay"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+
+        <div class="relative z-10 container mx-auto px-6 py-12 md:py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8 max-w-xl">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full badge text-brand-light text-sm font-bold tracking-wide">
+                    <span class="w-2 h-2 rounded-full bg-[#14b8a6] animate-pulse"></span>
+                    Contract Manufacturing & Export
+                </div>
+                <div class="space-y-4">
+                    <h2 class="text-4xl lg:text-5xl font-black leading-tight m-0 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-slate-300">
+                        End-to-End CDMO with Global Release Readiness
+                    </h2>
+                    <p class="text-lg text-slate-300 leading-relaxed">
+                        Ramopharmin delivers GMP-certified contract manufacturing, tech transfer, and regional export launch—covering formulation, fill-finish, QP release, and market-specific dossiers.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div class="glass-panel rounded-2xl p-4 flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-[#174f57]/40 flex items-center justify-center text-brand-light">
+                            <i data-lucide="factory" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-white">Tech Transfer</div>
+                            <p class="text-sm text-slate-400 mt-1">Scale-up, validation, and process lock within ICH Q8/Q9/Q10 frameworks.</p>
+                        </div>
+                    </div>
+                    <div class="glass-panel rounded-2xl p-4 flex items-start gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-[#3b82f6]/30 flex items-center justify-center text-blue-200">
+                            <i data-lucide="shield-check" class="w-5 h-5"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-white">Regulatory Ready</div>
+                            <p class="text-sm text-slate-400 mt-1">Dossiers, QP release, and multilingual packs aligned to GCC, CIS, and MENA requirements.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-3 gap-4 pt-4">
+                    <div class="glass-panel rounded-2xl p-4 glow-border">
+                        <div class="text-2xl font-bold text-white">48h</div>
+                        <div class="text-sm text-slate-400 mt-1">Batch review SLA</div>
+                    </div>
+                    <div class="glass-panel rounded-2xl p-4">
+                        <div class="text-2xl font-bold text-white">QP</div>
+                        <div class="text-sm text-slate-400 mt-1">Qualified release</div>
+                    </div>
+                    <div class="glass-panel rounded-2xl p-4">
+                        <div class="text-2xl font-bold text-white">Cold</div>
+                        <div class="text-sm text-slate-400 mt-1">Validated cold-chain</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="glass-panel rounded-[30px] p-4 glow-border space-y-4">
+                <div class="flex justify-between items-center px-2">
+                    <div class="text-slate-300 text-sm">Priority corridors</div>
+                    <div class="flex items-center gap-2 text-xs text-brand-light">
+                        <span class="w-2 h-2 rounded-full bg-[#14b8a6] animate-pulse"></span>
+                        Live telemetry
+                    </div>
+                </div>
+                <div class="glass-panel rounded-2xl p-4 space-y-4 bg-white/5 border border-white/10">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-[#174f57]/30 flex items-center justify-center text-brand-light">
+                                <i data-lucide="route" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="text-white font-bold text-lg">Tehran ➜ Dubai</div>
+                                <div class="text-slate-400 text-sm">Fast-track export, customs pre-clearance</div>
+                            </div>
+                        </div>
+                        <div class="text-brand-light text-sm font-semibold">72h</div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-[#3b82f6]/25 flex items-center justify-center text-blue-200">
+                                <i data-lucide="ship" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="text-white font-bold text-lg">Tehran ➜ Istanbul</div>
+                                <div class="text-slate-400 text-sm">Dual-mode: air/road with GDP partners</div>
+                            </div>
+                        </div>
+                        <div class="text-blue-200 text-sm font-semibold">96h</div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-[#14b8a6]/25 flex items-center justify-center text-brand-light">
+                                <i data-lucide="thermometer-snowflake" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <div class="text-white font-bold text-lg">Tehran ➜ Muscat</div>
+                                <div class="text-slate-400 text-sm">Cold-chain integrity with live sensors</div>
+                            </div>
+                        </div>
+                        <div class="text-brand-light text-sm font-semibold">78h</div>
+                    </div>
+                </div>
+
+                <div class="glass-panel rounded-2xl p-4 flex flex-col gap-3">
+                    <div class="flex items-center gap-2 text-brand-light text-sm font-bold uppercase tracking-wide">
+                        <span class="w-2 h-2 rounded-full bg-[#14b8a6] animate-pulse"></span>
+                        CDMO Scope
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 text-sm text-slate-200">
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="beaker" class="w-4 h-4 text-brand-light"></i>
+                            <span>Formulation & scale-up</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="package-check" class="w-4 h-4 text-brand-light"></i>
+                            <span>Fill-finish + packaging</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="certificate" class="w-4 h-4 text-brand-light"></i>
+                            <span>Stability & QP release</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i data-lucide="globe-2" class="w-4 h-4 text-brand-light"></i>
+                            <span>Export dossiers & labeling</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+    </script>
+    </div>
+    <!-- END BLOCK: 5-contract-manufacturing.html -->
+
+    <!-- START BLOCK: 6-mission-statement.html -->
+    <section class="w-full py-20 relative z-10">
+        <div class="container mx-auto px-6">
+            
+            <style>
+                /* Glassmorphism Utilities */
+                .glass-badge {
+                    background: rgba(20, 184, 166, 0.1);
+                    border: 1px solid rgba(20, 184, 166, 0.2);
+                    backdrop-filter: blur(8px);
+                }
+                
+                /* New Image Grid Styles */
+                .mission-grid {
+                    display: grid;
+                    grid-template-columns: repeat(12, 1fr);
+                    grid-template-rows: repeat(2, 200px);
+                    gap: 16px;
+                    width: 100%;
+                }
+
+                .grid-item {
+                    position: relative;
+                    border-radius: 20px;
+                    overflow: hidden;
+                    border: 1px solid rgba(255,255,255,0.1);
+                    box-shadow: 0 10px 30px -5px rgba(0,0,0,0.3);
+                    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+                }
+
+                .grid-item:hover {
+                    transform: translateY(-5px);
+                    border-color: rgba(20, 184, 166, 0.5);
+                    box-shadow: 0 20px 40px -5px rgba(0,0,0,0.5);
+                }
+
+                .grid-item img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                    transition: transform 0.7s ease;
+                }
+
+                .grid-item:hover img {
+                    transform: scale(1.1);
+                }
+
+                /* Grid Spans */
+                .item-main {
+                    grid-column: span 7;
+                    grid-row: span 2;
+                }
+                .item-secondary {
+                    grid-column: span 5;
+                    grid-row: span 1;
+                }
+                .item-tertiary {
+                    grid-column: span 5;
+                    grid-row: span 1;
+                }
+
+                /* Overlay & Caption */
+                .item-overlay {
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(to top, rgba(15, 23, 42, 0.8), transparent);
+                    opacity: 0.8;
+                    transition: opacity 0.3s;
+                }
+                .grid-item:hover .item-overlay {
+                    opacity: 0.6;
+                }
+
+                .item-caption {
+                    position: absolute;
+                    bottom: 16px;
+                    right: 16px;
+                    left: 16px;
+                    z-index: 10;
+                }
+
+                .caption-badge {
+                    display: inline-flex;
+                    align-items: center;
+                    gap: 6px;
+                    background: rgba(255,255,255,0.1);
+                    backdrop-filter: blur(4px);
+                    padding: 6px 10px;
+                    border-radius: 8px;
+                    font-size: 12px;
+                    color: #fff;
+                    border: 1px solid rgba(255,255,255,0.1);
+                    margin-bottom: 4px;
+                }
+
+                /* Responsive */
+                @media (max-width: 1024px) {
+                    .mission-grid { grid-template-rows: repeat(2, 160px); }
+                }
+                @media (max-width: 768px) {
+                    .mission-grid { display: flex; flex-direction: column; gap: 16px; }
+                    .grid-item { height: 200px; width: 100%; }
+                    .item-main { height: 250px; }
+                }
+
+                /* Text Justification */
+                .text-justify-custom {
+                    text-align: justify;
+                    text-justify: inter-word;
+                }
+            </style>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                
+                <!-- COLUMN 1: TEXT CONTENT -->
+                <div class="order-2 lg:order-1 text-left">
+                    
+                    <!-- Badge -->
+                    <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-badge text-teal-300 text-sm font-bold mb-6">
+                        <i data-lucide="shield-check" class="w-4 h-4"></i>
+                        <span>Committed to Quality</span>
+                    </div>
+
+                    <!-- Title -->
+                    <h2 class="text-3xl md:text-5xl font-black text-white mb-6 leading-tight">
+                        Manufacturing Quality and <br/>
+                        <span class="text-transparent bg-clip-text bg-gradient-to-l from-teal-200 to-white">Continuous R&amp;D</span>
+                    </h2>
+
+                    <!-- Divider -->
+                    <div class="w-20 h-1.5 bg-[#174f57] rounded-full mb-8 shadow-lg shadow-teal-900/50"></div>
+
+                    <!-- Body Text -->
+                    <div class="space-y-6 text-slate-300 text-lg leading-relaxed text-justify-custom">
+                        <p>
+                            Manufacturing quality and continuous research &amp; development are two fundamental pillars for the growth and advancement of the pharmaceutical industry and play a vital role in safeguarding public health and improving quality of life.
+                        </p>
+                        <p>
+                            Without sustained investment in these areas, achieving safe, effective medicines that meet international standards is not possible. At Ramopharmin, we believe producing high-quality pharmaceuticals is not only a professional responsibility but also an <span class="text-white font-bold border-b border-teal-500/50">ethical commitment</span> to public health.
+                        </p>
+                        <p>
+                            Therefore, relying on modern technologies, strict adherence to international standards, and ongoing development of research processes, we are committed to advancing the pharmaceutical industry and improving the health of our fellow citizens.
+                        </p>
+                    </div>
+
+                    <!-- Signature / Trust Indicators -->
+                    <div class="mt-8 flex items-center gap-6 pt-6 border-t border-white/5">
+                        <div class="flex -space-x-3 space-x-reverse">
+                            <div class="w-10 h-10 rounded-full bg-slate-700 border-2 border-[#0f172a] flex items-center justify-center text-xs text-white shadow-lg">GMP</div>
+                            <div class="w-10 h-10 rounded-full bg-slate-600 border-2 border-[#0f172a] flex items-center justify-center text-xs text-white shadow-lg">ISO</div>
+                            <div class="w-10 h-10 rounded-full bg-slate-500 border-2 border-[#0f172a] flex items-center justify-center text-xs text-white shadow-lg">+50</div>
+                        </div>
+                        <div class="text-sm text-slate-400">
+                            <span class="block font-bold text-white">Global Standards</span>
+                            Quality Assurance &amp; Safety
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- COLUMN 2: REDESIGNED IMAGE GRID (Bento Style) -->
+                <div class="order-1 lg:order-2">
+                    <div class="mission-grid">
+                        
+                        <!-- Main Large Image -->
+                        <div class="grid-item item-main group">
+                            <img src="https://ramopharmin.org/wp-content/uploads/2025/10/Quality-Control-in-the-Pharmaceutical-Industry-2048x1367-1.webp" alt="Quality Control">
+                            <div class="item-overlay"></div>
+                            <div class="item-caption">
+                                <div class="caption-badge group-hover:bg-teal-500 group-hover:border-teal-400 transition-colors">
+                                    <i data-lucide="microscope" class="w-3 h-3"></i>
+                                    <span>Quality Control Laboratory</span>
+                                </div>
+                                <h4 class="text-white font-bold text-lg drop-shadow-md">Attention to Detail</h4>
+                            </div>
+                        </div>
+
+                        <!-- Top Right Image -->
+                        <div class="grid-item item-secondary group">
+                            <img src="https://ramopharmin.org/wp-content/uploads/2025/10/pharmaceutical-manufacturing.webp" alt="Manufacturing">
+                            <div class="item-overlay"></div>
+                            <div class="item-caption">
+                                <div class="caption-badge group-hover:bg-teal-500 group-hover:border-teal-400 transition-colors">
+                                    <i data-lucide="settings" class="w-3 h-3"></i>
+                                    <span>Production Lines</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bottom Right Image -->
+                        <div class="grid-item item-tertiary group">
+                            <img src="https://ramopharmin.org/wp-content/uploads/2025/10/Pharmaceutical-GMPs-Scanlin-scaled-1.jpeg" alt="GMP Standards">
+                            <div class="item-overlay"></div>
+                            <div class="item-caption">
+                                <div class="caption-badge group-hover:bg-teal-500 group-hover:border-teal-400 transition-colors">
+                                    <i data-lucide="clipboard-check" class="w-3 h-3"></i>
+                                    <span>GMP Standards</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        lucide.createIcons();
+    </script>
+    <!-- END BLOCK: 6-mission-statement.html -->
+
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!-- Dependencies -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = {
+    corePlugins: {
+      preflight: false, // Disable base reset to prevent conflicts with WP theme
+    }
+  }
+</script>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+<script src="https://unpkg.com/lucide@latest"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<!-- Combined Header Bar -->
+<div id="ramo-header-bar" class="hidden md:flex w-full bg-gradient-to-l from-[#5aaeb8]/50 to-white text-slate-700 font-bold text-xs md:text-sm items-center justify-between px-4 py-3 border-b border-teal-200/30 shadow-sm z-50" style="font-family: 'Vazirmatn', 'Tahoma', 'Arial', sans-serif; direction: rtl;">
+    <!-- Holding Info (Right side) -->
+    <div class="flex items-center gap-2 flex-shrink-0">
+        <span class="text-slate-500 text-xs">زیرمجموعه</span>
+        <span id="holding-name" class="text-[#0d9488] font-semibold text-xs"></span>
+    </div>
+</div>
+
+<!-- Header Wrapper -->
+<div id="ramo-header-block" class="w-full bg-[#EFF2F3]" style="font-family: 'Vazirmatn', sans-serif; direction: rtl;">
+
+    <style>
+        /* Scoped Styles for Header */
+        #ramo-header-block {
+            background: #EFF2F3;
+            border-bottom: 1px solid #e2e8f0; /* slate-200 */
+            box-shadow: 0 4px 20px -10px rgba(0,0,0,0.05);
+        }
+
+        /* Prevent body scroll when mobile menu is open */
+        body.mobile-menu-open {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
+        }
+
+        /* Navigation Links */
+        #ramo-header-block .nav-link {
+            position: relative;
+            color: #475569; /* slate-600 */
+            transition: all 0.3s ease;
+            padding: 0.5rem 0;
+        }
+        #ramo-header-block .nav-link:hover {
+            color: #0f172a; /* slate-900 */
+        }
+        #ramo-header-block .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 0;
+            height: 2px;
+            background: #0d9488; /* teal-600 */
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px rgba(13, 148, 136, 0.3);
+        }
+        #ramo-header-block .nav-link:hover::after {
+            width: 100%;
+        }
+
+        /* Primary Button */
+        #ramo-header-block .btn-primary {
+            background: linear-gradient(135deg, #0d9488 0%, #115e59 100%); /* teal-600 to teal-800 */
+            border: 1px solid rgba(255,255,255,0.1);
+            color: white;
+            padding: 0.5rem 1.8rem;
+            min-height: 46px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+        #ramo-header-block .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            border-color: rgba(13, 148, 136, 0.3);
+        }
+        #ramo-header-block .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: 0.5s;
+        }
+        #ramo-header-block .btn-primary:hover::before {
+            left: 100%;
+        }
+
+        /* Dropdown Menu */
+        #ramo-header-block .dropdown-menu {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+            transition: all 0.2s ease;
+        }
+        #ramo-header-block .group:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        /* Language Buttons */
+        #ramo-header-block .lang-btn {
+            color: #475569; /* slate-600 */
+            background: rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.1);
+            padding: 0.25rem 0.75rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            min-width: 44px;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+        #ramo-header-block .lang-btn:hover {
+            background: rgba(0,0,0,0.1);
+            color: #0f172a; /* slate-900 */
+        }
+
+        /* Mobile menu button color */
+        #ramo-header-block #mobile-menu-btn {
+            background: #EFF2F3;
+            color: #475569; /* slate-600 */
+            border-color: transparent;
+        }
+
+        #ramo-header-block #mobile-menu-btn:hover {
+            background: #e2e8f0; /* slate-200 */
+        }
+    </style>
+
+    <header class="w-full z-50">
+        <div class="container mx-auto px-6 h-28 flex items-center justify-between">
+
+            <!-- Navigation (Right side in RTL) -->
+            <nav class="hidden md:flex items-center gap-10">
+                <a href="https://ramopharmin.org/" class="nav-link text-lg font-medium no-underline">خانه</a>
+
+                <!-- About Us Dropdown -->
+                <div class="relative group cursor-pointer py-4">
+                    <a href="https://ramopharmin.org/aboutus/" class="nav-link text-lg font-medium flex items-center gap-1.5 no-underline">
+                        درباره ما
+                        <i data-lucide="chevron-down" class="w-4 h-4 mt-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
+                    </a>
+                    <div class="dropdown-menu absolute top-full right-0 w-56 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-50">
+                        <div class="p-1">
+                            <a href="https://ramopharmin.org/board/" class="block px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-xl transition-colors text-base no-underline flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
+                                اعضای هیات مدیره
+                            </a>
+                            <a href="https://ramopharmin.org/managers/" class="block px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-xl transition-colors text-base no-underline flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
+                                مدیران اجرایی
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dropdown -->
+                <div class="relative group cursor-pointer py-4">
+                    <span class="nav-link text-lg font-medium flex items-center gap-1.5">
+                        محصولات
+                        <i data-lucide="chevron-down" class="w-4 h-4 mt-1 opacity-70 group-hover:rotate-180 transition-transform duration-300"></i>
+                    </span>
+                    <div class="dropdown-menu absolute top-full right-0 w-64 bg-white/95 backdrop-blur-md rounded-2xl shadow-2xl border border-slate-100 overflow-hidden z-50">
+                        <div class="p-1">
+                            <a href="https://ramopharmin.org/products/" class="block px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-xl transition-colors text-base no-underline flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
+                                بر اساس شکل دارویی
+                            </a>
+                            <a href="https://ramopharmin.org/category-by-therapeutics/" class="block px-4 py-3 text-slate-600 hover:bg-slate-50 hover:text-slate-900 rounded-xl transition-colors text-base no-underline flex items-center gap-2">
+                                <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
+                                بر اساس گروه درمانی
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://ramopharmin.org/salamat/" class="nav-link text-lg font-medium no-underline">مجله سلامت</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-slate-700 p-2 hover:bg-slate-100 rounded-xl transition-colors border border-transparent hover:border-slate-200 relative z-50">
+                <i data-lucide="menu" class="w-8 h-8"></i>
+            </button>
+
+            <!-- Logo & CTA Section (Left side in RTL) -->
+            <div class="flex items-center gap-4 md:gap-8 mobile-right-section">
+                <!-- Language Toggles -->
+                <div class="flex items-center gap-1.5">
+                    <button id="lang-en" class="lang-btn text-sm font-medium rounded-lg transition-colors">
+                        EN
+                    </button>
+                    <button id="lang-fa" class="lang-btn text-sm font-medium rounded-lg transition-colors">
+                        FA
+                    </button>
+                </div>
+
+                <!-- CTA Button -->
+                <a href="https://ramopharmin.org/contactus/" class="hidden lg:flex items-center justify-center gap-2 btn-primary text-base font-medium no-underline">
+                    <span>ارتباط با ما</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </a>
+
+                <!-- Logo -->
+                <a href="https://ramopharmin.org/" class="relative group logo-container block">
+                    <div class="absolute -inset-4 bg-teal-500/5 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                    <img src="https://ramopharmin.org/wp-content/uploads/2025/03/logo-new-3-scaled.png"
+                         alt="Ramopharmin Logo"
+                         class="relative object-contain transform transition-transform duration-300 group-hover:scale-105"
+                         style="height: 85px; width: auto; display: block;"
+                    >
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 bg-[#EFF2F3] z-40 transform translate-x-full transition-transform duration-300 md:hidden overflow-y-auto pt-32 px-6 pb-10">
+        <div class="flex flex-col gap-6">
+            <a href="https://ramopharmin.org/" class="text-xl font-medium text-slate-800 hover:text-teal-600 transition-colors no-underline">خانه</a>
+
+            <!-- Mobile Accordion: About Us -->
+            <div class="flex flex-col gap-3">
+                <button onclick="toggleMobileSubmenu('mobile-about-submenu')" class="flex items-center justify-between text-xl font-medium text-slate-800 w-full bg-transparent border-none p-0 cursor-pointer">
+                    <span>درباره ما</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5 opacity-70 transition-transform duration-300" id="icon-mobile-about-submenu"></i>
+                </button>
+                <div id="mobile-about-submenu" class="hidden flex-col gap-3 pr-4 border-r border-slate-200 mr-1">
+                    <a href="https://ramopharmin.org/aboutus/" class="text-lg text-slate-600 hover:text-slate-900 py-1 no-underline">درباره ما</a>
+                    <a href="https://ramopharmin.org/board/" class="text-lg text-slate-600 hover:text-slate-900 py-1 no-underline">اعضای هیات مدیره</a>
+                    <a href="https://ramopharmin.org/managers/" class="text-lg text-slate-600 hover:text-slate-900 py-1 no-underline">مدیران اجرایی</a>
+                </div>
+            </div>
+
+            <!-- Mobile Accordion: Products -->
+            <div class="flex flex-col gap-3">
+                <button onclick="toggleMobileSubmenu('mobile-products-submenu')" class="flex items-center justify-between text-xl font-medium text-slate-800 w-full bg-transparent border-none p-0 cursor-pointer">
+                    <span>محصولات</span>
+                    <i data-lucide="chevron-down" class="w-5 h-5 opacity-70 transition-transform duration-300" id="icon-mobile-products-submenu"></i>
+                </button>
+                <div id="mobile-products-submenu" class="hidden flex-col gap-3 pr-4 border-r border-slate-200 mr-1">
+                    <a href="https://ramopharmin.org/products/" class="text-lg text-slate-600 hover:text-slate-900 py-1 no-underline">بر اساس شکل دارویی</a>
+                    <a href="https://ramopharmin.org/category-by-therapeutics/" class="text-lg text-slate-600 hover:text-slate-900 py-1 no-underline">بر اساس گروه درمانی</a>
+                </div>
+            </div>
+
+            <a href="https://ramopharmin.org/salamat/" class="text-xl font-medium text-slate-800 hover:text-teal-600 transition-colors no-underline">مجله سلامت</a>
+        </div>
+    </div>
+
+    <script>
+        // Typing Effect for Holding Name
+        document.addEventListener('DOMContentLoaded', function() {
+            const holdingText = "هلدینگ خشت دژ ایلیا";
+            const holdingElement = document.getElementById('holding-name');
+            let charIndex = 0;
+            let isDeleting = false;
+
+            function typeWriter() {
+                if (!isDeleting) {
+                    // Typing effect
+                    holdingElement.textContent = holdingText.substring(0, charIndex + 1);
+                    charIndex++;
+
+                    if (charIndex === holdingText.length) {
+                        // Pause at end of text
+                        setTimeout(() => {
+                            isDeleting = true;
+                        }, 2000);
+                    }
+                } else {
+                    // Deleting effect
+                    holdingElement.textContent = holdingText.substring(0, charIndex);
+                    charIndex--;
+
+                    if (charIndex < 0) {
+                        // Reset for next cycle
+                        isDeleting = false;
+                        charIndex = 0;
+                        setTimeout(typeWriter, 500);
+                        return;
+                    }
+                }
+
+                const speed = isDeleting ? 100 : 150;
+                setTimeout(typeWriter, speed);
+            }
+
+            // Start the typing effect
+            typeWriter();
+        });
+
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        }
+
+        // Mobile Menu Logic
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        let isMenuOpen = false;
+
+        if(mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                isMenuOpen = !isMenuOpen;
+                if(isMenuOpen) {
+                    mobileMenu.classList.remove('translate-x-full');
+                    // Change icon to X
+                    mobileMenuBtn.innerHTML = '<i data-lucide="x" class="w-8 h-8"></i>';
+                } else {
+                    mobileMenu.classList.add('translate-x-full');
+                    // Change icon back to Menu
+                    mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-8 h-8"></i>';
+                }
+                if (typeof lucide !== 'undefined') {
+                    lucide.createIcons();
+                }
+            });
+        }
+
+        window.toggleMobileSubmenu = function(id) {
+            const submenu = document.getElementById(id);
+            const icon = document.getElementById('icon-' + id);
+            if(submenu.classList.contains('hidden')) {
+                submenu.classList.remove('hidden');
+                submenu.classList.add('flex');
+                icon.style.transform = 'rotate(180deg)';
+            } else {
+                submenu.classList.add('hidden');
+                submenu.classList.remove('flex');
+                icon.style.transform = 'rotate(0deg)';
+            }
+        }
+
+        // Language Toggle Logic
+        const langEn = document.getElementById('lang-en');
+        const langFa = document.getElementById('lang-fa');
+        let currentLang = 'fa';
+
+        langEn.addEventListener('click', () => {
+            currentLang = 'en';
+            // Placeholder: Switch to English version
+            alert('Switching to English version (placeholder)');
+        });
+
+        langFa.addEventListener('click', () => {
+            currentLang = 'fa';
+            // Placeholder: Switch to Farsi version
+            alert('Switching to Farsi version (placeholder)');
+        });
+    </script>
+</div>

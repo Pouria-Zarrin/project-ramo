@@ -1,0 +1,69 @@
+<!-- Company History & About — RTL, consistent with board/managers block styling -->
+<section class="board-block history-block" id="company-history" dir="rtl" aria-labelledby="history-title">
+  <header class="board-head">
+    <h2 id="history-title" class="trust-title">درباره ما</h2>
+    <div class="trust-subtitle" dir="ltr">RAMOPHARMIN PHARMACEUTICAL CO</div>
+    <div class="trust-line" role="presentation"></div>
+  </header>
+
+  <article class="about-text" aria-label="About RAMOPHARMIN">
+    <p>
+      کیفیت تولید و تحقیق و توسعه مستمر، دو رکن اساسی در رشد و پیشرفت صنعت پراهمیت داروسازی ایران محسوب می‌شوند و نقشی حیاتی در تأمین سلامت و بهبود کیفیت زندگی جامعه ایفا می‌کنند. بدون سرمایه‌گذاری مداوم در این حوزه‌ها، دستیابی به داروهای ایمن، مؤثر و مطابق با استانداردهای بین‌المللی امکان‌پذیر نخواهد بود. در راموفارمین، ما بر این باوریم که تولید محصولات دارویی با بالاترین سطح کیفیت نه‌تنها یک مسئولیت حرفه‌ای، بلکه تعهدی اخلاقی در قبال سلامت جامعه است. از این رو، با تکیه بر فناوری‌های نوین، رعایت دقیق استانداردهای بین‌المللی و توسعه مستمر فرآیندهای تحقیقاتی، به ارتقای صنعت داروسازی و بهبود سلامت هم‌میهنان عزیزمان پایبند هستیم.
+    </p>
+  </article>
+
+  <header class="board-head sub">
+    <h2 class="trust-title">تاریخچه ما</h2>
+    <div class="trust-subtitle" dir="ltr">RAMOPHARMIN PHARMACEUTICAL CO</div>
+    <div class="trust-line" role="presentation"></div>
+  </header>
+
+  <article class="about-text" aria-label="History of RAMOPHARMIN">
+    <p>
+      شرکت داروسازی راموفارمین در تاریخ 1348/02/24 و تحت شماره 13150 در اداره ثبت شرکت‌های تهران به ثبت رسیده است. نوع شرکت در ابتدا با مسئولیت محدود بوده، و پس از آن بر مبنای آگهی مندرج در روزنامه رسمی شماره 10372 مورخ 1359/07/13 به سهامی خاص تبدیل گردیده است. در تاریخ آبان ماه سال 1403 به منظور رشد و بهبود کیفیت، این شرکت به طور رسمی به بخش خصوصی واگذار و تحت تملک گروه سرمایه گذاری خشت در آمد. راموفارمین به عنوان یک برند با قدمت، افتخار دارد از تولیدکنندگان معتبر قرص، کپسول، شربت و قطره در کشور باشد که از جمله این تولیدات می توان به دارو های آزاتیوپرین، هیوسین،لاکتولوز، لوودوپا-کربیدوپا ، کاربامازپین، لیتیوم، گاباپنتین، فنوفیبرات، کلرودیازپوکساید، پرگابالین و ... اشاره کرد.
+    </p>
+  </article>
+
+  <footer class="board-foot">
+    <div class="policy-links">
+      <a href="/">صفحه اصلی</a>
+      <a href="/about-us/managers.html">مدیران ارشد</a>
+      <a href="/contact">تماس با ما</a>
+    </div>
+  </footer>
+</section>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700;800&display=swap');
+
+/* Reuse board-block design language for consistency */
+.board-block{
+  --maxw:1200px; --accent:#28206b; --bg:#eff2f3; --card:#ffffff; --border:#e6e6ea; --muted:#555;
+  margin:0 auto; max-width:var(--maxw); padding:70px 16px; background:var(--bg);
+  font-family:'Vazirmatn','Vazirmatn RD',system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Helvetica Neue",sans-serif;
+}
+.board-head{ display:flex; flex-direction:column; align-items:center; text-align:center; margin-bottom:28px; }
+.board-head.sub{ margin-top:32px; }
+.trust-eyebrow{ font-size:18px; color:var(--accent); font-weight:700; margin-bottom:10px; }
+.trust-title{ font-size:clamp(26px,2.6vw,38px); margin:0; font-weight:800; color:#111; }
+.trust-subtitle{ font-size:12px; color:#777; letter-spacing:.3px; margin-top:8px; }
+.trust-line{ width:70px; height:3px; background:var(--accent); border-radius:4px; margin-top:16px; margin-bottom:16px; }
+
+.about-text{ background:var(--card); border:1px solid var(--border); border-radius:12px; padding:50px; box-shadow:0 6px 16px rgba(0,0,0,.06); }
+.about-text p{ margin:0; line-height:1.8; color:#242424; font-size:15.5px; }
+
+/* Increase spacing between the two main blocks (About -> History) without margin collapse */
+.about-text + .board-head.sub::before{ content:""; display:block; height:48px; }
+@media (max-width:720px){
+  .about-text + .board-head.sub::before{ height:40px; }
+}
+
+.board-foot{ margin-top:18px; display:flex; justify-content:center; }
+.policy-links{ display:flex; gap:14px; }
+.policy-links a{ color:#666; text-decoration:none; font-size:13px; }
+.policy-links a:hover{ color:#111; }
+</style>
+
+<script>
+// Static content page; no JS needed for now
+</script>

@@ -1,0 +1,443 @@
+<!-- Dependencies -->
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+<script src="https://unpkg.com/lucide@latest"></script>
+
+<style>
+    body {
+        font-family: 'Vazirmatn', sans-serif;
+        margin: 0;
+        padding: 0;
+        /* Theme Background */
+        background: radial-gradient(circle at 10% 20%, #174f57 0%, rgb(11, 38, 59) 40%, rgb(2, 6, 23) 90%);
+        min-height: 100vh;
+    }
+
+    /* Glassmorphism Utilities */
+    .glass-panel {
+        background: rgba(255, 255, 255, 0.03);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .glass-panel:hover {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(20, 184, 166, 0.4);
+        transform: translateY(-5px);
+        box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.4);
+    }
+
+    .text-brand-light { color: #5aaeb8; }
+    .bg-brand { background-color: #174f57; }
+    
+    /* Slider container */
+    .slider-wrapper {
+        position: relative;
+        overflow: hidden;
+    }
+
+    .slider-track {
+        display: flex;
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* News card base width + margin */
+    .news-card {
+        flex: 0 0 350px;
+        margin: 0 12px;
+    }
+
+    /* Card Decoration Line */
+    .card-accent-line {
+        position: absolute;
+        right: 0;
+        top: 20px;
+        bottom: 20px;
+        width: 3px;
+        background: #14b8a6;
+        border-radius: 4px 0 0 4px;
+        opacity: 0.5;
+        transition: opacity 0.3s;
+    }
+    .glass-panel:hover .card-accent-line {
+        opacity: 1;
+        box-shadow: 0 0 10px #14b8a6;
+    }
+
+    .line-clamp-3 {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+</style>
+
+<!-- NEWS SECTION -->
+<section class="w-full py-20 relative z-10">
+    <div class="container mx-auto px-4 md:px-6">
+        
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row items-center justify-between mb-12 gap-6">
+            <div class="text-right">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="w-8 h-1 bg-[#174f57] rounded-full shadow-[0_0_10px_rgba(20,184,166,0.5)]"></span>
+                    <span class="text-brand-light text-sm font-bold uppercase tracking-wider">اتاق خبر</span>
+                </div>
+                <h2 class="text-3xl md:text-4xl font-black text-white leading-tight">اخبار و اطلاعیه‌های <span class="text-transparent bg-clip-text bg-gradient-to-l from-teal-200 to-white">راموفارمین</span></h2>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex gap-3">
+                <button type="button" id="news-prev-btn" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-white hover:bg-white/10 group">
+                    <i data-lucide="chevron-right" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
+                </button>
+                <button type="button" id="news-next-btn" class="w-12 h-12 rounded-full glass-panel flex items-center justify-center text-white hover:bg-white/10 group">
+                    <i data-lucide="chevron-left" class="w-6 h-6 group-hover:scale-110 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- News Slider Track -->
+        <div class="slider-wrapper">
+            <div class="slider-track" id="news-slider">
+                                <!-- 1. Rafarmin Women Release News -->
+                                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px]">
+                                    <div class="card-accent-line bg-pink-500"></div>
+                                    <div class="flex justify-between items-start mb-4" dir="rtl">
+                                        <div class="flex items-center gap-2 text-xs text-slate-400">
+                                            <i data-lucide="calendar" class="w-3 h-3"></i>
+                                            <time>۱۵ آذر ۱۴۰۴</time>
+                                        </div>
+                                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30">مسئولیت اجتماعی</span>
+                                    </div>
+                                    <div class="text-right flex-grow flex flex-col" dir="rtl">
+                                        <h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-pink-300 transition-colors">
+                                            پویش آزادسازی بانوان زندانی
+                                        </h3>
+                                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">
+                                            اقدام انسان‌دوستانه شرکت داروسازی رافارمین از شرکت‌های تابعه گروه سرمایه‌گذاری خشت در آزادسازی چهار بانوی زندانی مادر و سرپرست خانواده به مناسبت میلاد حضرت فاطمه (س)
+                                        </p>
+                                        <div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center">
+                                            <i data-lucide="heart-handshake" class="w-5 h-5 text-slate-600 group-hover:text-pink-400 transition-colors"></i>
+                                            <a href="https://ramopharmin.org/pouyesh/" class="text-sm font-bold text-pink-400 hover:text-white transition-colors flex items-center gap-1">
+                                                مشاهده خبر
+                                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <!-- 2. Interview News -->
+                                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px]">
+                                    <div class="card-accent-line bg-purple-500"></div>
+                                    
+                                    <!-- Header: Date & Tag -->
+                                    <div class="flex justify-between items-start mb-4" dir="rtl">
+                                        <div class="flex items-center gap-2 text-xs text-slate-400">
+                                            <i data-lucide="calendar" class="w-3 h-3"></i>
+                                            <time>۳۱ فروردین ۱۴۰۴</time>
+                                        </div>
+                                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">مصاحبه</span>
+                                    </div>
+
+                                    <!-- Content -->
+                                    <div class="text-right flex-grow flex flex-col" dir="rtl">
+                                        <h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-purple-300 transition-colors">
+                                            نگاهی به تحول راموفارمین؛ از نوسازی تا تمرکز بر صادرات
+                                        </h3>
+                                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">
+                                            مروری بر مسیر تحول شرکت پس از خصوصی‌سازی، سرمایه‌گذاری‌ها، و راهبرد صادرات‌محور برای ورود به بازارهای جهانی.
+                                        </p>
+                                        
+                                        <!-- Footer: Link & Icon -->
+                                        <div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center">
+                                            <i data-lucide="mic" class="w-5 h-5 text-slate-600 group-hover:text-purple-400 transition-colors"></i>
+                                            <a href="https://ramopharmin.org/doshanbe-daruyi/" class="text-sm font-bold text-purple-400 hover:text-white transition-colors flex items-center gap-1">
+                                                مشاهده خبر
+                                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </article>
+                                
+                                <!-- 3. Risk Scale News -->
+                                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px]">
+                                    <div class="card-accent-line bg-purple-500"></div>
+                                    
+                                    <div class="flex justify-between items-start mb-4" dir="rtl">
+                                        <div class="flex items-center gap-2 text-xs text-slate-400">
+                                            <i data-lucide="calendar" class="w-3 h-3"></i>
+                                            <time>آذر ۱۴۰۴</time>
+                                        </div>
+                                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-purple-500/20 text-purple-300 border border-purple-500/30">گفت‌وگو</span>
+                                    </div>
+
+                                    <div class="text-right flex-grow flex flex-col" dir="rtl">
+                                        <h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-purple-300 transition-colors">
+                                            صنعت ما دچار «ریسک مقیاس» است!
+                                        </h3>
+                                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">
+                                            گفت‌وگو با دکتر مهدی زرین، مدیرعامل راموفارمین درباره چالش‌های صنعت دارو، خصوصی‌سازی و مسیر تحول شرکت.
+                                        </p>
+                                        
+                                        <div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center">
+                                            <i data-lucide="mic" class="w-5 h-5 text-slate-600 group-hover:text-purple-400 transition-colors"></i>
+                                            <a href="https://ramopharmin.org/risk-industry/" class="text-sm font-bold text-purple-400 hover:text-white transition-colors flex items-center gap-1">
+                                                مشاهده خبر
+                                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <!-- 4. Event News -->
+                                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px]">
+                                    <div class="card-accent-line bg-amber-500"></div>
+                                    
+                                    <div class="flex justify-between items-start mb-4" dir="rtl">
+                                        <div class="flex items-center gap-2 text-xs text-slate-400">
+                                            <i data-lucide="calendar" class="w-3 h-3"></i>
+                                            <time>۲۵ اردیبهشت ۱۴۰۴</time>
+                                        </div>
+                                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">رویداد</span>
+                                    </div>
+
+                                    <div class="text-right flex-grow flex flex-col" dir="rtl">
+                                        <h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-amber-300 transition-colors">
+                                            راموفارمین در نمایشگاه بین‌المللی فارمکس
+                                        </h3>
+                                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">
+                                            حضور فعال در هفتمین نمایشگاه فارمکس خاورمیانه و تعاملات تخصصی با فعالان صنعت دارویی.
+                                        </p>
+                                        
+                                        <div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center">
+                                            <i data-lucide="building-2" class="w-5 h-5 text-slate-600 group-hover:text-amber-400 transition-colors"></i>
+                                            <a href="https://ramopharmin.org/pharmex-ramopharmin/" class="text-sm font-bold text-amber-400 hover:text-white transition-colors flex items-center gap-1">
+                                                مشاهده خبر
+                                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <!-- 5. GMP News -->
+                                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px]">
+                                    <div class="card-accent-line bg-emerald-500"></div>
+                                    
+                                    <div class="flex justify-between items-start mb-4" dir="rtl">
+                                        <div class="flex items-center gap-2 text-xs text-slate-400">
+                                            <i data-lucide="calendar" class="w-3 h-3"></i>
+                                            <time>۹ فروردین ۱۴۰۴</time>
+                                        </div>
+                                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">GMP</span>
+                                    </div>
+
+                                    <div class="text-right flex-grow flex flex-col" dir="rtl">
+                                        <h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-emerald-300 transition-colors">
+                                            آغاز طرح جامع اصلاحات GMP در راموفارمین
+                                        </h3>
+                                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">
+                                            گامی بزرگ برای ارتقای کیفیت و ایمنی دارو با همگام‌سازی خطوط تولید با آخرین استانداردهای جهانی.
+                                        </p>
+                                        
+                                        <div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center">
+                                            <i data-lucide="check-circle-2" class="w-5 h-5 text-slate-600 group-hover:text-emerald-400 transition-colors"></i>
+                                            <a href="https://ramopharmin.org/gmp/" class="text-sm font-bold text-emerald-400 hover:text-white transition-colors flex items-center gap-1">
+                                                مشاهده خبر
+                                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <!-- 6. Scientific Article -->
+                                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px]">
+                                    <div class="card-accent-line bg-cyan-500"></div>
+                                    
+                                    <div class="flex justify-between items-start mb-4" dir="rtl">
+                                        <div class="flex items-center gap-2 text-xs text-slate-400">
+                                            <i data-lucide="calendar" class="w-3 h-3"></i>
+                                            <time>۸ اسفند ۱۴۰۳</time>
+                                        </div>
+                                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">علمی</span>
+                                    </div>
+
+                                    <div class="text-right flex-grow flex flex-col" dir="rtl">
+                                        <h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-cyan-300 transition-colors">
+                                            مقاله دکتر صمدی درباره پیشرفت در درمان سرطان پروستات
+                                        </h3>
+                                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">
+                                            انتشار مقاله در مجله Urology درباره تست‌های ژنتیکی جدید و روش‌های درمان هدفمند در بیماران.
+                                        </p>
+                                        
+                                        <div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center">
+                                            <i data-lucide="file-text" class="w-5 h-5 text-slate-600 group-hover:text-cyan-400 transition-colors"></i>
+                                            <a href="https://ramopharmin.org/drsamadiarticle/" class="text-sm font-bold text-cyan-400 hover:text-white transition-colors flex items-center gap-1">
+                                                مشاهده خبر
+                                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <!-- 7. Rafarmin Women Release News -->
+                                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px]">
+                                    <div class="card-accent-line bg-pink-500"></div>
+                                    <div class="flex justify-between items-start mb-4" dir="rtl">
+                                        <div class="flex items-center gap-2 text-xs text-slate-400">
+                                            <i data-lucide="calendar" class="w-3 h-3"></i>
+                                            <time>۱۵ آذر ۱۴۰۴</time>
+                                        </div>
+                                        <span class="px-3 py-1 rounded-full text-xs font-bold bg-pink-500/20 text-pink-300 border border-pink-500/30">مسئولیت اجتماعی</span>
+                                    </div>
+                                    <div class="text-right flex-grow flex flex-col" dir="rtl">
+                                        <h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-pink-300 transition-colors">
+                                            پویش آزادسازی بانوان زندانی
+                                        </h3>
+                                        <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">
+                                            اقدام انسان‌دوستانه شرکت داروسازی رافارمین از شرکت‌های تابعه گروه سرمایه‌گذاری خشت در آزادسازی چهار بانوی زندانی مادر و سرپرست خانواده به مناسبت میلاد حضرت فاطمه (س)
+                                        </p>
+                                        <div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center">
+                                            <i data-lucide="heart-handshake" class="w-5 h-5 text-slate-600 group-hover:text-pink-400 transition-colors"></i>
+                                            <a href="/ramo-web-V2/news/news-article-rafarmin-women-release.html" class="text-sm font-bold text-pink-400 hover:text-white transition-colors flex items-center gap-1">
+                                                مشاهده خبر
+                                                <i data-lucide="arrow-left" class="w-4 h-4"></i>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </article>
+
+                                <!-- 8. Archive Link (Last Card) -->
+                                <article class="news-card glass-panel rounded-2xl p-6 relative group flex flex-col h-[320px] border-dashed border-2 !border-slate-700 hover:!border-teal-500">
+                                    <div class="flex justify-center items-center h-full flex-col text-center">
+                                        <div class="w-16 h-16 rounded-full bg-slate-800 flex items-center justify-center group-hover:bg-teal-900/50 transition-colors">
+                                            <i data-lucide="archive" class="w-8 h-8 text-slate-400 group-hover:text-teal-400"></i>
+                                        </div>
+                                        <div>
+                                            <h3 class="text-xl font-bold text-white mb-2">آرشیو اخبار</h3>
+                                            <p class="text-sm text-slate-400">مشاهده تمام اطلاعیه‌ها و گزارش‌های پیشین</p>
+                                        </div>
+                                        <a href="https://ramopharmin.org/news/" class="px-6 py-2 rounded-full bg-white/5 hover:bg-teal-600 text-white text-sm font-bold transition-all border border-white/10 mt-2">
+                                            ورود به آرشیو
+                                        </a>
+                                    </div>
+                                </article>
+
+
+            </div>
+        </div>
+
+        <!-- Indicator Dots -->
+        <div class="flex justify-center gap-2 mt-8" id="news-dots-container"></div>
+
+    </div>
+</section>
+
+<!-- Slider Script -->
+<script>
+    lucide.createIcons();
+
+    (function() {
+        const track = document.getElementById('news-slider');
+        const prevBtn = document.getElementById('news-prev-btn');
+        const nextBtn = document.getElementById('news-next-btn');
+        const dotsContainer = document.getElementById('news-dots-container');
+
+        if (!track) return;
+
+        const articles = Array.from(track.children);
+        const totalArticles = articles.length;
+        let currentIndex = 0;
+        let isAnimating = false;
+
+        // Card width including margin (350px + 24px margin)
+        const cardWidth = 374;
+
+        // Clone ALL articles multiple times for seamless infinite loop
+        // We'll add the full set of articles before and after for smooth preloading
+        const cloneBefore = articles.map(article => article.cloneNode(true));
+        const cloneAfter = articles.map(article => article.cloneNode(true));
+
+        // Add clones to track
+        cloneAfter.forEach(clone => track.appendChild(clone));
+        cloneBefore.reverse().forEach(clone => track.insertBefore(clone, track.firstChild));
+
+        // Set initial position (offset by totalArticles cloned cards)
+        currentIndex = totalArticles;
+        track.style.transform = `translateX(${currentIndex * cardWidth}px)`;
+
+        // Create indicator dots
+        for (let i = 0; i < totalArticles; i++) {
+            const dot = document.createElement('button');
+            dot.className = `w-2 h-2 rounded-full transition-all duration-300 ${i === 0 ? 'bg-brand w-6' : 'bg-slate-600'}`;
+            dot.addEventListener('click', () => goToSlide(i + totalArticles));
+            dotsContainer.appendChild(dot);
+        }
+
+        function updateDots() {
+            const realIndex = getRealIndex();
+            Array.from(dotsContainer.children).forEach((dot, i) => {
+                dot.className = `w-2 h-2 rounded-full transition-all duration-300 ${i === realIndex ? 'bg-brand w-6' : 'bg-slate-600'}`;
+            });
+        }
+
+        function getRealIndex() {
+            // Calculate the real index based on current position
+            let realIndex = (currentIndex - totalArticles) % totalArticles;
+            if (realIndex < 0) realIndex += totalArticles;
+            return realIndex;
+        }
+
+        function goToSlide(index) {
+            if (isAnimating) return;
+            isAnimating = true;
+            currentIndex = index;
+
+            track.style.transition = 'transform 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+            track.style.transform = `translateX(${currentIndex * cardWidth}px)`;
+
+            updateDots();
+
+            setTimeout(() => {
+                handleInfiniteLoop();
+                isAnimating = false;
+            }, 500);
+        }
+
+        function handleInfiniteLoop() {
+            // If we're in the cloned sections, seamlessly jump to the real position
+            if (currentIndex < totalArticles / 2) {
+                // Near the beginning - jump to equivalent position near the end
+                currentIndex = currentIndex + totalArticles;
+                track.style.transition = 'none';
+                track.style.transform = `translateX(${currentIndex * cardWidth}px)`;
+            } else if (currentIndex >= totalArticles * 2 - totalArticles / 2) {
+                // Near the end - jump to equivalent position near the beginning
+                currentIndex = currentIndex - totalArticles;
+                track.style.transition = 'none';
+                track.style.transform = `translateX(${currentIndex * cardWidth}px)`;
+            }
+        }
+
+        // Next button - slide one card to the left (new card from right)
+        if (nextBtn) {
+            nextBtn.addEventListener('click', () => {
+                if (isAnimating) return;
+                goToSlide(currentIndex - 1);
+            });
+        }
+
+        // Previous button - slide one card to the right (new card from left)
+        if (prevBtn) {
+            prevBtn.addEventListener('click', () => {
+                if (isAnimating) return;
+                goToSlide(currentIndex + 1);
+            });
+        }
+
+        // Initialize dots
+        updateDots();
+
+    })();
+</script>

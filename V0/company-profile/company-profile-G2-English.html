@@ -1,0 +1,2059 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Profile — Ramopharmin Pharmaceuticals</title>
+  <style>
+
+    /* ═══════════════════════════════════════════════
+       PRINT BASE
+    ═══════════════════════════════════════════════ */
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+
+    * {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 210mm;
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: #e8e8e8;
+    }
+
+    /* ═══════════════════════════════════════════════
+       PAGE STRUCTURE
+    ═══════════════════════════════════════════════ */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      background: #ffffff;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page-break-before {
+      page-break-before: always;
+      break-before: page;
+    }
+
+    .no-break {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* ═══════════════════════════════════════════════
+       BRAND TOKENS
+    ═══════════════════════════════════════════════ */
+    :root {
+      --teal:        #174f57;
+      --teal-light:  #5aaeb8;
+      --teal-mid:    #2d7b84;
+      --teal-dark:   #0f3338;
+      --slate-900:   #0f172a;
+      --slate-800:   #1e293b;
+      --slate-600:   #475569;
+      --slate-400:   #94a3b8;
+      --slate-200:   #e2e8f0;
+      --slate-50:    #f8fafc;
+    }
+
+    /* ═══════════════════════════════════════════════
+       COMPACT PAGE HEADER (inner pages)
+    ═══════════════════════════════════════════════ */
+    .page-header {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      padding: 7px 18mm;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .page-header img {
+      height: 104px;
+      width: auto;
+    }
+
+    .page-header-right {
+      text-align: right;
+      color: rgba(255,255,255,0.75);
+      font-size: 8pt;
+      letter-spacing: 0.05em;
+    }
+
+    .page-header-right strong {
+      color: #fff;
+      display: block;
+      font-size: 7.5pt;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════════════
+       PAGE FOOTER
+    ═══════════════════════════════════════════════ */
+    .page-footer {
+      background: var(--slate-900);
+      padding: 7px 18mm;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+      margin-top: auto;
+    }
+
+    .page-footer span {
+      color: rgba(255,255,255,0.5);
+      font-size: 7.5pt;
+      letter-spacing: 0.05em;
+    }
+
+    .page-footer .page-num {
+      color: var(--teal-light);
+      font-weight: 700;
+    }
+
+    /* ═══════════════════════════════════════════════
+       PAGE BODY (inner content area)
+    ═══════════════════════════════════════════════ */
+    .page-body {
+      padding: 10mm 18mm 8mm 18mm;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ═══════════════════════════════════════════════
+       SECTION HEADING
+    ═══════════════════════════════════════════════ */
+    .section-title {
+      font-size: 22pt;
+      font-weight: 900;
+      color: var(--teal);
+      line-height: 1.15;
+      margin-bottom: 3mm;
+      letter-spacing: -0.01em;
+    }
+
+    .section-accent {
+      width: 36px;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal-light), var(--teal-mid));
+      border-radius: 2px;
+      margin-bottom: 6mm;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--slate-200);
+      margin: 5mm 0;
+    }
+
+    /* ═══════════════════════════════════════════════
+       BODY TEXT
+    ═══════════════════════════════════════════════ */
+    .body-text {
+      font-size: 10.5pt;
+      color: var(--slate-800);
+      line-height: 1.65;
+    }
+
+    .body-text + .body-text {
+      margin-top: 4mm;
+    }
+
+    /* ═══════════════════════════════════════════════
+       FULL-BLEED IMAGE STRIP
+    ═══════════════════════════════════════════════ */
+    .img-strip {
+      width: 100%;
+      flex: 1;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ═══════════════════════════════════════════════
+       CAPTION OVERLAY ON IMAGE STRIP
+    ═══════════════════════════════════════════════ */
+    .img-caption-block {
+      position: relative;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .img-caption-block img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .img-caption-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 45%;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      padding: 7mm 8mm;
+    }
+
+    .img-caption-overlay p {
+      color: #ffffff;
+      font-size: 11pt;
+      font-weight: 900;
+      line-height: 1.3;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    /* ═══════════════════════════════════════════════
+       TABLES
+    ═══════════════════════════════════════════════ */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 9.5pt;
+    }
+
+    thead tr {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%);
+    }
+
+    thead th {
+      padding: 7px 10px;
+      text-align: left;
+      font-weight: 700;
+      font-size: 9pt;
+      color: #ffffff;
+      letter-spacing: 0.03em;
+    }
+
+    tbody tr:nth-child(even) {
+      background: var(--slate-50);
+    }
+
+    tbody td {
+      padding: 6px 10px;
+      color: var(--slate-800);
+      border-bottom: 1px solid var(--slate-200);
+      font-size: 9.5pt;
+    }
+
+    /* ═══════════════════════════════════════════════
+       PRODUCT GALLERY GRID
+    ═══════════════════════════════════════════════ */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 5mm;
+      margin-top: 4mm;
+    }
+
+    .gallery-grid-2col {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 5mm;
+      margin-top: 4mm;
+    }
+
+    .product-card {
+      border: 1px solid var(--slate-200);
+      border-radius: 8px;
+      overflow: hidden;
+      background: var(--slate-50);
+    }
+
+    .product-card-img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      object-fit: contain;
+      background: #ffffff;
+      padding: 4mm;
+      display: block;
+    }
+
+    .product-card-info {
+      padding: 3mm 4mm;
+      border-top: 1px solid var(--slate-200);
+      background: #fff;
+    }
+
+    .product-card-name {
+      font-size: 8.5pt;
+      font-weight: 700;
+      color: var(--teal);
+      line-height: 1.3;
+    }
+
+    .product-card-sub {
+      font-size: 7.5pt;
+      color: var(--slate-400);
+      margin-top: 1px;
+    }
+
+    /* ═══════════════════════════════════════════════
+       GALLERY SECTION HEADING (on product pages)
+    ═══════════════════════════════════════════════ */
+    .gallery-heading {
+      font-size: 10pt;
+      font-weight: 700;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 3mm;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .gallery-heading::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal-light), var(--teal-mid));
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════════════
+       CATEGORY LABEL BAND
+    ═══════════════════════════════════════════════ */
+    .category-label-band {
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%);
+      padding: 4mm 6mm;
+      border-radius: 6px;
+      margin-bottom: 5mm;
+    }
+
+    .category-label-band h2 {
+      color: #ffffff;
+      font-size: 14pt;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    /* ═══════════════════════════════════════════════
+       STAT BOXES (used on cover)
+    ═══════════════════════════════════════════════ */
+    .stat-row {
+      display: flex;
+      gap: 4mm;
+    }
+
+    .stat-box {
+      flex: 1;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 5mm 6mm;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 18pt;
+      font-weight: 900;
+      color: var(--teal-light);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 7.5pt;
+      color: rgba(255,255,255,0.65);
+      margin-top: 2px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════════════
+       ICON + TEXT ROW  (used in about / capabilities)
+    ═══════════════════════════════════════════════ */
+    .icon-row {
+      display: flex;
+      gap: 4mm;
+      margin-bottom: 4mm;
+    }
+
+    .icon-box {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--teal) 0%, var(--teal-mid) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .icon-box svg {
+      width: 18px;
+      height: 18px;
+      stroke: #fff;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .icon-content h4 {
+      font-size: 10pt;
+      font-weight: 700;
+      color: var(--teal);
+      margin-bottom: 1mm;
+    }
+
+    .icon-content p {
+      font-size: 9.5pt;
+      color: var(--slate-600);
+      line-height: 1.55;
+    }
+
+    /* ═══════════════════════════════════════════════
+       TWO-COLUMN LAYOUT
+    ═══════════════════════════════════════════════ */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7mm;
+    }
+
+    /* ═══════════════════════════════════════════════
+       BADGE PILL
+    ═══════════════════════════════════════════════ */
+    .badge {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 999px;
+      font-size: 7.5pt;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      background: #e0f7f5;
+      color: var(--teal);
+      border: 1px solid var(--teal-light);
+      margin-right: 2mm;
+      margin-bottom: 2mm;
+    }
+
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 1 — COVER
+════════════════════════════════════════════════════════ -->
+<div class="page" style="position:relative; overflow:hidden;">
+
+  <!-- Full-bleed background image -->
+  <img src="../company-images/photo_2025-11-12_12-58-37-cropped-4x.jpg"
+       style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center; display:block; z-index:0;" alt="">
+
+  <!-- Dark teal overlay — keeps text legible while image shows through -->
+  <div style="position:absolute; inset:0; background: linear-gradient(160deg, rgba(23,79,87,0.82) 0%, rgba(15,61,69,0.80) 45%, rgba(10,39,48,0.85) 100%); z-index:1;"></div>
+
+  <!-- Top accent bar -->
+  <div style="height: 4px; background: linear-gradient(90deg, #5aaeb8, #2d7b84, #14b8a6); flex-shrink:0; position:relative; z-index:2;"></div>
+
+  <!-- Content wrapper — full width -->
+  <div style="flex:1; display:flex; flex-direction:column; padding: 14mm 18mm 10mm 18mm; position:relative; z-index:2;">
+
+    <!-- Logo -->
+    <div style="margin-bottom: 14mm;">
+      <img src="../logos/english-full-logo-white.png"
+           style="height: 192px; width: auto;" alt="Ramopharmin Logo">
+    </div>
+
+    <!-- Tagline pill -->
+    <div style="margin-bottom: 6mm;">
+      <span style="display:inline-block; padding: 3px 12px; border-radius:999px; border: 1px solid rgba(90,174,184,0.5);
+                   color: #5aaeb8; font-size: 8pt; font-weight: 700; letter-spacing: 0.1em; text-transform:uppercase;">
+        EST. 1969 — TEHRAN, IRAN
+      </span>
+    </div>
+
+    <!-- Main title -->
+    <div style="margin-bottom: 10mm;">
+      <h1 style="font-size: 38pt; font-weight: 900; color: #ffffff; line-height: 1.1; letter-spacing:-0.02em; margin-bottom: 2mm; white-space: nowrap;">
+        Company Profile
+      </h1>
+      <div style="width: 48px; height: 3px; background: linear-gradient(90deg,#5aaeb8,#2d7b84); border-radius:2px;"></div>
+    </div>
+
+    <!-- Intro text -->
+    <p style="font-size: 10.5pt; color: rgba(255,255,255,0.78); line-height: 1.65; max-width: 130mm; margin-bottom: 10mm;">
+      With over five decades of experience, Ramopharmin Pharmaceutical Co. is a driving force in Iran's pharmaceutical sector — dedicated to innovation, quality, and worldwide standards in healthcare.
+    </p>
+
+    <!-- Stat boxes -->
+    <div class="stat-row" style="margin-bottom: 10mm;">
+      <div class="stat-box">
+        <div class="stat-num">55+</div>
+        <div class="stat-label">Years of Experience</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">100+</div>
+        <div class="stat-label">Product Portfolio</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">GMP</div>
+        <div class="stat-label">cGMP Certified</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-num">Global</div>
+        <div class="stat-label">Export Markets</div>
+      </div>
+    </div>
+
+    <!-- Mission quote band -->
+    <div style="border-left: 3px solid #5aaeb8; padding: 4mm 6mm; margin-bottom: 8mm; background: rgba(255,255,255,0.05); border-radius: 0 6px 6px 0;">
+      <p style="font-size: 13pt; font-weight: 700; color: #ffffff; line-height: 1.4; font-style: italic; letter-spacing: 0.01em;">
+        "Dedicated to quality. Driven by innovation."
+      </p>
+      <p style="font-size: 8pt; color: rgba(255,255,255,0.5); margin-top: 2mm; letter-spacing: 0.06em; text-transform: uppercase;">
+        Ramopharmin Pharmaceutical Co. — Est. 1969
+      </p>
+    </div>
+
+    <!-- Product category rectangles -->
+    <div>
+      <p style="font-size: 7.5pt; font-weight: 700; color: rgba(255,255,255,0.45); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3mm;">Therapeutic Areas</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 2mm;">
+        <span style="display:inline-block; padding:3px 9px; border-radius:3px; font-size:7.5pt; font-weight:700; letter-spacing:0.04em; background:rgba(255,255,255,0.08); color:#5aaeb8; border:1px solid rgba(90,174,184,0.35);">Analgesic &amp; NSAIDs</span>
+        <span style="display:inline-block; padding:3px 9px; border-radius:3px; font-size:7.5pt; font-weight:700; letter-spacing:0.04em; background:rgba(255,255,255,0.08); color:#5aaeb8; border:1px solid rgba(90,174,184,0.35);">Cold &amp; Respiratory</span>
+        <span style="display:inline-block; padding:3px 9px; border-radius:3px; font-size:7.5pt; font-weight:700; letter-spacing:0.04em; background:rgba(255,255,255,0.08); color:#5aaeb8; border:1px solid rgba(90,174,184,0.35);">Antihistaminic</span>
+        <span style="display:inline-block; padding:3px 9px; border-radius:3px; font-size:7.5pt; font-weight:700; letter-spacing:0.04em; background:rgba(255,255,255,0.08); color:#5aaeb8; border:1px solid rgba(90,174,184,0.35);">CNS Agents</span>
+        <span style="display:inline-block; padding:3px 9px; border-radius:3px; font-size:7.5pt; font-weight:700; letter-spacing:0.04em; background:rgba(255,255,255,0.08); color:#5aaeb8; border:1px solid rgba(90,174,184,0.35);">Supplements</span>
+        <span style="display:inline-block; padding:3px 9px; border-radius:3px; font-size:7.5pt; font-weight:700; letter-spacing:0.04em; background:rgba(255,255,255,0.08); color:#5aaeb8; border:1px solid rgba(90,174,184,0.35);">Gastrointestinal</span>
+        <span style="display:inline-block; padding:3px 9px; border-radius:3px; font-size:7.5pt; font-weight:700; letter-spacing:0.04em; background:rgba(255,255,255,0.08); color:#5aaeb8; border:1px solid rgba(90,174,184,0.35);">Antidementia</span>
+        <span style="display:inline-block; padding:3px 9px; border-radius:3px; font-size:7.5pt; font-weight:700; letter-spacing:0.04em; background:rgba(255,255,255,0.08); color:#5aaeb8; border:1px solid rgba(90,174,184,0.35);">Anti-Parkinson</span>
+        <span style="display:inline-block; padding:3px 9px; border-radius:3px; font-size:7.5pt; font-weight:700; letter-spacing:0.04em; background:rgba(255,255,255,0.08); color:#5aaeb8; border:1px solid rgba(90,174,184,0.35);">Cardiovascular</span>
+        <span style="display:inline-block; padding:3px 9px; border-radius:3px; font-size:7.5pt; font-weight:700; letter-spacing:0.04em; background:rgba(255,255,255,0.08); color:#5aaeb8; border:1px solid rgba(90,174,184,0.35);">Antimigraine</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Bottom footer bar -->
+  <div style="background: rgba(0,0,0,0.35); padding: 5mm 18mm; flex-shrink:0;
+              display:flex; justify-content:space-between; align-items:center; border-top: 1px solid rgba(255,255,255,0.08);
+              position:relative; z-index:2;">
+    <span style="color:rgba(255,255,255,0.5); font-size:8pt; letter-spacing:0.05em;">www.ramopharmin.org</span>
+    <span style="color:rgba(255,255,255,0.5); font-size:8pt; letter-spacing:0.05em;">RAMOPHARMIN PHARMA</span>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 2 — ABOUT RAMOPHARMIN
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before">
+
+  <div class="page-header">
+    <img src="../logos/english-full-logo-white.png" alt="Ramopharmin">
+    <div class="page-header-right">
+      <strong>Company Profile</strong>
+      About Ramopharmin
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <h2 class="section-title">About<br>Ramopharmin</h2>
+    <div class="section-accent"></div>
+
+    <p class="body-text">
+      Founded in 1969 and headquartered in Tehran, Ramopharmin Pharmaceutical Co. has established itself as one of Iran's most reputable and enduring pharmaceutical manufacturers. The company's approach is rooted in a dual commitment: maintaining the highest standards of quality in all products and investing in continuous research and development to drive innovation.
+    </p>
+    <p class="body-text" style="margin-top:4mm;">
+      This philosophy ensures the ongoing delivery of medicines that meet rigorous international standards for safety, efficacy, and reliability — serving millions of patients across Iran and global markets.
+    </p>
+
+    <div class="divider"></div>
+
+    <!-- Icon rows -->
+    <div style="margin-bottom: 5mm;">
+      <div class="icon-row">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+        </div>
+        <div class="icon-content">
+          <h4>Pharmaceutical Excellence</h4>
+          <p>Over five decades of manufacturing expertise producing tablets, capsules, syrups, and drops to the highest international quality standards.</p>
+        </div>
+      </div>
+      <div class="icon-row">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+        </div>
+        <div class="icon-content">
+          <h4>Heritage & Trust</h4>
+          <p>Established in 1969, Ramopharmin has built an unbroken track record of reliability, safety, and scientific integrity across every product line.</p>
+        </div>
+      </div>
+      <div class="icon-row">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        </div>
+        <div class="icon-content">
+          <h4>Tehran, Iran</h4>
+          <p>Headquartered in District 21, Valiasr Blvd, Tehran — our state-of-the-art facilities serve domestic and international markets alike.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Building image with caption overlay -->
+  <div class="img-caption-block" style="height: 72mm; flex-shrink:0;">
+    <img src="../company-images/70 x 50(2).jpg"
+         style="width:100%; height:100%; object-fit:cover; display:block;" alt="Ramopharmin Facility">
+    <div style="position:absolute; inset:0; background: linear-gradient(90deg, rgba(23,79,87,0.88) 0%, rgba(23,79,87,0.5) 50%, rgba(23,79,87,0) 100%);
+                display:flex; align-items:center; padding: 8mm 12mm;">
+      <div>
+        <p style="color:#5aaeb8; font-size:8pt; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:2mm;">Ramopharmin Pharmaceutical Co.</p>
+        <p style="color:#fff; font-size:16pt; font-weight:900; line-height:1.2; text-transform:uppercase; margin-bottom:3mm;">Dedicated to Quality<br>Driven by Innovation</p>
+        <p style="color:rgba(255,255,255,0.7); font-size:9pt; line-height:1.5;">District 21, Valiasr Blvd, Tehran, Iran · www.ramopharmin.org</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <span>Ramopharmin Pharmaceutical Co.</span>
+    <span class="page-num">01</span>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 3 — MANUFACTURING EXPERTISE
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before" style="position:relative; overflow:hidden;">
+
+  <!-- Vertical photo on right side with left fade -->
+  <div style="position:absolute; top:0; right:0; width:42%; height:100%; z-index:0;">
+    <img src="../company-images/DSC_8519 جمعی copy (1).jpg"
+         style="width:100%; height:100%; object-fit:cover; object-position:center top; display:block;" alt="Ramopharmin Team">
+    <div style="position:absolute; inset:0; background: linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0.7) 35%, rgba(255,255,255,0) 100%);"></div>
+  </div>
+
+  <div class="page-header" style="position:relative; z-index:1;">
+    <img src="../logos/english-full-logo-white.png" alt="Ramopharmin">
+    <div class="page-header-right">
+      <strong>Company Profile</strong>
+      Manufacturing Expertise
+    </div>
+  </div>
+
+  <div class="page-body" style="position:relative; z-index:1; width:62%; padding-top:6mm; padding-bottom:5mm; overflow:hidden;">
+
+    <h2 class="section-title" style="margin-bottom:2mm;">Manufacturing<br>Expertise &amp; Capabilities</h2>
+    <div class="section-accent" style="margin-bottom:4mm;"></div>
+
+    <p class="body-text">
+      Ramopharmin specializes in the production of a wide range of pharmaceutical dosage forms — tablets, capsules, syrups, and drops. Our modern manufacturing facilities operate in full compliance with current Good Manufacturing Practice (cGMP) guidelines, ensuring every product meets the most rigorous quality standards.
+    </p>
+    <p class="body-text" style="margin-top:2.5mm;">
+      Ongoing investment in new machinery, advanced laboratory systems, and high-grade infrastructure allows Ramopharmin to efficiently adapt to global regulatory requirements and diverse market demands.
+    </p>
+
+    <div class="divider" style="margin:3mm 0;"></div>
+
+    <!-- Capabilities grid -->
+    <div class="two-col" style="margin-bottom: 3mm;">
+      <div class="no-break">
+        <h4 style="font-size:9.5pt; font-weight:700; color:var(--teal); margin-bottom:2mm;">Dosage Forms</h4>
+        <div>
+          <span class="badge">Tablets</span>
+          <span class="badge">Capsules</span>
+          <span class="badge">Syrups</span>
+          <span class="badge">Oral Solutions</span>
+          <span class="badge">Elixirs</span>
+          <span class="badge">Nasal Drops</span>
+          <span class="badge">Oral Drops</span>
+        </div>
+      </div>
+      <div class="no-break">
+        <h4 style="font-size:9.5pt; font-weight:700; color:var(--teal); margin-bottom:2mm;">Compliance &amp; Standards</h4>
+        <div>
+          <span class="badge">cGMP</span>
+          <span class="badge">WHO Guidelines</span>
+          <span class="badge">ISO Standards</span>
+          <span class="badge">MOH Iran</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col" style="gap:3mm;">
+      <div class="icon-row no-break" style="margin-bottom:3mm;">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        </div>
+        <div class="icon-content">
+          <h4>Advanced Laboratory</h4>
+          <p>State-of-the-art analytical labs for quality control, stability testing, and formulation R&D.</p>
+        </div>
+      </div>
+      <div class="icon-row no-break" style="margin-bottom:3mm;">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+        </div>
+        <div class="icon-content">
+          <h4>Modern Infrastructure</h4>
+          <p>High-grade production infrastructure continuously upgraded to meet global regulatory evolution.</p>
+        </div>
+      </div>
+      <div class="icon-row no-break" style="margin-bottom:3mm;">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div class="icon-content">
+          <h4>Quality Assurance</h4>
+          <p>Comprehensive QA systems — from raw material intake through final release — ensuring consistent product safety.</p>
+        </div>
+      </div>
+      <div class="icon-row no-break" style="margin-bottom:0;">
+        <div class="icon-box">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        </div>
+        <div class="icon-content">
+          <h4>Flexible Capacity</h4>
+          <p>Scalable production capacity designed for both domestic supply and international export volumes.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer" style="position:relative; z-index:1;">
+    <span>Ramopharmin Pharmaceutical Co.</span>
+    <span class="page-num">02</span>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 4 — RESEARCH, INNOVATION & QUALITY
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before" style="position:relative; overflow:hidden;">
+
+  <!-- Vertical photo on right side with left fade -->
+  <div style="position:absolute; top:0; right:0; width:42%; height:100%; z-index:0;">
+    <img src="../company-images/WhatsApp Image 2025-05-16 at 13.53.46 (1).jpg"
+         style="width:100%; height:100%; object-fit:cover; object-position:center top; display:block;" alt="Ramopharmin Products">
+    <div style="position:absolute; inset:0; background: linear-gradient(to right, #ffffff 0%, rgba(255,255,255,0.85) 25%, rgba(255,255,255,0) 60%);"></div>
+    <!-- Top fade -->
+    <div style="position:absolute; top:0; left:0; right:0; height:12%; background: linear-gradient(to bottom, #ffffff 0%, rgba(255,255,255,0) 100%);"></div>
+    <!-- Bottom fade -->
+    <div style="position:absolute; bottom:0; left:0; right:0; height:12%; background: linear-gradient(to top, #ffffff 0%, rgba(255,255,255,0) 100%);"></div>
+  </div>
+
+  <div class="page-header" style="position:relative; z-index:1;">
+    <img src="../logos/english-full-logo-white.png" alt="Ramopharmin">
+    <div class="page-header-right">
+      <strong>Company Profile</strong>
+      Research, Innovation &amp; Quality
+    </div>
+  </div>
+
+  <div class="page-body" style="position:relative; z-index:1; width:62%;">
+
+    <h2 class="section-title">Research,<br>Innovation &amp; Quality</h2>
+    <div class="section-accent"></div>
+
+    <p class="body-text">
+      At the heart of Ramopharmin's operations is a robust research and development program. The company is dedicated to continuous product and process improvement, actively integrating the latest advancements in pharmaceutical science and technology.
+    </p>
+    <p class="body-text" style="margin-top:4mm;">
+      Initiatives in artificial intelligence and digitalization further enhance manufacturing efficiency, product quality, and regulatory compliance. Ramopharmin also invests in the professional growth of its scientific and technical teams, cultivating the next generation of pharmaceutical leaders.
+    </p>
+
+    <div class="divider"></div>
+
+    <div class="two-col" style="margin-bottom:0;">
+      <div>
+        <div class="icon-row no-break">
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+          </div>
+          <div class="icon-content">
+            <h4>R&amp;D Investment</h4>
+            <p>Continuous investment in research facilities and scientific talent to develop next-generation formulations.</p>
+          </div>
+        </div>
+        <div class="icon-row no-break">
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <div class="icon-content">
+            <h4>AI &amp; Digitalization</h4>
+            <p>Smart manufacturing technologies improving process consistency and enabling real-time quality monitoring.</p>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="icon-row no-break">
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <div class="icon-content">
+            <h4>Rigorous Testing</h4>
+            <p>Every product undergoes stringent analytical validation to ensure safety, potency, and batch-to-batch consistency.</p>
+          </div>
+        </div>
+        <div class="icon-row no-break">
+          <div class="icon-box">
+            <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="icon-content">
+            <h4>Talent Development</h4>
+            <p>Structured programs nurturing scientific expertise and professional growth within our technical teams.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer" style="position:relative; z-index:1;">
+    <span>Ramopharmin Pharmaceutical Co.</span>
+    <span class="page-num">03</span>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 5 — INTERNATIONAL OUTLOOK + ETHICS
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before">
+
+  <div class="page-header">
+    <img src="../logos/english-full-logo-white.png" alt="Ramopharmin">
+    <div class="page-header-right">
+      <strong>Company Profile</strong>
+      International Outlook &amp; Ethics
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <h2 class="section-title">International Outlook</h2>
+    <div class="section-accent"></div>
+
+    <p class="body-text">
+      Ramopharmin's vision extends beyond Iran's borders, with a clear strategic emphasis on expanding its presence in international markets. The company has established partnerships and collaborative links throughout the Middle East and Eurasia, aligning its products and processes with the needs of global healthcare providers and regulatory authorities. Ramopharmin is recognized for its flexible production capacity and its ability to deliver tailored solutions to partners worldwide.
+    </p>
+
+    <div style="margin-top:5mm; margin-bottom:5mm;">
+      <div style="display:flex; gap:3mm; flex-wrap:wrap;">
+        <span class="badge">Middle East</span>
+        <span class="badge">Eurasia</span>
+        <span class="badge">CIS Countries</span>
+        <span class="badge">Africa</span>
+        <span class="badge">Asia-Pacific</span>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2 class="section-title" style="font-size:18pt;">Ethical Commitment<br>&amp; Sustainability</h2>
+    <div class="section-accent"></div>
+
+    <p class="body-text">
+      The company operates with a strong sense of ethical responsibility, viewing the production of high-quality medicines as both a professional and moral obligation. Ramopharmin prioritizes sustainable practices in its operations, seeking to contribute positively to public health and community wellbeing. Its commitment to transparency, safety, and social responsibility is reflected in every aspect of its business.
+    </p>
+
+    <div style="margin-top:5mm; display:grid; grid-template-columns:1fr 1fr 1fr; gap:3mm;">
+      <div style="background:var(--slate-50); border:1px solid var(--slate-200); border-radius:6px; padding:4mm; text-align:center;">
+        <div style="font-size:11pt; font-weight:900; color:var(--teal); margin-bottom:1mm;">Transparency</div>
+        <div style="font-size:8pt; color:var(--slate-600);">Open and honest reporting across all operations</div>
+      </div>
+      <div style="background:var(--slate-50); border:1px solid var(--slate-200); border-radius:6px; padding:4mm; text-align:center;">
+        <div style="font-size:11pt; font-weight:900; color:var(--teal); margin-bottom:1mm;">Safety First</div>
+        <div style="font-size:8pt; color:var(--slate-600);">Unwavering commitment to patient and product safety</div>
+      </div>
+      <div style="background:var(--slate-50); border:1px solid var(--slate-200); border-radius:6px; padding:4mm; text-align:center;">
+        <div style="font-size:11pt; font-weight:900; color:var(--teal); margin-bottom:1mm;">Sustainability</div>
+        <div style="font-size:8pt; color:var(--slate-600);">Environmentally conscious manufacturing practices</div>
+      </div>
+    </div>
+
+    <div class="divider"></div>
+
+    <h2 class="section-title" style="font-size:18pt;">Partnership &amp;<br>Collaboration</h2>
+    <div class="section-accent"></div>
+
+    <p class="body-text">
+      Ramopharmin actively seeks strategic alliances with international distributors, healthcare institutions, and research organizations. Our flexible manufacturing model, regulatory track record, and broad therapeutic portfolio make us a reliable long-term partner for companies seeking quality-assured pharmaceutical supply from Iran's most established producers.
+    </p>
+
+    <div style="margin-top:5mm; display:grid; grid-template-columns:1fr 1fr; gap:3mm;">
+      <div style="background:var(--slate-50); border:1px solid var(--slate-200); border-radius:6px; padding:4mm;">
+        <div style="font-size:9.5pt; font-weight:900; color:var(--teal); margin-bottom:1mm;">Contract Manufacturing</div>
+        <div style="font-size:8pt; color:var(--slate-600); line-height:1.55;">Flexible CDMO services for regional and international clients requiring cGMP-certified production capacity.</div>
+      </div>
+      <div style="background:var(--slate-50); border:1px solid var(--slate-200); border-radius:6px; padding:4mm;">
+        <div style="font-size:9.5pt; font-weight:900; color:var(--teal); margin-bottom:1mm;">Export &amp; Distribution</div>
+        <div style="font-size:8pt; color:var(--slate-600); line-height:1.55;">Established export channels across the Middle East, Eurasia, CIS, and Africa with a dedicated international business team.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span>Ramopharmin Pharmaceutical Co.</span>
+    <span class="page-num">04</span>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 6 — PRODUCT LIST COVER
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before" style="background: linear-gradient(160deg, #174f57 0%, #0f3d45 50%, #0a2730 100%);">
+
+  <div style="height:4px; background: linear-gradient(90deg, #5aaeb8, #2d7b84, #14b8a6); flex-shrink:0;"></div>
+
+  <div style="flex:1; display:flex; flex-direction:column; padding: 3mm 18mm 8mm 18mm; overflow:hidden;">
+
+    <img src="../logos/english-full-logo-white.png"
+         style="height:144px; width:auto; max-width:100%; margin-bottom:2mm; object-fit:contain; display:block;" alt="Ramopharmin Logo">
+
+    <span style="display:inline-block; padding:3px 12px; border-radius:999px; border:1px solid rgba(90,174,184,0.5);
+                 color:#5aaeb8; font-size:8pt; font-weight:700; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:2mm;">
+      Product Portfolio
+    </span>
+
+    <h1 style="font-size:34pt; font-weight:900; color:#ffffff; line-height:1.1; letter-spacing:-0.02em; margin-bottom:2mm;">
+      Product List
+    </h1>
+    <div style="width:48px; height:3px; background:linear-gradient(90deg,#5aaeb8,#2d7b84); border-radius:2px; margin-bottom:3mm;"></div>
+
+    <p style="font-size:10.5pt; color:rgba(255,255,255,0.75); line-height:1.65; max-width:130mm; margin-bottom:3mm;">
+      At Ramopharmin Pharmaceutical Co., we offer a broad and evolving range of high-quality pharmaceutical products — developed and manufactured in accordance with the highest international standards. From essential generics to innovative formulations, every product reflects decades of expertise and a dedication to improving health and wellbeing.
+    </p>
+
+    <!-- Category badges -->
+    <div style="display:flex; flex-wrap:wrap; gap:2mm; margin-bottom:3mm;">
+      <span class="badge" style="background:rgba(255,255,255,0.1); color:#5aaeb8; border-color:rgba(90,174,184,0.4);">Analgesic &amp; NSAIDs</span>
+      <span class="badge" style="background:rgba(255,255,255,0.1); color:#5aaeb8; border-color:rgba(90,174,184,0.4);">Cold &amp; Respiratory</span>
+      <span class="badge" style="background:rgba(255,255,255,0.1); color:#5aaeb8; border-color:rgba(90,174,184,0.4);">Supplements</span>
+      <span class="badge" style="background:rgba(255,255,255,0.1); color:#5aaeb8; border-color:rgba(90,174,184,0.4);">Antihistaminic</span>
+      <span class="badge" style="background:rgba(255,255,255,0.1); color:#5aaeb8; border-color:rgba(90,174,184,0.4);">CNS Agents</span>
+      <span class="badge" style="background:rgba(255,255,255,0.1); color:#5aaeb8; border-color:rgba(90,174,184,0.4);">Gastrointestinal</span>
+      <span class="badge" style="background:rgba(255,255,255,0.1); color:#5aaeb8; border-color:rgba(90,174,184,0.4);">Antidementia</span>
+      <span class="badge" style="background:rgba(255,255,255,0.1); color:#5aaeb8; border-color:rgba(90,174,184,0.4);">Anti-Parkinson</span>
+    </div>
+
+    <!-- Company motto -->
+    <div style="border-left:3px solid #5aaeb8; padding:3mm 6mm; margin-bottom:3mm; background:rgba(255,255,255,0.05); border-radius:0 6px 6px 0;">
+      <p style="font-size:13pt; font-weight:700; color:#ffffff; line-height:1.4; font-style:italic; margin-bottom:1mm;">"Dedicated to quality. Driven by innovation."</p>
+      <p style="font-size:9pt; color:rgba(255,255,255,0.6); line-height:1.5;">Every formulation we bring to market is the result of rigorous research, advanced manufacturing, and an unwavering commitment to patient outcomes.</p>
+    </div>
+
+    <!-- Company description boxes -->
+    <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(90,174,184,0.3); border-radius:8px; padding:4mm; margin-bottom:3mm;">
+      <div style="font-size:7.5pt; font-weight:700; color:#5aaeb8; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1.5mm;">About Ramopharmin</div>
+      <div style="font-size:12pt; font-weight:900; color:#ffffff; margin-bottom:2mm; line-height:1.2;">A Legacy of Pharmaceutical Excellence</div>
+      <p style="font-size:9pt; color:rgba(255,255,255,0.75); line-height:1.6;">Ramopharmin Pharmaceutical Co. is a leading Iranian manufacturer with decades of experience producing high-quality medicines for domestic and international markets. Founded on principles of scientific rigor and patient-centered care, the company has grown into a trusted name across multiple therapeutic categories — from analgesics and CNS agents to immunosuppressants and specialty formulations. Every product that leaves our facility carries the assurance of stringent quality control, advanced analytical testing, and full compliance with national and international regulatory standards.</p>
+    </div>
+
+    <div style="background:rgba(255,255,255,0.07); border:1px solid rgba(90,174,184,0.3); border-radius:8px; padding:4mm;">
+      <div style="font-size:7.5pt; font-weight:700; color:#5aaeb8; text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1.5mm;">Manufacturing &amp; Quality</div>
+      <div style="font-size:12pt; font-weight:900; color:#ffffff; margin-bottom:2mm; line-height:1.2;">GMP-Certified. Export-Ready. Innovation-Driven.</div>
+      <p style="font-size:9pt; color:rgba(255,255,255,0.75); line-height:1.6;">Our state-of-the-art manufacturing facility operates under GMP conditions validated to international standards, supporting both solid and liquid dosage forms across a diverse product portfolio. Ramopharmin invests continuously in research and development, process optimization, and personnel training to ensure that the medicines we produce consistently meet — and exceed — the expectations of healthcare providers, patients, and regulatory authorities. With an expanding export footprint and a commitment to affordable access, we are dedicated to contributing to global health.</p>
+    </div>
+
+  </div>
+
+  <div style="background:rgba(0,0,0,0.3); padding:5mm 18mm; flex-shrink:0;
+              display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.08);">
+    <span style="color:rgba(255,255,255,0.5); font-size:8pt;">www.ramopharmin.org</span>
+    <span style="color:rgba(255,255,255,0.5); font-size:8pt;">RAMOPHARMIN PHARMA</span>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 7 — ANALGESIC & NSAIDs (Table)
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before">
+
+  <div class="page-header">
+    <img src="../logos/english-full-logo-white.png" alt="Ramopharmin">
+    <div class="page-header-right"><strong>Product List</strong>Analgesic &amp; NSAIDs</div>
+  </div>
+
+  <div class="page-body">
+
+    <div class="category-label-band">
+      <h2>Analgesic &amp; NSAIDs</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:65%;">Generic Name</th>
+          <th style="width:35%;">Unit Package</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="no-break"><td>Acetaminophen 120 mg / 5 ml Oral Solution</td><td>Bottle of 60ml</td></tr>
+        <tr class="no-break"><td>Acetaminophen 500 mg Scored Tablet</td><td>Box of 30/100</td></tr>
+        <tr class="no-break"><td>Diclofenac Potassium 50 mg Scored F.C Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Diclofenac Sodium E.R 100 mg Capsule</td><td>Box of 50</td></tr>
+        <tr class="no-break"><td>Diclofenac Sodium 25 mg E.C Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Ketorolac 10 mg Scored F.C Tablet</td><td>Box of 30</td></tr>
+        <tr class="no-break"><td>Mefenamic Acid 250 mg Capsule</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Naproxen 250 mg Scored Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Tramadol 100 mg Scored F.C Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Tramadol 50 mg F.C Tablet</td><td>Box of 100</td></tr>
+      </tbody>
+    </table>
+
+    <div class="divider" style="margin: 6mm 0 5mm;"></div>
+
+    <!-- Featured Product Spotlight -->
+    <div style="display:grid; grid-template-columns:100px 1fr; gap:6mm; align-items:center; background:var(--slate-50); border:1px solid var(--slate-200); border-radius:8px; padding:5mm;">
+      <img src="../product-images/استامینوفن 500.png" alt="Acetaminophen 500" style="width:100px; height:100px; object-fit:contain; background:#fff; border-radius:6px; border:1px solid var(--slate-200); padding:3mm;">
+      <div>
+        <div style="font-size:7.5pt; font-weight:700; color:var(--teal-light); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2mm;">Featured Product</div>
+        <div style="font-size:13pt; font-weight:900; color:var(--teal); margin-bottom:2mm; line-height:1.2;">Acetaminophen 500 mg</div>
+        <div style="font-size:8.5pt; color:var(--teal-mid); font-weight:600; margin-bottom:3mm;">Scored Tablet · Box of 30 / 100</div>
+        <p style="font-size:9pt; color:var(--slate-600); line-height:1.6;">Ramopharmin's Acetaminophen 500 mg Scored Tablet is a first-line analgesic and antipyretic formulated for reliable pain relief and fever reduction. The score line allows precise half-dose adjustment, making it suitable for a broad patient population. Manufactured under rigorous GMP standards, it offers consistent dissolution and bioavailability in every batch.</p>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:100px 1fr; gap:6mm; align-items:center; background:var(--slate-50); border:1px solid var(--slate-200); border-radius:8px; padding:5mm; margin-top:4mm;">
+      <img src="../product-images/مفنامیک اسید.png" alt="Mefenamic Acid" style="width:100px; height:100px; object-fit:contain; background:#fff; border-radius:6px; border:1px solid var(--slate-200); padding:3mm;">
+      <div>
+        <div style="font-size:7.5pt; font-weight:700; color:var(--teal-light); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2mm;">Featured Product</div>
+        <div style="font-size:13pt; font-weight:900; color:var(--teal); margin-bottom:2mm; line-height:1.2;">Mefenamic Acid 250 mg</div>
+        <div style="font-size:8.5pt; color:var(--teal-mid); font-weight:600; margin-bottom:3mm;">Capsule · Box of 100</div>
+        <p style="font-size:9pt; color:var(--slate-600); line-height:1.6;">Mefenamic Acid is a potent NSAID with both analgesic and anti-inflammatory properties, commonly prescribed for dysmenorrhoea, mild-to-moderate pain, and inflammatory conditions. Ramopharmin's 250 mg capsule delivers rapid onset relief, and its compact box-of-100 presentation makes it a practical choice for high-volume dispensing in clinic and hospital pharmacy settings.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span>Ramopharmin Pharmaceutical Co.</span>
+    <span class="page-num">05</span>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 8 — COLD PREPARATION & RESPIRATORY (Table)
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before">
+
+  <div class="page-header">
+    <img src="../logos/english-full-logo-white.png" alt="Ramopharmin">
+    <div class="page-header-right"><strong>Product List</strong>Cold Preparation &amp; Respiratory</div>
+  </div>
+
+  <div class="page-body">
+
+    <div class="category-label-band">
+      <h2>Cold Preparation &amp; Respiratory Agents</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:65%;">Generic Name</th>
+          <th style="width:35%;">Unit Package</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="no-break"><td>Acetaminophen / Phenylephrine 325 / 5 mg Scored Tablet</td><td>Box of 30/100</td></tr>
+        <tr class="no-break"><td>Bromhexine 4 mg / 5 ml Elixir</td><td>Bottle of 60ml</td></tr>
+        <tr class="no-break"><td>Dextromethorphan 15 mg / 5 ml Syrup</td><td>Bottle of 60ml</td></tr>
+        <tr class="no-break"><td>Dextromethorphan - P Syrup</td><td>Bottle of 60ml</td></tr>
+        <tr class="no-break"><td>Diphenhydramine 12.5 mg / 5 ml Oral Solution</td><td>Bottle of 60ml</td></tr>
+        <tr class="no-break"><td>Diphenhydramine Compound Syrup</td><td>Bottle of 60ml</td></tr>
+        <tr class="no-break"><td>Expectorant Syrup</td><td>Bottle of 60ml</td></tr>
+        <tr class="no-break"><td>Guaifenesin 100 mg / 5 ml Syrup</td><td>Bottle of 60ml</td></tr>
+        <tr class="no-break"><td>Pseudoephedrine 30 mg / 5 ml Syrup</td><td>Bottle of 60ml</td></tr>
+        <tr class="no-break"><td>Pediatric Grippe Syrup</td><td>Bottle of 60ml</td></tr>
+        <tr class="no-break"><td>Phenylephrine 0.25% Nasal Drop</td><td>Bottle of 10ml</td></tr>
+        <tr class="no-break"><td>Phenylephrine 0.5% Nasal Drop</td><td>Bottle of 10ml</td></tr>
+        <tr class="no-break"><td>Sodium Chloride 0.65% Nasal Drop</td><td>Bottle of 20ml</td></tr>
+        <tr class="no-break"><td>Theophylline - G Syrup</td><td>Bottle of 120ml</td></tr>
+      </tbody>
+    </table>
+
+    <div class="divider" style="margin: 3mm 0 3mm;"></div>
+
+    <!-- Featured Product Spotlight -->
+    <div style="display:grid; grid-template-columns:80px 1fr; gap:4mm; align-items:center; background:var(--slate-50); border:1px solid var(--slate-200); border-radius:8px; padding:3.5mm;">
+      <img src="../product-images/دکسترورامین - 2.png" alt="Dextromethorphan Syrup" style="width:80px; height:80px; object-fit:contain; background:#fff; border-radius:6px; border:1px solid var(--slate-200); padding:2mm;">
+      <div>
+        <div style="font-size:7pt; font-weight:700; color:var(--teal-light); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1mm;">Featured Product</div>
+        <div style="font-size:11pt; font-weight:900; color:var(--teal); margin-bottom:1mm; line-height:1.2;">Dextromethorphan 15 mg / 5 ml</div>
+        <div style="font-size:8pt; color:var(--teal-mid); font-weight:600; margin-bottom:1.5mm;">Syrup · Bottle of 60 ml</div>
+        <p style="font-size:8pt; color:var(--slate-600); line-height:1.5;">This non-opioid antitussive syrup effectively suppresses the cough reflex at the central level without causing sedation or dependency. Widely used in adults and children, Ramopharmin's Dextromethorphan Syrup is formulated with a palatable flavor to promote adherence. It serves as the backbone of the company's cold preparation portfolio.</p>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:80px 1fr; gap:4mm; align-items:center; background:var(--slate-50); border:1px solid var(--slate-200); border-radius:8px; padding:3.5mm; margin-top:3mm;">
+      <img src="../product-images/گایا فنزین - 1 - Copy.png" alt="Guaifenesin" style="width:80px; height:80px; object-fit:contain; background:#fff; border-radius:6px; border:1px solid var(--slate-200); padding:2mm;">
+      <div>
+        <div style="font-size:7pt; font-weight:700; color:var(--teal-light); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1mm;">Featured Product</div>
+        <div style="font-size:11pt; font-weight:900; color:var(--teal); margin-bottom:1mm; line-height:1.2;">Guaifenesin 100 mg / 5 ml</div>
+        <div style="font-size:8pt; color:var(--teal-mid); font-weight:600; margin-bottom:1.5mm;">Expectorant Syrup · Bottle of 60 ml</div>
+        <p style="font-size:8pt; color:var(--slate-600); line-height:1.5;">Guaifenesin acts as an expectorant by thinning and loosening mucus in the airways, facilitating productive coughing and clearing of bronchial secretions. It is a mainstay treatment for chest congestion associated with colds, bronchitis, and upper respiratory tract infections. Ramopharmin's pleasantly flavored syrup form ensures ease of administration for both pediatric and adult patients.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span>Ramopharmin Pharmaceutical Co.</span>
+    <span class="page-num">06</span>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 9 — ANTIHISTAMINIC AGENTS (Table + Gallery)
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before">
+
+  <div class="page-header">
+    <img src="../logos/english-full-logo-white.png" alt="Ramopharmin">
+    <div class="page-header-right"><strong>Product List</strong>Antihistaminic Agents</div>
+  </div>
+
+  <div class="page-body">
+
+    <div class="category-label-band">
+      <h2>Antihistaminic Agents</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:65%;">Generic Name</th>
+          <th style="width:35%;">Unit Package</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="no-break"><td>Cetirizine 5 mg / 5 ml Syrup</td><td>Bottle of 60ml</td></tr>
+        <tr class="no-break"><td>Cetirizine 5 mg Scored Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Cetirizine 10 mg Scored Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Ketotifen 1 mg F.C Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Ketotifen 1 mg / 5 ml Syrup</td><td>Bottle of 120ml</td></tr>
+        <tr class="no-break"><td>Levocetirizine 5 mg Scored Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Loratadine 10 mg Scored Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Loratadine 5 mg / 5 ml Syrup</td><td>Bottle of 60ml</td></tr>
+        <tr class="no-break"><td>Hydroxyzine Hydrochloride Tablet</td><td>Box of 100</td></tr>
+      </tbody>
+    </table>
+
+    <div class="divider" style="margin: 6mm 0 5mm;"></div>
+
+    <!-- Featured Product Spotlight -->
+    <div style="display:grid; grid-template-columns:100px 1fr; gap:6mm; align-items:center; background:var(--slate-50); border:1px solid var(--slate-200); border-radius:8px; padding:5mm;">
+      <img src="../product-images/ستیریزین - 1.png" alt="Cetirizine" style="width:100px; height:100px; object-fit:contain; background:#fff; border-radius:6px; border:1px solid var(--slate-200); padding:3mm;">
+      <div>
+        <div style="font-size:7.5pt; font-weight:700; color:var(--teal-light); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2mm;">Featured Product</div>
+        <div style="font-size:13pt; font-weight:900; color:var(--teal); margin-bottom:2mm; line-height:1.2;">Cetirizine 10 mg</div>
+        <div style="font-size:8.5pt; color:var(--teal-mid); font-weight:600; margin-bottom:3mm;">Scored Tablet · Box of 100 — also available as 5 mg Syrup</div>
+        <p style="font-size:9pt; color:var(--slate-600); line-height:1.6;">A second-generation, non-sedating antihistamine, Cetirizine selectively blocks peripheral H₁ receptors to relieve allergic rhinitis, urticaria, and dermatological hypersensitivity reactions. Ramopharmin offers Cetirizine in both scored tablet and syrup forms to serve pediatric and adult populations. Its once-daily dosing and minimal CNS penetration ensure patient comfort and safety.</p>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:100px 1fr; gap:6mm; align-items:center; background:var(--slate-50); border:1px solid var(--slate-200); border-radius:8px; padding:5mm; margin-top:4mm;">
+      <img src="../product-images/لوراتادین - 1 - Copy.png" alt="Loratadine" style="width:100px; height:100px; object-fit:contain; background:#fff; border-radius:6px; border:1px solid var(--slate-200); padding:3mm;">
+      <div>
+        <div style="font-size:7.5pt; font-weight:700; color:var(--teal-light); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2mm;">Featured Product</div>
+        <div style="font-size:13pt; font-weight:900; color:var(--teal); margin-bottom:2mm; line-height:1.2;">Loratadine 10 mg</div>
+        <div style="font-size:8.5pt; color:var(--teal-mid); font-weight:600; margin-bottom:3mm;">Scored Tablet · Box of 100 — also available as 5 mg / 5 ml Syrup</div>
+        <p style="font-size:9pt; color:var(--slate-600); line-height:1.6;">Loratadine is a long-acting, non-sedating antihistamine that provides 24-hour relief from symptoms of seasonal and perennial allergic rhinitis and chronic idiopathic urticaria. Its high selectivity for peripheral H₁ receptors results in minimal CNS side effects, making it well-tolerated for daily use. Ramopharmin's scored tablet and companion syrup formulations cover the full range of patient age groups.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span>Ramopharmin Pharmaceutical Co.</span>
+    <span class="page-num">07</span>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 10 — SUPPLEMENTS
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before">
+
+  <div class="page-header">
+    <img src="../logos/english-full-logo-white.png" alt="Ramopharmin">
+    <div class="page-header-right"><strong>Product List</strong>Supplements</div>
+  </div>
+
+  <div class="page-body">
+
+    <div class="category-label-band">
+      <h2>Supplements</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:65%;">Generic Name</th>
+          <th style="width:35%;">Unit Package</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="no-break"><td>Alpha Lipoic Acid 100 mg Capsule</td><td>Bottle of 60ml</td></tr>
+        <tr class="no-break"><td>B-Complex Syrup</td><td>Bottle of 60ml</td></tr>
+        <tr class="no-break"><td>Calcium Syrup</td><td>Bottle of 240ml</td></tr>
+        <tr class="no-break"><td>Calcium / Vit D3 500 mg / 200 IU F.C Tablet</td><td>Box of 50</td></tr>
+        <tr class="no-break"><td>Calcium 500 mg Tablet</td><td>Box of 50</td></tr>
+        <tr class="no-break"><td>Calcium + Zinc + Vit D3 Syrup</td><td>Bottle of 240ml</td></tr>
+        <tr class="no-break"><td>Cystine B6 Zinc F.C Tablet</td><td>Box of 120</td></tr>
+        <tr class="no-break"><td>5-Hydroxy Tryptophan 100 mg Capsule</td><td>Box of 30</td></tr>
+        <tr class="no-break"><td>L-Arginine 500 mg Tablet</td><td>Bottle of 60</td></tr>
+        <tr class="no-break"><td>L-Carnitine 330 mg Tablet</td><td>Bottle of 30</td></tr>
+        <tr class="no-break"><td>Melatonin 3 mg Scored Tablet</td><td>Box of 30</td></tr>
+        <tr class="no-break"><td>Magnesium + Vit B6 F.C Tablet</td><td>Bottle of 90</td></tr>
+        <tr class="no-break"><td>Vit AD &amp; C Oral Drop</td><td>Bottle of 15ml</td></tr>
+        <tr class="no-break"><td>Vit B6 40 mg Scored Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Vit D3 400 IU Oral Drop</td><td>Bottle of 15ml</td></tr>
+        <tr class="no-break"><td>Vit D3 1000 IU Oral Drop</td><td>Bottle of 15ml</td></tr>
+        <tr class="no-break"><td>Vit D3 12000 IU Oral Drop</td><td>Bottle of 15ml</td></tr>
+        <tr class="no-break"><td>Zinc Sulfate 10 mg / 5 ml Oral Solution</td><td>Bottle of 120ml</td></tr>
+      </tbody>
+    </table>
+
+    <div class="divider" style="margin: 6mm 0 5mm;"></div>
+
+    <!-- Featured Product Spotlight -->
+    <div style="display:grid; grid-template-columns:100px 1fr; gap:6mm; align-items:center; background:var(--slate-50); border:1px solid var(--slate-200); border-radius:8px; padding:5mm;">
+      <img src="../product-images/کلسیرام.png" alt="Calciram Calcium Syrup" style="width:100px; height:100px; object-fit:contain; background:#fff; border-radius:6px; border:1px solid var(--slate-200); padding:3mm;">
+      <div>
+        <div style="font-size:7.5pt; font-weight:700; color:var(--teal-light); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2mm;">Featured Product</div>
+        <div style="font-size:13pt; font-weight:900; color:var(--teal); margin-bottom:2mm; line-height:1.2;">Calciram — Calcium Syrup</div>
+        <div style="font-size:8.5pt; color:var(--teal-mid); font-weight:600; margin-bottom:3mm;">Oral Syrup · Bottle of 240 ml</div>
+        <p style="font-size:9pt; color:var(--slate-600); line-height:1.6;">Calciram is Ramopharmin's proprietary calcium supplement syrup, designed for children and adults who require bone health support and dietary calcium supplementation. Its pleasantly flavored formulation encourages consistent use, while the 240 ml bottle provides an economical supply for long-term supplementation. Part of a broad portfolio that also includes Calcium + Zinc + Vit D3 and Calcium / Vit D3 tablets.</p>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="page-footer">
+    <span>Ramopharmin Pharmaceutical Co.</span>
+    <span class="page-num">08</span>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 11 — CNS AGENTS (Table)
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before">
+
+  <div class="page-header">
+    <img src="../logos/english-full-logo-white.png" alt="Ramopharmin">
+    <div class="page-header-right"><strong>Product List</strong>CNS Agents</div>
+  </div>
+
+  <div class="page-body">
+
+    <div class="category-label-band">
+      <h2>CNS Agents</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:65%;">Generic Name</th>
+          <th style="width:35%;">Unit Package</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="no-break"><td>Bupropion 100 mg Scored F.C Tablet</td><td>Bottle of 60ml</td></tr>
+        <tr class="no-break"><td>Citalopram 20 mg F.C Tablet</td><td>Bottle of 60ml</td></tr>
+        <tr class="no-break"><td>Citalopram 40 mg F.C Tablet</td><td>Bottle of 240ml</td></tr>
+        <tr class="no-break"><td>Carbamazepine 200 mg Scored Tablet</td><td>Box of 50</td></tr>
+        <tr class="no-break"><td>Chlordiazepoxide 5 mg Scored F.C Tablet</td><td>Box of 50</td></tr>
+        <tr class="no-break"><td>Chlordiazepoxide 10 mg Scored F.C Tablet</td><td>Bottle of 240ml</td></tr>
+        <tr class="no-break"><td>Duloxetine 30 mg E.C Capsule</td><td>Box of 120</td></tr>
+        <tr class="no-break"><td>Duloxetine 60 mg E.C Capsule</td><td>Box of 30</td></tr>
+        <tr class="no-break"><td>Doxepin 10 mg Capsule</td><td>Bottle of 60</td></tr>
+        <tr class="no-break"><td>Doxepin 25 mg Capsule</td><td>Box of 30</td></tr>
+        <tr class="no-break"><td>Gabapentin 100 mg Capsule</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Levetiracetam 250 mg Scored F.C Tablet</td><td>Box of 50</td></tr>
+        <tr class="no-break"><td>Levetiracetam 500 mg F.C Tablet</td><td>Box of 50</td></tr>
+        <tr class="no-break"><td>Lithium Carbonate 300 mg Scored Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Lithium Carbonate 400 mg Scored E.R Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Modafinil 100 mg Scored Tablet</td><td>Box of 30</td></tr>
+        <tr class="no-break"><td>Modafinil 200 mg Scored Tablet</td><td>Box of 30</td></tr>
+        <tr class="no-break"><td>Oxcarbazepine 150 mg Scored F.C Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Oxcarbazepine 300 mg Scored F.C Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Pregabalin 75 mg Capsule</td><td>Box of 50</td></tr>
+        <tr class="no-break"><td>Pregabalin 150 mg Capsule</td><td>Box of 50</td></tr>
+      </tbody>
+    </table>
+
+    <div class="divider" style="margin: 6mm 0 5mm;"></div>
+
+    <!-- Featured Product Spotlight -->
+    <div style="display:grid; grid-template-columns:100px 1fr; gap:6mm; align-items:center; background:var(--slate-50); border:1px solid var(--slate-200); border-radius:8px; padding:5mm;">
+      <img src="../product-images/146-DSC09359.png" alt="Lithiram 300" style="width:100px; height:100px; object-fit:contain; background:#fff; border-radius:6px; border:1px solid var(--slate-200); padding:3mm;">
+      <div>
+        <div style="font-size:7.5pt; font-weight:700; color:var(--teal-light); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2mm;">Featured Product</div>
+        <div style="font-size:13pt; font-weight:900; color:var(--teal); margin-bottom:2mm; line-height:1.2;">Lithiram 300 — Lithium Carbonate</div>
+        <div style="font-size:8.5pt; color:var(--teal-mid); font-weight:600; margin-bottom:3mm;">Scored Tablet 300 mg · Box of 100 — also available in 400 mg E.R</div>
+        <p style="font-size:9pt; color:var(--slate-600); line-height:1.6;">Lithiram is Ramopharmin's brand of Lithium Carbonate, a cornerstone mood stabilizer used in the management of bipolar disorder and prevention of manic episodes. The scored tablet allows precise dose titration tailored to each patient's serum lithium levels. The 300 mg immediate-release and 400 mg extended-release variants give clinicians the flexibility to optimize therapeutic outcomes.</p>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="page-footer">
+    <span>Ramopharmin Pharmaceutical Co.</span>
+    <span class="page-num">09</span>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 12 — ANTIDEMENTIA + LAXATIVE + ANTISPASMODIC + ANTIDIABETIC + IMMUNOSUPPRESSANT
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before">
+
+  <div class="page-header">
+    <img src="../logos/english-full-logo-white.png" alt="Ramopharmin">
+    <div class="page-header-right"><strong>Product List</strong>Antidementia &amp; Other Agents</div>
+  </div>
+
+  <div class="page-body" style="padding-top:5mm; padding-bottom:5mm;">
+
+    <!-- Antidementia -->
+    <div class="category-label-band" style="margin-bottom:3mm;">
+      <h2>Antidementia Agents</h2>
+    </div>
+
+    <table style="margin-bottom:3mm;">
+      <thead><tr><th style="width:65%;">Generic Name</th><th style="width:35%;">Unit Package</th></tr></thead>
+      <tbody>
+        <tr class="no-break"><td>Donepezil 5 mg Scored Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Donepezil 10 mg Scored Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Memantine 10 mg / 5 ml Oral Solution</td><td>Bottle of 240ml</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Featured Product Spotlight -->
+    <div style="display:grid; grid-template-columns:72px 1fr; gap:4mm; align-items:center; background:var(--slate-50); border:1px solid var(--slate-200); border-radius:8px; padding:3mm; margin-bottom:3mm;">
+      <img src="../product-images/دنپزیل.png" alt="Donepezil" style="width:72px; height:72px; object-fit:contain; background:#fff; border-radius:6px; border:1px solid var(--slate-200); padding:2mm;">
+      <div>
+        <div style="font-size:7pt; font-weight:700; color:var(--teal-light); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1mm;">Featured Product</div>
+        <div style="font-size:10.5pt; font-weight:900; color:var(--teal); margin-bottom:1mm; line-height:1.2;">Donepezil 5 / 10 mg</div>
+        <div style="font-size:8pt; color:var(--teal-mid); font-weight:600; margin-bottom:1.5mm;">Scored Tablet · Box of 100</div>
+        <p style="font-size:8pt; color:var(--slate-600); line-height:1.5;">A reversible acetylcholinesterase inhibitor indicated for mild-to-moderate and severe Alzheimer's disease. Donepezil enhances cholinergic transmission in the cortex, improving cognitive function and slowing disease progression. Ramopharmin's scored tablet allows flexible dose initiation and escalation under physician guidance.</p>
+      </div>
+    </div>
+
+    <div class="divider" style="margin: 2mm 0;"></div>
+
+    <!-- Three small categories in two-col grid -->
+    <div class="two-col" style="gap:4mm;">
+      <div>
+        <div class="category-label-band" style="padding:2.5mm 5mm; margin-bottom:2mm;">
+          <h2 style="font-size:11pt;">Laxative</h2>
+        </div>
+        <table>
+          <thead><tr><th>Generic Name</th><th>Unit Package</th></tr></thead>
+          <tbody>
+            <tr class="no-break"><td>Lactulose 10 g / 15 ml Syrup</td><td>Bottle of 240ml</td></tr>
+          </tbody>
+        </table>
+
+        <div class="category-label-band" style="padding:2.5mm 5mm; margin-bottom:2mm; margin-top:3mm;">
+          <h2 style="font-size:11pt;">Antispasmodic</h2>
+        </div>
+        <table>
+          <thead><tr><th>Generic Name</th><th>Unit Package</th></tr></thead>
+          <tbody>
+            <tr class="no-break"><td>Solifenacin Succinate 10 mg F.C Tablet</td><td>Box of 30</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div>
+        <div class="category-label-band" style="padding:2.5mm 5mm; margin-bottom:2mm;">
+          <h2 style="font-size:11pt;">Antidiabetic Agents</h2>
+        </div>
+        <table>
+          <thead><tr><th>Generic Name</th><th>Unit Package</th></tr></thead>
+          <tbody>
+            <tr class="no-break"><td>Repaglinide 0.5 mg Scored Tablet</td><td>Box of 100</td></tr>
+            <tr class="no-break"><td>Repaglinide 1 mg Scored Tablet</td><td>Box of 100</td></tr>
+          </tbody>
+        </table>
+
+        <div class="category-label-band" style="padding:2.5mm 5mm; margin-bottom:2mm; margin-top:3mm;">
+          <h2 style="font-size:11pt;">Immunosuppressant</h2>
+        </div>
+        <table>
+          <thead><tr><th>Generic Name</th><th>Unit Package</th></tr></thead>
+          <tbody>
+            <tr class="no-break"><td>Azathioprine 25 mg Scored Tablet</td><td>Box of 100</td></tr>
+            <tr class="no-break"><td>Azathioprine 50 mg Scored Tablet</td><td>Box of 100</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:72px 1fr; gap:4mm; align-items:center; background:var(--slate-50); border:1px solid var(--slate-200); border-radius:8px; padding:3mm; margin-top:3mm;">
+      <img src="../product-images/آزارام (1).png" alt="Azaram" style="width:72px; height:72px; object-fit:contain; background:#fff; border-radius:6px; border:1px solid var(--slate-200); padding:2mm;">
+      <div>
+        <div style="font-size:7pt; font-weight:700; color:var(--teal-light); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:1mm;">Featured Product</div>
+        <div style="font-size:10.5pt; font-weight:900; color:var(--teal); margin-bottom:1mm; line-height:1.2;">Azaram — Azathioprine 25 / 50 mg</div>
+        <div style="font-size:8pt; color:var(--teal-mid); font-weight:600; margin-bottom:1.5mm;">Scored Tablet · Box of 100</div>
+        <p style="font-size:8pt; color:var(--slate-600); line-height:1.5;">Azathioprine is a purine analogue immunosuppressant used to prevent organ transplant rejection and to manage autoimmune conditions including rheumatoid arthritis, inflammatory bowel disease, and systemic lupus erythematosus. Ramopharmin offers both 25 mg and 50 mg scored strengths, enabling precise dose individualisation and stepwise escalation in accordance with clinical protocols.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span>Ramopharmin Pharmaceutical Co.</span>
+    <span class="page-num">10</span>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 13 — GASTROINTESTINAL AGENTS
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before">
+
+  <div class="page-header">
+    <img src="../logos/english-full-logo-white.png" alt="Ramopharmin">
+    <div class="page-header-right"><strong>Product List</strong>Gastrointestinal Agents</div>
+  </div>
+
+  <div class="page-body">
+
+    <div class="category-label-band">
+      <h2>Gastrointestinal Agents</h2>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:65%;">Generic Name</th>
+          <th style="width:35%;">Unit Package</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="no-break"><td>Dicyclomine 10 mg / 5 ml Elixir</td><td>Bottle of 60ml</td></tr>
+        <tr class="no-break"><td>Dicyclomine 10 mg F.C Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Esomeprazole 20 mg E.C Capsule</td><td>Bottle of 14</td></tr>
+        <tr class="no-break"><td>Esomeprazole 40 mg E.C Capsule</td><td>Bottle of 14</td></tr>
+        <tr class="no-break"><td>Hyoscine 10 mg Scored F.C Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Lansoprazole 15 mg E.C Capsule</td><td>Bottle of 14</td></tr>
+        <tr class="no-break"><td>Lansoprazole 30 mg E.C Capsule</td><td>Bottle of 14</td></tr>
+        <tr class="no-break"><td>Mebeverine 200 mg E.R Capsule</td><td>Box of 30</td></tr>
+        <tr class="no-break"><td>Omeprazole 20 mg E.C Capsule</td><td>Bottle of 14/28</td></tr>
+        <tr class="no-break"><td>Pantoprazole 20 mg E.C Capsule</td><td>Bottle of 14</td></tr>
+        <tr class="no-break"><td>Pantoprazole 40 mg E.C Capsule</td><td>Box of 30</td></tr>
+        <tr class="no-break"><td>Ursodeoxycholic Acid 250 mg Scored F.C Tablet</td><td>Box of 100</td></tr>
+      </tbody>
+    </table>
+
+    <div class="divider" style="margin: 6mm 0 5mm;"></div>
+
+    <!-- Featured Product Spotlight -->
+    <div style="display:grid; grid-template-columns:100px 1fr; gap:6mm; align-items:center; background:var(--slate-50); border:1px solid var(--slate-200); border-radius:8px; padding:5mm;">
+      <img src="../product-images/الدورام.png" alt="Aldoram Omeprazole" style="width:100px; height:100px; object-fit:contain; background:#fff; border-radius:6px; border:1px solid var(--slate-200); padding:3mm;">
+      <div>
+        <div style="font-size:7.5pt; font-weight:700; color:var(--teal-light); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2mm;">Featured Product</div>
+        <div style="font-size:13pt; font-weight:900; color:var(--teal); margin-bottom:2mm; line-height:1.2;">Aldoram — Omeprazole 20 mg</div>
+        <div style="font-size:8.5pt; color:var(--teal-mid); font-weight:600; margin-bottom:3mm;">Enteric-Coated Capsule · Bottle of 14 / 28 — also available in 40 mg</div>
+        <p style="font-size:9pt; color:var(--slate-600); line-height:1.6;">Aldoram is Ramopharmin's branded proton pump inhibitor containing Omeprazole, indicated for peptic ulcer disease, gastroesophageal reflux disease (GERD), and Helicobacter pylori eradication regimens. The enteric-coated capsule protects the active ingredient from gastric acid, ensuring targeted release in the small intestine for optimal absorption and sustained acid suppression.</p>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns:100px 1fr; gap:6mm; align-items:center; background:var(--slate-50); border:1px solid var(--slate-200); border-radius:8px; padding:5mm; margin-top:4mm;">
+      <img src="../product-images/دی سیکلومین - 1.png" alt="Dicyclomine" style="width:100px; height:100px; object-fit:contain; background:#fff; border-radius:6px; border:1px solid var(--slate-200); padding:3mm;">
+      <div>
+        <div style="font-size:7.5pt; font-weight:700; color:var(--teal-light); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2mm;">Featured Product</div>
+        <div style="font-size:13pt; font-weight:900; color:var(--teal); margin-bottom:2mm; line-height:1.2;">Dicyclomine 10 mg</div>
+        <div style="font-size:8.5pt; color:var(--teal-mid); font-weight:600; margin-bottom:3mm;">Elixir 10 mg / 5 ml · Bottle of 60 ml — also available as F.C Tablet</div>
+        <p style="font-size:9pt; color:var(--slate-600); line-height:1.6;">Dicyclomine is an anticholinergic antispasmodic that relaxes smooth muscle in the gastrointestinal tract, relieving cramping and spasm associated with irritable bowel syndrome and functional GI disorders. Ramopharmin offers it in both elixir and film-coated tablet forms, enabling flexible dosing for patients with dysphagia or those requiring liquid formulations, such as elderly or pediatric patients.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span>Ramopharmin Pharmaceutical Co.</span>
+    <span class="page-num">11</span>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 14 — ANTI-PARKINSON + ANTIMIGRAINE + CARDIOVASCULAR
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before">
+
+  <div class="page-header">
+    <img src="../logos/english-full-logo-white.png" alt="Ramopharmin">
+    <div class="page-header-right"><strong>Product List</strong>Neurological &amp; Cardiovascular</div>
+  </div>
+
+  <div class="page-body" style="padding-top:7mm;">
+
+    <!-- Anti-Parkinson -->
+    <div class="category-label-band">
+      <h2>Anti-Parkinson Agents</h2>
+    </div>
+    <table style="margin-bottom:5mm;">
+      <thead><tr><th style="width:65%;">Generic Name</th><th style="width:35%;">Unit Package</th></tr></thead>
+      <tbody>
+        <tr class="no-break"><td>Levodopa Carbidopa Entacapone 100 / 25 / 200 mg Scored F.C Tablet</td><td>Box of 30</td></tr>
+        <tr class="no-break"><td>Levodopa Carbidopa 100 / 10 mg Scored Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Levodopa Carbidopa 250 / 25 mg Scored Tablet</td><td>Box of 100</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Antimigraine -->
+    <div class="category-label-band">
+      <h2>Antimigraine Agent</h2>
+    </div>
+    <table style="margin-bottom:5mm;">
+      <thead><tr><th style="width:65%;">Generic Name</th><th style="width:35%;">Unit Package</th></tr></thead>
+      <tbody>
+        <tr class="no-break"><td>Sumatriptan 50 mg Scored F.C Tablet</td><td>Box of 4</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Cardiovascular / Diuretic -->
+    <div class="category-label-band">
+      <h2>Cardiovascular &amp; Diuretic Agents</h2>
+    </div>
+    <table style="margin-bottom:5mm;">
+      <thead><tr><th style="width:65%;">Generic Name</th><th style="width:35%;">Unit Package</th></tr></thead>
+      <tbody>
+        <tr class="no-break"><td>Hydrochlorothiazide 25 mg Scored Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Hydrochlorothiazide 50 mg Scored Tablet</td><td>Box of 100</td></tr>
+        <tr class="no-break"><td>Baclofen 25 mg Scored Tablet</td><td>Box of 100</td></tr>
+      </tbody>
+    </table>
+
+    <div class="divider" style="margin: 6mm 0 5mm;"></div>
+
+    <!-- Featured Product Spotlight -->
+    <div style="display:grid; grid-template-columns:100px 1fr; gap:6mm; align-items:center; background:var(--slate-50); border:1px solid var(--slate-200); border-radius:8px; padding:5mm;">
+      <img src="../product-images/37-DSC09438.png" alt="Hydrochlorothiazide 25 mg" style="width:100px; height:100px; object-fit:contain; background:#fff; border-radius:6px; border:1px solid var(--slate-200); padding:3mm;">
+      <div>
+        <div style="font-size:7.5pt; font-weight:700; color:var(--teal-light); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2mm;">Featured Product</div>
+        <div style="font-size:13pt; font-weight:900; color:var(--teal); margin-bottom:2mm; line-height:1.2;">Hydrochlorothiazide 25 mg</div>
+        <div style="font-size:8.5pt; color:var(--teal-mid); font-weight:600; margin-bottom:3mm;">Scored Tablet · Box of 100 — also available in 50 mg</div>
+        <p style="font-size:9pt; color:var(--slate-600); line-height:1.6;">A thiazide diuretic widely prescribed for hypertension and oedema, Hydrochlorothiazide reduces blood pressure by inhibiting sodium reabsorption in the distal convoluted tubule. Ramopharmin produces both 25 mg and 50 mg strengths as scored tablets, enabling stepwise dose adjustment to meet individual patient cardiovascular management goals. Its established safety profile makes it a staple in antihypertensive combination regimens.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span>Ramopharmin Pharmaceutical Co.</span>
+    <span class="page-num">12</span>
+  </div>
+
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 15 — PRODUCT GALLERY (1 of 5)
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before">
+  <div class="page-header">
+    <img src="../logos/english-full-logo-white.png" alt="Ramopharmin">
+    <div class="page-header-right"><strong>Product Gallery</strong>1 of 4</div>
+  </div>
+  <div class="page-body" style="padding-top:6mm; padding-bottom:6mm; justify-content:center;">
+    <div class="category-label-band" style="margin-bottom:6mm;"><h2>Product Gallery</h2></div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:5mm; flex:1;">
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/استامینوفن 500.png" alt="Acetaminophen 500">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Acetaminophen 500 mg</div>
+          <div class="product-card-sub">Scored Tablet · Box of 30/100</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/WhatsApp Image 2026-02-21 at 17.09.40.jpeg" alt="Acetaminophen Oral Solution">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Acetaminophen 120 mg/5ml</div>
+          <div class="product-card-sub">Oral Solution · Bottle of 60ml</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/مفنامیک اسید.png" alt="Mefenamic Acid">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Mefenamic Acid 250 mg</div>
+          <div class="product-card-sub">Capsule · Box of 100</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/آزارام (1).png" alt="Azaram">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Azaram — Azathioprine 50 mg</div>
+          <div class="product-card-sub">Scored Tablet · Box of 100</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/دکسترورامین - 2.png" alt="Dextromethorphan">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Dextromethorphan 15 mg/5ml</div>
+          <div class="product-card-sub">Syrup · Bottle of 60ml</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/دکسترورامین - پی - 2.png" alt="Dextromethorphan-P 2">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Dextromethorphan-P</div>
+          <div class="product-card-sub">Syrup · Bottle of 60ml</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/دیفن هیدرامین - 1.png" alt="Diphenhydramine">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Diphenhydramine 12.5 mg/5ml</div>
+          <div class="product-card-sub">Oral Solution · Bottle of 60ml</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/دیفن هیدرامین - 2.png" alt="Diphenhydramine Compound">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Diphenhydramine Compound</div>
+          <div class="product-card-sub">Syrup · Bottle of 60ml</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/گایا فنزین - 1 - Copy.png" alt="Guaifenesin">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Guaifenesin 100 mg/5ml</div>
+          <div class="product-card-sub">Syrup · Bottle of 60ml</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span>Ramopharmin Pharmaceutical Co.</span>
+    <span class="page-num">13</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 16 — PRODUCT GALLERY (2 of 5)
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before">
+  <div class="page-header">
+    <img src="../logos/english-full-logo-white.png" alt="Ramopharmin">
+    <div class="page-header-right"><strong>Product Gallery</strong>2 of 4</div>
+  </div>
+  <div class="page-body" style="padding-top:6mm; padding-bottom:6mm; justify-content:center;">
+    <div class="category-label-band" style="margin-bottom:6mm;"><h2>Product Gallery <span style="font-size:12pt; font-weight:500; color:var(--teal-light);">— continued</span></h2></div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:5mm; flex:1;">
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/گایا فنزین - 2 - Copy.png" alt="Guaifenesin 2">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Guaifenesin 100 mg/5ml</div>
+          <div class="product-card-sub">Syrup · Bottle of 60ml</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/سودوافدرین - 1.png" alt="Pseudoephedrine">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Pseudoephedrine 30 mg/5ml</div>
+          <div class="product-card-sub">Syrup · Bottle of 60ml</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/سودوافدرین - 2.png" alt="Pseudoephedrine 2">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Pseudoephedrine 30 mg/5ml</div>
+          <div class="product-card-sub">Syrup · Bottle of 60ml</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/تئوفیلین - جی - 2.png" alt="Theophylline-G">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Theophylline-G Syrup</div>
+          <div class="product-card-sub">Bottle of 120ml</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/ستیریزین - 1.png" alt="Cetirizine Syrup">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Cetirizine 5 mg/5ml</div>
+          <div class="product-card-sub">Syrup · Bottle of 60ml</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/ستیریزین - 2.png" alt="Cetirizine 5mg Tablet">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Cetirizine 5 mg</div>
+          <div class="product-card-sub">Scored Tablet · Box of 100</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/سیتریزین 2.png" alt="Cetirizine Syrup 2">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Cetirizine Syrup</div>
+          <div class="product-card-sub">5 mg / 5 ml · Bottle of 60ml</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/سیتریزین10.png" alt="Cetirizine 10mg">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Cetirizine 10 mg</div>
+          <div class="product-card-sub">Scored Tablet · Box of 100</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/سیتریزین1.png" alt="Cetirizine 10mg alt">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Cetirizine 10 mg</div>
+          <div class="product-card-sub">Scored Tablet · Box of 100</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span>Ramopharmin Pharmaceutical Co.</span>
+    <span class="page-num">14</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 17 — PRODUCT GALLERY (3 of 5)
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before">
+  <div class="page-header">
+    <img src="../logos/english-full-logo-white.png" alt="Ramopharmin">
+    <div class="page-header-right"><strong>Product Gallery</strong>3 of 4</div>
+  </div>
+  <div class="page-body" style="padding-top:6mm; padding-bottom:6mm; justify-content:center;">
+    <div class="category-label-band" style="margin-bottom:6mm;"><h2>Product Gallery <span style="font-size:12pt; font-weight:500; color:var(--teal-light);">— continued</span></h2></div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:5mm; flex:1;">
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/کتوتیفن - 1 - Copy.png" alt="Ketotifen">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Ketotifen 1 mg</div>
+          <div class="product-card-sub">F.C Tablet · Box of 100</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/کتوتیفن - 2 - Copy.png" alt="Ketotifen Syrup">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Ketotifen Syrup</div>
+          <div class="product-card-sub">1 mg / 5 ml · Bottle of 120ml</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/لوراتادین - 1 - Copy.png" alt="Loratadine">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Loratadine 10 mg</div>
+          <div class="product-card-sub">Scored Tablet · Box of 100</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/لوراتادین - 2 - Copy.png" alt="Loratadine Syrup">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Loratadine Syrup</div>
+          <div class="product-card-sub">5 mg / 5 ml · Bottle of 60ml</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/هیدروکسی زین هیدروکلراید - 1.png" alt="Hydroxyzine">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Hydroxyzine Hydrochloride</div>
+          <div class="product-card-sub">Tablet · Box of 100</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/هیدروکسی زین هیدروکلراید - 2.png" alt="Hydroxyzine HCl 2">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Hydroxyzine HCl</div>
+          <div class="product-card-sub">Tablet · Box of 100</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/آزارام.png" alt="Azaram">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Azaram (Azathioprine)</div>
+          <div class="product-card-sub">Immunosuppressant</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/کلسیرام.png" alt="Calciram">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Calciram (Calcium Syrup)</div>
+          <div class="product-card-sub">Bottle of 240ml</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/146-DSC09359.png" alt="Lithiram 300">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Lithiram 300 mg</div>
+          <div class="product-card-sub">Scored Tablet · Box of 100</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span>Ramopharmin Pharmaceutical Co.</span>
+    <span class="page-num">15</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 18 — PRODUCT GALLERY (4 of 5)
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before">
+  <div class="page-header">
+    <img src="../logos/english-full-logo-white.png" alt="Ramopharmin">
+    <div class="page-header-right"><strong>Product Gallery</strong>4 of 4</div>
+  </div>
+  <div class="page-body" style="padding-top:6mm; padding-bottom:6mm; justify-content:center;">
+    <div class="category-label-band" style="margin-bottom:6mm;"><h2>Product Gallery <span style="font-size:12pt; font-weight:500; color:var(--teal-light);">— continued</span></h2></div>
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:5mm; flex:1;">
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/86-DSC09581.png" alt="Carbaram 200">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Carbaram 200 mg</div>
+          <div class="product-card-sub">Scored Tablet · Box of 50</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/WhatsApp Image 2026-02-21 at 17.10.28.jpeg" alt="Baclofen 25">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Baclofen 25 mg</div>
+          <div class="product-card-sub">Scored Tablet · Box of 100</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/دنپزیل.png" alt="Donepezil">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Donepezil 5 / 10 mg</div>
+          <div class="product-card-sub">Scored Tablet · Box of 100</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/مماتین.png" alt="Memantine">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Memantine 10 mg/5ml</div>
+          <div class="product-card-sub">Oral Solution · Bottle of 240ml</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/دی سیکلومین - 1.png" alt="Dicyclomine">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Dicyclomine 10 mg</div>
+          <div class="product-card-sub">Elixir / F.C Tablet</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/دی سیکلومین - 2.png" alt="Dicyclomine Elixir">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Dicyclomine Elixir</div>
+          <div class="product-card-sub">10 mg / 5 ml</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/الدورام.png" alt="Aldoram">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Aldoram (Omeprazole)</div>
+          <div class="product-card-sub">E.C Capsule · Bottle of 14/28</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/37-DSC09438.png" alt="Hydrochlorothiazide 25">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Hydrochlorothiazide 25 mg</div>
+          <div class="product-card-sub">Scored Tablet · Box of 100</div>
+        </div>
+      </div>
+      <div class="product-card no-break" style="padding:5mm;">
+        <img class="product-card-img" src="../product-images/38-DSC09443.png" alt="Hydrochlorothiazide 25 alt">
+        <div class="product-card-info" style="padding:3mm 4mm;">
+          <div class="product-card-name">Hydrochlorothiazide 25 mg</div>
+          <div class="product-card-sub">Scored Tablet · Box of 100</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer">
+    <span>Ramopharmin Pharmaceutical Co.</span>
+    <span class="page-num">16</span>
+  </div>
+</div>
+
+
+<!-- ════════════════════════════════════════════════════════
+     PAGE 19 — CONTACT
+════════════════════════════════════════════════════════ -->
+<div class="page page-break-before" style="background: #ffffff;">
+
+  <div style="height:4px; background: linear-gradient(90deg, #5aaeb8, #2d7b84, #14b8a6); flex-shrink:0;"></div>
+
+  <!-- Top dark band -->
+  <div style="background: linear-gradient(135deg, #174f57 0%, #0f3338 100%); padding: 12mm 18mm 10mm; flex-shrink:0;">
+    <img src="../logos/english-full-logo-white.png"
+         style="height:128px; width:auto; max-width:100%; margin-bottom:6mm; object-fit:contain; display:block;" alt="">
+    <h2 style="font-size:24pt; font-weight:900; color:#ffffff; line-height:1.15; letter-spacing:-0.01em; margin-bottom:2mm;">
+      Contact Us
+    </h2>
+    <div style="width:36px; height:3px; background:linear-gradient(90deg,#5aaeb8,#2d7b84); border-radius:2px;"></div>
+  </div>
+
+  <!-- Contact details -->
+  <div style="padding: 10mm 18mm; flex:1;">
+
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:7mm; margin-bottom:8mm;">
+
+      <div>
+        <div style="font-size:8pt; font-weight:700; color:var(--teal-light, #5aaeb8); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:4mm;">
+          Get in Touch
+        </div>
+
+        <div style="display:flex; flex-direction:column; gap:4mm;">
+          <div style="display:flex; align-items:flex-start; gap:3mm;">
+            <div style="width:32px; height:32px; border-radius:8px; background:linear-gradient(135deg,#174f57,#2d7b84);
+                        display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+              </svg>
+            </div>
+            <div>
+              <div style="font-size:8pt; color:#94a3b8; margin-bottom:1px;">Email</div>
+              <div style="font-size:10pt; font-weight:600; color:#1e293b;">info@ramopharmin.com</div>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:flex-start; gap:3mm;">
+            <div style="width:32px; height:32px; border-radius:8px; background:linear-gradient(135deg,#174f57,#2d7b84);
+                        display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.18 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.09a16 16 0 0 0 6 6l.72-.72a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+              </svg>
+            </div>
+            <div>
+              <div style="font-size:8pt; color:#94a3b8; margin-bottom:1px;">Phone</div>
+              <div style="font-size:10pt; font-weight:600; color:#1e293b;">+98 021 44536020</div>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:flex-start; gap:3mm;">
+            <div style="width:32px; height:32px; border-radius:8px; background:linear-gradient(135deg,#174f57,#2d7b84);
+                        display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              </svg>
+            </div>
+            <div>
+              <div style="font-size:8pt; color:#94a3b8; margin-bottom:1px;">Website</div>
+              <div style="font-size:10pt; font-weight:600; color:#1e293b;">www.ramopharmin.org</div>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:flex-start; gap:3mm;">
+            <div style="width:32px; height:32px; border-radius:8px; background:linear-gradient(135deg,#174f57,#2d7b84);
+                        display:flex; align-items:center; justify-content:center; flex-shrink:0;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+            </div>
+            <div>
+              <div style="font-size:8pt; color:#94a3b8; margin-bottom:1px;">Address</div>
+              <div style="font-size:10pt; font-weight:600; color:#1e293b;">District 21, Valiasr Blvd<br>Tehran, Iran</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: closing statement -->
+      <div style="background:var(--slate-50, #f8fafc); border:1px solid var(--slate-200, #e2e8f0); border-radius:10px; padding:7mm;">
+        <p style="font-size:9pt; font-weight:700; color:#174f57; text-transform:uppercase; letter-spacing:0.07em; margin-bottom:3mm;">
+          A Khesht Holding Company
+        </p>
+        <p style="font-size:9.5pt; color:#475569; line-height:1.65;">
+          Ramopharmin Pharmaceutical Co. is a proud member of Khesht Holding — a diversified industrial group committed to innovation, quality, and sustainable growth across its portfolio companies.
+        </p>
+        <div style="margin-top:5mm; padding-top:4mm; border-top:1px solid #e2e8f0;">
+          <p style="font-size:8.5pt; color:#94a3b8; line-height:1.6;">
+            For partnership inquiries, product registrations, or export opportunities, please reach us via email or telephone. Our international business development team is available to assist.
+          </p>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Motto band -->
+    <div style="border-left:3px solid var(--teal-light); padding:4mm 6mm; margin-bottom:4mm; background:var(--slate-50); border-radius:0 6px 6px 0;">
+      <p style="font-size:13pt; font-weight:700; color:var(--teal); line-height:1.4; font-style:italic; margin-bottom:1.5mm;">"Dedicated to quality. Driven by innovation."</p>
+      <p style="font-size:9pt; color:var(--slate-600); line-height:1.5;">Every formulation we bring to market is the result of rigorous research, advanced manufacturing, and an unwavering commitment to patient outcomes.</p>
+    </div>
+
+    <!-- Description boxes -->
+    <div style="background:var(--slate-50); border:1px solid var(--slate-200); border-radius:8px; padding:5mm; margin-bottom:4mm;">
+      <div style="font-size:7.5pt; font-weight:700; color:var(--teal-light); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2mm;">About Ramopharmin</div>
+      <div style="font-size:11pt; font-weight:900; color:var(--teal); margin-bottom:3mm; line-height:1.2;">A Legacy of Pharmaceutical Excellence</div>
+      <p style="font-size:9pt; color:var(--slate-600); line-height:1.65;">Ramopharmin Pharmaceutical Co. is a leading Iranian manufacturer with decades of experience producing high-quality medicines for domestic and international markets. Founded on principles of scientific rigor and patient-centered care, the company has grown into a trusted name across multiple therapeutic categories — from analgesics and CNS agents to immunosuppressants and specialty formulations.</p>
+    </div>
+
+    <div style="background:var(--slate-50); border:1px solid var(--slate-200); border-radius:8px; padding:5mm;">
+      <div style="font-size:7.5pt; font-weight:700; color:var(--teal-light); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:2mm;">Manufacturing &amp; Quality</div>
+      <div style="font-size:11pt; font-weight:900; color:var(--teal); margin-bottom:3mm; line-height:1.2;">GMP-Certified. Export-Ready. Innovation-Driven.</div>
+      <p style="font-size:9pt; color:var(--slate-600); line-height:1.65;">Our state-of-the-art manufacturing facility operates under GMP conditions validated to international standards, supporting both solid and liquid dosage forms. Ramopharmin invests continuously in R&amp;D, process optimization, and personnel training to ensure our medicines consistently meet the expectations of healthcare providers, patients, and regulatory authorities worldwide.</p>
+    </div>
+
+  </div>
+
+  <div class="page-footer">
+    <span>Ramopharmin Pharmaceutical Co. — info@ramopharmin.com</span>
+    <span class="page-num">13</span>
+  </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ramopharmin - Therapeutic Categories</title>
+    
+    <!-- Dependencies -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .glass-panel:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(20, 184, 166, 0.3); /* Teal border on hover */
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        .text-brand-light { color: #5aaeb8; }
+        .bg-brand { background-color: #174f57; }
+        
+        /* Icon container gradient */
+        .icon-gradient {
+            background: linear-gradient(135deg, #174f57 0%, #2d7b84 100%);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CATEGORIES BLOCK STARTS HERE -->
+    <!-- Added inline style for background to ensure it's self-contained and not transparent -->
+    <section class="py-24 relative z-20" style="background: radial-gradient(circle at 10% 20%, #174f57 0%, rgb(11, 38, 59) 40%, rgb(2, 6, 23) 90%);">
+        <div class="container mx-auto px-4 md:px-6">
+            
+            <!-- Header Section -->
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <h3 class="text-brand-light font-bold text-sm tracking-wider uppercase mb-3 animate-pulse">پایبندی به درمان‌های مؤثر</h3>
+                <h2 class="text-3xl md:text-5xl font-black text-white mb-6 leading-tight">گروه‌های درمانی <span class="text-transparent bg-clip-text bg-gradient-to-r from-teal-200 to-white">راموفارمین</span></h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-transparent via-[#174f57] to-transparent mx-auto rounded-full mb-6"></div>
+                <p class="text-slate-400 text-lg leading-relaxed">
+                    تولیدکننده طیف وسیعی از محصولات دارویی با بالاترین استانداردهای جهانی برای ارتقای سلامت جامعه.
+                </p>
+            </div>
+
+            <!-- Categories Grid -->
+            <!-- 1 col mobile, 2 col tablet, 3 col desktop -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- 1. Immunosuppressants -->
+                <a href="https://ramopharmin.org/immunosuppressants-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <!-- Hover Glow Effect -->
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="shield-alert" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">سرکوب‌کننده‌های ایمنی</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">مهارکننده‌های کالسینورین و سایر ایمونوساپرسورها برای پیوند اعضا.</p>
+                    </div>
+                </a>
+
+                <!-- 2. Anti-Parkinson -->
+                <a href="https://ramopharmin.org/anti-parkinson-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="brain-circuit" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">داروهای ضد پارکینسون</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">مهارکننده‌های MAO‑B و آگونیست‌های دوپامین جهت کنترل علائم.</p>
+                    </div>
+                </a>
+
+                <!-- 3. Pain & Anti-inflammatory -->
+                <a href="https://ramopharmin.org/pain-anti-inflammatory-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="flame" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">ضددرد و ضدالتهاب</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">NSAIDs و مهارکننده‌های انتخابی COX‑2 برای مدیریت درد.</p>
+                    </div>
+                </a>
+
+                <!-- 4. Cold & Respiratory -->
+                <a href="https://ramopharmin.org/cold-respiratory-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="wind" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">سرماخوردگی و تنفسی</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">آنتی‌هیستامین‌ها و ضداحتقان‌ها برای بهبود تنفس.</p>
+                    </div>
+                </a>
+
+                <!-- 5. Supplements -->
+                <a href="https://ramopharmin.org/supplements-vitamins-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="sun" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">مکمل‌ها و ویتامین‌ها</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">انواع ویتامین‌ها و مینرال‌ها برای تقویت سیستم ایمنی.</p>
+                    </div>
+                </a>
+
+                <!-- 6. Laxatives -->
+                <a href="https://ramopharmin.org/laxatives-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="droplets" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">ملین‌ها</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">محرک‌های اسموتیک و آگونیست‌های GC‑C.</p>
+                    </div>
+                </a>
+
+                <!-- 7. Antispasmodics -->
+                <a href="https://ramopharmin.org/antispasmodics-urinary-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="activity" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">ضداسپاسم و ادراری</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">آنتی‌موسکارینی‌های انتخابی جهت درمان اختلالات.</p>
+                    </div>
+                </a>
+
+                <!-- 8. Anti-Migraine -->
+                <a href="https://ramopharmin.org/anti-migraine-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="zap" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">داروهای ضدمیگرن</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">تریپتان‌ها و آنتاگونیست‌های CGRP برای تسکین سردرد.</p>
+                    </div>
+                </a>
+
+                <!-- 9. Anti-Diabetes -->
+                <a href="https://ramopharmin.org/anti-diabetes-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="heart-pulse" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">داروهای ضد دیابت</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">مهارکننده‌های DPP‑4 و SGLT2 برای کنترل قند خون.</p>
+                    </div>
+                </a>
+
+                 <!-- 10. CNS -->
+                 <a href="https://ramopharmin.org/cns-drugs-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="brain" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">سیستم عصبی مرکزی</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">مدولاتورهای GABA و دوپامین.</p>
+                    </div>
+                </a>
+
+                 <!-- 11. Gastrointestinal -->
+                 <a href="https://ramopharmin.org/gastrointestinal-therap-cat/" class="glass-panel rounded-2xl p-6 group flex items-start gap-5 relative overflow-hidden">
+                    <div class="absolute -right-10 -top-10 w-32 h-32 bg-teal-500/10 rounded-full blur-3xl group-hover:bg-teal-500/20 transition-all"></div>
+                    
+                    <div class="icon-gradient w-14 h-14 rounded-xl flex items-center justify-center flex-shrink-0 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i data-lucide="utensils" class="w-7 h-7 text-white"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-teal-200 transition-colors">داروهای گوارشی</h3>
+                        <p class="text-sm text-slate-400 leading-relaxed">مهارکننده‌های پمپ پروتون برای سلامت دستگاه گوارش.</p>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Init Icons -->
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

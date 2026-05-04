@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رافارمین - اخبار برتر</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100;400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-primary: #14b8a6;
+            --brand-secondary: #0d9488;
+        }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            margin: 0;
+            background-color: #020617;
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Smooth Slider */
+        .slider-wrapper {
+            display: flex;
+            transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+            height: 100%;
+            width: 100%;
+        }
+
+        .slide-item {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+            opacity: 0.4;
+            transform: scale(0.95);
+            transition: all 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+        }
+
+        .slide-item.active {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Glassmorphism */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .glass-panel:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* Progress Bar */
+        .timer-bar {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            height: 3px;
+            background: white;
+            width: 0%;
+            opacity: 0.5;
+            transition: width 0.1s linear;
+        }
+
+        /* Navigation Dots */
+        .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 99px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            width: 32px;
+            background: white;
+        }
+
+        .nav-btn {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.1);
+        }
+
+        /* Animated Background Gradients */
+        .bg-blob {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            filter: blur(100px);
+            z-index: 0;
+            opacity: 0.15;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="bg-slate-950">
+
+<section class="relative w-full h-screen overflow-hidden flex flex-col justify-center">
+    
+    <!-- Animated Blobs -->
+    <div class="bg-blob bg-teal-500 top-[-10%] right-[-5%]"></div>
+    <div class="bg-blob bg-purple-600 bottom-[-10%] left-[-5%]"></div>
+
+    <!-- The Slider -->
+    <div id="main-slider" class="h-full w-full">
+        <div class="slider-wrapper" id="slider-wrapper">
+            
+            <!-- Slide 1 -->
+            <div class="slide-item active">
+                <div class="container mx-auto h-full px-4 flex items-center justify-center">
+                    <div class="max-w-6xl w-full">
+                        <article class="glass-panel rounded-[2.5rem] p-6 md:p-12 relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-2 h-full bg-pink-500 opacity-60"></div>
+                            <div class="flex flex-col lg:flex-row gap-10 items-center relative z-10">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-4 mb-6">
+                                        <span class="px-3 py-1 bg-pink-500/10 text-pink-400 border border-pink-500/20 rounded-lg text-xs font-bold">مسئولیت اجتماعی</span>
+                                        <div class="flex items-center gap-1 text-slate-400 text-xs">
+                                            <i data-lucide="calendar" class="w-3 h-3"></i>
+                                            <span>۱۵ آذر ۱۴۰۴</span>
+                                        </div>
+                                    </div>
+                                    <h3 class="text-3xl md:text-5xl font-black mb-6 leading-tight group-hover:text-pink-300 transition-colors">پویش آزادسازی بانوان زندانی</h3>
+                                    <p class="text-lg text-slate-300 leading-relaxed mb-8 opacity-80">شرکت داروسازی رافارمین در اقدامی انسان‌دوستانه به مناسبت میلاد حضرت فاطمه (س)، چهار بانوی زندانی مادر و سرپرست خانواده را آزاد کرد. این فعالیت در راستای اهداف والای مسئولیت اجتماعی گروه خشت انجام شده است.</p>
+                                    <div class="flex items-center justify-between mt-auto">
+                                        <div class="hidden md:flex items-center gap-2 text-slate-500">
+                                            <i data-lucide="heart" class="w-5 h-5"></i>
+                                            <span class="text-sm">همدلی اجتماعی</span>
+                                        </div>
+                                        <a href="#" class="px-8 py-4 bg-white text-slate-950 rounded-2xl font-bold flex items-center gap-3 hover:bg-pink-500 hover:text-white transition-all shadow-xl shadow-pink-500/10">
+                                            مشاهده کامل خبر
+                                            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="w-full lg:w-80 h-64 lg:h-80 bg-gradient-to-br from-pink-500/20 to-transparent border border-white/5 rounded-3xl flex items-center justify-center">
+                                    <i data-lucide="heart-handshake" class="w-24 h-24 text-pink-400/40"></i>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide-item">
+                <div class="container mx-auto h-full px-4 flex items-center justify-center">
+                    <div class="max-w-6xl w-full">
+                        <article class="glass-panel rounded-[2.5rem] p-6 md:p-12 relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-2 h-full bg-indigo-500 opacity-60"></div>
+                            <div class="flex flex-col lg:flex-row gap-10 items-center relative z-10">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-4 mb-6">
+                                        <span class="px-3 py-1 bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 rounded-lg text-xs font-bold">مصاحبه</span>
+                                        <div class="flex items-center gap-1 text-slate-400 text-xs">
+                                            <i data-lucide="calendar" class="w-3 h-3"></i>
+                                            <span>۳۱ فروردین ۱۴۰۴</span>
+                                        </div>
+                                    </div>
+                                    <h3 class="text-3xl md:text-5xl font-black mb-6 leading-tight group-hover:text-indigo-300 transition-colors">تحول در مسیر صادرات دارویی</h3>
+                                    <p class="text-lg text-slate-300 leading-relaxed mb-8 opacity-80">بررسی استراتژی‌های جدید راموفارمین پس از نوسازی زیرساخت‌ها. نگاهی به بازارهای هدف صادراتی و نقش تکنولوژی در افزایش کیفیت تولیدات داخلی مطابق با استانداردهای جهانی.</p>
+                                    <div class="flex items-center justify-between mt-auto">
+                                        <div class="hidden md:flex items-center gap-2 text-slate-500">
+                                            <i data-lucide="mic" class="w-5 h-5"></i>
+                                            <span class="text-sm">تحلیل اختصاصی</span>
+                                        </div>
+                                        <a href="#" class="px-8 py-4 bg-white text-slate-950 rounded-2xl font-bold flex items-center gap-3 hover:bg-indigo-500 hover:text-white transition-all shadow-xl shadow-indigo-500/10">
+                                            مشاهده مصاحبه
+                                            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="w-full lg:w-80 h-64 lg:h-80 bg-gradient-to-br from-indigo-500/20 to-transparent border border-white/5 rounded-3xl flex items-center justify-center">
+                                    <i data-lucide="trending-up" class="w-24 h-24 text-indigo-400/40"></i>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide-item">
+                <div class="container mx-auto h-full px-4 flex items-center justify-center">
+                    <div class="max-w-6xl w-full">
+                        <article class="glass-panel rounded-[2.5rem] p-6 md:p-12 relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-2 h-full bg-purple-500 opacity-60"></div>
+                            <div class="flex flex-col lg:flex-row gap-10 items-center relative z-10">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-4 mb-6">
+                                        <span class="px-3 py-1 bg-purple-500/10 text-purple-400 border border-purple-500/20 rounded-lg text-xs font-bold">گفت‌وگو</span>
+                                        <div class="flex items-center gap-1 text-slate-400 text-xs">
+                                            <i data-lucide="calendar" class="w-3 h-3"></i>
+                                            <span>آذر ۱۴۰۴</span>
+                                        </div>
+                                    </div>
+                                    <h3 class="text-3xl md:text-5xl font-black mb-6 leading-tight group-hover:text-purple-300 transition-colors">صنعت ما دچار «ریسک مقیاس» است!</h3>
+                                    <p class="text-lg text-slate-300 leading-relaxed mb-8 opacity-80">گفت‌وگو با دکتر مهدی زرین، مدیرعامل راموفارمین درباره چالش‌های صنعت دارو، خصوصی‌سازی و مسیر تحول شرکت. تحلیل عمیقی از مشکلات ساختاری صنعت داروسازی ایران.</p>
+                                    <div class="flex items-center justify-between mt-auto">
+                                        <div class="hidden md:flex items-center gap-2 text-slate-500">
+                                            <i data-lucide="alert-triangle" class="w-5 h-5"></i>
+                                            <span class="text-sm">تحلیل ریسک</span>
+                                        </div>
+                                        <a href="#" class="px-8 py-4 bg-white text-slate-950 rounded-2xl font-bold flex items-center gap-3 hover:bg-purple-500 hover:text-white transition-all shadow-xl shadow-purple-500/10">
+                                            مشاهده گفت‌وگو
+                                            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="w-full lg:w-80 h-64 lg:h-80 bg-gradient-to-br from-purple-500/20 to-transparent border border-white/5 rounded-3xl flex items-center justify-center">
+                                    <i data-lucide="bar-chart-3" class="w-24 h-24 text-purple-400/40"></i>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="slide-item">
+                <div class="container mx-auto h-full px-4 flex items-center justify-center">
+                    <div class="max-w-6xl w-full">
+                        <article class="glass-panel rounded-[2.5rem] p-6 md:p-12 relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-2 h-full bg-amber-500 opacity-60"></div>
+                            <div class="flex flex-col lg:flex-row gap-10 items-center relative z-10">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-4 mb-6">
+                                        <span class="px-3 py-1 bg-amber-500/10 text-amber-400 border border-amber-500/20 rounded-lg text-xs font-bold">رویداد</span>
+                                        <div class="flex items-center gap-1 text-slate-400 text-xs">
+                                            <i data-lucide="calendar" class="w-3 h-3"></i>
+                                            <span>۲۵ اردیبهشت ۱۴۰۴</span>
+                                        </div>
+                                    </div>
+                                    <h3 class="text-3xl md:text-5xl font-black mb-6 leading-tight group-hover:text-amber-300 transition-colors">حضور در نمایشگاه فارمکس</h3>
+                                    <p class="text-lg text-slate-300 leading-relaxed mb-8 opacity-80">گزارش تصویری از حضور فعال راموفارمین در هفتمین دوره نمایشگاه بین‌المللی فارمکس خاورمیانه. نمایش آخرین دستاوردهای دارویی و تعامل با تامین‌کنندگان برتر منطقه.</p>
+                                    <div class="flex items-center justify-between mt-auto">
+                                        <div class="hidden md:flex items-center gap-2 text-slate-500">
+                                            <i data-lucide="award" class="w-5 h-5"></i>
+                                            <span class="text-sm">رویدادهای صنعت</span>
+                                        </div>
+                                        <a href="#" class="px-8 py-4 bg-white text-slate-950 rounded-2xl font-bold flex items-center gap-3 hover:bg-amber-500 hover:text-white transition-all shadow-xl shadow-amber-500/10">
+                                            مشاهده گزارش
+                                            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="w-full lg:w-80 h-64 lg:h-80 bg-gradient-to-br from-amber-500/20 to-transparent border border-white/5 rounded-3xl flex items-center justify-center">
+                                    <i data-lucide="factory" class="w-24 h-24 text-amber-400/40"></i>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="slide-item">
+                <div class="container mx-auto h-full px-4 flex items-center justify-center">
+                    <div class="max-w-6xl w-full">
+                        <article class="glass-panel rounded-[2.5rem] p-6 md:p-12 relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-2 h-full bg-emerald-500 opacity-60"></div>
+                            <div class="flex flex-col lg:flex-row gap-10 items-center relative z-10">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-4 mb-6">
+                                        <span class="px-3 py-1 bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 rounded-lg text-xs font-bold">GMP</span>
+                                        <div class="flex items-center gap-1 text-slate-400 text-xs">
+                                            <i data-lucide="calendar" class="w-3 h-3"></i>
+                                            <span>۹ فروردین ۱۴۰۴</span>
+                                        </div>
+                                    </div>
+                                    <h3 class="text-3xl md:text-5xl font-black mb-6 leading-tight group-hover:text-emerald-300 transition-colors">طرح جامع اصلاحات GMP</h3>
+                                    <p class="text-lg text-slate-300 leading-relaxed mb-8 opacity-80">گامی بزرگ برای ارتقای کیفیت و ایمنی دارو با همگام‌سازی خطوط تولید با آخرین استانداردهای جهانی. این طرح شامل نوسازی تجهیزات و آموزش نیروی انسانی است.</p>
+                                    <div class="flex items-center justify-between mt-auto">
+                                        <div class="hidden md:flex items-center gap-2 text-slate-500">
+                                            <i data-lucide="shield-check" class="w-5 h-5"></i>
+                                            <span class="text-sm">استانداردهای کیفیت</span>
+                                        </div>
+                                        <a href="#" class="px-8 py-4 bg-white text-slate-950 rounded-2xl font-bold flex items-center gap-3 hover:bg-emerald-500 hover:text-white transition-all shadow-xl shadow-emerald-500/10">
+                                            مشاهده جزئیات
+                                            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="w-full lg:w-80 h-64 lg:h-80 bg-gradient-to-br from-emerald-500/20 to-transparent border border-white/5 rounded-3xl flex items-center justify-center">
+                                    <i data-lucide="check-circle-2" class="w-24 h-24 text-emerald-400/40"></i>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 6 -->
+            <div class="slide-item">
+                <div class="container mx-auto h-full px-4 flex items-center justify-center">
+                    <div class="max-w-6xl w-full">
+                        <article class="glass-panel rounded-[2.5rem] p-6 md:p-12 relative overflow-hidden group">
+                            <div class="absolute top-0 right-0 w-2 h-full bg-cyan-500 opacity-60"></div>
+                            <div class="flex flex-col lg:flex-row gap-10 items-center relative z-10">
+                                <div class="flex-1">
+                                    <div class="flex items-center gap-4 mb-6">
+                                        <span class="px-3 py-1 bg-cyan-500/10 text-cyan-400 border border-cyan-500/20 rounded-lg text-xs font-bold">علمی</span>
+                                        <div class="flex items-center gap-1 text-slate-400 text-xs">
+                                            <i data-lucide="calendar" class="w-3 h-3"></i>
+                                            <span>۸ اسفند ۱۴۰۳</span>
+                                        </div>
+                                    </div>
+                                    <h3 class="text-3xl md:text-5xl font-black mb-6 leading-tight group-hover:text-cyan-300 transition-colors">مقاله دکتر صمدی در درمان سرطان</h3>
+                                    <p class="text-lg text-slate-300 leading-relaxed mb-8 opacity-80">انتشار مقاله در مجله Urology درباره تست‌های ژنتیکی جدید و روش‌های درمان هدفمند در بیماران مبتلا به سرطان پروستات. دستاوردهای علمی شرکت در زمینه تحقیقات دارویی.</p>
+                                    <div class="flex items-center justify-between mt-auto">
+                                        <div class="hidden md:flex items-center gap-2 text-slate-500">
+                                            <i data-lucide="file-text" class="w-5 h-5"></i>
+                                            <span class="text-sm">پژوهش علمی</span>
+                                        </div>
+                                        <a href="#" class="px-8 py-4 bg-white text-slate-950 rounded-2xl font-bold flex items-center gap-3 hover:bg-cyan-500 hover:text-white transition-all shadow-xl shadow-cyan-500/10">
+                                            مشاهده مقاله
+                                            <i data-lucide="arrow-left" class="w-5 h-5"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="w-full lg:w-80 h-64 lg:h-80 bg-gradient-to-br from-cyan-500/20 to-transparent border border-white/5 rounded-3xl flex items-center justify-center">
+                                    <i data-lucide="microscope" class="w-24 h-24 text-cyan-400/40"></i>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-8 z-30">
+        <!-- Next button is physically LEFT in RTL for "Forward" -->
+        <button id="next-slide" class="nav-btn w-14 h-14 rounded-full flex items-center justify-center text-white">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+        <div id="dot-container" class="flex gap-3">
+            <!-- Generated by JS -->
+        </div>
+
+        <button id="prev-slide" class="nav-btn w-14 h-14 rounded-full flex items-center justify-center text-white">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+    </div>
+
+    <!-- Timer Bar -->
+    <div class="timer-bar" id="timer-bar"></div>
+
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        lucide.createIcons();
+
+        const wrapper = document.getElementById('slider-wrapper');
+        const slides = document.querySelectorAll('.slide-item');
+        const nextBtn = document.getElementById('next-slide');
+        const prevBtn = document.getElementById('prev-slide');
+        const dotContainer = document.getElementById('dot-container');
+        const timerBar = document.getElementById('timer-bar');
+
+        let currentIndex = 0;
+        const totalSlides = slides.length;
+        const autoPlayDuration = 6000;
+        let timerStart = Date.now();
+        let autoPlayTimer;
+        let progressInterval;
+
+        // Initialize Dots
+        slides.forEach((_, i) => {
+            const dot = document.createElement('button');
+            dot.className = `dot ${i === 0 ? 'active' : ''}`;
+            dot.addEventListener('click', () => goToSlide(i));
+            dotContainer.appendChild(dot);
+        });
+
+        const dots = document.querySelectorAll('.dot');
+
+        function updateSlider() {
+            // In RTL, to show next slide (to the left), use negative translateX
+            const offset = currentIndex * 100;
+            wrapper.style.transform = `translateX(-${offset}%)`;
+
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === currentIndex);
+            });
+
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === currentIndex);
+            });
+
+            resetTimer();
+        }
+
+        function goToSlide(index) {
+            currentIndex = index;
+            updateSlider();
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        function resetTimer() {
+            clearInterval(progressInterval);
+            clearTimeout(autoPlayTimer);
+            
+            let progress = 0;
+            timerBar.style.width = '0%';
+            
+            const step = 100; // update every 100ms
+            const increment = (step / autoPlayDuration) * 100;
+
+            progressInterval = setInterval(() => {
+                progress += increment;
+                timerBar.style.width = `${Math.min(progress, 100)}%`;
+            }, step);
+
+            autoPlayTimer = setTimeout(nextSlide, autoPlayDuration);
+        }
+
+        // Event Listeners
+        nextBtn.addEventListener('click', () => {
+            nextSlide();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            prevSlide();
+        });
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') prevSlide();
+            if (e.key === 'ArrowLeft') nextSlide();
+        });
+
+        // Pause on hover
+        wrapper.addEventListener('mouseenter', () => {
+            clearInterval(progressInterval);
+            clearTimeout(autoPlayTimer);
+        });
+
+        wrapper.addEventListener('mouseleave', () => {
+            resetTimer();
+        });
+
+        // Initial Start
+        updateSlider();
+    });
+</script>
+
+</body>
+</html>

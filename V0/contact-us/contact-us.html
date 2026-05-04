@@ -1,0 +1,119 @@
+<!-- Contact Us Form - Styled to Blend with White Header/Footer -->
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ارتباط با ما</title>
+  <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      background: #EFF2F3;
+      font-family: 'Vazirmatn', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .contact-form-container {
+      max-width: 600px;
+      margin: 48px auto;
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+      padding: 32px 24px;
+      border: 1px solid #e2e8f0;
+    }
+    .contact-form-title {
+      color: #0d9488;
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 24px;
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    label {
+      display: block;
+      margin-bottom: 8px;
+      color: #475569;
+      font-weight: 500;
+      text-align: right;
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 1rem;
+      background: #f8fafc;
+      color: #0f172a;
+      transition: border-color 0.2s;
+      text-align: right;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #0d9488;
+      outline: none;
+    }
+    .contact-form-btn {
+      background: linear-gradient(135deg, #0d9488 0%, #115e59 100%);
+      color: #fff;
+      border: none;
+      padding: 12px 32px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 8px;
+      box-shadow: 0 2px 8px rgba(13,148,136,0.08);
+    }
+    .contact-form-btn:hover {
+      background: #0d9488;
+    }
+    .form-success {
+      color: #16a34a;
+      text-align: center;
+      margin-top: 16px;
+      font-weight: 600;
+    }
+    .form-error {
+      color: #dc2626;
+      text-align: center;
+      margin-top: 16px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="contact-form-container">
+    <div class="contact-form-title">ارتباط با ما</div>
+    <form action="https://formspree.io/f/xanrbkab" method="POST">
+      <div class="form-group">
+        <label for="name">نام</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">ایمیل</label>
+        <input type="email" id="email" name="email" required>
+      </div>
+      <div class="form-group">
+        <label for="department">دپارتمان</label>
+        <select id="department" name="department" required>
+          <option value="">انتخاب کنید</option>
+          <option value="فروش">فروش</option>
+          <option value="پشتیبانی">پشتیبانی</option>
+          <option value="مدیریت">مدیریت</option>
+          <option value="مالی">مالی</option>
+          <option value="بازاریابی">بازاریابی</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="message">پیام</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+      </div>
+      <button type="submit" class="contact-form-btn">ارسال پیام</button>
+    </form>
+  </div>
+  </body>
+</html>

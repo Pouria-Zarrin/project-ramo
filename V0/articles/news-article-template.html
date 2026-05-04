@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>آنفلوآنزا — پیشگیری با واکسیناسیون، درمان و راهنمای جامع | راموفارمین</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Vazirmatn -->
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Vazirmatn', 'sans-serif'],
+                    },
+                    colors: {
+                        'ramo-blue': '#195057',
+                        'ramo-dark': '#172554',
+                        'ramo-accent': '#3b82f6',
+                        'clinical-teal': '#195057',
+                        'journal-gray': '#f1f5f9',
+                        'text-body': '#334155',
+                        'text-header': '#0f172a'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .toc-scrollbar::-webkit-scrollbar { width: 4px; }
+        .toc-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .toc-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        .toc-scrollbar::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        /* Small visual tweaks for the imported article content */
+        .a-article p { text-align: justify; text-justify: inter-word; }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-text-body">
+
+    <!-- Top Navigation Bar (Sticky) -->
+    <nav class="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+            <!-- Journal Branding -->
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-ramo-blue rounded flex items-center justify-center text-white font-bold">R</div>
+                <div class="hidden md:block">
+                    <span class="block text-sm font-bold text-ramo-blue">اخبار راموفارمین</span>
+                </div>
+            </div>
+
+            <!-- Main Links (desktop) -->
+            <nav class="hidden md:flex items-center gap-6">
+                <a href="https://ramopharmin.org/" class="text-lg font-medium no-underline text-gray-700 hover:text-ramo-blue">خانه</a>
+
+                <div class="relative group cursor-pointer">
+                    <a href="https://ramopharmin.org/aboutus/" class="text-lg font-medium flex items-center gap-1.5 text-gray-700 hover:text-ramo-blue no-underline">
+                        درباره ما
+                        <i class="fa-solid fa-chevron-down text-xs opacity-70"></i>
+                    </a>
+                    <div class="dropdown-menu absolute top-full right-0 w-56 bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                        <div class="p-1">
+                            <a href="https://ramopharmin.org/board/" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl text-base no-underline">اعضای هیات مدیره</a>
+                            <a href="https://ramopharmin.org/managers/" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl text-base no-underline">مدیران اجرایی</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative group cursor-pointer">
+                    <a href="#" class="text-lg font-medium flex items-center gap-1.5 text-gray-700 hover:text-ramo-blue no-underline">
+                        محصولات
+                        <i class="fa-solid fa-chevron-down text-xs opacity-70"></i>
+                    </a>
+                    <div class="dropdown-menu absolute top-full right-0 w-64 bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden z-50 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                        <div class="p-1">
+                            <a href="https://ramopharmin.org/products/" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl text-base no-underline">بر اساس شکل دارویی</a>
+                            <a href="https://ramopharmin.org/category-by-therapeutics/" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 rounded-xl text-base no-underline">بر اساس گروه درمانی</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="https://ramopharmin.org/salamat/" class="text-lg font-medium no-underline text-gray-700 hover:text-ramo-blue">مجله سلامت</a>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-3">
+                <button class="text-gray-500 hover:text-ramo-blue px-3 py-2 text-sm hidden sm:block">
+                    <i class="fa-solid fa-search ml-1"></i> جستجو
+                </button>
+                <a href="#" onclick="window.print(); return false;" class="bg-ramo-blue hover:bg-ramo-dark text-white px-4 py-2 rounded-sm text-sm font-medium transition-colors flex items-center gap-2 shadow-sm" aria-label="چاپ یا ذخیره به‌عنوان PDF">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span>دانلود PDF</span>
+                </a>
+                <!-- Mobile menu button -->
+                <button id="mobileMenuBtn" class="md:hidden p-2 rounded bg-gray-100 text-gray-700 ml-2">
+                    <i class="fa-solid fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile sliding menu -->
+    <div id="mobileMenu" class="fixed inset-y-0 right-0 w-80 max-w-xs bg-white shadow-lg transform translate-x-full transition-transform z-50">
+        <div class="p-4 border-b border-gray-100 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 bg-ramo-blue rounded flex items-center justify-center text-white font-bold">R</div>
+                <div class="text-sm font-bold text-ramo-blue">راموفارمین</div>
+            </div>
+            <button id="mobileMenuClose" class="p-2 text-gray-600">
+                <i class="fa-solid fa-xmark text-lg"></i>
+            </button>
+        </div>
+        <nav class="p-4 space-y-2">
+            <a href="https://ramopharmin.org/" class="block py-3 px-2 rounded hover:bg-gray-50 text-gray-800">خانه</a>
+
+            <div>
+                <button onclick="toggleMobileSubmenu('submenu-about')" class="w-full text-right py-3 px-2 rounded hover:bg-gray-50 flex items-center justify-between text-gray-800">
+                    <span>درباره ما</span>
+                    <i class="fa-solid fa-chevron-down text-sm text-gray-500"></i>
+                </button>
+                <div id="submenu-about" class="hidden pr-4">
+                    <a href="https://ramopharmin.org/board/" class="block py-2 text-sm text-gray-700">اعضای هیات مدیره</a>
+                    <a href="https://ramopharmin.org/managers/" class="block py-2 text-sm text-gray-700">مدیران اجرایی</a>
+                </div>
+            </div>
+
+            <div>
+                <button onclick="toggleMobileSubmenu('submenu-products')" class="w-full text-right py-3 px-2 rounded hover:bg-gray-50 flex items-center justify-between text-gray-800">
+                    <span>محصولات</span>
+                    <i class="fa-solid fa-chevron-down text-sm text-gray-500"></i>
+                </button>
+                <div id="submenu-products" class="hidden pr-4">
+                    <a href="https://ramopharmin.org/products/" class="block py-2 text-sm text-gray-700">بر اساس شکل دارویی</a>
+                    <a href="https://ramopharmin.org/category-by-therapeutics/" class="block py-2 text-sm text-gray-700">بر اساس گروه درمانی</a>
+                </div>
+            </div>
+
+            <a href="https://ramopharmin.org/salamat/" class="block py-3 px-2 rounded hover:bg-gray-50 text-gray-800">مجله سلامت</a>
+        </nav>
+    </div>
+
+    <!-- Main Content Grid -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+        <!-- RIGHT SIDEBAR: Table of Contents & Info (Sticky on Desktop) -->
+        <aside class="hidden lg:block lg:col-span-3">
+            <div class="sticky top-24 space-y-6">
+                
+                <!-- Article Navigation -->
+                <div class="bg-white rounded-lg border border-gray-200 shadow-sm p-4">
+                    <h3 class="font-bold text-gray-900 mb-3 text-sm border-b pb-2">فهرست مطالب</h3>
+                    <ul class="space-y-2 text-sm toc-scrollbar max-h-[60vh] overflow-y-auto pl-2">
+                        <li><a href="#sec-intro" class="text-ramo-accent hover:underline block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">مروری کوتاه</a></li>
+                        <li><a href="#sec-virus" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">ویروس و انواع آن</a></li>
+                        <li><a href="#sec-spread" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">راه‌های انتقال</a></li>
+                        <li><a href="#sec-symptoms" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">علائم و عوارض</a></li>
+                        <li><a href="#sec-prevention" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">پیشگیری‌های عمومی</a></li>
+                        <li><a href="#sec-vaccines" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">واکسیناسیون آنفلوآنزا</a></li>
+                        <li><a href="#sec-manufacture" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">چگونگی تولید واکسن</a></li>
+                        <li><a href="#sec-safety" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">ایمنی و عوارض واکسن</a></li>
+                        <li><a href="#sec-who" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">چه کسانی واکسن بزنند؟</a></li>
+                        <li><a href="#sec-timing" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">بهترین زمان تزریق</a></li>
+                        <li><a href="#sec-future" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">نوآوری‌ها و آینده واکسن</a></li>
+                        <li><a href="#sec-treatment" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">درمان پس از ابتلا</a></li>
+                        <li><a href="#sec-summary" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">جمع‌بندی</a></li>
+                        <li><a href="#refs" class="text-gray-600 hover:text-ramo-blue block py-1 border-r-2 border-transparent hover:border-ramo-accent pr-2">منابع</a></li>
+                    </ul>
+                </div>
+
+                <!-- Article Title & Abstract Card -->
+                <div class="bg-white rounded-lg p-4 border border-gray-200 shadow-sm">
+                    <h4 class="text-xs font-bold text-ramo-blue uppercase mb-2">عنوان مقاله</h4>
+                    <h5 class="text-sm font-extrabold text-text-header leading-tight mb-3">
+                        آنفلوآنزا؛ پیشگیری با واکسیناسیون، درمان و راهنمای جامع
+                    </h5>
+                    <div class="text-xs text-gray-600 leading-relaxed mb-3">
+                        <p class="text-justify">
+                            این مقاله راهنمای جامعی برای عموم درباره انتقال، پیشگیری، واکسن‌ها و درمان آنفلوآنزا فراهم می‌کند تا خوانندگان تصمیم‌های عملی و آگاهانه بگیرند.
+                        </p>
+                    </div>
+                    <a href="#sec-summary" class="text-xs bg-ramo-blue text-white px-3 py-2 rounded inline-block hover:bg-ramo-dark transition-colors">مشاهده جمع‌بندی</a>
+                </div>
+
+            </div>
+        </aside>
+
+        <!-- CENTER: Article Content -->
+        <article class="lg:col-span-6 bg-white shadow-sm border border-gray-200 rounded-lg p-6 md:p-10">
+
+            <!-- Inserted Article Header (from user content) -->
+            <header class="mb-6">
+                <div class="text-xs font-bold text-clinical-teal mb-2">اخبار</div>
+                <h1 class="text-2xl md:text-3xl font-extrabold text-text-header leading-tight mb-3">آنفلوآنزا؛ پیشگیری با واکسیناسیون، درمان و راهنمای جامع</h1>
+                <p class="text-sm text-gray-600 mb-3">با نزدیک شدن به فصل آنفلوآنزا، آشنایی با راه‌های انتقال، پیشگیری، درمان و به‌ویژه نقش واکسن‌ها اهمیت زیادی دارد. این مقاله، به زبان ساده و با تکیه بر منابع معتبر علمی تدوین شده است.</p>
+                <div class="flex flex-wrap gap-4 text-xs text-gray-400">
+                    <span>نویسنده: واحد روابط عمومی راموفارمین</span>
+                    <span class="dot">•</span>
+                    <span>آخرین بروزرسانی: ۸ آبان ۱۴۰۴</span>
+                    <span class="dot">•</span>
+                    <span>زمان مطالعه: ۱۵ دقیقه</span>
+                </div>
+            </header>
+
+            <!-- Share / Utilities (hidden on mobile, visible from sm+) -->
+            <div class="mb-6 hidden sm:flex items-center gap-3">
+                <div class="flex gap-2">
+                    <a href="#" class="text-xs bg-white border border-gray-200 px-3 py-2 rounded inline-flex items-center gap-2"> <i class="fa-brands fa-linkedin"></i> اشتراک در LinkedIn</a>
+                    <a href="#" class="text-xs bg-white border border-gray-200 px-3 py-2 rounded inline-flex items-center gap-2"> <i class="fa-solid fa-link"></i> کپی لینک</a>
+                </div>
+                <div class="flex-1 text-right text-xs text-gray-500">دانلود نسخه PDF: <a href="#" onclick="window.print(); return false;" class="text-ramo-blue hover:underline" aria-label="چاپ یا ذخیره به‌عنوان PDF">دانلود</a></div>
+            </div>
+
+            <!-- Featured Image -->
+            <figure class="a-secmedia mb-6">
+                <img loading="lazy" src="https://images.unsplash.com/photo-1584036561566-baf8f5f1b144?q=80&w=1600&auto=format&fit=crop" alt="نمایی نمادین از ویروس‌های تنفسی در میکروسکوپ" class="w-full h-auto object-cover rounded-lg border border-gray-200">
+                <figcaption class="text-xs text-gray-500 mt-2">آنفلوآنزا یک عفونت ویروسی دستگاه تنفسی فوقانی با الگوی فصلی است.</figcaption>
+            </figure>
+
+            <!-- Article Sections (from provided content) -->
+            <h2 id="sec-intro" class="text-xl font-bold text-text-header mb-3">مروری کوتاه</h2>
+            <p class="mb-4 text-justify text-gray-700">آنفلوآنزا بیماری‌ای است که با تب ناگهانی، درد بدن، سرفه خشک و خستگی شدید شناخته می‌شود و به دلیل قابلیت بالای سرایت، هر ساله موج‌های فصلی بیماری ایجاد می‌کند. بیشتر مبتلایان ظرف چند روز تا یک هفته بهبود می‌یابند؛ بااین‌حال در سالمندان، کودکان خردسال، زنان باردار و افراد دارای بیماری‌های زمینه‌ای، خطر عوارض جدی مانند ذات‌الریه یا بدتر شدن وضعیت قلبی‌ـ‌ریوی وجود دارد. هدف این مقاله ارائه تصویری یکپارچه از ماهیت ویروس، مسیرهای انتقال، اصول پیشگیری، درمان‌های موجود و نقش محوری واکسیناسیون است تا خواننده بتواند تصمیم‌های عملی و آگاهانه بگیرد.</p>
+
+            <h2 id="sec-virus" class="text-xl font-bold text-text-header mb-3">ویروس و انواع آن</h2>
+            <p class="mb-4 text-justify text-gray-700">عامل آنفلوآنزا ویروس‌هایی از خانواده <em>Orthomyxoviridae</em> هستند که ژنوم RNA قطعه‌قطعه دارند. سه نوع اصلی A، B و C تعریف شده است؛ نوع A در انسان و حیوانات گردش می‌کند و با ایجاد «تغییر آنتی‌ژنی بزرگ» (shift) می‌تواند سویه‌های کاملاً نوظهور و همه‌گیری‌های گسترده به‌راه بیندازد. نوع B تقریباً منحصر به انسان است و معمولاً به موج‌های فصلی محدود می‌شود. نوع C اغلب بیماری خفیف ایجاد می‌کند. دو پروتئین سطحی هماگلوتینین (HA) و نورآمینیداز (NA) برای ورود و رهایش ویروس ضروری‌اند و همان‌ها هدف آنتی‌بادی‌های محافظتی هستند. «لغزش آنتی‌ژنی» (drift) یعنی تغییرات کوچک اما مداوم در HA/NA باعث می‌شود ایمنی سال‌های قبل یا ایمنی ناشی از واکسن به‌تدریج کارایی کمتری پیدا کند؛ به همین دلیل نیاز به به‌روزرسانی سالانه ترکیب واکسن وجود دارد [1].</p>
+
+            <h2 id="sec-spread" class="text-xl font-bold text-text-header mb-3">راه‌های انتقال</h2>
+            <p class="mb-4 text-justify text-gray-700">انتقال عمدتاً از طریق قطرات تنفسی در زمان سرفه، عطسه یا حتی صحبت رخ می‌دهد. این قطرات ممکن است مستقیم استنشاق شوند یا روی سطوح فرود آیند و سپس با تماس دست و لمس مخاط چشم، بینی یا دهان به بدن منتقل شوند. در محیط‌های شلوغ، کم‌تهویه و فضاهای بسته، احتمال انتقال بیشتر است. دوره نهفتگی معمولاً بین یک تا چهار روز است و فرد ممکن است از یک روز پیش از ظاهر شدن علائم تا حدود یک هفته بعد، ویروس را به دیگران منتقل کند. کودکان و افراد دارای نقص ایمنی ممکن است مدت‌زمان طولانی‌تری ناقل باشند [2].</p>
+
+            <h2 id="sec-symptoms" class="text-xl font-bold text-text-header mb-3">علائم و عوارض</h2>
+            <p class="mb-4 text-justify text-gray-700">شروع ناگهانی تب، لرز، سردرد، دردهای منتشر عضلانی و خستگی مشخصه‌های بالینی اصلی هستند. سرفه اغلب خشک است و گلودرد و آبریزش یا احتقان بینی شایع‌اند. در کودکان، تهوع و اسهال ممکن است دیده شود. بخش قابل‌توجهی از بیماران بدون درمان ویژه و با استراحت و مایعات کافی بهبود می‌یابند؛ بااین‌حال عوارضی مانند ذات‌الریه ویروسی، عفونت باکتریایی ثانویه، تشدید آسم یا بیماری انسدادی ریه، و به‌ندرت درگیری قلبی (میوکاردیت) توصیف شده است. تشخیص افتراقی با سرماخوردگی معمولی در شدت و ناگهانی‌بودن علائم است؛ آنفلوآنزا معمولاً فرد را از فعالیت‌های روزمره بازمی‌دارد [3].</p>
+
+            <h2 id="sec-prevention" class="text-xl font-bold text-text-header mb-3">پیشگیری‌های عمومی</h2>
+            <p class="mb-4 text-justify text-gray-700">پیشگیری مؤثر بر دو پایه بنا می‌شود: رفتارهای بهداشتی و ایمنی فعال از طریق واکسن. شست‌وشوی منظم دست‌ها با آب و صابون برای دست‌کم ۲۰ ثانیه یا استفاده از محلول‌های الکلی هنگام نبود دسترسی به آب، احتمال انتقال از طریق تماس را کاهش می‌دهد. پوشاندن دهان و بینی هنگام سرفه یا عطسه و دوری از تماس نزدیک با افراد بیمار ریزش ویروس را محدود می‌کند. تهویه مناسب فضاهای بسته، باز نگه‌داشتن پنجره‌ها در صورت امکان، و اجتناب از حضور طولانی در مکان‌های شلوغ، به‌ویژه در فصل اوج، توصیه می‌شود. با همه این موارد، <strong>واکسیناسیون سالانه</strong> همچنان اثربخش‌ترین مداخله برای کاهش ابتلا، بستری و مرگ‌ومیر ناشی از آنفلوآنزا است [4].</p>
+
+            <h2 id="sec-vaccines" class="text-xl font-bold text-text-header mb-3">واکسیناسیون آنفلوآنزا</h2>
+            <p class="mb-3 text-justify text-gray-700"><strong>چرا به واکسن نیاز داریم؟</strong> سیستم ایمنی پس از ابتلا یا تزریق واکسن، آنتی‌بادی‌هایی علیه HA و NA تولید می‌کند. اما ویروس دائماً دچار «لغزش آنتی‌ژنی» می‌شود و سویه‌های در گردش هر سال کمی متفاوت‌اند. به همین دلیل، ایمنی سال قبل ممکن است برای فصل جدید کافی نباشد. واکسن‌های فصلی با هدف‌گیری سویه‌هایی که بر اساس پایش جهانی محتمل‌ترند، بدن را برای مواجهه واقعی آماده می‌کنند. معمولاً حدود دو هفته طول می‌کشد تا پاسخ ایمنی محافظتی به سطح مناسب برسد، بنابراین تزریق پیش از شروع فصل شیوع اهمیت دارد [4].</p>
+            <p class="mb-3 text-justify text-gray-700"><strong>سازوکار ایمنی‌زایی چگونه است؟</strong> آنتی‌ژن‌های موجود در واکسن بدون ایجاد بیماری، سیستم ایمنی را تحریک می‌کنند. بازوی «ایمنی هومورال» با تولید آنتی‌بادی‌های خنثی‌کننده مانع اتصال HA به گیرنده‌های سلولی و ورود ویروس می‌شود. هم‌زمان، بازوی «ایمنی سلولی» با فعال‌سازی سلول‌های T، سلول‌های آلوده را شناسایی و حذف می‌کند. این دو بازو با هم باعث کاهش احتمال ابتلا و اگر ابتلا رخ دهد، کاهش شدت و طول بیماری می‌شوند.</p>
+            <p class="mb-3 text-justify text-gray-700"><strong>انواع واکسن‌های در دسترس چیست؟</strong> واکسن‌های غیرفعال یا IIV رایج‌ترین نوع‌اند و به‌صورت تزریقی در بازو تزریق می‌شوند؛ ویروس در آنها از نظر تکثیر ناتوان است و برای افراد بالای شش ماه مناسب به‌شمار می‌رود. واکسن زنده تضعیف‌شده یا LAIV به‌صورت اسپری بینی استفاده می‌شود و برای کودکان بالای دو سال و بزرگسالان سالم تا ۴۹ سال گزینه‌ای پذیرفته‌شده است؛ بااین‌حال در دوران بارداری و نقص ایمنی توصیه نمی‌شود [5]. واکسن‌های نوترکیب یا RIV با استفاده از فناوری DNA نوترکیب پروتئین HA را تولید می‌کنند و از آنجا که به تخم‌مرغ وابسته نیستند، برای کسانی که حساسیت شدید به تخم‌مرغ دارند می‌تواند مناسب‌تر باشد [6]. رویکرد سل‌پایه نیز که در آن ویروس در سلول‌های پستانداران کشت داده می‌شود، با هدف کاهش تغییرات ناخواسته مرتبط با رشد در تخم‌مرغ و بهبود انطباق آنتی‌ژنی به‌کار می‌رود [7].</p>
+            <p class="mb-4 text-justify text-gray-700"><strong>اثربخشی و محدودیت‌ها:</strong> میزان محافظت واکسن بسته به سن، وضعیت ایمنی، بیماری‌های زمینه‌ای و میزان انطباق سویه‌های واکسن با ویروس‌های در گردش متفاوت است. حتی در سال‌هایی که انطباق کامل نیست، واکسن به‌طور معناداری از بستری و پیامدهای شدید می‌کاهد. پیام ساده برای خانوارها این است که واکسن «همیشه ارزش دارد»، حتی اگر محافظت مطلق ایجاد نکند.</p>
+            <p class="mb-6 text-justify text-gray-700"><strong>پرسش رایج: آیا واکسن باعث آنفلوآنزا می‌شود؟</strong> خیر. واکسن‌های تزریقی از ویروس غیرفعال استفاده می‌کنند و توانایی ایجاد بیماری ندارند. ممکن است پس از تزریق، درد محل تزریق یا تب خفیف به‌دلیل فعال‌شدن سیستم ایمنی رخ دهد که معمولاً گذراست.</p>
+
+            <h2 id="sec-manufacture" class="text-xl font-bold text-text-header mb-3">چگونگی تولید واکسن</h2>
+            <p class="mb-4 text-justify text-gray-700">هر سال سازمان جهانی بهداشت با تکیه بر شبکه جهانی پایش آنفلوآنزا، سویه‌هایی را که پیش‌بینی می‌شود در فصل آتی غالب باشند معرفی می‌کند. تولیدکنندگان سپس با استفاده از یکی از پلتفرم‌ها—رشد در تخم‌مرغ یا کشت سلولی—ویروس منتخب را تکثیر می‌کنند. در واکسن‌های غیرفعال، ویروس به‌وسیله عوامل شیمیایی مانند فرمالدهید غیرفعال می‌شود تا توان تکثیر خود را از دست بدهد. پس از آن، فرآیندهای تصفیه برای استخراج آنتی‌ژن‌های هدف انجام می‌شود و در برخی فرمولاسیون‌ها از «ادجوانت» برای تقویت پاسخ ایمنی بهره گرفته می‌شود. در نهایت، هر سری تولید تحت آزمون‌های دقیق کیفیت، پایداری و ایمنی قرار می‌گیرد تا از استاندارد بودن محصول نهایی اطمینان حاصل شود [8].</p>
+
+            <h2 id="sec-safety" class="text-xl font-bold text-text-header mb-3">ایمنی و عوارض واکسن</h2>
+            <p class="mb-4 text-justify text-gray-700">واکسن آنفلوآنزا سابقه ایمنی طولانی و بسیار خوبی دارد. شایع‌ترین پیامدها درد یا قرمزی محل تزریق، تب خفیف یا احساس کوفتگی برای یک تا دو روز است. واکنش‌های آلرژیک شدید بسیار نادرند و مراکز واکسیناسیون برای مدیریت آنها آمادگی دارند. برای افرادی با سابقه واکنش آلرژیک شدید به اجزای واکسن، تصمیم‌گیری باید با پزشک صورت گیرد. نکته مهم این است که دریافت واکسن حتی برای مبتلایان به بیماری‌های مزمن نیز معمولاً توصیه می‌شود، زیرا خطر آنفلوآنزا و عوارض آن برای این افراد بیشتر است [9].</p>
+
+            <h2 id="sec-who" class="text-xl font-bold text-text-header mb-3">چه کسانی واکسن بزنند؟</h2>
+            <p class="mb-4 text-justify text-gray-700">اگرچه هر فردی از واکسیناسیون سود می‌برد، برخی گروه‌ها در اولویت هستند: سالمندان ۶۵ سال و بالاتر که با افزایش سن پاسخ ایمنی ضعیف‌تری دارند؛ کودکان ۶ ماه تا ۵ سال که در معرض خطر تب بالا و تشنج‌های ناشی از تب هستند؛ زنان باردار که هم از خود و هم از نوزاد محافظت می‌کنند؛ کارکنان نظام سلامت به‌دلیل تماس مکرر با بیماران؛ و افراد دارای بیماری‌های زمینه‌ای مانند آسم، COPD، دیابت، بیماری قلبی یا نارسایی کلیه. ساکنان خانه‌های سالمندان یا مراکز تجمعی نیز به‌دلیل تماس نزدیک با دیگران باید واکسینه شوند [10].</p>
+
+            <h2 id="sec-timing" class="text-xl font-bold text-text-header mb-3">بهترین زمان تزریق</h2>
+            <p class="mb-4 text-justify text-gray-700">بدن حدود دو هفته پس از تزریق واکسن به سطحی از ایمنی محافظتی می‌رسد؛ بنابراین بهترین زمان، اواخر شهریور تا اواسط مهر است تا پیش از اوج فصل آماده باشید. اگر به هر دلیل دیرتر مراجعه کردید، تزریق همچنان توصیه می‌شود، زیرا ویروس معمولاً تا زمستان و حتی اوایل بهار در گردش است. تأخیر بهتر از واکسینه‌نشدن است.</p>
+
+            <h2 id="sec-future" class="text-xl font-bold text-text-header mb-3">نوآوری‌ها و آینده واکسن</h2>
+            <p class="mb-4 text-justify text-gray-700">پژوهش‌ها به‌سوی واکسن‌های «جهانی» پیش می‌رود که با هدف‌گیری بخش‌های پایدارتر HA (مانند ساقه HA) محافظتی گسترده‌تر و طولانی‌مدت‌تر فراهم کنند. پلتفرم mRNA که در همه‌گیری کووید-۱۹ کارآمدی و سرعت تولید خود را نشان داد، برای آنفلوآنزا نیز مورد توجه است؛ مزیت آن امکان به‌روزرسانی سریع در پاسخ به تغییر سویه‌هاست. همچنین نانوذرات به‌عنوان حامل آنتی‌ژن می‌توانند ارائه دقیق‌تر و قوی‌تری از آنتی‌ژن ایجاد کنند و پاسخ ایمنی را بهبود دهند. هدف نهایی کاهش نیاز به تزریق سالانه و دستیابی به محافظتی پایدار است [11].</p>
+
+            <h2 id="sec-treatment" class="text-xl font-bold text-text-header mb-3">درمان پس از ابتلا</h2>
+            <p class="mb-4 text-justify text-gray-700">در اغلب موارد، درمان حمایتی شامل استراحت کافی، نوشیدن مایعات فراوان، کنترل تب و کاهش درد با داروهای مناسب است. شروع زودهنگام داروهای ضدویروسی مانند اوسلتامیویر یا زانامیویر طی ۴۸ ساعت نخست علائم می‌تواند مدت و شدت بیماری را کاهش دهد و در گروه‌های پرخطر از بروز عوارض پیشگیری کند. بالوکساویر گزینه‌ای تک‌دوزی است که در برخی شرایط توسط پزشک تجویز می‌شود. اگر نشانه‌هایی از عفونت باکتریایی ثانویه مانند تداوم تب، بدترشدن سرفه همراه با خلط چرکی یا علائم ریوی جدید ظاهر شد، ارزیابی پزشکی ضروری است و ممکن است آنتی‌بیوتیک لازم شود [12].</p>
+
+            <h2 id="sec-summary" class="text-xl font-bold text-text-header mb-3">جمع‌بندی</h2>
+            <p class="mb-6 text-justify text-gray-700">آنفلوآنزا هر سال با چهره‌ای اندکی متفاوت بازمی‌گردد، اما اصول کنترل آن تغییر نکرده است: بهداشت فردی، تهویه مناسب، رفتار مسئولانه هنگام بیماری و—از همه مهم‌تر—واکسیناسیون سالانه. حتی وقتی واکسن تطابق کامل با سویه‌های در گردش نداشته باشد، همچنان از پیامدهای شدید می‌کاهد. تصمیم آگاهانه امروز می‌تواند از بستری و عوارض فردا جلوگیری کند؛ برای خود و اطرافیانتان برنامه واکسیناسیون فصل را جدی بگیرید.</p>
+
+
+            <script type="application/ld+json">
+            {
+              "@context":"https://schema.org",
+              "@type":"Article",
+              "headline":"آنفلوآنزا — پیشگیری با واکسیناسیون، درمان و راهنمای جامع | راموفارمین",
+              "description":"راهنمای جامع آنفلوآنزا برای عموم: راه‌های انتقال، پیشگیری، درمان و همه‌چیز درباره واکسن‌های آنفلوآنزا (انواع، سازوکار، زمان تزریق، ایمنی، آینده واکسن‌ها).",
+              "author":{"@type":"Organization","name":"Ramopharmin Editorial"},
+              "publisher":{"@type":"Organization","name":"Ramopharmin"},
+              "dateModified":"2025-10-30",
+              "inLanguage":"fa"
+            }
+            </script>
+
+        </article>
+
+        <!-- LEFT SIDEBAR: Related & Authors (Desktop) / Bottom (Mobile) -->
+        <aside class="lg:col-span-3 space-y-6">
+            
+            <!-- Author Card -->
+            <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
+                <h3 class="font-bold text-gray-900 text-sm mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-user-doctor text-clinical-teal"></i>
+                    درباره نویسندگان
+                </h3>
+                <div class="flex items-start gap-3 mb-4">
+                    <img src="https://ui-avatars.com/api/?name=Ramopharmin&background=195057&color=fff" class="w-10 h-10 rounded-full" alt="Author">
+                    <div>
+                        <div class="text-sm font-bold text-gray-800">واحد روابط عمومی راموفارمین</div>
+                        <div class="text-xs text-gray-500 mt-1">اخبار و روابط عمومی راموفارمین</div>
+                        <a href="#" class="text-xs text-ramo-blue hover:underline mt-1 block">ارتباط با روابط عمومی</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related articles removed -->
+
+            <!-- Ramopharmin Info -->
+            <div class="bg-gradient-to-br from-ramo-blue to-ramo-dark text-white p-6 rounded-lg text-center shadow-md">
+                <i class="fa-solid fa-hospital text-3xl mb-3 text-white/80"></i>
+                <h3 class="font-bold text-sm mb-2">داروسازی راموفارمین</h3>
+                <p class="text-xs text-white/90 mb-4 leading-relaxed">
+                    شرکت داروسازی راموفارمین به عنوان یکی از پیشگامان صنعت دارو در ایران، با بهره‌گیری از دانش روز، فناوری‌های نوین و استانداردهای بین‌المللی، در تولید و توزیع داروهای با کیفیت و موثر فعالیت می‌کند. ماموریت ما ارتقای سلامت و کیفیت زندگی جامعه است.
+                </p>
+                <a href="https://ramopharmin.org/" class="inline-block bg-white text-ramo-blue text-xs font-bold py-2 px-4 rounded hover:bg-ramo-blue/10 transition">بیشتر بدانید</a>
+            </div>
+
+        </aside>
+
+    </main>
+    
+    <!-- Footer placeholder -->
+    <footer class="bg-white border-t border-gray-200 mt-12 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-400">
+            &copy; ۱۴۰۳ گروه داروسازی راموفارمین. تمامی حقوق محفوظ است.
+        </div>
+    </footer>
+
+        <!-- Mobile menu script -->
+        <script>
+            (function(){
+                const btn = document.getElementById('mobileMenuBtn');
+                const closeBtn = document.getElementById('mobileMenuClose');
+                const menu = document.getElementById('mobileMenu');
+                function openMenu(){ menu.classList.remove('translate-x-full'); menu.classList.add('translate-x-0'); document.body.style.overflow = 'hidden'; }
+                function closeMenu(){ menu.classList.remove('translate-x-0'); menu.classList.add('translate-x-full'); document.body.style.overflow = ''; }
+                if(btn) btn.addEventListener('click', openMenu);
+                if(closeBtn) closeBtn.addEventListener('click', closeMenu);
+                // close when clicking outside the menu on small screens
+                document.addEventListener('click', function(e){
+                    if(!menu) return;
+                    if(menu.classList.contains('translate-x-0')){
+                        const inside = menu.contains(e.target) || (btn && btn.contains(e.target));
+                        if(!inside) closeMenu();
+                    }
+                });
+                window.toggleMobileSubmenu = function(id){
+                    const el = document.getElementById(id);
+                    if(!el) return;
+                    el.classList.toggle('hidden');
+                }
+            })();
+        </script>
+
+</body>
+</html>
