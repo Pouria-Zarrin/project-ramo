@@ -24,6 +24,82 @@
 </head>
 <body>
 
+    <!-- SITE HEADER -->
+    <nav id="ramo-en-header" style="position:fixed;top:0;left:0;right:0;z-index:100;font-family:system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;">
+        <style>
+            #ramo-en-header {
+                background: rgba(15,23,42,0.85);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                border-bottom: 1px solid rgba(255,255,255,0.06);
+            }
+            #ramo-en-header .en-nav-link {
+                color: rgba(255,255,255,0.7);
+                text-decoration: none;
+                font-size: 0.9rem;
+                font-weight: 500;
+                transition: color 0.2s;
+            }
+            #ramo-en-header .en-nav-link:hover { color: #fff; }
+            #ramo-en-header .lang-btn {
+                display: inline-block;
+                padding: 4px 12px;
+                border-radius: 8px;
+                font-size: 0.8rem;
+                font-weight: 600;
+                text-decoration: none;
+                transition: background 0.2s;
+            }
+            #ramo-en-header .lang-active {
+                background: rgba(23,79,87,0.8);
+                color: #fff;
+                border: 1px solid rgba(90,174,184,0.4);
+            }
+            #ramo-en-header .lang-inactive {
+                background: rgba(255,255,255,0.06);
+                color: rgba(255,255,255,0.7);
+                border: 1px solid rgba(255,255,255,0.1);
+            }
+            #ramo-en-header .lang-inactive:hover {
+                background: rgba(255,255,255,0.12);
+                color: #fff;
+            }
+            #ramo-en-header .mobile-btn {
+                display: none;
+                background: none;
+                border: none;
+                cursor: pointer;
+                color: #fff;
+                padding: 4px;
+            }
+            @media (max-width: 768px) {
+                #ramo-en-header .en-nav-links { display: none; }
+                #ramo-en-header .mobile-btn { display: block; }
+            }
+        </style>
+        <div style="max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;">
+            <!-- Brand -->
+            <a href="./" style="color:#fff;font-weight:700;font-size:1rem;text-decoration:none;letter-spacing:0.02em;">
+                Ramopharmin
+            </a>
+            <!-- Nav links -->
+            <div class="en-nav-links" style="display:flex;align-items:center;gap:28px;">
+                <a href="./" class="en-nav-link">Home</a>
+                <a href="../about-us/history.html" class="en-nav-link">About</a>
+                <a href="../product-category-therapeutics/category-page.html" class="en-nav-link">Products</a>
+                <a href="../news-page/news-highlights.html" class="en-nav-link">News</a>
+                <a href="../contact-us/contact-us.html" class="en-nav-link">Contact</a>
+            </div>
+            <!-- Right side: lang toggle -->
+            <div style="display:flex;align-items:center;gap:8px;">
+                <span class="lang-btn lang-active">EN</span>
+                <a href="../fa/" class="lang-btn lang-inactive">FA</a>
+            </div>
+        </div>
+    </nav>
+    <!-- Spacer so content isn't hidden under fixed nav -->
+    <div style="height:64px;"></div>
+
     <!-- START BLOCK: 1-head-2-tablet-3D.html -->
     <!-- Main Wrapper -->
     <div id="ramo-hero-block" class="relative w-full overflow-hidden bg-[#0f172a] text-white" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; min-height: 600px; direction: ltr;">
