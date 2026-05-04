@@ -4,6 +4,10 @@ node_modules/
 .env
 .env.*
 
-# Large PDFs that exceed GitHub's 100 MB limit — store these externally (e.g. Google Drive)
+# Wrangler local dev state
+.wrangler/
+
+# Large PDFs that exceed GitHub's 100 MB limit — stored in Cloudflare R2
 V0/company-profile/company-profile-G2-English.pdf
 V0/company-profile/company-profile-v1.pdf
+company-profile-G2-English.pdf
