@@ -121,6 +121,63 @@ const isEditIntent = (text: string): boolean => {
   ].some((k) => v.includes(k));
 };
 
+const isGenerationIntent = (text: string): boolean => {
+  const v = text.toLowerCase();
+  const direct = [
+    "تولید متن",
+    "متن بساز",
+    "نمونه متن",
+    "یه متن بنویس",
+    "خبر بنویس",
+    "مقاله بنویس",
+    "generate text",
+    "write sample",
+    "draft this"
+  ].some((k) => v.includes(k));
+  const fuzzyFa = (v.includes("نمونه") && (v.includes("بنویس") || v.includes("تولید"))) || (v.includes("متن") && v.includes("بنویس"));
+  return direct || fuzzyFa;
+};
+
+const extractBrief = (text: string): string =>
+  text
+    .replace(/(تولید متن|متن بساز|نمونه متن|یه متن بنویس|خبر بنویس|مقاله بنویس|generate text|write sample|draft this)/gi, "")
+    .replace(/\s+/g, " ")
+    .trim();
+
+const generateSampleContent = (
+  brief: string,
+  type: ContentType,
+  language: "fa" | "en"
+): { title: string; summary: string; body: string } => {
+  const topic = brief || (language === "fa" ? "به‌روزرسانی فعالیت شرکت" : "company update");
+  if (language === "fa") {
+    const title = type === "news" ? `خبر: ${topic}` : `مقاله سلامت: ${topic}`;
+    const summary = `این متن نمونه بر اساس توضیح شما تهیه شده و قابل ویرایش است: ${topic}.`;
+    const body =
+      `بر اساس توضیح ارائه‌شده، این خبر/مقاله با تمرکز بر ${topic} تهیه شده است.\n\n` +
+      "در این نسخه نمونه، تلاش شده لحن حرفه‌ای و قابل انتشار حفظ شود و پیام اصلی به‌صورت شفاف بیان گردد.\n\n" +
+      "لطفا اگر نام‌ها، تاریخ‌ها، اعداد یا جزئیات خاصی مدنظر دارید ارسال کنید تا نسخه نهایی دقیق‌تر آماده و سپس منتشر شود.";
+    return { title, summary, body };
+  }
+
+  const title = type === "news" ? `News: ${topic}` : `Health Article: ${topic}`;
+  const summary = `This is a generated sample draft based on your brief: ${topic}.`;
+  const body =
+    `Based on your brief, this draft focuses on ${topic}.\n\n` +
+    "The current version is optimized for clarity and can be refined with exact names, dates, and figures.\n\n" +
+    "Share any required factual details and I will prepare the final version for publication.";
+  return { title, summary, body };
+};
+
+const deriveTitleFromBody = (body: string, language: "fa" | "en"): string => {
+  const cleaned = body.replace(/\n+/g, " ").trim();
+  const firstSentence = cleaned.split(/[.!؟]/).map((s) => s.trim()).find(Boolean) ?? cleaned;
+  const words = firstSentence.split(/\s+/).filter(Boolean).slice(0, 9);
+  const candidate = words.join(" ").trim();
+  if (!candidate) return language === "fa" ? "خبر جدید" : "New update";
+  return candidate.length > 90 ? candidate.slice(0, 90) : candidate;
+};
+
 const containsOutOfScopeRequest = (body: string): boolean => {
   const text = body.toLowerCase();
   const triggers = [
@@ -200,6 +257,20 @@ const runConversationFlow = async (from: string, key: string, body: string, medi
     }
   }
 
+  // Optional generation mode: client gives a brief and asks for a sample.
+  if (isGenerationIntent(body) && !draft.requiresConfirmation) {
+    const language: "fa" | "en" = /[a-zA-Z]/.test(body) ? "en" : "fa";
+    const sample = generateSampleContent(extractBrief(body), draft.type, language);
+    draft.language = language;
+    draft.title = sample.title;
+    draft.summary = sample.summary;
+    draft.body = sample.body;
+    draft.cleanedPreview = cleanClientText(sample);
+    draft.requiresConfirmation = true;
+    sessions.save(from, draft);
+    return `متن نمونه آماده شد ✍️\n\nعنوان: ${draft.cleanedPreview.title}\nخلاصه: ${draft.cleanedPreview.summary}\n\nاگر اصلاح دارید طبیعی بنویسید تا نسخه بهتر شود.\nاگر تایید است بنویسید: تایید انتشار`;
+  }
+
   const parsedFreeform = parseFreeformText(body);
   draft.title = parseLabeledField(body, "title") ?? parsedFreeform.title ?? draft.title;
   draft.summary = parseLabeledField(body, "summary") ?? parsedFreeform.summary ?? draft.summary;
@@ -207,6 +278,15 @@ const runConversationFlow = async (from: string, key: string, body: string, medi
   draft.language = body.includes("language: en")
     ? "en"
     : parsedFreeform.language ?? draft.language ?? "fa";
+
+  // Avoid generic placeholders as final titles.
+  if (draft.title) {
+    const normalizedTitle = draft.title.trim().toLowerCase();
+    const genericTitles = ["خبر", "مقاله", "مقاله سلامت", "news", "article", "health article"];
+    if (genericTitles.includes(normalizedTitle) && draft.body) {
+      draft.title = deriveTitleFromBody(draft.body, draft.language ?? "fa");
+    }
+  }
 
   // If we're already in preview mode and user sends edits naturally, rebuild preview.
   if (draft.requiresConfirmation && isEditIntent(body)) {
