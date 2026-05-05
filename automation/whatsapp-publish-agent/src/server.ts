@@ -339,56 +339,21 @@ const runConversationFlow = async (from: string, key: string, body: string, medi
 
   const draft = sessions.getOrCreate(from);
   if (media.length) draft.media.push(...media.filter((m) => (m.contentType ?? "").startsWith("image/")));
-
-  // Publish is deterministic and requires explicit confirmation phrase.
-  if (
-    draft.requiresConfirmation &&
-    (body.trim().toUpperCase() === "CONFIRM PUBLISH" || body.trim() === "تایید انتشار") &&
-    draft.cleanedPreview
-  ) {
-    const slug = createSlug(draft.cleanedPreview.title);
-    const record: ContentRecord = {
-      slug,
-      type: draft.type!,
-      title: draft.cleanedPreview.title,
-      summary: draft.cleanedPreview.summary,
-      bodyHtml: textToSimpleHtml(draft.cleanedPreview.body),
-      language: draft.language ?? "fa",
-      imageUrl: draft.media[0]?.mediaUrl ?? "https://dummyimage.com/1200x675/e5e7eb/334155&text=Ramopharmin",
-      imageAlt: draft.cleanedPreview.title,
-      imageCaption: draft.cleanedPreview.summary,
-      createdAtIso: new Date().toISOString()
-    };
-
-    const useCloud = process.env.USE_CLOUD_AGENT === "true";
-    try {
-      if (useCloud) {
-        await runCloudPublishAgent(record);
-      }
-      const result = await publishRecord(record);
-      sessions.clear(from);
-      const status = result.deployLive ? "Published" : "Deploy in progress";
-      return `${status}\n\nلینک(ها):\n${result.liveUrls.join("\n")}\n\ncommit: ${result.commitSha ?? "n/a"}`;
-    } catch (error) {
-      sessions.save(from, draft);
-      return `خطا در انتشار: ${(error as Error).message}\nپیش‌نویس ذخیره شد. دوباره تلاش کنید.`;
-    }
-  }
-
-  // Conversational intelligence layer via Cloud Agent (classification/generation/revisions).
   try {
     const cloud = await runCloudConversationAgent(body, draft);
-    if (cloud.outOfScope) {
+    if (cloud.outOfScope || cloud.action === "out_of_scope") {
       return cloud.reply;
     }
+
     draft.type = cloud.type ?? draft.type;
     draft.title = cloud.title ?? draft.title;
     draft.summary = cloud.summary ?? draft.summary;
     draft.body = cloud.body ?? draft.body;
     draft.language = cloud.language ?? draft.language ?? "fa";
 
+    // Agent decides when to publish.
     if (
-      cloud.readyToPublish &&
+      cloud.action === "publish_now" &&
       draft.type &&
       draft.title &&
       draft.summary &&
@@ -399,23 +364,36 @@ const runConversationFlow = async (from: string, key: string, body: string, medi
         summary: draft.summary,
         body: draft.body
       });
-      draft.requiresConfirmation = true;
-      sessions.save(from, draft);
-      return `پیش‌نویس نهایی آماده است ✅\n\nنوع محتوا: ${draft.type === "news" ? "خبر" : "مقاله سلامت"}\nعنوان: ${draft.cleanedPreview.title}\nخلاصه: ${draft.cleanedPreview.summary}\n\nاگر اصلاح می‌خواهید طبیعی بنویسید.\nاگر تایید است: تایید انتشار`;
+      const slug = createSlug(draft.cleanedPreview.title);
+      const record: ContentRecord = {
+        slug,
+        type: draft.type,
+        title: draft.cleanedPreview.title,
+        summary: draft.cleanedPreview.summary,
+        bodyHtml: textToSimpleHtml(draft.cleanedPreview.body),
+        language: draft.language ?? "fa",
+        imageUrl: draft.media[0]?.mediaUrl ?? "https://dummyimage.com/1200x675/e5e7eb/334155&text=Ramopharmin",
+        imageAlt: draft.cleanedPreview.title,
+        imageCaption: draft.cleanedPreview.summary,
+        createdAtIso: new Date().toISOString()
+      };
+
+      const useCloud = process.env.USE_CLOUD_AGENT === "true";
+      if (useCloud) {
+        await runCloudPublishAgent(record);
+      }
+      const result = await publishRecord(record);
+      sessions.clear(from);
+      const status = result.deployLive ? "Published" : "Deploy in progress";
+      return `${cloud.reply}\n\n${status}\n\nلینک(ها):\n${result.liveUrls.join("\n")}\n\ncommit: ${result.commitSha ?? "n/a"}`;
     }
 
-    draft.requiresConfirmation = Boolean(draft.requiresConfirmation && draft.cleanedPreview);
     sessions.save(from, draft);
     return cloud.reply || "متن شما دریافت شد. ادامه بدهیم.";
   } catch (error) {
-    // Fallback: maintain current deterministic heuristics if cloud conversation fails.
-    const safeMessage = `ارتباط هوشمند موقتاً در دسترس نیست (${(error as Error).message}). لطفا ادامه متن را بفرستید تا دستی پیش برویم.`;
     sessions.save(from, draft);
-    return safeMessage;
+    return `ارتباط هوشمند موقتاً در دسترس نیست (${(error as Error).message}). لطفا چند لحظه دیگر دوباره پیام دهید.`;
   }
-
-  sessions.save(from, draft);
-  return "متن شما دریافت شد. ادامه بدهیم.";
 };
 
 const sendMetaText = async (to: string, text: string): Promise<void> => {

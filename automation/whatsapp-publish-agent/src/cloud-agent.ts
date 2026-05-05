@@ -45,12 +45,12 @@ export const runCloudPublishAgent = async (record: ContentRecord): Promise<{ run
 
 export interface CloudConversationResult {
   reply: string;
+  action?: "ask_more" | "update_draft" | "publish_now" | "out_of_scope";
   type?: ContentType;
   title?: string;
   summary?: string;
   body?: string;
   language?: "fa" | "en";
-  readyToPublish?: boolean;
   outOfScope?: boolean;
 }
 
@@ -69,25 +69,24 @@ ${message}
 
 Your job:
 1) Be conversational and helpful in Persian.
-2) Classify/confirm content type (news vs health_magazine_article) if not confirmed.
-3) If user asks, generate or expand long draft text (title/summary/body).
-4) If user asks for edits, revise draft naturally.
-5) If request is outside publishing scope, mark outOfScope=true and explain briefly.
-6) Never publish directly here; only prepare content and ask for confirmation.
-7) Do NOT repeatedly ask "news or article" if type is already inferable from the message or existing state.
-8) If user asks for generation (e.g., "بنویس", "تولید کن", "متن رو بیشتر کن"), generate/revise directly.
-9) Keep responses concise, human, and natural — not robotic templates.
-10) Default language is Persian. Only switch to English if user explicitly requests English.
+2) Classify/confirm content type (news vs health_magazine_article) if inferable from context.
+3) Generate, expand, and polish draft text proactively from messy user input.
+4) If user asks for edits, revise naturally and improve writing quality.
+5) Decide when content is publish-ready and set action=publish_now.
+6) If more information is needed, set action=ask_more and ask only the missing details.
+7) If request is outside publishing scope, set action=out_of_scope and explain briefly.
+8) Keep responses concise, human, and natural — not robotic templates.
+9) Default language is Persian. Only switch to English if user explicitly requests English.
 
 Return STRICT JSON only with shape:
 {
   "reply": "string (Persian response for user)",
+  "action": "ask_more|update_draft|publish_now|out_of_scope",
   "type": "news|health_magazine_article|null",
   "title": "string|null",
   "summary": "string|null",
   "body": "string|null",
   "language": "fa|en|null",
-  "readyToPublish": true|false,
   "outOfScope": true|false
 }
 `;
@@ -106,7 +105,6 @@ export const runCloudConversationAgent = async (
   try {
     const result = await Agent.prompt(buildConversationPrompt(message, draft), {
       apiKey: config.cursorApiKey,
-      model: { id: "composer-2-fast" },
       cloud: {
         repos: [{ url: config.cloudRepoUrl, startingRef: "main" }],
         skipReviewerRequest: true
@@ -118,7 +116,7 @@ export const runCloudConversationAgent = async (
     const raw = String(result.result ?? "");
     const jsonText = extractJsonObject(raw);
     if (!jsonText) {
-      return { reply: "متوجه شدم. لطفا کمی دقیق‌تر بفرمایید تا پیش‌نویس مناسب آماده کنم.", readyToPublish: false };
+      return { reply: "متوجه شدم. لطفا کمی دقیق‌تر بفرمایید تا پیش‌نویس مناسب آماده کنم.", action: "ask_more" };
     }
     const parsed = JSON.parse(jsonText) as CloudConversationResult & {
       type?: ContentType | null;
@@ -126,12 +124,12 @@ export const runCloudConversationAgent = async (
     };
     return {
       reply: parsed.reply || "متن شما دریافت شد.",
+      action: parsed.action ?? (parsed.outOfScope ? "out_of_scope" : "update_draft"),
       type: parsed.type ?? undefined,
       title: parsed.title ?? undefined,
       summary: parsed.summary ?? undefined,
       body: parsed.body ?? undefined,
       language: parsed.language ?? undefined,
-      readyToPublish: Boolean(parsed.readyToPublish),
       outOfScope: Boolean(parsed.outOfScope)
     };
   } catch (err) {
