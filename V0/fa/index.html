@@ -269,25 +269,51 @@
             background: rgba(90, 174, 184, 0.12);
         }
         #mag-mobile-panel {
-            display: none;
             position: fixed;
             top: var(--fa-chrome-h, 112px);
             left: 0;
             right: 0;
             bottom: 0;
-            background: #0f172a;
+            background: rgba(15,23,42,0.96);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
             z-index: 99;
-            padding: 24px;
-            flex-direction: column;
-            gap: 16px;
+            padding: 18px 16px 20px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
         }
-        #mag-mobile-panel.is-open { display: flex; }
+        #mag-mobile-panel.is-open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        #mag-mobile-panel .mobile-card {
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 14px;
+            background: rgba(255,255,255,0.04);
+            padding: 10px;
+            margin-bottom: 12px;
+        }
+        #mag-mobile-panel .mobile-label {
+            color: rgba(148,163,184,0.95);
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0 4px 6px;
+        }
         #mag-mobile-panel a {
+            display: block;
             color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
-            font-size: 1.1rem;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 1rem;
+            padding: 12px 10px;
+            border-radius: 10px;
+        }
+        #mag-mobile-panel a:hover {
+            background: rgba(255,255,255,0.08);
+            color: #fff;
         }
         #ramo-fa-header .fa-lang-btn {
             display: inline-block;
@@ -360,14 +386,20 @@
 <div id="fa-chrome-spacer" style="height:var(--fa-chrome-h,112px);"></div>
 
 <div id="mag-mobile-panel" aria-hidden="true">
-    <a href="./">خانه</a>
-    <a href="../about-us/history.html">درباره ما</a>
-    <a href="../about-us/board-members.html">هیئت مدیره</a>
-    <a href="../about-us/managers.html">مدیران ارشد</a>
-    <a href="../product-category-therapeutics/category-page.html">محصولات</a>
-    <a href="magazine/">مجله سلامت</a>
-    <a href="../news-page/news-highlights.html">اخبار</a>
-    <a href="../en/">English</a>
+    <div class="mobile-card">
+        <div class="mobile-label">منو</div>
+        <a href="./">خانه</a>
+        <a href="../about-us/history.html">درباره ما</a>
+        <a href="../about-us/board-members.html">هیئت مدیره</a>
+        <a href="../about-us/managers.html">مدیران ارشد</a>
+        <a href="../product-category-therapeutics/category-page.html">محصولات</a>
+        <a href="magazine/">مجله سلامت</a>
+        <a href="../news-page/news-highlights.html">اخبار</a>
+    </div>
+    <div class="mobile-card">
+        <div class="mobile-label">زبان</div>
+        <a href="../en/">English (EN)</a>
+    </div>
 </div>
 
 <script>
@@ -718,6 +750,7 @@ document.addEventListener('DOMContentLoaded', () => {
         open = !open;
         panel.classList.toggle('is-open', open);
         panel.setAttribute('aria-hidden', open ? 'false' : 'true');
+        document.body.classList.toggle('mobile-menu-open', open);
         btn.innerHTML = open ? '<i data-lucide="x" class="w-7 h-7"></i>' : '<i data-lucide="menu" class="w-7 h-7"></i>';
         if (typeof lucide !== 'undefined') lucide.createIcons();
     });
@@ -726,9 +759,20 @@ document.addEventListener('DOMContentLoaded', () => {
             open = false;
             panel.classList.remove('is-open');
             panel.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('mobile-menu-open');
             btn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
             if (typeof lucide !== 'undefined') lucide.createIcons();
         });
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && open) {
+            open = false;
+            panel.classList.remove('is-open');
+            panel.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('mobile-menu-open');
+            btn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
     });
 })();
 

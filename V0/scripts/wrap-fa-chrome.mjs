@@ -102,31 +102,50 @@ const CHROME_CSS = `
             left: 0;
             right: 0;
             bottom: 0;
-            background: #0f172a;
             z-index: 99;
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
+            background: rgba(15, 23, 42, 0.96);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            padding: 16px;
             opacity: 0;
             visibility: hidden;
-            transform: translateX(100%);
-            transition: transform 0.25s ease, opacity 0.25s ease;
+            transform: translateY(-10px);
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+            overflow-y: auto;
         }
         #mag-mobile-panel.is-open {
             opacity: 1;
             visibility: visible;
-            transform: translateX(0);
+            transform: translateY(0);
+        }
+        #mag-mobile-panel .mobile-card {
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 14px;
+            padding: 10px;
+            margin-bottom: 12px;
+        }
+        #mag-mobile-panel .mobile-label {
+            color: rgba(148, 163, 184, 0.95);
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0 4px 6px;
         }
         #mag-mobile-panel a {
+            display: block;
             color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
             font-size: 1rem;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 12px 10px;
+            border-radius: 10px;
+        }
+        #mag-mobile-panel a:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
         }
         @media (max-width: 768px) {
-            #mag-mobile-panel { top: 56px; padding: 14px; }
+            #mag-mobile-panel { top: 56px; }
         }
         #ramo-fa-header .fa-nav-dd {
             position: relative;
@@ -278,14 +297,20 @@ function navBlock(p, current) {
 <div style="height:64px;"></div>
 
 <div id="mag-mobile-panel" aria-hidden="true">
-    <a href="${p.faHome}">خانه</a>
-    <a href="${p.aboutHistory}">درباره ما</a>
-    <a href="${p.aboutBoard}">هیئت مدیره</a>
-    <a href="${p.aboutManagers}">مدیران ارشد</a>
-    <a href="${p.productsHub}">محصولات</a>
-    <a href="${p.magazine}">مجله سلامت</a>
-    <a href="${p.news}">اخبار</a>
-    <a href="${p.en}">English</a>
+    <div class="mobile-card">
+        <div class="mobile-label">منو</div>
+        <a href="${p.faHome}">خانه</a>
+        <a href="${p.aboutHistory}">درباره ما</a>
+        <a href="${p.aboutBoard}">هیئت مدیره</a>
+        <a href="${p.aboutManagers}">مدیران ارشد</a>
+        <a href="${p.productsHub}">محصولات</a>
+        <a href="${p.magazine}">مجله سلامت</a>
+        <a href="${p.news}">اخبار</a>
+    </div>
+    <div class="mobile-card">
+        <div class="mobile-label">زبان</div>
+        <a href="${p.en}">English (EN)</a>
+    </div>
 </div>
 `;
 }
@@ -391,6 +416,11 @@ function alreadyWrapped(s) {
   return /<!DOCTYPE html>/i.test(s) && /id="ramo-fa-header"/.test(s);
 }
 
+function extractMainBody(s) {
+  const m = s.match(/<main class="ramo-page-main">([\s\S]*?)<\/main>/i);
+  return m ? m[1].trim() : s;
+}
+
 const jobs = [
   ...[
     "product-category-therapeutics/category-page.html",
@@ -401,6 +431,9 @@ const jobs = [
     "product-category-therapeutics/cns-drugs.html",
     "product-category-therapeutics/cold-respiratory.html",
     "product-category-therapeutics/gastrointestinal.html",
+    "contact-us/contact-us.html",
+    "news-page/news-highlights.html",
+    "news-page/news-highlights-2.html",
   ].map((rel) => ({
     rel,
     title: rel.endsWith("category-page.html")
@@ -425,8 +458,7 @@ for (const job of jobs) {
   const fp = join(V0, job.rel);
   let raw = readFileSync(fp, "utf8");
   if (alreadyWrapped(raw)) {
-    console.log("skip (already wrapped):", job.rel);
-    continue;
+    raw = extractMainBody(raw);
   }
   raw = wrapFragment(raw, job.title, job.current, job.paths);
   writeFileSync(fp, raw, "utf8");

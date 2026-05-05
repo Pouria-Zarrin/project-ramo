@@ -84,29 +84,70 @@
         @media (max-width: 768px) {
             #ramo-fa-header .fa-nav-links { display: none !important; }
             #ramo-fa-header .fa-mobile-btn { display: block; }
+            #ramo-fa-header > div {
+                height: 56px !important;
+                padding: 0 12px !important;
+            }
+            #ramo-fa-header img {
+                height: 50px !important;
+            }
+            #ramo-fa-header .fa-lang-btn {
+                font-size: 0.72rem;
+                padding: 3px 8px;
+            }
         }
+        body.mobile-menu-open { overflow: hidden; }
         #mag-mobile-panel {
-            display: none;
             position: fixed;
             top: 64px;
             left: 0;
             right: 0;
             bottom: 0;
-            background: #0f172a;
             z-index: 99;
-            padding: 24px;
-            flex-direction: column;
-            gap: 16px;
+            background: rgba(15, 23, 42, 0.96);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            padding: 16px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+            overflow-y: auto;
         }
-        #mag-mobile-panel.is-open { display: flex; }
+        #mag-mobile-panel.is-open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        #mag-mobile-panel .mobile-card {
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 14px;
+            padding: 10px;
+            margin-bottom: 12px;
+        }
+        #mag-mobile-panel .mobile-label {
+            color: rgba(148, 163, 184, 0.95);
+            font-size: 0.72rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 0 4px 6px;
+        }
         #mag-mobile-panel a {
+            display: block;
             color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
-            font-size: 1.1rem;
-            padding: 12px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 1rem;
+            padding: 12px 10px;
+            border-radius: 10px;
         }
-
+        #mag-mobile-panel a:hover {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+        @media (max-width: 768px) {
+            #mag-mobile-panel { top: 56px; }
+        }
         #ramo-fa-header .fa-nav-dd {
             position: relative;
         }
@@ -124,7 +165,6 @@
             box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
             z-index: 200;
         }
-
         #ramo-fa-header .fa-nav-dd:hover .fa-nav-submenu,
         #ramo-fa-header .fa-nav-dd:focus-within .fa-nav-submenu {
             display: block;
@@ -147,7 +187,7 @@
         }
         main.ramo-page-main {
             background-color: #EFF2F3;
-            min-height: auto;
+            min-height: calc(100vh - 64px);
         }
 
     </style>
@@ -184,18 +224,23 @@
 <div style="height:64px;"></div>
 
 <div id="mag-mobile-panel" aria-hidden="true">
-    <a href="../fa/">خانه</a>
-    <a href="../about-us/history.html">درباره ما</a>
-    <a href="../about-us/board-members.html">هیئت مدیره</a>
-    <a href="../about-us/managers.html">مدیران ارشد</a>
-    <a href="category-page.html">محصولات</a>
-    <a href="../fa/magazine/">مجله سلامت</a>
-    <a href="../news-page/news-highlights.html">اخبار</a>
-    <a href="../en/index.html">English</a>
+    <div class="mobile-card">
+        <div class="mobile-label">منو</div>
+        <a href="../fa/">خانه</a>
+        <a href="../about-us/history.html">درباره ما</a>
+        <a href="../about-us/board-members.html">هیئت مدیره</a>
+        <a href="../about-us/managers.html">مدیران ارشد</a>
+        <a href="category-page.html">محصولات</a>
+        <a href="../fa/magazine/">مجله سلامت</a>
+        <a href="../news-page/news-highlights.html">اخبار</a>
+    </div>
+    <div class="mobile-card">
+        <div class="mobile-label">زبان</div>
+        <a href="../en/index.html">English (EN)</a>
+    </div>
 </div>
 
 <main class="ramo-page-main">
-
 <section class="product-hero" dir="rtl" aria-labelledby="cold-respiratory-title">
   <header class="hero-wrap">
     <h3 class="trust-eyebrow">پایبندی به کیفیت ارائه و دوز</h3>
@@ -494,21 +539,30 @@ document.addEventListener('DOMContentLoaded', function() {
     var panel = document.getElementById('mag-mobile-panel');
     if (!btn || !panel) return;
     var open = false;
-    btn.addEventListener('click', function() {
-        open = !open;
-        panel.classList.toggle('is-open', open);
-        panel.setAttribute('aria-hidden', open ? 'false' : 'true');
-        btn.innerHTML = open ? '<i data-lucide="x" class="w-7 h-7"></i>' : '<i data-lucide="menu" class="w-7 h-7"></i>';
+    function closePanel() {
+        open = false;
+        panel.classList.remove('is-open');
+        panel.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('mobile-menu-open');
+        btn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
         if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+    function openPanel() {
+        open = true;
+        panel.classList.add('is-open');
+        panel.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('mobile-menu-open');
+        btn.innerHTML = '<i data-lucide="x" class="w-7 h-7"></i>';
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+    btn.addEventListener('click', function() {
+        open ? closePanel() : openPanel();
     });
     panel.querySelectorAll('a').forEach(function(a) {
-        a.addEventListener('click', function() {
-            open = false;
-            panel.classList.remove('is-open');
-            panel.setAttribute('aria-hidden', 'true');
-            btn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
-            if (typeof lucide !== 'undefined') lucide.createIcons();
-        });
+        a.addEventListener('click', closePanel);
+    });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && open) closePanel();
     });
 })();
 </script>
