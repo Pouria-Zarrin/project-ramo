@@ -1,4 +1,5 @@
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -21,6 +22,8 @@ const optionalForLocalTest = (name: string, fallback = "test-value"): string => 
 const optional = (name: string, fallback = ""): string => process.env[name] ?? fallback;
 
 const whatsappProvider = process.env.WHATSAPP_PROVIDER ?? "telegram";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 export const config = {
   port: Number(process.env.PORT ?? 8787),
