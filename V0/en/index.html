@@ -2044,6 +2044,92 @@
         </script>
     </div>
 
+    <!-- Latest news -->
+    <div id="ramo-en-news-block" class="relative w-full overflow-hidden text-white" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; direction: ltr;">
+        <style>
+            #ramo-en-news-block .glass-panel {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(12px);
+                -webkit-backdrop-filter: blur(12px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                transition: all 0.3s ease;
+            }
+            #ramo-en-news-block .glass-panel:hover {
+                background: rgba(255, 255, 255, 0.08);
+                transform: translateY(-4px);
+            }
+            #ramo-en-news-block .bg-brand { background-color: #174f57; }
+            #ramo-en-news-block .text-brand-light { color: #5aaeb8; }
+            #ramo-en-news-block .line-clamp-3 {
+                display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+            }
+        </style>
+        <section class="py-20 relative z-20 border-t border-white/5 bg-slate-900/20 backdrop-blur-sm">
+            <div class="container mx-auto px-4 md:px-6">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between mb-8 gap-4">
+                    <div>
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="w-8 h-1 bg-brand rounded-full"></span>
+                            <span class="text-brand-light text-sm font-bold uppercase tracking-wider">Newsroom</span>
+                        </div>
+                        <h2 class="text-3xl md:text-4xl font-black text-white">Latest news</h2>
+                    </div>
+                    <a href="../news-page/news-highlights.html" class="px-5 py-3 rounded-full bg-white/5 hover:bg-[#174f57] text-white text-sm font-bold transition-all border border-white/10 no-underline">View archive</a>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <article class="glass-panel rounded-2xl p-6 relative group flex flex-col min-h-[320px]">
+                        <div class="absolute left-0 top-5 bottom-5 w-1 rounded-r bg-teal-500 opacity-70"></div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-teal-500/20 text-teal-300 border border-teal-500/30">New</span>
+                            <div class="flex items-center gap-2 text-xs text-slate-400"><i data-lucide="calendar" class="w-3 h-3"></i><time>May 5, 2026</time></div>
+                        </div>
+                        <div class="flex-grow flex flex-col">
+                            <h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-teal-300 transition-colors">Ramopharmin's new supplement manufacturing facility</h3>
+                            <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">Ramopharmin has launched a new supplement manufacturing facility to increase production capacity, improve quality, and expand access to health-focused products.</p>
+                            <div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center">
+                                <i data-lucide="factory" class="w-5 h-5 text-slate-600 group-hover:text-teal-400 transition-colors"></i>
+                                <a href="../news/کارخانه-جدید-تولید-مکمل-های-راموفارمین؛-گامی-تازه-در-توسعه-تولید.html" class="text-sm font-bold text-teal-400 hover:text-white transition-colors flex items-center gap-1 no-underline">Read news<i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="glass-panel rounded-2xl p-6 relative group flex flex-col min-h-[320px]">
+                        <div class="absolute left-0 top-5 bottom-5 w-1 rounded-r bg-blue-500 opacity-70"></div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-blue-500/20 text-blue-300 border border-blue-500/30">Special report</span>
+                            <div class="flex items-center gap-2 text-xs text-slate-400"><i data-lucide="calendar" class="w-3 h-3"></i><time>Dec 6, 2025</time></div>
+                        </div>
+                        <div class="flex-grow flex flex-col">
+                            <h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-blue-300 transition-colors">Ramopharmin structural and strategic transformation report</h3>
+                            <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">A summary of structural, management, and infrastructure reforms following privatization.</p>
+                            <div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center">
+                                <i data-lucide="bar-chart-3" class="w-5 h-5 text-slate-600 group-hover:text-blue-400 transition-colors"></i>
+                                <a href="../news/news-article-ramopharmin-structure-report.html" class="text-sm font-bold text-blue-400 hover:text-white transition-colors flex items-center gap-1 no-underline">Read news<i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="glass-panel rounded-2xl p-6 relative group flex flex-col min-h-[320px]">
+                        <div class="absolute left-0 top-5 bottom-5 w-1 rounded-r bg-amber-500 opacity-70"></div>
+                        <div class="flex justify-between items-start mb-4">
+                            <span class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-500/30">Event</span>
+                            <div class="flex items-center gap-2 text-xs text-slate-400"><i data-lucide="calendar" class="w-3 h-3"></i><time>May 15, 2025</time></div>
+                        </div>
+                        <div class="flex-grow flex flex-col">
+                            <h3 class="text-xl font-bold text-white mb-3 leading-snug group-hover:text-amber-300 transition-colors">Ramopharmin at Pharmex Middle East</h3>
+                            <p class="text-sm text-slate-400 leading-relaxed line-clamp-3 mb-4">Ramopharmin participated in the seventh Pharmex Middle East exhibition and engaged with pharmaceutical industry specialists.</p>
+                            <div class="mt-auto pt-4 border-t border-white/5 flex justify-between items-center">
+                                <i data-lucide="building-2" class="w-5 h-5 text-slate-600 group-hover:text-amber-400 transition-colors"></i>
+                                <a href="../news/pharmex-ramopharmin.html" class="text-sm font-bold text-amber-400 hover:text-white transition-colors flex items-center gap-1 no-underline">Read news<i data-lucide="arrow-right" class="w-4 h-4"></i></a>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </div>
+
     <!-- START BLOCK: 5-contract-manufacturing.html -->
     <div id="ramo-contract-block" class="relative w-full overflow-hidden text-white" style="font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial; direction: ltr;">
         <style>

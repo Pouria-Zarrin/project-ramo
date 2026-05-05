@@ -1,0 +1,16 @@
+{
+  "runAt": "2026-05-05T14:07:14.464Z",
+  "commitSha": "manual-publish",
+  "changed": [
+    "V0/news/کارخانه-جدید-تولید-مکمل-های-راموفارمین؛-گامی-تازه-در-توسعه-تولید.html",
+    "V0/fa/index.html",
+    "V0/en/index.html",
+    "V0/news-page/news-highlights.html",
+    "automation/whatsapp-publish-agent/content-manifests/کارخانه-جدید-تولید-مکمل-های-راموفارمین؛-گامی-تازه-در-توسعه-تولید.json"
+  ],
+  "liveUrls": [
+    "https://pouria-zarrin.github.io/project-ramo/news/کارخانه-جدید-تولید-مکمل-های-راموفارمین؛-گامی-تازه-در-توسعه-تولید.html"
+  ],
+  "deployLive": false,
+  "manifestPath": "/workspace/automation/whatsapp-publish-agent/content-manifests/کارخانه-جدید-تولید-مکمل-های-راموفارمین؛-گامی-تازه-در-توسعه-تولید.json"
+}
