@@ -97,19 +97,11 @@
             transform: translateY(0);
         }
         #ramo-header-block .group.cursor-pointer {
-            padding-bottom: 20px;
-            margin-bottom: -20px;
+            padding-bottom: 0;
+            margin-bottom: 0;
         }
         #ramo-header-block .dropdown-menu.absolute {
-            top: calc(100% - 12px);
-        }
-        #ramo-header-block .dropdown-menu::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 100%;
-            height: 24px;
+            top: calc(100% + 6px);
         }
 
         /* Golden Animated Border for News Link */
@@ -145,6 +137,18 @@
         .news-link-wrapper:hover::before {
             border-color: rgba(251, 191, 36, 0.6);
             background: rgba(251, 191, 36, 0.1);
+        }
+        body.mobile-menu-open { overflow: hidden; }
+        @media (max-width: 768px) {
+            #ramo-header-block header .container {
+                height: 5rem;
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            #ramo-header-block header .container > .flex.items-center.gap-8 { gap: 0.75rem; }
+            #ramo-header-block header img[alt="Ramopharmin Logo"] { height: 52px !important; }
+            #ramo-header-block #mobile-menu { padding-top: 6rem; }
+            #ramo-header-block #mobile-menu .news-link-wrapper { padding: 6px 0; }
         }
     </style>
 
@@ -318,22 +322,28 @@
         const mobileMenuBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
         let isMenuOpen = false;
+        const closeMobileMenu = () => {
+            isMenuOpen = false;
+            mobileMenu.classList.add('translate-x-full');
+            mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-8 h-8"></i>';
+            document.body.classList.remove('mobile-menu-open');
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        };
+        const openMobileMenu = () => {
+            isMenuOpen = true;
+            mobileMenu.classList.remove('translate-x-full');
+            mobileMenuBtn.innerHTML = '<i data-lucide="x" class="w-8 h-8"></i>';
+            document.body.classList.add('mobile-menu-open');
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        };
 
         if(mobileMenuBtn && mobileMenu) {
             mobileMenuBtn.addEventListener('click', () => {
-                isMenuOpen = !isMenuOpen;
-                if(isMenuOpen) {
-                    mobileMenu.classList.remove('translate-x-full');
-                    // Change icon to X
-                    mobileMenuBtn.innerHTML = '<i data-lucide="x" class="w-8 h-8"></i>';
-                } else {
-                    mobileMenu.classList.add('translate-x-full');
-                    // Change icon back to Menu
-                    mobileMenuBtn.innerHTML = '<i data-lucide="menu" class="w-8 h-8"></i>';
-                }
-                if (typeof lucide !== 'undefined') {
-                    lucide.createIcons();
-                }
+                isMenuOpen ? closeMobileMenu() : openMobileMenu();
+            });
+            mobileMenu.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMobileMenu));
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && isMenuOpen) closeMobileMenu();
             });
         }
 

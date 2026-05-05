@@ -87,9 +87,12 @@
         @media (max-width: 768px) {
             #ramo-fa-header .fa-nav-links { display: none !important; }
             #ramo-fa-header .fa-mobile-btn { display: block; }
+            #ramo-fa-header > div { height: 56px !important; padding: 0 12px !important; }
+            #ramo-fa-header img { height: 50px !important; }
+            #ramo-fa-header .fa-lang-btn { font-size: 0.72rem; padding: 3px 8px; }
         }
+        body.mobile-menu-open { overflow: hidden; }
         #mag-mobile-panel {
-            display: none;
             position: fixed;
             top: 64px;
             left: 0;
@@ -97,28 +100,36 @@
             bottom: 0;
             background: #0f172a;
             z-index: 99;
-            padding: 24px;
+            padding: 14px;
+            display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(100%);
+            transition: transform 0.25s ease, opacity 0.25s ease;
         }
-        #mag-mobile-panel.is-open { display: flex; }
+        #mag-mobile-panel.is-open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+        }
         #mag-mobile-panel a {
             color: rgba(255, 255, 255, 0.9);
             text-decoration: none;
-            font-size: 1.1rem;
+            font-size: 1rem;
             padding: 12px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
+        @media (max-width: 768px) { #mag-mobile-panel { top: 56px; } }
 
         #ramo-fa-header .fa-nav-dd {
             position: relative;
-            padding-bottom: 24px;
-            margin-bottom: -24px;
         }
         #ramo-fa-header .fa-nav-submenu {
             display: none;
             position: absolute;
-            top: calc(100% - 14px);
+            top: calc(100% + 6px);
             right: 0;
             margin-top: 0;
             min-width: 220px;
@@ -128,14 +139,6 @@
             padding: 8px 0;
             box-shadow: 0 16px 48px rgba(0, 0, 0, 0.35);
             z-index: 200;
-        }
-        #ramo-fa-header .fa-nav-submenu::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 100%;
-            height: 28px;
         }
         #ramo-fa-header .fa-nav-dd:hover .fa-nav-submenu,
         #ramo-fa-header .fa-nav-dd:focus-within .fa-nav-submenu {
@@ -419,21 +422,28 @@ document.addEventListener('DOMContentLoaded', function() {
     var panel = document.getElementById('mag-mobile-panel');
     if (!btn || !panel) return;
     var open = false;
-    btn.addEventListener('click', function() {
-        open = !open;
-        panel.classList.toggle('is-open', open);
-        panel.setAttribute('aria-hidden', open ? 'false' : 'true');
-        btn.innerHTML = open ? '<i data-lucide="x" class="w-7 h-7"></i>' : '<i data-lucide="menu" class="w-7 h-7"></i>';
+    function closePanel() {
+        open = false;
+        panel.classList.remove('is-open');
+        panel.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('mobile-menu-open');
+        btn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
         if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+    function openPanel() {
+        open = true;
+        panel.classList.add('is-open');
+        panel.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('mobile-menu-open');
+        btn.innerHTML = '<i data-lucide="x" class="w-7 h-7"></i>';
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+    }
+    btn.addEventListener('click', function() {
+        open ? closePanel() : openPanel();
     });
-    panel.querySelectorAll('a').forEach(function(a) {
-        a.addEventListener('click', function() {
-            open = false;
-            panel.classList.remove('is-open');
-            panel.setAttribute('aria-hidden', 'true');
-            btn.innerHTML = '<i data-lucide="menu" class="w-7 h-7"></i>';
-            if (typeof lucide !== 'undefined') lucide.createIcons();
-        });
+    panel.querySelectorAll('a').forEach(function(a) { a.addEventListener('click', closePanel); });
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && open) closePanel();
     });
 })();
 </script>
