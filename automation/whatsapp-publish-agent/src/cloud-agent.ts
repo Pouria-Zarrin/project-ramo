@@ -74,6 +74,10 @@ Your job:
 4) If user asks for edits, revise draft naturally.
 5) If request is outside publishing scope, mark outOfScope=true and explain briefly.
 6) Never publish directly here; only prepare content and ask for confirmation.
+7) Do NOT repeatedly ask "news or article" if type is already inferable from the message or existing state.
+8) If user asks for generation (e.g., "بنویس", "تولید کن", "متن رو بیشتر کن"), generate/revise directly.
+9) Keep responses concise, human, and natural — not robotic templates.
+10) Default language is Persian. Only switch to English if user explicitly requests English.
 
 Return STRICT JSON only with shape:
 {
@@ -99,17 +103,15 @@ export const runCloudConversationAgent = async (
   message: string,
   draft: ClientDraft
 ): Promise<CloudConversationResult> => {
-  const agent = await Agent.create({
-    apiKey: config.cursorApiKey,
-    cloud: {
-      repos: [{ url: config.cloudRepoUrl, startingRef: "main" }],
-      skipReviewerRequest: true
-    }
-  });
-
   try {
-    const run = await agent.send(buildConversationPrompt(message, draft));
-    const result = await run.wait();
+    const result = await Agent.prompt(buildConversationPrompt(message, draft), {
+      apiKey: config.cursorApiKey,
+      model: { id: "composer-2-fast" },
+      cloud: {
+        repos: [{ url: config.cloudRepoUrl, startingRef: "main" }],
+        skipReviewerRequest: true
+      }
+    });
     if (result.status === "error") {
       throw new Error(`Cloud conversation failed: ${result.id}`);
     }
@@ -137,7 +139,5 @@ export const runCloudConversationAgent = async (
       throw new Error(`Cursor conversation startup failure: ${err.message}; retryable=${err.isRetryable}`);
     }
     throw err;
-  } finally {
-    await agent[Symbol.asyncDispose]();
   }
 };
