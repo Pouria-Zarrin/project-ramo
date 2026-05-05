@@ -161,13 +161,15 @@
                 #ramo-en-header .en-nav-links { display: none; }
                 #ramo-en-header .mobile-btn { display: block; }
                 #ramo-en-header > div {
-                    padding: 0 14px !important;
+                    height: 56px !important;
+                    padding: 0 12px !important;
                 }
                 #ramo-en-header img[src*="english-full-logo-white"] {
-                    height: 58px !important;
+                    height: 50px !important;
                 }
                 #ramo-en-header .lang-btn {
-                    padding: 3px 10px;
+                    font-size: 0.72rem;
+                    padding: 3px 8px;
                 }
             }
         </style>
@@ -390,8 +392,13 @@
             lucide.createIcons();
         }
 
+        function isMobileView() {
+            return window.matchMedia('(max-width: 768px)').matches;
+        }
+
         // Initialize Three.js
         function initThreeJS() {
+            if (isMobileView()) return;
             const container = document.getElementById('canvas-container');
             if (!container) return;
             
@@ -569,7 +576,7 @@
         const checkThree = setInterval(() => {
             if (typeof THREE !== 'undefined') {
                 clearInterval(checkThree);
-                initThreeJS();
+                if (!isMobileView()) initThreeJS();
             }
         }, 100);
         

@@ -344,11 +344,22 @@
             border: none;
             cursor: pointer;
             color: #fff;
-            padding: 4px;
+            padding: 8px;
+            border-radius: 10px;
         }
+        #ramo-fa-header .fa-mobile-btn:hover { background: rgba(255, 255, 255, 0.08); }
         @media (max-width: 768px) {
             #ramo-fa-header .fa-nav-links { display: none; }
             #ramo-fa-header .fa-mobile-btn { display: block; }
+            #ramo-fa-header > div {
+                height: 56px !important;
+                padding: 0 12px !important;
+            }
+            #ramo-fa-header img { height: 50px !important; }
+            #ramo-fa-header .fa-lang-btn {
+                font-size: 0.72rem;
+                padding: 3px 8px;
+            }
         }
     </style>
     <div style="max-width:1200px;margin:0 auto;padding:0 24px;height:64px;display:flex;align-items:center;justify-content:space-between;">
@@ -459,7 +470,7 @@
             </div>
         </div>
         <!-- Left col (3D) — visible on all breakpoints -->
-        <div class="order-1 lg:order-2 flex justify-center items-stretch relative w-full min-h-[280px] min-w-0 py-4 lg:py-0 self-stretch">
+        <div class="order-1 lg:order-2 hidden md:flex justify-center items-stretch relative w-full min-h-[280px] min-w-0 py-4 lg:py-0 self-stretch">
             <div id="fa-canvas-container" aria-label="نمای سه‌بعدی کپسول"></div>
             <div class="absolute bottom-0 right-0 glass-panel p-6 rounded-2xl max-w-xs transform rotate-3 shadow-2xl hidden md:block z-20">
                 <div class="flex items-center gap-4 mb-3">
@@ -779,6 +790,9 @@ document.addEventListener('DOMContentLoaded', () => {
 // 3D Pill
 (function() {
     let pillInited = false;
+    function isMobileView() {
+        return window.matchMedia('(max-width: 768px)').matches;
+    }
     /** Prefer Phong/Lambert so low-end GPUs and strict WebGL1 contexts still shade reliably. */
     function pillMaterial(hex) {
         try {
@@ -793,6 +807,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
     function initThreeJS() {
+        if (isMobileView()) return;
         if (pillInited) return;
         const container = document.getElementById('fa-canvas-container');
         if (!container || typeof THREE === 'undefined') return;
@@ -910,6 +925,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     var tryLeft = 400;
     function tryInit() {
+        if (isMobileView()) return;
         if (typeof THREE === 'undefined') return;
         if (pillInited) return;
         requestAnimationFrame(function tick() {
