@@ -36,6 +36,91 @@ const parseLabeledField = (body: string, label: string): string | undefined => {
   return m?.[1]?.trim();
 };
 
+const cleanLine = (line: string): string => line.trim().replace(/\s+/g, " ");
+
+const splitParagraphs = (text: string): string[] =>
+  text
+    .split(/\n{2,}/)
+    .map((p) => cleanLine(p))
+    .filter(Boolean);
+
+const guessSummaryFromBody = (body: string): string => {
+  const compact = body.replace(/\n+/g, " ").trim();
+  if (!compact) return "";
+  const sentence = compact.split(/[.!؟\n]/).map((s) => s.trim()).find(Boolean) ?? compact;
+  return sentence.slice(0, 220);
+};
+
+const parseFreeformText = (
+  raw: string
+): {
+  title?: string;
+  summary?: string;
+  body?: string;
+  language?: "fa" | "en";
+} => {
+  const text = raw.trim();
+  if (!text) return {};
+
+  const normalized = text.replace(/\r/g, "");
+  const lines = normalized
+    .split("\n")
+    .map((l) => cleanLine(l))
+    .filter(Boolean);
+
+  const explicitTitle = parseLabeledField(normalized, "title");
+  const explicitSummary = parseLabeledField(normalized, "summary");
+  const explicitBody = parseLabeledField(normalized, "body");
+  const explicitLang = normalized.match(/language\s*:\s*(fa|en)/i)?.[1]?.toLowerCase();
+
+  const looksLikeLabeled = /title\s*:|summary\s*:|body\s*:/i.test(normalized);
+  if (looksLikeLabeled) {
+    return {
+      title: explicitTitle,
+      summary: explicitSummary,
+      body: explicitBody,
+      language: explicitLang === "en" ? "en" : explicitLang === "fa" ? "fa" : undefined
+    };
+  }
+
+  const paragraphs = splitParagraphs(normalized);
+  const firstLine = lines[0] ?? "";
+  const titleCandidate = firstLine.length <= 90 ? firstLine : undefined;
+  const bodyCandidate =
+    paragraphs.length > 1
+      ? paragraphs.join("\n\n")
+      : lines.length > 1
+        ? lines.slice(1).join("\n")
+        : titleCandidate
+          ? ""
+          : normalized;
+
+  const summaryCandidate = bodyCandidate ? guessSummaryFromBody(bodyCandidate) : undefined;
+  const hasEnglish = /[a-zA-Z]/.test(normalized);
+
+  return {
+    title: titleCandidate,
+    summary: summaryCandidate,
+    body: bodyCandidate || undefined,
+    language: hasEnglish ? "en" : "fa"
+  };
+};
+
+const isEditIntent = (text: string): boolean => {
+  const v = text.toLowerCase();
+  return [
+    "اصلاح",
+    "ویرایش",
+    "تغییر",
+    "edit",
+    "change",
+    "rewrite",
+    "عنوان جدید",
+    "خلاصه جدید",
+    "متن جدید"
+  ].some((k) => v.includes(k));
+};
+
 const containsOutOfScopeRequest = (body: string): boolean => {
   const text = body.toLowerCase();
   const triggers = [
@@ -111,14 +196,42 @@ const runConversationFlow = async (from: string, key: string, body: string, medi
     draft.type = parseType(body);
     sessions.save(from, draft);
     if (!draft.type) {
-      return "سلام، خوش آمدید 🌿\nبرای شروع لطفا نوع محتوا را مشخص کنید:\n- خبر\n- مقاله سلامت";
+      return "سلام 🌿\nمن همراه شما هستم تا خبر یا مقاله را منتشر کنیم.\nلطفا بگویید محتوا «خبر» است یا «مقاله سلامت».\nمی‌توانید متن را هم همان‌طور که هست (حتی نامرتب) بفرستید؛ من خودم ساختارش را آماده می‌کنم.";
     }
   }
 
-  draft.title = parseLabeledField(body, "title") ?? draft.title;
-  draft.summary = parseLabeledField(body, "summary") ?? draft.summary;
-  draft.body = parseLabeledField(body, "body") ?? draft.body;
-  draft.language = body.includes("language: en") ? "en" : (draft.language ?? "fa");
+  const parsedFreeform = parseFreeformText(body);
+  draft.title = parseLabeledField(body, "title") ?? parsedFreeform.title ?? draft.title;
+  draft.summary = parseLabeledField(body, "summary") ?? parsedFreeform.summary ?? draft.summary;
+  draft.body = parseLabeledField(body, "body") ?? parsedFreeform.body ?? draft.body;
+  draft.language = body.includes("language: en")
+    ? "en"
+    : parsedFreeform.language ?? draft.language ?? "fa";
+
+  // If we're already in preview mode and user sends edits naturally, rebuild preview.
+  if (draft.requiresConfirmation && isEditIntent(body)) {
+    if (!draft.body && draft.cleanedPreview?.body) draft.body = draft.cleanedPreview.body;
+    if (!draft.title && draft.cleanedPreview?.title) draft.title = draft.cleanedPreview.title;
+    if (!draft.summary && draft.cleanedPreview?.summary) draft.summary = draft.cleanedPreview.summary;
+  }
+
+  // If summary is missing but body exists, derive concise summary automatically.
+  if (!draft.summary && draft.body) {
+    const guessed = guessSummaryFromBody(draft.body);
+    if (guessed) draft.summary = guessed;
+  }
+
+  // Conversational missing-field collection (instead of rigid template demand).
+  if (!draft.title || !draft.body) {
+    sessions.save(from, draft);
+    if (!draft.title && !draft.body) {
+      return "عالی. لطفا متن را همین‌جا بفرستید (حتی نامرتب هم باشد) تا عنوان، خلاصه و بدنه را استخراج و پاکسازی کنم.";
+    }
+    if (!draft.title) {
+      return "ممنون. برای اینکه خروجی دقیق شود، لطفا یک عنوان کوتاه هم بفرستید.";
+    }
+    return "خیلی خوب. حالا لطفا بدنه اصلی متن را هم بفرستید تا پیش‌نمایش نهایی را آماده کنم.";
+  }
 
   if (!draft.requiresConfirmation && requiredForPreview(draft)) {
     draft.cleanedPreview = cleanClientText({
@@ -128,7 +241,7 @@ const runConversationFlow = async (from: string, key: string, body: string, medi
     });
     draft.requiresConfirmation = true;
     sessions.save(from, draft);
-    return `پیش‌نمایش ویرایش‌شده:\n\nعنوان: ${draft.cleanedPreview.title}\nخلاصه: ${draft.cleanedPreview.summary}\n\nبرای انتشار بنویسید: تایید انتشار\n\nاگر اصلاحی دارید همان‌جا بنویسید تا دوباره پاکسازی کنم.`;
+    return `پیش‌نمایش ویرایش‌شده آماده شد ✅\n\nعنوان: ${draft.cleanedPreview.title}\nخلاصه: ${draft.cleanedPreview.summary}\n\nاگر موردی نیاز به اصلاح دارد، همان‌جا به‌صورت طبیعی بنویسید (مثلا: «عنوان رسمی‌تر شود»).\nاگر تایید است، بنویسید: تایید انتشار`;
   }
 
   if (
