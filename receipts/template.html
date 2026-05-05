@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>رسید پرداخت - راموفارمین</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <style>
+        body {
+            font-family: "Vazirmatn", sans-serif;
+            background: #525659; /* Dark background for document viewer feel */
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .a4-page {
+            background: white;
+            width: 210mm;
+            min-height: 297mm; /* Allow expansion if content overflows, but target A4 */
+            padding: 20mm;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            box-sizing: border-box;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+                display: block;
+            }
+            .a4-page {
+                width: 210mm;
+                height: 297mm; /* Fixed height for print */
+                box-shadow: none;
+                margin: 0 auto;
+                padding: 20mm;
+                page-break-after: always;
+            }
+            @page {
+                size: A4;
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="a4-page">
+        <!-- Header -->
+        <div class="flex justify-between items-start border-b-2 border-gray-900 pb-6 mb-10">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">داروسازی راموفارمین</h1>
+                <p class="text-gray-600 text-sm uppercase tracking-wider font-medium">Ramopharmin Pharmaceuticals</p>
+            </div>
+            <div class="text-left">
+                <div class="text-4xl font-bold text-gray-200 tracking-widest">RECEIPT</div>
+                <div class="text-gray-500 text-sm mt-1 font-medium">رسید پرداخت خدمات وب</div>
+            </div>
+        </div>
+
+        <!-- Info Grid -->
+        <div class="grid grid-cols-2 gap-12 mb-12">
+            <div>
+                <div class="text-gray-500 text-xs uppercase tracking-wide mb-2 font-bold">دریافت کننده</div>
+                <div class="font-bold text-xl text-gray-900 mb-1">پوریا زرین</div>
+                <div class="text-gray-700 text-sm mb-1">توسعه‌دهنده وب و مشاور دیجیتال</div>
+            </div>
+            <div class="text-left" dir="ltr">
+                <div class="flex justify-between mb-3 border-b border-gray-100 pb-2">
+                    <span class="text-gray-500 text-sm font-medium">Receipt #:</span>
+                    <span class="font-bold text-gray-900">RM-REC-2025-001</span>
+                </div>
+                <div class="flex justify-between border-b border-gray-100 pb-2">
+                    <span class="text-gray-500 text-sm font-medium">Date:</span>
+                    <span class="font-bold text-gray-900">December 4, 2025</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div>
+            <table class="w-full mb-8">
+                <thead>
+                    <tr class="border-b-2 border-gray-900">
+                        <th class="text-right py-3 text-sm font-bold text-gray-900 w-2/3">شرح خدمات (Description)</th>
+                        <th class="text-left py-3 text-sm font-bold text-gray-900 w-1/3">مبلغ (Amount)</th>
+                    </tr>
+                </thead>
+                <tbody class="text-gray-800">
+                    <tr class="border-b border-gray-200">
+                        <td class="py-5 pr-2">
+                            <div class="font-bold text-gray-900 text-lg">طراحی مجدد صفحه اصلی</div>
+                            <div class="text-sm text-gray-500 mt-1">طراحی مدرن و بهینه‌سازی تجربه کاربری (UI/UX)</div>
+                        </td>
+                        <td class="py-5 text-left font-mono text-lg font-medium" dir="ltr">11,000,000 Toman</td>
+                    </tr>
+                    <tr class="border-b border-gray-200">
+                        <td class="py-5 pr-2">
+                            <div class="font-bold text-gray-900 text-lg">پروژه توصیف محصولات</div>
+                            <div class="text-sm text-gray-500 mt-1">ایجاد صفحات اطلاعات پزشکی تخصصی برای محصولات</div>
+                        </td>
+                        <td class="py-5 text-left font-mono text-lg font-medium" dir="ltr">8,500,000 Toman</td>
+                    </tr>
+                    <tr class="border-b border-gray-200">
+                        <td class="py-5 pr-2">
+                            <div class="font-bold text-gray-900 text-lg">مجله سلامت راموفارمین</div>
+                            <div class="text-sm text-gray-500 mt-1">راه‌اندازی پلتفرم محتوای آموزشی و اطلاع‌رسانی پزشکی</div>
+                        </td>
+                        <td class="py-5 text-left font-mono text-lg font-medium" dir="ltr">8,500,000 Toman</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Totals -->
+        <div class="flex items-center mb-16 border-b border-gray-200 py-3">
+            <div class="w-2/3 pl-4 text-left">
+                <span class="text-gray-600 font-medium">جمع کل</span>
+            </div>
+            <div class="w-1/3 text-left font-mono font-bold text-lg" dir="ltr">
+                28,000,000 Toman
+            </div>
+        </div>
+
+        <!-- Signature -->
+        <div class="mt-12 mb-8 pr-4">
+            <div class="w-64">
+                <div class="h-24 mb-2 flex items-end justify-center pb-2">
+                    <div class="text-5xl text-black italic transform -rotate-6" style="font-family: 'Brush Script MT', cursive;">Pouria Zarrin</div>
+                </div>
+                <div class="border-t-2 border-gray-900 pt-2 text-center">
+                    <div class="font-bold text-gray-900">پوریا زرین</div>
+                    <div class="text-xs text-gray-500">امضا / Signature</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <div class="mt-auto pt-8 border-t border-gray-200 text-center">
+            <div class="text-gray-400 text-xs lowercase tracking-widest" dir="ltr">
+                pseudolab web services
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

@@ -163,6 +163,28 @@
             transition:color 0.2s ease;
         }
         .footer-bottom-bar a.footer-legal:hover { color:#5eead4; }
+
+        /* Smooth ticker */
+        #ramo-news-ticker {
+            overflow: hidden;
+            gap: 0.5rem;
+        }
+        #news-ticker-viewport {
+            position: relative;
+            flex: 1 1 auto;
+            min-width: 0;
+            overflow: hidden;
+            height: 1.5rem;
+        }
+        .news-ticker-item {
+            position: absolute;
+            top: 0;
+            right: 0;
+            max-width: 100%;
+            white-space: nowrap;
+            line-height: 1.5rem;
+            will-change: transform, opacity;
+        }
     </style>
 </head>
 <body>
@@ -171,7 +193,10 @@
      NEWS TICKER
 ════════════════════════════════════════ -->
 <div id="ramo-news-ticker" class="fixed top-0 left-0 right-0 w-full bg-gradient-to-l from-[#174f57] to-[#0f172a] text-white font-bold text-xs md:text-sm flex items-center justify-end px-4 py-3 border-b border-yellow-300/10 shadow z-[60]" style="direction:rtl;">
-    <span id="news-ticker-text" class="transition-opacity duration-500 ml-2">به وبسایت رسمی راموفارمین خوش آمدید</span>
+    <div id="news-ticker-viewport" class="ml-2" aria-live="polite">
+        <span id="news-ticker-a" class="news-ticker-item">به وبسایت رسمی راموفارمین خوش آمدید</span>
+        <span id="news-ticker-b" class="news-ticker-item" style="opacity:0;transform:translateX(-112%);">به وبسایت رسمی راموفارمین خوش آمدید</span>
+    </div>
     <i data-lucide="megaphone" class="w-4 h-4 text-yellow-300 mr-2"></i>
 </div>
 <script>
@@ -423,13 +448,39 @@
             "پویش آزادسازی بانوان زندانی — اقدام انسان‌دوستانه راموفارمین",
             "گزارش تحول ساختاری و راهبردی راموفارمین"
         ];
-        var ticker = document.getElementById('news-ticker-text');
+        var a = document.getElementById('news-ticker-a');
+        var b = document.getElementById('news-ticker-b');
+        if (!a || !b || !items.length) return;
+
+        var active = a;
+        var inactive = b;
         var idx = 0;
+        active.textContent = items[idx];
+        active.style.opacity = "1";
+        active.style.transform = "translateX(0)";
+
         function next() {
-            ticker.style.opacity = 0;
-            setTimeout(function() { ticker.textContent = items[idx]; ticker.style.opacity = 1; idx = (idx+1) % items.length; }, 400);
+            idx = (idx + 1) % items.length;
+            inactive.textContent = items[idx];
+            inactive.style.transition = "none";
+            inactive.style.opacity = "0";
+            inactive.style.transform = "translateX(-112%)";
+
+            requestAnimationFrame(function() {
+                active.style.transition = "transform 560ms ease, opacity 560ms ease";
+                inactive.style.transition = "transform 560ms ease, opacity 560ms ease";
+                active.style.transform = "translateX(112%)";
+                active.style.opacity = "0";
+                inactive.style.transform = "translateX(0)";
+                inactive.style.opacity = "1";
+
+                var t = active;
+                active = inactive;
+                inactive = t;
+            });
         }
-        next(); setInterval(next, 3400);
+
+        setInterval(next, 3600);
     })();
 </script>
 

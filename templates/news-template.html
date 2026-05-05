@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="{{lang}}" dir="{{dir}}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{title}} | Ramopharmin</title>
+  <meta name="description" content="{{description}}">
+  <meta name="keywords" content="{{keywords}}">
+  <meta name="author" content="{{author_name}}">
+  <link rel="canonical" href="{{canonical_url}}">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Vazirmatn', 'sans-serif'] },
+          colors: {
+            'ramo-blue': '#195057',
+            'ramo-dark': '#172554',
+            'ramo-accent': '#3b82f6',
+            'text-body': '#334155',
+            'text-header': '#0f172a'
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; background-color: #EFF2F3; }
+    body { font-family: Vazirmatn, sans-serif; }
+    .toc-scrollbar::-webkit-scrollbar { width: 4px; }
+    .toc-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+    .article-content p { text-align: justify; text-justify: inter-word; }
+  </style>
+</head>
+<body class="bg-[#EFF2F3] font-sans text-text-body">
+  <!-- Header -->
+  <nav class="fixed top-0 left-0 right-0 z-50 bg-white border-b border-gray-200 shadow-sm">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <a href="{{home_url}}" class="flex items-center gap-3 no-underline">
+        <div class="w-8 h-8 bg-ramo-blue rounded flex items-center justify-center text-white font-bold">R</div>
+        <span class="hidden md:block text-sm font-bold text-ramo-blue">{{site_label}}</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-6">
+        <a href="{{home_url}}" class="text-gray-700 hover:text-ramo-blue no-underline">{{nav_home}}</a>
+        <a href="{{about_url}}" class="text-gray-700 hover:text-ramo-blue no-underline">{{nav_about}}</a>
+        <a href="{{products_url}}" class="text-gray-700 hover:text-ramo-blue no-underline">{{nav_products}}</a>
+        <a href="{{magazine_url}}" class="text-gray-700 hover:text-ramo-blue no-underline">{{nav_magazine}}</a>
+      </div>
+
+      <a href="#" onclick="window.print(); return false;" class="bg-ramo-blue hover:bg-ramo-dark text-white px-4 py-2 rounded-sm text-sm font-medium transition-colors no-underline">
+        {{download_pdf_label}}
+      </a>
+    </div>
+  </nav>
+  <div class="h-16" aria-hidden="true"></div>
+
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <!-- TOC -->
+    <aside class="hidden lg:block lg:col-span-3">
+      <div class="sticky top-24 space-y-6">
+        <div class="bg-white rounded-lg border border-gray-200 shadow-sm p-4">
+          <h3 class="font-bold text-gray-900 mb-3 text-sm border-b pb-2">{{toc_title}}</h3>
+          <ul class="space-y-2 text-sm toc-scrollbar max-h-[60vh] overflow-y-auto pl-2">
+            {{toc_items_html}}
+          </ul>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Article -->
+    <article class="lg:col-span-6 bg-white shadow-sm border border-gray-200 rounded-lg p-6 md:p-10">
+      <header class="mb-6">
+        <div class="text-xs font-bold text-ramo-blue mb-2">{{kicker}}</div>
+        <h1 class="text-2xl md:text-3xl font-extrabold text-text-header leading-tight mb-3">{{title}}</h1>
+        <p class="text-sm text-gray-600 mb-3">{{abstract}}</p>
+        <div class="flex flex-wrap gap-4 text-xs text-gray-400">
+          <span>{{author_label}}: {{author_name}}</span>
+          <span>•</span>
+          <span>{{updated_label}}: {{updated_at}}</span>
+          <span>•</span>
+          <span>{{reading_time_label}}: {{reading_time}}</span>
+        </div>
+      </header>
+
+      <figure class="mb-6">
+        <img loading="lazy" src="{{hero_image_url}}" alt="{{hero_image_alt}}" class="w-full h-auto object-cover rounded-lg border border-gray-200">
+        <figcaption class="text-xs text-gray-500 mt-2">{{hero_image_caption}}</figcaption>
+      </figure>
+
+      <section class="article-content">
+        {{article_body_html}}
+      </section>
+
+      <section id="refs" class="pt-6 border-t border-gray-200 mt-6">
+        <h2 class="text-lg font-bold text-gray-900 mb-4">{{references_title}}</h2>
+        {{references_html}}
+      </section>
+    </article>
+
+    <!-- Side card -->
+    <aside class="lg:col-span-3 space-y-6">
+      <div class="bg-white p-5 rounded-lg border border-gray-200 shadow-sm">
+        <h3 class="font-bold text-gray-900 text-sm mb-4">{{about_author_title}}</h3>
+        <p class="text-sm text-gray-600">{{about_author_text}}</p>
+      </div>
+    </aside>
+  </main>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "NewsArticle",
+    "headline": "{{title}}",
+    "description": "{{description}}",
+    "author": { "@type": "Organization", "name": "{{author_name}}" },
+    "publisher": { "@type": "Organization", "name": "Ramopharmin" },
+    "dateModified": "{{date_modified}}",
+    "inLanguage": "{{lang}}",
+    "url": "{{canonical_url}}"
+  }
+  </script>
+</body>
+</html>
