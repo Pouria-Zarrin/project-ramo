@@ -421,6 +421,18 @@ function extractMainBody(s) {
   return m ? m[1].trim() : s;
 }
 
+function stripInjectedChromeArtifacts(s) {
+  let out = s;
+  // Remove previously injected shared footer blocks (can appear multiple times in corrupted wraps).
+  out = out.replace(/<style>#ramo-news-footer a\{color:#0f172a!important\}#ramo-news-footer a:hover\{color:#0d9488!important\}<\/style>\s*<footer id="ramo-news-footer"[\s\S]*?<\/footer>/gi, "");
+  // Remove injected mobile-nav script tail fragments if they leaked into main content.
+  out = out.replace(/<script>\s*document\.addEventListener\('DOMContentLoaded', function\(\) \{\s*if \(typeof lucide !== 'undefined'\) lucide\.createIcons\(\);\s*\}\);\s*\(function\(\) \{[\s\S]*?\}\)\(\);\s*<\/script>/gi, "");
+  // Remove leaked closing tags from previous wraps.
+  out = out.replace(/<\/main>\s*<\/body>\s*<\/html>/gi, "");
+  out = out.replace(/<\/body>\s*<\/html>/gi, "");
+  return out.trim();
+}
+
 const jobs = [
   ...[
     "product-category-therapeutics/category-page.html",
@@ -460,6 +472,7 @@ for (const job of jobs) {
   if (alreadyWrapped(raw)) {
     raw = extractMainBody(raw);
   }
+  raw = stripInjectedChromeArtifacts(raw);
   raw = wrapFragment(raw, job.title, job.current, job.paths);
   writeFileSync(fp, raw, "utf8");
   console.log("wrapped:", job.rel);
