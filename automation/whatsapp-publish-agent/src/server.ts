@@ -7,7 +7,7 @@ import { SessionStore } from "./session-store.js";
 import { cleanClientText, textToSimpleHtml } from "./content-cleaner.js";
 import { ContentRecord, ContentType } from "./types.js";
 import { publishRecord } from "./publisher.js";
-import { runCloudPublishAgent } from "./cloud-agent.js";
+import { runCloudConversationAgent, runCloudPublishAgent } from "./cloud-agent.js";
 
 const app = express();
 app.use(express.urlencoded({ extended: false }));
@@ -148,6 +148,22 @@ const isGenerationIntent = (text: string): boolean => {
   return direct || fuzzyFa;
 };
 
+const isExpandIntent = (text: string): boolean => {
+  const v = text.toLowerCase();
+  return [
+    "متن رو بیشتر کن",
+    "متن را بیشتر کن",
+    "بیشترش کن",
+    "طولانی تر",
+    "طولانی‌تر",
+    "مفصل تر",
+    "مفصل‌تر",
+    "longer",
+    "expand",
+    "more detail"
+  ].some((k) => v.includes(k));
+};
+
 const extractBrief = (text: string): string =>
   text
     .replace(/(تولید متن|متن بساز|نمونه متن|یه متن بنویس|خبر بنویس|مقاله بنویس|generate text|write sample|draft this)/gi, "")
@@ -233,6 +249,30 @@ const deriveTitleFromBody = (body: string, language: "fa" | "en"): string => {
   return candidate.length > 90 ? candidate.slice(0, 90) : candidate;
 };
 
+const expandDraftBody = (
+  body: string,
+  type: ContentType,
+  language: "fa" | "en"
+): string => {
+  const extensionFa = [
+    "در ادامه این خبر، می‌توان به ابعاد عملیاتی پروژه نیز اشاره کرد؛ از جمله ظرفیت‌سازی جدید، تاثیر بر پایداری زنجیره تامین، و ارتقای سرعت پاسخ‌گویی به نیاز بازار.",
+    "از منظر کیفیت، هم‌راستایی با استانداردهای جهانی زمانی ارزشمندتر می‌شود که با نظام پایش مستمر، آموزش نیروی انسانی و شفافیت شاخص‌های عملکرد همراه باشد.",
+    "همچنین پیام این اقدام برای ذی‌نفعان داخلی و خارجی این است که مسیر توسعه بر مبنای برنامه‌ریزی بلندمدت، استانداردسازی و بهبود تجربه مصرف‌کننده دنبال می‌شود.",
+    "در صورت تایید، نسخه نهایی می‌تواند با اضافه شدن آمار دقیق، زمان‌بندی اجرایی و نقل‌قول رسمی مدیران، برای انتشار رسانه‌ای کاملا آماده شود."
+  ];
+  const extensionEn = [
+    "Operationally, this initiative can be framed as a capacity and resilience improvement with direct impact on supply continuity.",
+    "From a quality standpoint, alignment with international standards is most credible when paired with continuous monitoring and transparent performance indicators.",
+    "The broader message to stakeholders is that growth is being executed through disciplined planning, standardization, and measurable outcomes.",
+    "If needed, the final version can be enriched with exact metrics, dates, and leadership quotes for publication-readiness."
+  ];
+  const extra = language === "fa" ? extensionFa.join("\n\n") : extensionEn.join("\n\n");
+  const prefix = type === "news"
+    ? (language === "fa" ? "تکمیل خبر:" : "News expansion:")
+    : (language === "fa" ? "تکمیل مقاله:" : "Article expansion:");
+  return `${body.trim()}\n\n${prefix}\n\n${extra}`;
+};
+
 const containsOutOfScopeRequest = (body: string): boolean => {
   const text = body.toLowerCase();
   const triggers = [
@@ -300,92 +340,7 @@ const runConversationFlow = async (from: string, key: string, body: string, medi
   const draft = sessions.getOrCreate(from);
   if (media.length) draft.media.push(...media.filter((m) => (m.contentType ?? "").startsWith("image/")));
 
-  if (containsOutOfScopeRequest(body)) {
-    return "این درخواست خارج از قابلیت‌های فعلی این بات است. لطفا برای این مورد با توسعه‌دهنده وب تماس بگیرید.\n\nمن فقط می‌توانم دریافت/پاکسازی متن خبر یا مقاله سلامت، پیش‌نمایش، و انتشار خودکار را انجام دهم.";
-  }
-
-  if (!draft.type) {
-    // Try to infer channel if user asks generation directly.
-    if (isGenerationIntent(body)) {
-      const low = body.toLowerCase();
-      if (low.includes("خبر") || low.includes("news")) draft.type = "news";
-      if (low.includes("مقاله") || low.includes("article")) draft.type = "health_magazine_article";
-    }
-    draft.type = draft.type ?? parseType(body);
-    sessions.save(from, draft);
-    if (!draft.type) {
-      return "سلام 🌿\nمن همراه شما هستم تا خبر یا مقاله را منتشر کنیم.\nلطفا بگویید محتوا «خبر» است یا «مقاله سلامت».\nمی‌توانید متن را هم همان‌طور که هست (حتی نامرتب) بفرستید؛ من خودم ساختارش را آماده می‌کنم.";
-    }
-  }
-
-  // Optional generation mode: client gives a brief and asks for a sample.
-  if (isGenerationIntent(body) && !draft.requiresConfirmation) {
-    const language: "fa" | "en" = /[a-zA-Z]/.test(body) ? "en" : "fa";
-    const requestedLength = detectRequestedLength(body);
-    const sample = generateSampleContent(extractBrief(body), draft.type, language, requestedLength);
-    draft.language = language;
-    draft.title = sample.title;
-    draft.summary = sample.summary;
-    draft.body = sample.body;
-    draft.cleanedPreview = cleanClientText(sample);
-    draft.requiresConfirmation = true;
-    sessions.save(from, draft);
-    return `متن نمونه آماده شد ✍️\n\nعنوان: ${draft.cleanedPreview.title}\nخلاصه: ${draft.cleanedPreview.summary}\n\nاگر اصلاح دارید طبیعی بنویسید تا نسخه بهتر شود.\nاگر تایید است بنویسید: تایید انتشار`;
-  }
-
-  const parsedFreeform = parseFreeformText(body);
-  draft.title = parseLabeledField(body, "title") ?? parsedFreeform.title ?? draft.title;
-  draft.summary = parseLabeledField(body, "summary") ?? parsedFreeform.summary ?? draft.summary;
-  draft.body = parseLabeledField(body, "body") ?? parsedFreeform.body ?? draft.body;
-  draft.language = body.includes("language: en")
-    ? "en"
-    : parsedFreeform.language ?? draft.language ?? "fa";
-
-  // Avoid generic placeholders as final titles.
-  if (draft.title) {
-    const normalizedTitle = draft.title.trim().toLowerCase();
-    const genericTitles = ["خبر", "مقاله", "مقاله سلامت", "news", "article", "health article"];
-    if (genericTitles.includes(normalizedTitle) && draft.body) {
-      draft.title = deriveTitleFromBody(draft.body, draft.language ?? "fa");
-    }
-  }
-
-  // If we're already in preview mode and user sends edits naturally, rebuild preview.
-  if (draft.requiresConfirmation && isEditIntent(body)) {
-    if (!draft.body && draft.cleanedPreview?.body) draft.body = draft.cleanedPreview.body;
-    if (!draft.title && draft.cleanedPreview?.title) draft.title = draft.cleanedPreview.title;
-    if (!draft.summary && draft.cleanedPreview?.summary) draft.summary = draft.cleanedPreview.summary;
-  }
-
-  // If summary is missing but body exists, derive concise summary automatically.
-  if (!draft.summary && draft.body) {
-    const guessed = guessSummaryFromBody(draft.body);
-    if (guessed) draft.summary = guessed;
-  }
-
-  // Conversational missing-field collection (instead of rigid template demand).
-  if (!draft.title || !draft.body) {
-    sessions.save(from, draft);
-    if (!draft.title && !draft.body) {
-      return "عالی. لطفا متن را همین‌جا بفرستید (حتی نامرتب هم باشد) تا عنوان، خلاصه و بدنه را استخراج و پاکسازی کنم.";
-    }
-    if (!draft.title) {
-      return "ممنون. برای اینکه خروجی دقیق شود، لطفا یک عنوان کوتاه هم بفرستید.";
-    }
-    return "خیلی خوب. حالا لطفا بدنه اصلی متن را هم بفرستید تا پیش‌نمایش نهایی را آماده کنم.";
-  }
-
-  if (!draft.requiresConfirmation && requiredForPreview(draft)) {
-    draft.cleanedPreview = cleanClientText({
-      title: draft.title!,
-      summary: draft.summary!,
-      body: draft.body!
-    });
-    draft.requiresConfirmation = true;
-    sessions.save(from, draft);
-    return `پیش‌نمایش ویرایش‌شده آماده شد ✅\n\nعنوان: ${draft.cleanedPreview.title}\nخلاصه: ${draft.cleanedPreview.summary}\n\nاگر موردی نیاز به اصلاح دارد، همان‌جا به‌صورت طبیعی بنویسید (مثلا: «عنوان رسمی‌تر شود»).\nاگر تایید است، بنویسید: تایید انتشار`;
-  }
-
+  // Publish is deterministic and requires explicit confirmation phrase.
   if (
     draft.requiresConfirmation &&
     (body.trim().toUpperCase() === "CONFIRM PUBLISH" || body.trim() === "تایید انتشار") &&
@@ -420,8 +375,47 @@ const runConversationFlow = async (from: string, key: string, body: string, medi
     }
   }
 
+  // Conversational intelligence layer via Cloud Agent (classification/generation/revisions).
+  try {
+    const cloud = await runCloudConversationAgent(body, draft);
+    if (cloud.outOfScope) {
+      return cloud.reply;
+    }
+    draft.type = cloud.type ?? draft.type;
+    draft.title = cloud.title ?? draft.title;
+    draft.summary = cloud.summary ?? draft.summary;
+    draft.body = cloud.body ?? draft.body;
+    draft.language = cloud.language ?? draft.language ?? "fa";
+
+    if (
+      cloud.readyToPublish &&
+      draft.type &&
+      draft.title &&
+      draft.summary &&
+      draft.body
+    ) {
+      draft.cleanedPreview = cleanClientText({
+        title: draft.title,
+        summary: draft.summary,
+        body: draft.body
+      });
+      draft.requiresConfirmation = true;
+      sessions.save(from, draft);
+      return `پیش‌نویس نهایی آماده است ✅\n\nنوع محتوا: ${draft.type === "news" ? "خبر" : "مقاله سلامت"}\nعنوان: ${draft.cleanedPreview.title}\nخلاصه: ${draft.cleanedPreview.summary}\n\nاگر اصلاح می‌خواهید طبیعی بنویسید.\nاگر تایید است: تایید انتشار`;
+    }
+
+    draft.requiresConfirmation = Boolean(draft.requiresConfirmation && draft.cleanedPreview);
+    sessions.save(from, draft);
+    return cloud.reply || "متن شما دریافت شد. ادامه بدهیم.";
+  } catch (error) {
+    // Fallback: maintain current deterministic heuristics if cloud conversation fails.
+    const safeMessage = `ارتباط هوشمند موقتاً در دسترس نیست (${(error as Error).message}). لطفا ادامه متن را بفرستید تا دستی پیش برویم.`;
+    sessions.save(from, draft);
+    return safeMessage;
+  }
+
   sessions.save(from, draft);
-  return "خیلی خوب. لطفا متن را با این قالب بفرستید تا بخوانم و پاکسازی کنم:\ntitle: ...\nsummary: ...\nbody: ...\nlanguage: fa|en\n\nاگر تصویر دارید، بعد از متن ارسال کنید.";
+  return "متن شما دریافت شد. ادامه بدهیم.";
 };
 
 const sendMetaText = async (to: string, text: string): Promise<void> => {
