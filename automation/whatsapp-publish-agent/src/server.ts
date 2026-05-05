@@ -125,16 +125,26 @@ const isGenerationIntent = (text: string): boolean => {
   const v = text.toLowerCase();
   const direct = [
     "تولید متن",
+    "تولید کن",
     "متن بساز",
     "نمونه متن",
     "یه متن بنویس",
+    "یک متن بنویس",
     "خبر بنویس",
+    "خبر کامل بنویس",
     "مقاله بنویس",
+    "پیش نویس بنویس",
+    "پیش‌نویس بنویس",
+    "long draft",
     "generate text",
     "write sample",
+    "write a draft",
     "draft this"
   ].some((k) => v.includes(k));
-  const fuzzyFa = (v.includes("نمونه") && (v.includes("بنویس") || v.includes("تولید"))) || (v.includes("متن") && v.includes("بنویس"));
+  const fuzzyFa =
+    ((v.includes("متن") || v.includes("خبر") || v.includes("مقاله")) &&
+      (v.includes("بنویس") || v.includes("تولید") || v.includes("بساز"))) ||
+    (v.includes("بلند") && (v.includes("متن") || v.includes("خبر")));
   return direct || fuzzyFa;
 };
 
@@ -144,28 +154,73 @@ const extractBrief = (text: string): string =>
     .replace(/\s+/g, " ")
     .trim();
 
+type DraftLength = "short" | "medium" | "long" | "very_long";
+
+const detectRequestedLength = (text: string): DraftLength => {
+  const v = text.toLowerCase();
+  if (
+    v.includes("خیلی بلند") ||
+    v.includes("خیلی کامل") ||
+    v.includes("مفصل") ||
+    v.includes("detailed")
+  ) {
+    return "very_long";
+  }
+  if (
+    v.includes("بلند") ||
+    v.includes("کامل") ||
+    v.includes("full") ||
+    v.includes("long")
+  ) {
+    return "long";
+  }
+  if (v.includes("کوتاه") || v.includes("خلاصه") || v.includes("short")) {
+    return "short";
+  }
+  return "medium";
+};
+
 const generateSampleContent = (
   brief: string,
   type: ContentType,
-  language: "fa" | "en"
+  language: "fa" | "en",
+  length: DraftLength
 ): { title: string; summary: string; body: string } => {
   const topic = brief || (language === "fa" ? "به‌روزرسانی فعالیت شرکت" : "company update");
   if (language === "fa") {
     const title = type === "news" ? `خبر: ${topic}` : `مقاله سلامت: ${topic}`;
     const summary = `این متن نمونه بر اساس توضیح شما تهیه شده و قابل ویرایش است: ${topic}.`;
-    const body =
-      `بر اساس توضیح ارائه‌شده، این خبر/مقاله با تمرکز بر ${topic} تهیه شده است.\n\n` +
-      "در این نسخه نمونه، تلاش شده لحن حرفه‌ای و قابل انتشار حفظ شود و پیام اصلی به‌صورت شفاف بیان گردد.\n\n" +
-      "لطفا اگر نام‌ها، تاریخ‌ها، اعداد یا جزئیات خاصی مدنظر دارید ارسال کنید تا نسخه نهایی دقیق‌تر آماده و سپس منتشر شود.";
+    const baseParagraphs = [
+      `بر اساس توضیح ارائه‌شده، این ${type === "news" ? "خبر" : "مقاله"} با تمرکز بر «${topic}» تهیه شده است و تلاش می‌کند پیام اصلی را شفاف و قابل انتشار منتقل کند.`,
+      "در این نسخه، جزئیات کلیدی موضوع به زبان ساده و حرفه‌ای تنظیم شده تا مخاطب بتواند به‌سرعت تصویری روشن از اهمیت موضوع، هدف اقدام انجام‌شده و اثرات مورد انتظار دریافت کند.",
+      "از نظر لحن و ساختار نیز متن به‌گونه‌ای تنظیم شده که هم برای انتشار در کانال‌های رسمی مناسب باشد و هم قابلیت ویرایش سریع برای افزودن اطلاعات دقیق‌تر مانند تاریخ، نام افراد، آمار یا نقل‌قول‌های رسمی را داشته باشد.",
+      "در صورت نیاز می‌توان تاکید متن را بر جنبه‌های فنی، مدیریتی، اقتصادی یا پیام‌های مسئولیت اجتماعی قرار داد تا پیام نهایی دقیق‌تر با هدف ارتباطی برند همراستا شود.",
+      "همچنین پیشنهاد می‌شود برای نسخه نهایی، یک پاراگراف اختصاصی درباره دستاوردهای عملی، اثر مستقیم بر مخاطبان هدف، و مسیر اقدامات بعدی اضافه شود تا متن از نظر خبری کامل‌تر و اثرگذارتر باشد.",
+      "اگر اطلاعات تکمیلی شامل اعداد دقیق، جدول زمان‌بندی، نقل‌قول مدیران، یا نام واحدهای اجرایی ارسال شود، نسخه نهایی می‌تواند با دقت بیشتر و آمادگی کامل برای انتشار رسمی آماده گردد."
+    ];
+
+    const paragraphCount =
+      length === "short" ? 2 : length === "medium" ? 4 : length === "long" ? 6 : 8;
+    const extension = [
+      "در جمع‌بندی، این اقدام می‌تواند گامی عملی در مسیر ارتقای کیفیت، افزایش ظرفیت و تقویت اعتماد مخاطبان تلقی شود و تصویر حرفه‌ای‌تری از روند توسعه ارائه دهد.",
+      "در صورت تایید شما، همین پیش‌نویس می‌تواند در نسخه بعدی با جزئیات نهایی تکمیل شده و مستقیما برای انتشار در وب‌سایت آماده شود."
+    ];
+    const body = [...baseParagraphs, ...extension].slice(0, paragraphCount).join("\n\n");
     return { title, summary, body };
   }
 
   const title = type === "news" ? `News: ${topic}` : `Health Article: ${topic}`;
   const summary = `This is a generated sample draft based on your brief: ${topic}.`;
-  const body =
-    `Based on your brief, this draft focuses on ${topic}.\n\n` +
-    "The current version is optimized for clarity and can be refined with exact names, dates, and figures.\n\n" +
-    "Share any required factual details and I will prepare the final version for publication.";
+  const enParagraphs = [
+    `Based on your brief, this draft focuses on ${topic}.`,
+    "The structure is designed to communicate the core message clearly while remaining suitable for publication channels.",
+    "This version can be quickly refined by inserting exact names, dates, figures, and approved quotes from stakeholders.",
+    "If needed, the final copy can emphasize technical outcomes, operational impact, or broader public-facing messaging.",
+    "A stronger final version usually includes measurable outcomes, timeline context, and a clear next-step statement.",
+    "Share any factual additions and I will produce a publication-ready final draft."
+  ];
+  const enCount = length === "short" ? 2 : length === "medium" ? 4 : length === "long" ? 6 : 6;
+  const body = enParagraphs.slice(0, enCount).join("\n\n");
   return { title, summary, body };
 };
 
@@ -250,7 +305,13 @@ const runConversationFlow = async (from: string, key: string, body: string, medi
   }
 
   if (!draft.type) {
-    draft.type = parseType(body);
+    // Try to infer channel if user asks generation directly.
+    if (isGenerationIntent(body)) {
+      const low = body.toLowerCase();
+      if (low.includes("خبر") || low.includes("news")) draft.type = "news";
+      if (low.includes("مقاله") || low.includes("article")) draft.type = "health_magazine_article";
+    }
+    draft.type = draft.type ?? parseType(body);
     sessions.save(from, draft);
     if (!draft.type) {
       return "سلام 🌿\nمن همراه شما هستم تا خبر یا مقاله را منتشر کنیم.\nلطفا بگویید محتوا «خبر» است یا «مقاله سلامت».\nمی‌توانید متن را هم همان‌طور که هست (حتی نامرتب) بفرستید؛ من خودم ساختارش را آماده می‌کنم.";
@@ -260,7 +321,8 @@ const runConversationFlow = async (from: string, key: string, body: string, medi
   // Optional generation mode: client gives a brief and asks for a sample.
   if (isGenerationIntent(body) && !draft.requiresConfirmation) {
     const language: "fa" | "en" = /[a-zA-Z]/.test(body) ? "en" : "fa";
-    const sample = generateSampleContent(extractBrief(body), draft.type, language);
+    const requestedLength = detectRequestedLength(body);
+    const sample = generateSampleContent(extractBrief(body), draft.type, language, requestedLength);
     draft.language = language;
     draft.title = sample.title;
     draft.summary = sample.summary;
