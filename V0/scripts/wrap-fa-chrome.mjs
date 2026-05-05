@@ -134,7 +134,7 @@ const CHROME_CSS = `
         #ramo-fa-header .fa-nav-submenu {
             display: none;
             position: absolute;
-            top: calc(100% + 6px);
+            top: 100%;
             right: 0;
             margin-top: 0;
             min-width: 220px;
