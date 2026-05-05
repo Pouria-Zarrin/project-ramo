@@ -2,3 +2,4 @@ node_modules/
 dist/
 .env
 meta-credentials.txt
+telegram-credentials.txt

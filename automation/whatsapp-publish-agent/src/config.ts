@@ -20,7 +20,7 @@ const optionalForLocalTest = (name: string, fallback = "test-value"): string => 
 
 const optional = (name: string, fallback = ""): string => process.env[name] ?? fallback;
 
-const whatsappProvider = process.env.WHATSAPP_PROVIDER ?? "meta";
+const whatsappProvider = process.env.WHATSAPP_PROVIDER ?? "telegram";
 
 export const config = {
   port: Number(process.env.PORT ?? 8787),
@@ -38,6 +38,8 @@ export const config = {
   metaVerifyToken: process.env.META_VERIFY_TOKEN ?? "ramo_meta_verify_2026",
   metaAccessToken: process.env.META_ACCESS_TOKEN ?? "",
   metaPhoneNumberId: process.env.META_PHONE_NUMBER_ID ?? "",
+  telegramBotToken: process.env.TELEGRAM_BOT_TOKEN ?? "",
+  telegramWebhookSecret: process.env.TELEGRAM_WEBHOOK_SECRET ?? "",
   liveCheckTimeoutMs: Number(process.env.LIVE_CHECK_TIMEOUT_MS ?? 180000),
   liveCheckPollMs: Number(process.env.LIVE_CHECK_POLL_MS ?? 10000)
 };

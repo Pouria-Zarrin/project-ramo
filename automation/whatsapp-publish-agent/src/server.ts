@@ -186,6 +186,28 @@ const sendMetaText = async (to: string, text: string): Promise<void> => {
   });
 };
 
+const sendTelegramText = async (chatId: string, text: string): Promise<void> => {
+  if (!config.telegramBotToken) return;
+  await fetch(`https://api.telegram.org/bot${config.telegramBotToken}/sendMessage`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      chat_id: chatId,
+      text
+    })
+  });
+};
+
+const getTelegramMediaUrl = async (fileId: string): Promise<string | undefined> => {
+  if (!config.telegramBotToken) return undefined;
+  const fileRes = await fetch(`https://api.telegram.org/bot${config.telegramBotToken}/getFile?file_id=${encodeURIComponent(fileId)}`);
+  if (!fileRes.ok) return undefined;
+  const fileJson = (await fileRes.json()) as { ok: boolean; result?: { file_path?: string } };
+  const filePath = fileJson.result?.file_path;
+  if (!filePath) return undefined;
+  return `https://api.telegram.org/file/bot${config.telegramBotToken}/${filePath}`;
+};
+
 app.post("/webhooks/twilio/whatsapp", async (req, res) => {
   if (!verifySignature(req)) {
     res.status(401).send("invalid signature");
@@ -230,6 +252,41 @@ app.post("/webhooks/meta/whatsapp", async (req, res) => {
   const key = (message.id as string | undefined) ?? `${from}:${Date.now()}`;
   const reply = await runConversationFlow(from, key, body, []);
   await sendMetaText(from, reply);
+  res.sendStatus(200);
+});
+
+app.post("/webhooks/telegram", async (req, res) => {
+  if (config.telegramWebhookSecret) {
+    const secretHeader = req.header("x-telegram-bot-api-secret-token");
+    if (secretHeader !== config.telegramWebhookSecret) {
+      res.sendStatus(401);
+      return;
+    }
+  }
+
+  const message = req.body?.message ?? req.body?.edited_message;
+  if (!message) {
+    res.sendStatus(200);
+    return;
+  }
+
+  const chatId = String(message.chat?.id ?? "");
+  const from = String(message.from?.id ?? chatId);
+  const body = String(message.text ?? message.caption ?? "");
+  const key = String(message.message_id ?? `${from}:${Date.now()}`);
+  const media: { mediaUrl: string; contentType?: string }[] = [];
+
+  if (Array.isArray(message.photo) && message.photo.length > 0) {
+    const largest = message.photo[message.photo.length - 1];
+    const fileId = largest?.file_id as string | undefined;
+    if (fileId) {
+      const mediaUrl = await getTelegramMediaUrl(fileId);
+      if (mediaUrl) media.push({ mediaUrl, contentType: "image/jpeg" });
+    }
+  }
+
+  const reply = await runConversationFlow(from, key, body, media);
+  await sendTelegramText(chatId, reply);
   res.sendStatus(200);
 });
 
