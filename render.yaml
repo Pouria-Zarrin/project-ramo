@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: ramo-whatsapp-publish-agent
+    runtime: node
+    rootDir: automation/whatsapp-publish-agent
+    plan: starter
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: WHATSAPP_PROVIDER
+        value: meta
+      - key: SITE_BASE_URL
+        value: https://www.ramopharmin.net
+      - key: CLOUD_REPO_URL
+        value: https://github.com/Pouria-Zarrin/project-ramo.git
+      - key: USE_CLOUD_AGENT
+        value: true
+      - key: PUBLISH_DRY_RUN
+        value: false
+      - key: SKIP_TWILIO_SIGNATURE_FOR_LOCAL_TEST
+        value: false
+      - key: META_VERIFY_TOKEN
+        sync: false
+      - key: META_ACCESS_TOKEN
+        sync: false
+      - key: META_PHONE_NUMBER_ID
+        sync: false
+      - key: CURSOR_API_KEY
+        sync: false

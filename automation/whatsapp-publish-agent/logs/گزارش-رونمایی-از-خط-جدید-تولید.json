@@ -1,0 +1,10 @@
+{
+  "runAt": "2026-05-05T09:13:25.025Z",
+  "commitSha": "dry-run",
+  "changed": [],
+  "liveUrls": [
+    "https://pouria-zarrin.github.io/project-ramo/news/گزارش-رونمایی-از-خط-جدید-تولید.html"
+  ],
+  "deployLive": false,
+  "manifestPath": "/Users/pouriazarrin/project-ramo/automation/whatsapp-publish-agent/content-manifests/گزارش-رونمایی-از-خط-جدید-تولید.json"
+}
