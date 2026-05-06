@@ -315,7 +315,7 @@
         <div class="mesh-overlay"></div>
 
         <!-- Content -->
-        <div class="relative z-10 container mx-auto px-6 pt-0 md:pt-32 pb-32 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-0 md:min-h-[600px]">
+        <div class="relative z-10 container mx-auto px-6 pt-4 md:pt-32 pb-32 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-0 md:min-h-[600px]">
             
             <!-- Left Col (Text for LTR) -->
             <div class="order-2 lg:order-1 text-left space-y-8">
@@ -828,60 +828,120 @@
             
             /* Mobile Adjustments */
             @media (max-width: 768px) {
+                #ramo-profile-block .relative.z-10.container {
+                    padding-top: 2.25rem;
+                    padding-bottom: 2.5rem;
+                    padding-left: 1rem;
+                    padding-right: 1rem;
+                }
+
+                #ramo-profile-block .text-center.mb-12 {
+                    margin-bottom: 1.25rem;
+                }
+
+                #ramo-profile-block .text-center.mb-12 h2 {
+                    font-size: 1.9rem;
+                    line-height: 1.2;
+                    margin-bottom: 0.65rem;
+                }
+
+                #ramo-profile-block .text-center.mb-12 p {
+                    font-size: 0.95rem;
+                    line-height: 1.55;
+                    opacity: 0.9;
+                }
+
                 #ramo-profile-block .slider-container {
-                    height: auto;
-                    min-height: 560px;
+                    min-height: 520px;
                     border-radius: 16px;
+                    background: linear-gradient(160deg, rgba(15, 23, 42, 0.58), rgba(23, 79, 87, 0.42));
+                    border: 1px solid rgba(255, 255, 255, 0.12);
+                    box-shadow: 0 14px 40px rgba(2, 8, 23, 0.34);
                 }
                 
                 #ramo-profile-block .slide {
                     align-items: flex-start;
-                    padding: 1.25rem 1rem 5.5rem;
+                    padding: 1rem 0.9rem 5rem;
                 }
 
                 #ramo-profile-block .slide-content {
                     max-width: 100%;
+                    background: rgba(15, 23, 42, 0.36);
+                    border: 1px solid rgba(255, 255, 255, 0.1);
+                    border-radius: 14px;
+                    padding: 0.95rem 0.85rem;
+                    backdrop-filter: blur(6px);
                 }
 
                 #ramo-profile-block .slide-icon {
-                    width: 56px;
-                    height: 56px;
-                    margin: 0 auto 0.9rem;
+                    width: 50px;
+                    height: 50px;
+                    margin: 0 auto 0.7rem;
                 }
 
                 #ramo-profile-block .slide h3 {
-                    font-size: 1.35rem;
-                    margin-bottom: 0.65rem;
-                    line-height: 1.3;
+                    font-size: 1.2rem;
+                    margin-bottom: 0.55rem;
+                    line-height: 1.28;
                 }
 
                 #ramo-profile-block .slide p {
-                    font-size: 0.95rem;
-                    line-height: 1.55;
-                    margin-bottom: 1rem;
+                    font-size: 0.9rem;
+                    line-height: 1.5;
+                    margin-bottom: 0.85rem;
+                }
+
+                #ramo-profile-block .slide-content .grid.grid-cols-3,
+                #ramo-profile-block .slide-content .grid.grid-cols-2 {
+                    grid-template-columns: 1fr;
+                    gap: 0.65rem;
+                    margin-top: 0.95rem;
+                }
+
+                #ramo-profile-block .slide-content .space-y-3 {
+                    margin-top: 0.95rem;
+                }
+
+                #ramo-profile-block .slide-content .flex.flex-wrap.justify-center {
+                    justify-content: flex-start;
+                    gap: 0.45rem;
+                    margin-top: 0.9rem;
+                }
+
+                #ramo-profile-block .slide-content .text-3xl {
+                    font-size: 1.35rem;
+                    margin-bottom: 0.15rem;
                 }
 
                 #ramo-profile-block .slider-nav {
-                    bottom: 0.8rem;
-                    gap: 0.65rem;
+                    bottom: 0.72rem;
+                    gap: 0.5rem;
+                    background: rgba(2, 6, 23, 0.45);
+                    border: 1px solid rgba(255, 255, 255, 0.12);
+                    border-radius: 999px;
+                    padding: 0.35rem 0.5rem;
                 }
 
                 #ramo-profile-block .nav-arrow {
-                    width: 34px;
-                    height: 34px;
+                    width: 30px;
+                    height: 30px;
                 }
 
                 #ramo-profile-block .nav-dots {
-                    gap: 0.35rem;
+                    gap: 0.3rem;
                 }
 
                 #ramo-profile-block .nav-dot {
-                    width: 9px;
-                    height: 9px;
+                    width: 8px;
+                    height: 8px;
                 }
 
                 #ramo-profile-block .floating-particles {
                     display: none;
+                }
+
+                #ramo-profile-block .progress-bar {
+                    height: 3px;
                 }
             }
         </style>
