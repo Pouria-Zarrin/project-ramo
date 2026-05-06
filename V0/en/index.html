@@ -305,6 +305,12 @@
             .text-brand-light { color: #5aaeb8; }
             .hover-bg-brand-dark:hover { background-color: #0f3338; }
             .shadow-brand { box-shadow: 0 10px 15px -3px rgba(23, 79, 87, 0.5); }
+
+            @media (max-width: 768px) {
+                #ramo-hero-block .hero-badge {
+                    margin-top: 1rem;
+                }
+            }
         </style>
 
         <!-- Background -->
@@ -319,7 +325,7 @@
             
             <!-- Left Col (Text for LTR) -->
             <div class="order-2 lg:order-1 text-left space-y-8">
-                 <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-white/10 text-brand-light text-sm font-bold tracking-wide">
+                 <div class="hero-badge inline-flex items-center gap-2 px-4 py-2 rounded-full glass-panel border border-white/10 text-brand-light text-sm font-bold tracking-wide">
                     <span class="w-2 h-2 rounded-full bg-brand animate-pulse"></span>
                     Innovation in Health
                 </div>
